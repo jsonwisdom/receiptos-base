@@ -21,9 +21,9 @@ case "$CMD" in
     ipfs cat "$CID" >/dev/null || { echo "FAIL: IPFS unavailable"; exit 21; }
     ;;
   eas)
-    UID="$(jq -r '.easUid // empty' "$TARGET/evidence-bundle.json")"
-    [ -n "$UID" ] || { echo "FAIL: missing easUid"; exit 30; }
-    echo "EAS UID: $UID"
+    EAS_UID="$(jq -r '.easUid // empty' "$TARGET/evidence-bundle.json")"
+    [ -n "$EAS_UID" ] || { echo "FAIL: missing easUid"; exit 30; }
+    echo "EAS UID: $EAS_UID"
     ;;
   all)
     ./tools/verify_ros.sh "$TARGET"
