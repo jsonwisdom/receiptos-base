@@ -14,6 +14,21 @@
       "easUID": "0xa453526f0fe7afbb878be85221f943fd3074fa126c749f30fb3b827107314f8",
       "authority": false,
       "status": "sealed"
+    },
+    {
+      "id": "BUGGLEBUGGLE",
+      "contract": "0x7457401bcae266f8c028c72d9ed6be67d0d7a35a",
+      "creationTx": "0x84ba2a12717f930412beba0c7821f71ff6f593f3e470acc29c027307bc79daea",
+      "metadataCID": "bafybeih65s442fpkb2dttsbz643t5gkm6cbh4txtte7czawpgs6qqd2utu",
+      "mediaCID": "bafybeibt3udrsmmf2wifghmk4rabi7ualpuqakmkxjc4odzq2skqt5vaey",
+      "name": "BUGGLEBUGGLE",
+      "ticker": "BUGGLEBUGGLE",
+      "description": "The Only Fish that can Wink 😉",
+      "gitCommit": "pending",
+      "schemaUID": "pending",
+      "easUID": "pending",
+      "authority": false,
+      "status": "pending_eas"
     }
   ]
 }
