@@ -1,0 +1,13 @@
+{
+  "asset": "ReceiptOS Genesis • Artifact 0001",
+  "artifact_id": "NEXT-ZORA-COIN",
+  "status": "sealed",
+  "replay": "eas_backed",
+  "authority": false,
+  "membrane": "intact",
+  "schemaUID": "0x7e29a0932ff347470306acc86127a9d50061431e8e0abb0f7ebbd61f8327aea5",
+  "easUID": "0x534743e299069963fef26e82928f23982ba479a15563fc46e9ad555696a0fff6",
+  "easTx": "0x35d81e71eb0764214c9de2bb5d3bc1defd6745aeccecbbeed9240101671ef801",
+  "packet_commit": "f7a2da5f80ccdf5d6a502a72fec0e9d00cacc288",
+  "ledger_commit": "c85006d2ab64b01a9718001a46cb1e3452805e60"
+}
