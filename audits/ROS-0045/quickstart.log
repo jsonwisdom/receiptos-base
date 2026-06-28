@@ -1,0 +1,21 @@
+ReceiptOS Quickstart
+Structural replay only. authority=false.
+PHASE 1: receipt verification
+evidence/ROS-0004-runtime-config-core.tar: OK
+PASS: ros-0004-runtime-config-core-v1
+ARCHIVE: evidence/ROS-0004-runtime-config-core.tar
+CID: bafkreic2t7xaic5oglmky56cprzfz72watd6cpsfiqixcnmjie75kin3lm
+EAS UID: 0xa453a526f0fe7afbb878be85221f943fd3074fa126c749f30fb3b827107314f8
+TX: 0x33d3fb83b7d1aabd73ba349213acf056f7c95df585c66a05a8bc54387bfc2edd
+PASS: all
+PHASE 2: citation lint
+PASS: citation language clean
+PHASE 3: tamper tests
+PASS: tamper tests placeholder
+PASS: latest pointer tests placeholder
+PASS: clean gate tests placeholder
+PHASE 4: latest snapshot verification
+PASS: latest snapshot pointer valid: ROS-0043
+PHASE 5: residue gate
+FAIL: working tree residue detected
+?? audits/
