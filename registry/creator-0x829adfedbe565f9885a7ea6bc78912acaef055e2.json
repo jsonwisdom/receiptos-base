@@ -24,11 +24,11 @@
       "name": "BUGGLEBUGGLE",
       "ticker": "BUGGLEBUGGLE",
       "description": "The Only Fish that can Wink 😉",
-      "gitCommit": "pending",
+      "gitCommit": "436c330f1a362b322241a64214a2aeac83130b61",
       "schemaUID": "pending",
       "easUID": "pending",
       "authority": false,
-      "status": "pending_eas"
+      "status": "pending_eas_with_git_packet"
     }
   ]
 }
