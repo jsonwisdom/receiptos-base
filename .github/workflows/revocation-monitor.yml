@@ -14,7 +14,7 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Check EAS revocation status
+      - name: Check EAS revocation status for all anchors
         env:
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
-        run: scripts/check-eas-revocation.sh evidence/receipts/eas-global-forest-anchor.json
+        run: scripts/verify-all-anchors.sh evidence/anchors.json
