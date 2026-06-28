@@ -19,11 +19,11 @@ pass() {
 command -v jq >/dev/null || fail "jq required"
 [ -f "$ANCHOR_JSON" ] || fail "missing anchor receipt: $ANCHOR_JSON"
 
-UID="$(jq -r '.uid' "$ANCHOR_JSON")"
+ANCHOR_UID="$(jq -r '.uid' "$ANCHOR_JSON")"
 
-[ "$UID" != "null" ] || fail "missing uid in $ANCHOR_JSON"
+[ "$ANCHOR_UID" != "null" ] || fail "missing uid in $ANCHOR_JSON"
 
 scripts/verify-eas-anchor-onchain.sh "$ANCHOR_JSON"
 
-pass "EAS attestation remains unrevoked: $UID"
+pass "EAS attestation remains unrevoked: $ANCHOR_UID"
 echo "PASS"
