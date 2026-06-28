@@ -30,17 +30,17 @@ def sha256_file(path: Path) -> str:
 
 
 def canonical_payload(bundle: dict) -> bytes:
-    payload = {
-        "rosId": bundle["rosId"],
-        "version": bundle["version"],
-        "artifact": bundle["artifact"],
-        "publication": bundle["publication"],
-        "evidence": bundle["evidence"],
-        "verificationScript": bundle["verificationScript"],
-        "timestamp": bundle["timestamp"],
-        "verifier": bundle["verifier"],
-    }
-    return json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    """Return the exact ROS release payload signed by the deployer key.
+
+    Format:
+    ROS-0001|<artifact_digest>|<publication_commit>|<eas_uid>
+    """
+    return (
+        f"{bundle['rosId']}|"
+        f"{bundle['artifact']['digest']}|"
+        f"{bundle['publication']['commit']}|"
+        f"{bundle['evidence']['eas_uid']}"
+    ).encode("utf-8")
 
 
 def reject_placeholders(obj) -> None:
