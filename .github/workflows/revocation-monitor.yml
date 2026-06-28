@@ -17,4 +17,5 @@ jobs:
       - name: Check EAS revocation status for all anchors
         env:
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
-        run: scripts/verify-all-anchors.sh evidence/anchors.json
+          REQUIRE_ONCHAIN: "1"
+        run: bash scripts/verify-all-anchors.sh evidence/anchors.json
