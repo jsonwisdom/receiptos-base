@@ -1,0 +1,44 @@
+{
+  "rosId": "ROS-0001",
+  "version": "0.1.0",
+  "artifact": {
+    "name": "ReceiptOS Genesis Cover",
+    "digest": "REPLACE_WITH_SHA256_OF_ARTIFACT",
+    "size": 1
+  },
+  "publication": {
+    "repository": "https://github.com/jsonwisdom/receiptos-base",
+    "commit": "REPLACE_WITH_COMMIT_HASH",
+    "tag": "v0.1.0",
+    "timestamp": "REPLACE_WITH_ISO_TIMESTAMP"
+  },
+  "evidence": {
+    "eas_uid": "REPLACE_WITH_EAS_UID_0x64HEX",
+    "chain": "base",
+    "zora_coin": "0xd0c736467e0d496cc56209a36f28264b86c49582",
+    "ipfs_cid": "REPLACE_WITH_IPFS_CID"
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "signer": "deployer",
+    "key_id": "deployer.pub",
+    "sig": "REPLACE_WITH_BASE64_ED25519_SIGNATURE"
+  },
+  "verificationScript": {
+    "path": "scripts/verify-evidence-bundle.py",
+    "algorithm": "sha256",
+    "digest": "REPLACE_WITH_SCRIPT_SHA256"
+  },
+  "timestamp": "REPLACE_WITH_ISO_TIMESTAMP",
+  "verifier": {
+    "name": "receiptos-verifier",
+    "version": "0.1.0",
+    "commit": "REPLACE_WITH_VERIFIER_COMMIT"
+  },
+  "metadata": {
+    "title": "ReceiptOS Genesis • Artifact 0001",
+    "tagline": "Every receipt can replay.",
+    "authority": false,
+    "claim": "Genesis visual identity artifact only; not a protocol authority claim."
+  }
+}

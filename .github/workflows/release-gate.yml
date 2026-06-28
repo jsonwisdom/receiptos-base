@@ -1,0 +1,64 @@
+name: release-gate
+
+on:
+  pull_request:
+  push:
+    tags:
+      - "v*"
+      - "ros-*"
+
+jobs:
+  verify:
+    name: release-gate/verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run fail-closed negative tests
+        run: python scripts/test-release-gate-negative.py
+
+      - name: Validate evidence schema files
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from jsonschema import Draft7Validator, FormatChecker
+
+          schema = json.loads(Path('schemas/evidence-bundle.schema.json').read_text())
+          validator = Draft7Validator(schema, format_checker=FormatChecker())
+
+          for path in Path('evidence').glob('ROS-*/evidence-bundle.json'):
+              bundle = json.loads(path.read_text())
+              errors = sorted(validator.iter_errors(bundle), key=lambda e: e.path)
+              if errors:
+                  for err in errors:
+                      print(f'{path}: {list(err.path)}: {err.message}')
+                  raise SystemExit(1)
+              print(f'schema ok: {path}')
+          PY
+
+      - name: Verify evidence bundles
+        run: |
+          found=0
+          for bundle in evidence/ROS-*/evidence-bundle.json; do
+            if [ -f "$bundle" ]; then
+              found=1
+              python scripts/verify-evidence-bundle.py "$bundle"
+            fi
+          done
+          if [ "$found" = "0" ]; then
+            echo "No final evidence bundles found. Templates are intentionally not release evidence."
+            if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+              echo "Tag release requires at least one final evidence-bundle.json."
+              exit 1
+            fi
+          fi
