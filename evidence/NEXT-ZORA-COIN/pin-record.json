@@ -1,0 +1,13 @@
+{
+  "id": "NEXT-ZORA-COIN",
+  "contract": "0xd0c736467e0d496cc56209a36f28264b86c49582",
+  "creationTx": "0xd82e95aee0cef74263406a313e30dd7b3676b2c51180c2977a554b62fd991cd8",
+  "packetCID": "bafkreibqogrcmgxuaq5ljtafjvrwmgngowfzxfsr5m3a5s56toxgpgzzqq",
+  "sha256SidecarCID": "bafkreib5rosc2yoeq7z6i3opzad2fhilrceemk5r527qz6ei5fze7qnh6q",
+  "packetSha256": "3071a2261af4043ab4cc054d636619a6758b9b9651eb360ecbbe9bae679b3984",
+  "zoraUrl": "https://zora.co/coin/base:0xd0c736467e0d496cc56209a36f28264b86c49582",
+  "receiptStandard": "ReceiptOS Creator Ledger v2",
+  "authority": false,
+  "status": "candidate_packet_pinned_pending_metadata",
+  "notes": "These CIDs point to the candidate ReceiptOS packet and SHA-256 sidecar generated before metadata/media extraction. They are not the on-chain metadataCID or mediaCID."
+}
