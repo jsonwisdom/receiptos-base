@@ -1,1 +1,40 @@
-{"algorithm":"sha256","leaves":[{"artifact_count":29,"authority":false,"creator_id":"jaywisdom","creator_root":"0x2b6cc644cddd007023f608c10ed2123191eff9cde95ac9645ee8ea4e446777b8","git_commit":"e8805162dbb223bf1e5ff1c0a0042cba34eec6dc","git_tag":"round-014-live-evidence","manifest_hash":"0x8c7d21f558f8e7d2d0be98a79c6574ad2a06dde2295ae539e52608b5a9b4f94e"}],"round":"014"}
+{
+  "algorithm": "sha256",
+  "authority": false,
+  "leaves": [
+    {
+      "artifacts": [
+        {
+          "artifact_id": "BUGGLEBUGGLE",
+          "authority": false,
+          "status": "sealed"
+        },
+        {
+          "artifact_id": "KARENN11",
+          "authority": false,
+          "status": "sealed"
+        },
+        {
+          "artifact_id": "NEXT-ZORA-COIN",
+          "authority": false,
+          "easTx": "0x35d81e71eb0764214c9de2bb5d3bc1defd6745aeccecbbeed9240101671ef801",
+          "easUID": "0x534743e299069963fef26e82928f23982ba479a15563fc46e9ad555696a0fff6",
+          "replay": "eas_backed",
+          "schemaUID": "0x7e29a0932ff347470306acc86127a9d50061431e8e0abb0f7ebbd61f8327aea5",
+          "status": "sealed"
+        }
+      ],
+      "authority": false,
+      "creator": "0x829adfedbe565f9885a7ea6bc78912acaef055e2",
+      "creator_id": "jaywisdom",
+      "membrane": "intact",
+      "metadata": {
+        "merkle_root": "0x9a684c54be7ef85ea4635c9fbf188cb58778803ab950b3b0289de09aad83e385",
+        "total_artifacts": 3
+      },
+      "network": "base",
+      "version": "V2026.1.1"
+    }
+  ],
+  "version": "1.0"
+}

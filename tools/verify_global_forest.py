@@ -99,6 +99,27 @@ def main() -> int:
     print(f"PASS global_root: 0x{root}")
     print(f"PASS manifest_hash: 0x{manifest_hash}")
     print("ROUND_013 VERIFICATION: PASS")
+
+    receipt = {
+        "algorithm": "sha256",
+        "authority": False,
+        "global_root": f"0x{root}",
+        "manifest_hash": f"0x{manifest_hash}",
+        "manifest_path": "global-manifest.json",
+        "status": "PASS",
+        "verifier": "tools/verify_global_forest.py",
+        "verifier_version": "1.0",
+        "version": "1.0",
+    }
+
+    receipt_path = repo_root / "evidence" / "receipts" / "global-forest-verification.json"
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    receipt_path.write_text(
+        json.dumps(receipt, sort_keys=True, separators=(",", ":"), ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+    print(f"PASS receipt: {receipt_path}")
     return 0
 
 
