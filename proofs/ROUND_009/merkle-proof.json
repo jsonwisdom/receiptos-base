@@ -1,0 +1,23 @@
+{
+  "round": "ROUND_009",
+  "leaf_count": 3,
+  "leaves": [
+    {
+      "artifact_id": "BUGGLEBUGGLE",
+      "leaf_hash": "0xd216821a706ad3f78bdd4db0f61b6532c823be8a66b933d8029c3962852529aa"
+    },
+    {
+      "artifact_id": "KARENN11",
+      "leaf_hash": "0x57ff6bb4e54dfd5d2c6f7f106642ef2e7b987c9d1d37d1fb1926d3a62cc5498a"
+    },
+    {
+      "artifact_id": "NEXT-ZORA-COIN",
+      "leaf_hash": "0xe3e6315b018fc6cca931f7bd15d8a8edaf3c89dff8db6b6298a2f15a3bc807e3"
+    }
+  ],
+  "computed_root": "0x9a684c54be7ef85ea4635c9fbf188cb58778803ab950b3b0289de09aad83e385",
+  "locked_root": "0x9a684c54be7ef85ea4635c9fbf188cb58778803ab950b3b0289de09aad83e385",
+  "root_match": true,
+  "authority": false,
+  "membrane": "intact"
+}
