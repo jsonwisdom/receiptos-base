@@ -1,0 +1,19 @@
+{
+  "creator": "0x829adfedbe565f9885a7ea6bc78912acaef055e2",
+  "network": "base",
+  "zoraProfile": "https://zora.co/@jaywisdom",
+  "gitRepository": "https://github.com/jsonwisdom/receiptos-base",
+  "gitBranch": "main",
+  "coins": [
+    {
+      "id": "KARENN11",
+      "contract": "0x4a7b541a1987c6062fbf3469b408f67936b4ac68",
+      "creationTx": "0x09bc0f18a6a582ff0fd1850631238172b808a45236a50998bee8fd154146ecba",
+      "gitCommit": "17be78e3b188c2f0383692f91f50a2b2496e4520",
+      "schemaUID": "0x7e29a0932ff347470306acc86127a9d50061431e8e0abb0f7ebbd61f8327aea5",
+      "easUID": "0xa453526f0fe7afbb878be85221f943fd3074fa126c749f30fb3b827107314f8",
+      "authority": false,
+      "status": "sealed"
+    }
+  ]
+}
