@@ -27,6 +27,7 @@ case "$CMD" in
   .eas_uid //
   .attestationUid //
   .attestationUID //
+  .eas.easAttestationUid //
   .eas.uid //
   .eas.uidHash //
   .eas //
