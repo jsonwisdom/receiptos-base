@@ -1,65 +1,76 @@
 #!/usr/bin/env python3
-import json, hashlib, sys
-from pathlib import Path
+import argparse, json, hashlib, sys
 
-def canon(o):
-    return json.dumps(o, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-
-def h(s):
-    return hashlib.sha256(s.encode()).hexdigest()
+ALG = "sha256-merkle-v1"
 
 def strip0x(x):
     return x[2:] if isinstance(x, str) and x.startswith("0x") else x
 
-def verify(proof):
-    if proof.get("authority") is not False:
-        return False, "authority must be false"
+def with0x(x):
+    return x if isinstance(x, str) and x.startswith("0x") else "0x" + x
 
-    leaf_obj = {"path": proof["path"], "sha256": proof["sha256"]}
-    leaf_hash = "0x" + h(canon(leaf_obj))
+def canon(x):
+    return json.dumps(x, sort_keys=True, separators=(",", ":"))
 
-    if leaf_hash != proof["leaf_hash"]:
-        return False, "leaf_hash mismatch"
+def hhex(a, b):
+    return "0x" + hashlib.sha256((strip0x(a) + strip0x(b)).encode()).hexdigest()
 
-    cur = strip0x(leaf_hash)
-
-    for step in proof["proof"]:
-        sib = strip0x(step["hash"])
-        side = step["side"]
-        if side == "left":
-            cur = h(sib + cur)
-        elif side == "right":
-            cur = h(cur + sib)
-        else:
-            return False, "bad proof side"
-
-    root = "0x" + cur
-    if root != proof["creator_root"]:
-        return False, "creator_root mismatch"
-
-    return True, "intact"
+def rec(status, path=None, creator_root=None, computed_root=None, reason=None):
+    r = {
+        "status": status,
+        "artifact_id": path,
+        "creator_root": creator_root,
+        "computed_root": computed_root,
+        "algorithm": ALG,
+        "authority": False
+    }
+    if status == "FAIL":
+        r["reason"] = reason
+    return {k: v for k, v in r.items() if v is not None}
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python3 verify.py artifact-proofs/<proof>.json")
-        sys.exit(2)
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--proof", required=True)
+    ap.add_argument("--pretty", action="store_true")
+    args = ap.parse_args()
 
-    proof = json.loads(Path(sys.argv[1]).read_text())
-    ok, status = verify(proof)
+    path = creator_root = cur = None
 
-    receipt = {
-        "schema": "GoblinCourtVerificationReceiptV1",
-        "proof_file": sys.argv[1],
-        "path": proof.get("path"),
-        "leaf_hash": proof.get("leaf_hash"),
-        "creator_root": proof.get("creator_root"),
-        "authority": False,
-        "invariant_status": status
-    }
-    receipt["receipt_hash"] = "0x" + h(canon(receipt))
+    try:
+        p = json.load(open(args.proof))
+        for k in ["path", "leaf_hash", "proof", "creator_root"]:
+            if k not in p:
+                raise ValueError(f"missing required field: {k}")
 
-    print(canon(receipt))
-    sys.exit(0 if ok else 1)
+        path = p["path"]
+        creator_root = with0x(p["creator_root"])
+        cur = with0x(p["leaf_hash"])
+
+        if not isinstance(p["proof"], list):
+            raise ValueError("modified proof path")
+
+        for step in p["proof"]:
+            if "hash" not in step or "side" not in step:
+                raise ValueError("modified proof path")
+
+            sibling = with0x(step["hash"])
+            side = step["side"]
+
+            if side == "left":
+                cur = hhex(sibling, cur)
+            elif side == "right":
+                cur = hhex(cur, sibling)
+            else:
+                raise ValueError("modified proof path")
+
+        status = "PASS" if cur.lower() == creator_root.lower() else "FAIL"
+        out = rec(status, path, creator_root, cur, None if status == "PASS" else "root mismatch")
+
+    except Exception as e:
+        out = rec("FAIL", path, creator_root, cur, str(e))
+
+    print(json.dumps(out, indent=2, sort_keys=True) if args.pretty else canon(out))
+    return 0 if out["status"] == "PASS" else 1
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
