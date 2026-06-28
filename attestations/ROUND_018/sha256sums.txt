@@ -1,0 +1,1 @@
+863aaf19ff57188ce0dc62321bac0a099019a85ed119598deff16cab5c7300e4  attestations/ROUND_018/eas-receipt-anchor.txt
