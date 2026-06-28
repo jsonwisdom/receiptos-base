@@ -21,6 +21,7 @@ jobs:
       - name: Verify all on-chain anchors if BASE_RPC_URL is set
         env:
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+          REQUIRE_ONCHAIN: "1"
         run: |
           if [ -z "${BASE_RPC_URL:-}" ]; then
             echo "BASE_RPC_URL not set; skipping RPC-backed EAS verification."
