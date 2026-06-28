@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ ! -f releases/LATEST ]; then
+  echo "FAIL: missing releases/LATEST"
+  exit 50
+fi
+
+LATEST="$(cat releases/LATEST)"
+DIR="releases/$LATEST"
+
+if [ ! -d "$DIR" ]; then
+  echo "FAIL: latest release directory missing: $DIR"
+  exit 50
+fi
+
+echo "PASS: latest snapshot pointer valid: $LATEST"
