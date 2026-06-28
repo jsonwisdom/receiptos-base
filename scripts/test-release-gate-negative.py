@@ -6,6 +6,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+from cryptography.exceptions import InvalidSignature
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from jsonschema import Draft7Validator, FormatChecker
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -124,9 +126,41 @@ def canonical_payload_is_not_json() -> None:
     print("negative test ok: canonical payload is pipe, not JSON")
 
 
+def json_signature_rejected() -> None:
+    spec = importlib.util.spec_from_file_location("receiptos_verifier", VERIFIER)
+    verifier = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(verifier)
+
+    bundle = valid_shape()
+    pipe_payload = verifier.canonical_payload(bundle)
+    old_json_payload = json.dumps({
+        "rosId": bundle["rosId"],
+        "version": bundle["version"],
+        "artifact": bundle["artifact"],
+        "publication": bundle["publication"],
+        "evidence": bundle["evidence"],
+        "verificationScript": bundle["verificationScript"],
+        "timestamp": bundle["timestamp"],
+        "verifier": bundle["verifier"],
+    }, sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+    signing_key = Ed25519PrivateKey.generate()
+    verify_key = signing_key.public_key()
+    json_signature = signing_key.sign(old_json_payload)
+    try:
+        verify_key.verify(json_signature, pipe_payload)
+    except InvalidSignature:
+        print("negative test ok: JSON signature rejected for pipe payload")
+        return
+    print("negative test failed: JSON signature verified against pipe payload", file=sys.stderr)
+    raise SystemExit(1)
+
+
 if __name__ == "__main__":
     schema_rejects_template()
     verifier_rejects_template()
     verifier_rejects_invalid_crypto()
     canonical_payload_is_not_json()
+    json_signature_rejected()
     print("negative release-gate tests passed")
