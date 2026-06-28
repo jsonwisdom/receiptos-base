@@ -82,6 +82,7 @@
     },
     "signature": {
       "type": "object",
+      "description": "Signature covers canonical string: {rosId}|{artifact.digest}|{publication.commit}|{evidence.eas_uid}",
       "required": ["algorithm", "signer", "key_id", "sig"],
       "properties": {
         "algorithm": { "type": "string", "const": "ed25519" },
