@@ -25,10 +25,11 @@
       "ticker": "BUGGLEBUGGLE",
       "description": "The Only Fish that can Wink 😉",
       "gitCommit": "436c330f1a362b322241a64214a2aeac83130b61",
-      "schemaUID": "pending",
-      "easUID": "pending",
+      "schemaUID": "0x7e29a0932ff347470306acc86127a9d50061431e8e0abb0f7ebbd61f8327aea5",
+      "easUID": "0x764082d4517d38538b078f19614b4f927381f3ac42268a9074c0193066044d67",
+      "easTx": "0xc7b631bd636898aebd856b8d892212aba7f2bd219913aece219c69ee2037c4b6",
       "authority": false,
-      "status": "pending_eas_with_git_packet"
+      "status": "sealed"
     }
   ]
 }
