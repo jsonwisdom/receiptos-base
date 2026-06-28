@@ -26,3 +26,6 @@ else
   echo "ROUND_020 REPLAY: FAIL"
   exit 1
 fi
+
+echo "ROUND_021 Self-Test:"
+python3 self_test.py
