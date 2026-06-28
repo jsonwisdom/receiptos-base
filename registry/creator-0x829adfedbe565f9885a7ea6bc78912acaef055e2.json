@@ -4,14 +4,26 @@
   "zoraProfile": "https://zora.co/@jaywisdom",
   "gitRepository": "https://github.com/jsonwisdom/receiptos-base",
   "gitBranch": "main",
+  "receiptStandard": "ReceiptOS Creator Ledger v2",
+  "authority": false,
   "coins": [
     {
       "id": "KARENN11",
       "contract": "0x4a7b541a1987c6062fbf3469b408f67936b4ac68",
       "creationTx": "0x09bc0f18a6a582ff0fd1850631238172b808a45236a50998bee8fd154146ecba",
+      "metadataCID": "bafybeihrdj6m3tuujonx6urguttrfk3ppjs4fm22dipmzu7zgag76nu2sq",
+      "mediaCID": "bafybeifjxi3ik6zke5gc5nzkeyeurjmvtub7mxmmhpuu7f3h5t6tjmbxjq",
+      "name": "KARENN11",
+      "description": "Alicia Lewis",
       "gitCommit": "17be78e3b188c2f0383692f91f50a2b2496e4520",
       "schemaUID": "0x7e29a0932ff347470306acc86127a9d50061431e8e0abb0f7ebbd61f8327aea5",
       "easUID": "0xa453526f0fe7afbb878be85221f943fd3074fa126c749f30fb3b827107314f8",
+      "easTx": "pending_tx_lookup",
+      "artifactDigest": "sha256:bc70535e7957fb969db559b48a17f3a86b9ecd6fc90bb616be4f30bb57f08422",
+      "replayPath": "evidence/KARENN11/receiptos-packet.json",
+      "zoraUrl": "https://zora.co/coin/base:0x4a7b541a1987c6062fbf3469b408f67936b4ac68",
+      "sealedAt": "2026-06-28",
+      "receiptStandard": "ReceiptOS Creator Ledger v2",
       "authority": false,
       "status": "sealed"
     },
@@ -28,6 +40,11 @@
       "schemaUID": "0x7e29a0932ff347470306acc86127a9d50061431e8e0abb0f7ebbd61f8327aea5",
       "easUID": "0x764082d4517d38538b078f19614b4f927381f3ac42268a9074c0193066044d67",
       "easTx": "0xc7b631bd636898aebd856b8d892212aba7f2bd219913aece219c69ee2037c4b6",
+      "artifactDigest": "sha256:43fc52d008d7dad238b913dc055cc481b58ad282bcb068fc2ff41499beff3aa2",
+      "replayPath": "evidence/MUDSKIPPER/receiptos-packet.json",
+      "zoraUrl": "https://zora.co/coin/base:0x7457401bcae266f8c028c72d9ed6be67d0d7a35a",
+      "sealedAt": "2026-06-28",
+      "receiptStandard": "ReceiptOS Creator Ledger v2",
       "authority": false,
       "status": "sealed"
     }
