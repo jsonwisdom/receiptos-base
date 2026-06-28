@@ -6,7 +6,8 @@ BAD='proves true|confirms guilt|establishes ownership|legally verifies|official 
 
 if grep -RniE "$BAD" "$TARGET" \
   --exclude-dir=.git \
-  --exclude=CITATION_POLICY.md; then
+  --exclude=CITATION_POLICY.md \
+  --exclude=lint-citations; then
   echo "FAIL: prohibited citation language found"
   exit 70
 fi
