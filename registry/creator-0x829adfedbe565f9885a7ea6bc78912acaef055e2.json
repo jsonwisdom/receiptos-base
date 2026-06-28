@@ -47,6 +47,36 @@
       "receiptStandard": "ReceiptOS Creator Ledger v2",
       "authority": false,
       "status": "sealed"
+    },
+    {
+      "id": "NEXT-ZORA-COIN",
+      "name": "ReceiptOS Genesis • Artifact 0001",
+      "ticker": "ROS",
+      "contract": "0xd0c736467e0d496cc56209a36f28264b86c49582",
+      "creationTx": "0xd82e95aee0cef74263406a313e30dd7b3676b2c51180c2977a554b62fd991cd8",
+      "contractURI": "ipfs://bafybeifmrxk5f4ngkgkeqabt65fzwvj6uclpfjylv6ltrbdashejn7uk4u",
+      "metadataCID": "bafybeifmrxk5f4ngkgkeqabt65fzwvj6uclpfjylv6ltrbdashejn7uk4u",
+      "mediaCID": "bafybeihljbr27qv7obmuz4vzfcvtz6grevvvzj44uz76jh3adxyuooyp2i",
+      "sha256Metadata": "32a0da666a7605e4dbea9287f411bd352c257e648b402fb47af4e0a4ee155234",
+      "sha256Media": "0f4884035ef225573a60af62e0a8b7009fb31fd52184c03eef4d2b5b1cf28d47",
+      "description": "ReceiptOS Genesis • Artifact 0001. Every receipt can replay. Proof over narrative.",
+      "packetCID": "bafkreibqogrcmgxuaq5ljtafjvrwmgngowfzxfsr5m3a5s56toxgpgzzqq",
+      "sha256SidecarCID": "bafkreib5rosc2yoeq7z6i3opzad2fhilrceemk5r527qz6ei5fze7qnh6q",
+      "packetSha256": "3071a2261af4043ab4cc054d636619a6758b9b9651eb360ecbbe9bae679b3984",
+      "gitCommit": "5932b7867cd5b068b326c86575c8d0fdb90618c4",
+      "artifactCommit": "2464cb61fa1559d67d3dd4bc94d1a9fd02a4239",
+      "schemaUID": "pending",
+      "easUID": "pending",
+      "easTx": "pending",
+      "artifactDigest": "sha256:3071a2261af4043ab4cc054d636619a6758b9b9651eb360ecbbe9bae679b3984",
+      "replayPath": "evidence/NEXT-ZORA-COIN/receiptos-packet.json",
+      "zoraUrl": "https://zora.co/coin/base:0xd0c736467e0d496cc56209a36f28264b86c49582",
+      "sealedAt": null,
+      "receiptStandard": "ReceiptOS Creator Ledger v2",
+      "authority": false,
+      "status": "pending_eas",
+      "replay": "verified_substrate",
+      "membrane": "intact"
     }
   ]
 }
