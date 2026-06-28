@@ -21,7 +21,17 @@ case "$CMD" in
     ipfs cat "$CID" >/dev/null || { echo "FAIL: IPFS unavailable"; exit 21; }
     ;;
   eas)
-    EAS_UID="$(jq -r '.easUid // empty' "$TARGET/evidence-bundle.json")"
+    EAS_UID="$(jq -r '
+  .easUid //
+  .easUID //
+  .eas_uid //
+  .attestationUid //
+  .attestationUID //
+  .eas.uid //
+  .eas.uidHash //
+  .eas //
+  empty
+' "$TARGET/evidence-bundle.json")" 
     [ -n "$EAS_UID" ] || { echo "FAIL: missing easUid"; exit 30; }
     echo "EAS UID: $EAS_UID"
     ;;
