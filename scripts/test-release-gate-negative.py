@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import importlib.util
 import json
 import subprocess
 import sys
@@ -38,8 +39,8 @@ def verifier_rejects_template() -> None:
     expect_exit_1("verifier rejects placeholder template", [sys.executable, str(VERIFIER), str(TEMPLATE)])
 
 
-def verifier_rejects_invalid_crypto() -> None:
-    good_shape = {
+def valid_shape() -> dict:
+    return {
         "rosId": "ROS-0001",
         "version": "0.1.0",
         "artifact": {
@@ -80,14 +81,52 @@ def verifier_rejects_invalid_crypto() -> None:
             "authority": False
         }
     }
+
+
+def verifier_rejects_invalid_crypto() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         path = Path(tmp) / "bad-crypto.json"
-        path.write_text(json.dumps(good_shape, indent=2))
+        path.write_text(json.dumps(valid_shape(), indent=2))
         expect_exit_1("verifier rejects invalid crypto", [sys.executable, str(VERIFIER), str(path)])
+
+
+def canonical_payload_is_not_json() -> None:
+    spec = importlib.util.spec_from_file_location("receiptos_verifier", VERIFIER)
+    verifier = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(verifier)
+
+    bundle = valid_shape()
+    pipe_payload = verifier.canonical_payload(bundle)
+    expected_pipe = (
+        f"{bundle['rosId']}|"
+        f"{bundle['artifact']['digest']}|"
+        f"{bundle['publication']['commit']}|"
+        f"{bundle['evidence']['eas_uid']}"
+    ).encode("utf-8")
+    old_json_payload = json.dumps({
+        "rosId": bundle["rosId"],
+        "version": bundle["version"],
+        "artifact": bundle["artifact"],
+        "publication": bundle["publication"],
+        "evidence": bundle["evidence"],
+        "verificationScript": bundle["verificationScript"],
+        "timestamp": bundle["timestamp"],
+        "verifier": bundle["verifier"],
+    }, sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+    if pipe_payload != expected_pipe:
+        print("negative test failed: pipe payload mismatch", file=sys.stderr)
+        raise SystemExit(1)
+    if pipe_payload == old_json_payload:
+        print("negative test failed: old JSON payload still accepted as canonical", file=sys.stderr)
+        raise SystemExit(1)
+    print("negative test ok: canonical payload is pipe, not JSON")
 
 
 if __name__ == "__main__":
     schema_rejects_template()
     verifier_rejects_template()
     verifier_rejects_invalid_crypto()
+    canonical_payload_is_not_json()
     print("negative release-gate tests passed")
