@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DIRTY="$(git status --short)"
+
+if [ -n "$DIRTY" ]; then
+  echo "FAIL: working tree residue detected"
+  echo "$DIRTY"
+  exit 70
+fi
+
+echo "PASS: working tree clean"
