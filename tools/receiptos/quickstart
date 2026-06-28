@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "ReceiptOS Quickstart"
+echo "Structural replay only. authority=false."
+
+echo "PHASE 1: receipt verification"
+tools/receiptos/verify all evidence/ROS-0004
+
+echo "PHASE 2: citation lint"
+tools/receiptos/lint-citations .
+
+echo "PHASE 3: tamper tests"
+tests/tamper-test.sh
+tests/latest-pointer-test.sh
+tests/check-clean-test.sh
+
+echo "PHASE 4: latest snapshot verification"
+tools/receiptos/verify-latest
+
+echo "PHASE 5: residue gate"
+tools/receiptos/check-clean
+
+echo "PASS: ReceiptOS quickstart replay complete"
