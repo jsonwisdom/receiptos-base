@@ -12,7 +12,7 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
       - name: Verify all local anchors
-        run: scripts/verify-all-anchors.sh evidence/anchors.json
+        run: bash scripts/verify-all-anchors.sh evidence/anchors.json
 
   verify-onchain-anchor:
     runs-on: ubuntu-latest
@@ -28,4 +28,4 @@ jobs:
             exit 0
           fi
 
-          scripts/verify-all-anchors.sh evidence/anchors.json
+          bash scripts/verify-all-anchors.sh evidence/anchors.json
