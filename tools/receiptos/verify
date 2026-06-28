@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CMD="${1:-}"
+TARGET="${2:-}"
+
+usage() {
+  echo "usage: tools/receiptos/verify {archive|ipfs|eas|all} <ros-dir>"
+}
+
+[ -n "$CMD" ] || { usage; exit 1; }
+[ -n "$TARGET" ] || { usage; exit 1; }
+
+case "$CMD" in
+  archive)
+    ./tools/verify_ros.sh "$TARGET" --archive-only
+    ;;
+  ipfs)
+    CID="$(jq -r '.ipfsCid // empty' "$TARGET/evidence-bundle.json")"
+    [ -n "$CID" ] || { echo "FAIL: missing ipfsCid"; exit 20; }
+    ipfs cat "$CID" >/dev/null || { echo "FAIL: IPFS unavailable"; exit 21; }
+    ;;
+  eas)
+    UID="$(jq -r '.easUid // empty' "$TARGET/evidence-bundle.json")"
+    [ -n "$UID" ] || { echo "FAIL: missing easUid"; exit 30; }
+    echo "EAS UID: $UID"
+    ;;
+  all)
+    ./tools/verify_ros.sh "$TARGET"
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac
+
+echo "PASS: $CMD"
