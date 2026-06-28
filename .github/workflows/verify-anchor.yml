@@ -11,14 +11,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
-      - name: Verify local anchor
-        run: scripts/verify-eas-anchor.sh evidence/receipts/eas-global-forest-anchor.json
+      - name: Verify all local anchors
+        run: scripts/verify-all-anchors.sh evidence/anchors.json
 
   verify-onchain-anchor:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify on-chain anchor if BASE_RPC_URL is set
+      - name: Verify all on-chain anchors if BASE_RPC_URL is set
         env:
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
         run: |
@@ -27,4 +27,4 @@ jobs:
             exit 0
           fi
 
-          scripts/verify-eas-anchor-onchain.sh evidence/receipts/eas-global-forest-anchor.json
+          scripts/verify-all-anchors.sh evidence/anchors.json
