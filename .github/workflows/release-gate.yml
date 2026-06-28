@@ -57,7 +57,7 @@ jobs:
           done
           if [ "$found" = "0" ]; then
             echo "No final evidence bundles found. Templates are intentionally not release evidence."
-            if [ "${{ github.event_name }}" = "push" ]; then
+            if [[ "${{ github.ref }}" == refs/tags/* ]]; then
               echo "Tag release requires at least one final evidence-bundle.json."
               exit 1
             fi
