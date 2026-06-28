@@ -16,10 +16,15 @@ jobs:
 
   verify-onchain-anchor:
     runs-on: ubuntu-latest
-    if: ${{ secrets.BASE_RPC_URL != '' }}
     steps:
       - uses: actions/checkout@v4
-      - name: Verify on-chain anchor
+      - name: Verify on-chain anchor if BASE_RPC_URL is set
         env:
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
-        run: scripts/verify-eas-anchor-onchain.sh evidence/receipts/eas-global-forest-anchor.json
+        run: |
+          if [ -z "${BASE_RPC_URL:-}" ]; then
+            echo "BASE_RPC_URL not set; skipping RPC-backed EAS verification."
+            exit 0
+          fi
+
+          scripts/verify-eas-anchor-onchain.sh evidence/receipts/eas-global-forest-anchor.json
