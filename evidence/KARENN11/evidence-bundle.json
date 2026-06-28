@@ -31,5 +31,19 @@
   },
   "authority": false,
   "provenance": "onchain_spine + content_addressed + git_commit + eas_attestation",
-  "notes": "ROS-0002.2 seals the pinned KARENN11 evidence tar CID and artifact digest under EAS Schema #1630. Authority remains false."
+  "notes": "ROS-0002.2 seals the pinned KARENN11 evidence tar CID and artifact digest under EAS Schema #1630. Authority remains false.",
+  "rosId": "ros-karenn11-v1",
+  "schemaVersion": 3,
+  "eas": {
+    "network": "base",
+    "schemaNumber": 1630,
+    "easSchemaUid": "0x7e29a0932ff347470306acc86127a9d50061431e8e0abb0f7ebbd61f8327aea5",
+    "easAttestationUid": "",
+    "transactionHash": "",
+    "authority": false
+  },
+  "reserved": {
+    "environmentSignature": null,
+    "dependencyGraphHash": null
+  }
 }
