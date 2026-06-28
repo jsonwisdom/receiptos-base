@@ -1,0 +1,22 @@
+{
+  "rosId": "ros-0004-runtime-config-core-v1",
+  "schemaVersion": 3,
+  "artifactType": "runtime-config-core",
+  "freezeCommit": "7fa652774700608d06d0b37f2b3fcacb1afeaf43",
+  "artifactDigest": "sha256:5a9fee040bae32d8ac77c27c725cff5604c7e13e454411713589413fd521bb5b",
+  "publicationCommit": "",
+  "ipfsCid": "bafkreic2t7xaic5oglmky56cprzfz72watd6cpsfiqixcnmjie75kin3lm",
+  "authority": false,
+  "eas": {
+    "network": "base",
+    "schemaNumber": 1630,
+    "easSchemaUid": "0x7e29a0932ff347470306acc86127a9d50061431e8e0abb0f7ebbd61f8327aea5",
+    "easAttestationUid": "",
+    "transactionHash": "",
+    "authority": false
+  },
+  "reserved": {
+    "environmentSignature": null,
+    "dependencyGraphHash": null
+  }
+}
