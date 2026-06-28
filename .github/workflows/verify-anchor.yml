@@ -1,0 +1,25 @@
+name: Verify Anchor
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify-local-anchor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Verify local anchor
+        run: scripts/verify-eas-anchor.sh evidence/receipts/eas-global-forest-anchor.json
+
+  verify-onchain-anchor:
+    runs-on: ubuntu-latest
+    if: ${{ secrets.BASE_RPC_URL != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify on-chain anchor
+        env:
+          BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+        run: scripts/verify-eas-anchor-onchain.sh evidence/receipts/eas-global-forest-anchor.json
