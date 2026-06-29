@@ -1,0 +1,8 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "homepage": "https://example.com",
+  "name": "valid-v2-version-semver-test",
+  "version": "2.0.0-alpha.1+build.7",
+  "permissions": []
+}
