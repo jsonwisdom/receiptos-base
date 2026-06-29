@@ -1,0 +1,12 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "vector": "fail-v2-developer-url-http",
+  "vector_revision": "0.1.0",
+  "valid": false,
+  "exit_code": 15,
+  "reason": "invalid_url",
+  "failed_field": "developer_url",
+  "sha256": null,
+  "canonical_file": null
+}
