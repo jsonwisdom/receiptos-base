@@ -1,0 +1,21 @@
+{
+  "id": "jaywisdom",
+  "name": "JAYWISDOM",
+  "description": "Replay-first verification on Base. Replay First. Verify Everything.",
+  "developer": {
+    "name": "jsonwisdom",
+    "url": "https://github.com/jsonwisdom/receiptos-base"
+  },
+  "website": "https://cmptrwsdm.com",
+  "icon": "https://cmptrwsdm.com/icon.png",
+  "screenshots": [
+    "https://cmptrwsdm.com/screenshot-1.png"
+  ],
+  "app": {
+    "url": "https://cmptrwsdm.com/app",
+    "permissions": [
+      "farcaster.read",
+      "farcaster.write"
+    ]
+  }
+}
