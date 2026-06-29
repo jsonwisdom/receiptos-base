@@ -1,7 +1,7 @@
 {
   "spec": "SPEC-V2",
   "spec_revision": "2.0.0-alpha",
-  "corpus_version": "0.2.0",
+  "corpus_version": "0.3.0",
   "canonicalization": "RFC8785",
   "authority": false,
   "vectors": [
@@ -14,6 +14,11 @@
       "id": "valid-v2-permissions",
       "path": "passing/valid-v2-permissions",
       "type": "passing"
+    },
+    {
+      "id": "fail-v2-permissions-not-array",
+      "path": "failing/fail-v2-permissions-not-array",
+      "type": "failing"
     }
   ],
   "release_state": "open",
