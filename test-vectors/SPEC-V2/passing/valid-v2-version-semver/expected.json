@@ -1,0 +1,10 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "vector": "valid-v2-version-semver",
+  "vector_revision": "0.1.0",
+  "valid": true,
+  "exit_code": 0,
+  "reason": null,
+  "failed_field": null
+}
