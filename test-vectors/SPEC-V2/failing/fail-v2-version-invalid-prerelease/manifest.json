@@ -2,6 +2,11 @@
   "spec": "SPEC-V2",
   "spec_revision": "2.0.0-alpha",
   "homepage": "https://example.com",
+  "developer": {
+    "name": "Example Dev",
+    "url": "https://developer.example.com"
+  },
+  "description": "Failing SPEC-V2 vector for invalid numeric prerelease SemVer version",
   "name": "fail-v2-version-invalid-prerelease-test",
   "version": "2.0.0-01",
   "permissions": []
