@@ -5,8 +5,10 @@
   "description": "ReceiptOS: Onchain verifiable receipt + replay engine on Base. Evidence-first verification.",
   "type": "commonjs",
   "scripts": {
+    "test:rfc8785": "node scripts/rfc8785-test-vectors.js",
     "verify:farcaster:semantic": "node scripts/semantic-verify.js",
-    "verify:farcaster:lock": "node scripts/verify-manifest-lock.js"
+    "verify:farcaster:lock": "node scripts/verify-manifest-lock.js",
+    "verify:farcaster": "npm run test:rfc8785 && npm run verify:farcaster:semantic && npm run verify:farcaster:lock"
   },
   "dependencies": {
     "json-canonicalize": "^1.0.6"
