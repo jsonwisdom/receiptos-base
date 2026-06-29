@@ -1,0 +1,16 @@
+{
+  "name": "example-fail-semantic",
+  "description": "Missing required developer object",
+  "permissions": [
+    "read:user"
+  ],
+  "screenshots": [
+    {
+      "url": "https://example.dev/screenshot.png",
+      "description": "Main interface"
+    }
+  ],
+  "version": "1.0.0",
+  "homepage": "https://example.dev/app",
+  "repository": "https://github.com/example/example-fail-semantic"
+}
