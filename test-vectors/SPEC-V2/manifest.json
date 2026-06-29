@@ -1,0 +1,20 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "corpus_version": "0.1.0",
+  "canonicalization": "RFC8785",
+  "authority": false,
+  "vectors": [
+    {
+      "id": "valid-v2-minimal",
+      "path": "passing/valid-v2-minimal",
+      "type": "passing"
+    }
+  ],
+  "release_state": "open",
+  "doctrine": {
+    "replay_first": true,
+    "authority": false,
+    "observable_behavior_defines_conformance": true
+  }
+}
