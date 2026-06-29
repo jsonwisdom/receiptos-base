@@ -1,0 +1,12 @@
+{
+  "spec": "SPEC-V1",
+  "spec_revision": "1.0.0",
+  "vector": "fail-digest",
+  "vector_revision": "1.0.0",
+  "valid": false,
+  "exit_code": 21,
+  "reason": "digest_mismatch",
+  "failed_stage": "lock",
+  "sha256": "6c596babd26d98adbbfc45ff45459ca41dec356e7d7db6941a9da7f753af9b77",
+  "canonical_file": "manifest.jcs"
+}
