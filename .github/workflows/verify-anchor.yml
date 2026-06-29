@@ -14,6 +14,24 @@ jobs:
       - name: Verify all local anchors
         run: bash scripts/verify-all-anchors.sh evidence/anchors.json
 
+  verify-spec-v1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Run SPEC-V1 conformance bailiff
+        run: node ci/local-runner.js
+      - name: Upload SPEC-V1 summary
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: spec-v1-summary
+          path: results/SPEC-V1/summary.json
+
   verify-onchain-anchor:
     runs-on: ubuntu-latest
     steps:
