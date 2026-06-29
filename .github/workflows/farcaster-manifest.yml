@@ -5,11 +5,15 @@ on:
     paths:
       - ".well-known/farcaster/**"
       - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
       - ".github/workflows/farcaster-manifest.yml"
   pull_request:
     paths:
       - ".well-known/farcaster/**"
       - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
       - ".github/workflows/farcaster-manifest.yml"
   workflow_dispatch:
 
@@ -27,17 +31,21 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Install dependencies
+        run: |
+          npm install
+
       - name: Check manifest exists
         run: |
           test -f .well-known/farcaster/manifest.json
 
       - name: Semantic Verification
         run: |
-          node scripts/semantic-verify.js
+          npm run verify:farcaster:semantic
 
       - name: Verify Manifest Lock
         run: |
-          node scripts/verify-manifest-lock.js
+          npm run verify:farcaster:lock
 
       - name: Emit CI Receipt
         if: always()
