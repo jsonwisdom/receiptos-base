@@ -1,0 +1,29 @@
+{
+  "schema_version": "agent-card.v1",
+  "name": "JAYWISDOM",
+  "description": "Replay-first AI agent for cryptographic verification, provenance, and audit trails. Verifies claims using Git, IPFS, EAS, and on-chain receipts before acting. Trust through replay, not authority.",
+  "url": "https://github.com/jsonwisdom/receiptos-base",
+  "homepage": "https://github.com/jsonwisdom/receiptos-base",
+  "agent_card_url": "https://raw.githubusercontent.com/jsonwisdom/receiptos-base/main/public/.well-known/agent-card.json",
+  "service_endpoints": [
+    "https://raw.githubusercontent.com/jsonwisdom/receiptos-base/main/public/.well-known/agent-card.json"
+  ],
+  "payments": {
+    "x402": true,
+    "network": "base",
+    "asset": "USDC"
+  },
+  "capabilities": [
+    "git_verification",
+    "ipfs_provenance",
+    "eas_attestations",
+    "onchain_receipts",
+    "replayable_audit_trails"
+  ],
+  "principles": [
+    "Replay first",
+    "Receipts over narrative",
+    "Authority=false",
+    "Human approval before action"
+  ]
+}
