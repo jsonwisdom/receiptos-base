@@ -2,6 +2,11 @@
   "spec": "SPEC-V2",
   "spec_revision": "2.0.0-alpha",
   "homepage": "http://example.com",
+  "developer": {
+    "name": "Example Dev",
+    "url": "https://developer.example.com"
+  },
+  "description": "Failing SPEC-V2 vector for homepage URL policy",
   "name": "fail-v2-homepage-http-test",
   "version": "1.0.0",
   "permissions": []
