@@ -1,0 +1,8 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "homepage": "http://example.com",
+  "name": "fail-v2-homepage-http-test",
+  "version": "1.0.0",
+  "permissions": []
+}
