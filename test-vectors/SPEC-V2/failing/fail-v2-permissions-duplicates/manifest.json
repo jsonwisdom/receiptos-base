@@ -1,0 +1,14 @@
+{
+  "name": "fail-v2-permissions-duplicates",
+  "description": "Reject duplicate permission strings",
+  "developer": {
+    "name": "Example Dev",
+    "url": "https://example.com"
+  },
+  "permissions": [
+    "read:user",
+    "write:storage",
+    "read:user"
+  ],
+  "version": "2.0.0-alpha"
+}
