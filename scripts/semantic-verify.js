@@ -3,6 +3,7 @@
 
 const fs = require("fs");
 const crypto = require("crypto");
+const { canonicalize } = require("json-canonicalize");
 
 const manifestPath = process.env.MANIFEST_PATH || ".well-known/farcaster/manifest.json";
 const canonicalPath = process.env.MANIFEST_JCS_PATH || ".well-known/farcaster/manifest.jcs";
@@ -42,12 +43,6 @@ function isHttpsUrl(value) {
   }
 }
 
-function stableStringify(value) {
-  if (value === null || typeof value !== "object") return JSON.stringify(value);
-  if (Array.isArray(value)) return `[${value.map(stableStringify).join(",")}]`;
-  return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify(value[key])}`).join(",")}}`;
-}
-
 function assertNoEmptyStrings(value, path = "manifest") {
   if (typeof value === "string") {
     must(value.trim().length > 0, `${path} must not be an empty string`);
@@ -61,6 +56,14 @@ function assertNoEmptyStrings(value, path = "manifest") {
     for (const [key, nested] of Object.entries(value)) {
       assertNoEmptyStrings(nested, `${path}.${key}`);
     }
+  }
+}
+
+function canonicalizeOrFail(value) {
+  try {
+    return canonicalize(value);
+  } catch (error) {
+    fail(`RFC8785 canonicalization failed: ${error.message}`);
   }
 }
 
@@ -105,10 +108,10 @@ for (const screenshot of manifest.screenshots) {
   must(path.endsWith(".png") || path.endsWith(".jpg") || path.endsWith(".jpeg") || path.endsWith(".webp"), `screenshot must be an image URL: ${screenshot}`);
 }
 
-// Canonical drift detection.
+// Canonical drift detection using RFC8785 JCS.
 if (canonicalText !== null) {
-  const derivedCanonical = stableStringify(manifest);
-  must(canonicalText === derivedCanonical, "manifest.json does not match manifest.jcs canonical bytes");
+  const derivedCanonical = canonicalizeOrFail(manifest);
+  must(canonicalText === derivedCanonical, "manifest.json does not match manifest.jcs RFC8785 canonical bytes");
 }
 
 // Lock doctrine.
@@ -134,4 +137,4 @@ if (lock) {
   }
 }
 
-console.log("Semantic verification doctrine v2 passed.");
+console.log("Semantic verification doctrine v2 passed with RFC8785 canonicalization.");
