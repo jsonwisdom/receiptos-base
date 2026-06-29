@@ -14,8 +14,13 @@ jobs:
       - name: Verify all local anchors
         run: bash scripts/verify-all-anchors.sh evidence/anchors.json
 
-  verify-spec-v1:
+  verify-spec:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        spec:
+          - SPEC-V1
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -23,14 +28,14 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm install
-      - name: Run SPEC-V1 conformance bailiff
-        run: node ci/local-runner.js --spec SPEC-V1
-      - name: Upload SPEC-V1 summary
+      - name: Run SPEC conformance bailiff
+        run: node ci/local-runner.js --spec ${{ matrix.spec }}
+      - name: Upload SPEC summary
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: spec-v1-summary
-          path: results/SPEC-V1/summary.json
+          name: spec-summary-${{ matrix.spec }}
+          path: results/${{ matrix.spec }}/summary.json
 
   verify-onchain-anchor:
     runs-on: ubuntu-latest
