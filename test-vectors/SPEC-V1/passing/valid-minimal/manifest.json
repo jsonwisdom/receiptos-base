@@ -1,0 +1,10 @@
+{
+  "name": "example-minimal",
+  "description": "Minimal valid manifest",
+  "developer": {
+    "name": "Example Dev",
+    "url": "https://example.com"
+  },
+  "permissions": [],
+  "version": "1.0.0"
+}
