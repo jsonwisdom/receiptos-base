@@ -40,6 +40,9 @@ jobs:
       - name: RFC8785 Test Vectors
         run: npm run test:rfc8785
 
+      - name: Invalid Vector Rejection Tests
+        run: npm run test:farcaster:invalid
+
       - name: Semantic Verification
         run: npm run verify:farcaster:semantic
 
@@ -50,5 +53,5 @@ jobs:
         if: always()
         run: |
           mkdir -p .receipts
-          echo '{"receipt_type":"FARCASTER_MANIFEST_CI_RECEIPT_V1","git_commit":"'"${GITHUB_SHA}"'","workflow":"'"${GITHUB_WORKFLOW}"'","run_id":"'"${GITHUB_RUN_ID}"'","manifest_path":".well-known/farcaster/manifest.json","canonical_manifest_path":".well-known/farcaster/manifest.jcs","lock_path":".well-known/farcaster/manifest.lock.json","rfc8785_test_vectors":"scripts/rfc8785-test-vectors.js","semantic_verifier":"scripts/semantic-verify.js","lock_verifier":"scripts/verify-manifest-lock.js","authority":false}' > ".receipts/farcaster-manifest-${GITHUB_SHA}.json"
+          echo '{"receipt_type":"FARCASTER_MANIFEST_CI_RECEIPT_V1","git_commit":"'"${GITHUB_SHA}"'","workflow":"'"${GITHUB_WORKFLOW}"'","run_id":"'"${GITHUB_RUN_ID}"'","manifest_path":".well-known/farcaster/manifest.json","canonical_manifest_path":".well-known/farcaster/manifest.jcs","lock_path":".well-known/farcaster/manifest.lock.json","rfc8785_test_vectors":"scripts/rfc8785-test-vectors.js","invalid_vectors":"scripts/invalid-vectors.js","semantic_verifier":"scripts/semantic-verify.js","lock_verifier":"scripts/verify-manifest-lock.js","authority":false}' > ".receipts/farcaster-manifest-${GITHUB_SHA}.json"
           cat ".receipts/farcaster-manifest-${GITHUB_SHA}.json"
