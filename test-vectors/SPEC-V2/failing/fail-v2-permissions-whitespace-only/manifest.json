@@ -1,0 +1,9 @@
+{
+  "name": "fail-v2-permissions-whitespace-only",
+  "description": "Reject whitespace-only permission string",
+  "permissions": [
+    "read:user",
+    "   "
+  ],
+  "version": "2.0.0-alpha"
+}
