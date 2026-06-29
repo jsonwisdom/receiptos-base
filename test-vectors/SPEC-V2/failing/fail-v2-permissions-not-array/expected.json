@@ -1,0 +1,12 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "vector": "fail-v2-permissions-not-array",
+  "vector_revision": "0.1.0",
+  "valid": false,
+  "exit_code": 10,
+  "reason": "semantic_error",
+  "failed_field": "permissions",
+  "sha256": null,
+  "canonical_file": null
+}
