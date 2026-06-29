@@ -1,0 +1,14 @@
+{
+  "name": "fail-v2-permissions-duplicates",
+  "description": "Reject repeated permission strings",
+  "developer": {
+    "name": "Example Dev",
+    "url": "https://example.com"
+  },
+  "permissions": [
+    "alpha",
+    "beta",
+    "alpha"
+  ],
+  "version": "2.0.0-alpha"
+}
