@@ -1,16 +1,54 @@
 {
-  "name": "receiptos-base",
+  "name": "@jsonwisdom/farcaster-verify",
   "version": "0.1.0",
-  "private": true,
-  "description": "ReceiptOS: Onchain verifiable receipt + replay engine on Base. Evidence-first verification.",
+  "private": false,
+  "description": "Authority=false Farcaster Mini App manifest verifier with RFC8785 canonicalization, semantic checks, lock verification, and adversarial vectors.",
   "type": "commonjs",
+  "main": "index.js",
+  "bin": {
+    "farcaster-verify-semantic": "scripts/semantic-verify.js",
+    "farcaster-verify-lock": "scripts/verify-manifest-lock.js",
+    "farcaster-verify-rfc8785": "scripts/rfc8785-test-vectors.js",
+    "farcaster-verify-invalid": "scripts/invalid-vectors.js",
+    "farcaster-verify-fuzz": "scripts/fuzz-manifest-vectors.js"
+  },
+  "files": [
+    "index.js",
+    "scripts/semantic-verify.js",
+    "scripts/verify-manifest-lock.js",
+    "scripts/rfc8785-test-vectors.js",
+    "scripts/invalid-vectors.js",
+    "scripts/fuzz-manifest-vectors.js",
+    "docs/farcaster-lock-rotation.md",
+    "docs/farcaster-transparency-log.md"
+  ],
+  "keywords": [
+    "farcaster",
+    "mini-app",
+    "manifest",
+    "rfc8785",
+    "jcs",
+    "verification",
+    "authority-false",
+    "receiptos"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsonwisdom/receiptos-base.git"
+  },
+  "homepage": "https://github.com/jsonwisdom/receiptos-base#readme",
+  "bugs": {
+    "url": "https://github.com/jsonwisdom/receiptos-base/issues"
+  },
+  "license": "MIT",
   "scripts": {
     "test:rfc8785": "node scripts/rfc8785-test-vectors.js",
     "test:farcaster:invalid": "node scripts/invalid-vectors.js",
     "test:farcaster:fuzz": "node scripts/fuzz-manifest-vectors.js",
     "verify:farcaster:semantic": "node scripts/semantic-verify.js",
     "verify:farcaster:lock": "node scripts/verify-manifest-lock.js",
-    "verify:farcaster": "npm run test:rfc8785 && npm run test:farcaster:invalid && npm run test:farcaster:fuzz && npm run verify:farcaster:semantic && npm run verify:farcaster:lock"
+    "verify:farcaster": "npm run test:rfc8785 && npm run test:farcaster:invalid && npm run test:farcaster:fuzz && npm run verify:farcaster:semantic && npm run verify:farcaster:lock",
+    "prepublishOnly": "npm run verify:farcaster"
   },
   "dependencies": {
     "json-canonicalize": "^1.0.6"
