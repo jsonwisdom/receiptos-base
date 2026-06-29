@@ -1,0 +1,11 @@
+{
+  "spec": "SPEC-V1",
+  "spec_revision": "1.0.0",
+  "vector": "valid-full",
+  "vector_revision": "1.0.0",
+  "valid": true,
+  "exit_code": 0,
+  "reason": "ok",
+  "sha256": "9fdc9c5d65422037becfb73ac5d5bd4a38b345be1bbd2db8b1ededd6daf4cd2d",
+  "canonical_file": "manifest.jcs"
+}
