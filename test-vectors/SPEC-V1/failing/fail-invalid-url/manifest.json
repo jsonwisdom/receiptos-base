@@ -1,0 +1,10 @@
+{
+  "name": "example-fail-invalid-url",
+  "description": "Manifest contains a non-HTTPS developer URL",
+  "developer": {
+    "name": "Example Dev",
+    "url": "http://example.com"
+  },
+  "permissions": [],
+  "version": "1.0.0"
+}
