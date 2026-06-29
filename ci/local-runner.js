@@ -9,6 +9,7 @@ const canonicalize = mod.canonicalize || mod;
 
 const VECTOR_ROOT = "test-vectors";
 const ROOT_MANIFEST = path.join(VECTOR_ROOT, "manifest.json");
+const SEMVER_RE = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
 
 function argValue(name) {
   const index = process.argv.indexOf(name);
@@ -32,6 +33,12 @@ function stripNl(s) {
 function httpsOnly(s) {
   try { return new URL(s).protocol === "https:"; } catch { return false; }
 }
+function semverFailure() {
+  return { valid:false, exit_code:16, reason:"invalid_semver", failed_field:"version", sha256:null, canonical_file:null };
+}
+function validSemVer(s) {
+  return typeof s === "string" && SEMVER_RE.test(s);
+}
 
 function permissionsFailure() {
   return { valid:false, exit_code:10, reason:"semantic_error", failed_field:"permissions", sha256:null, canonical_file:null };
@@ -50,7 +57,7 @@ function validatePermissions(permissions) {
   return null;
 }
 
-function semantic(m) {
+function semantic(m, specId) {
   if (typeof m.homepage === "string" && !httpsOnly(m.homepage)) return { valid:false, exit_code:15, reason:"invalid_url", failed_field:"homepage", sha256:null, canonical_file:null };
   if (m.developer && typeof m.developer.url === "string" && !httpsOnly(m.developer.url)) return { valid:false, exit_code:15, reason:"invalid_url", failed_field:"developer.url", sha256:null, canonical_file:null };
   if (typeof m.repository === "string" && !httpsOnly(m.repository)) return { valid:false, exit_code:15, reason:"invalid_url", failed_field:"repository", sha256:null, canonical_file:null };
@@ -60,14 +67,15 @@ function semantic(m) {
   if (!m.developer || typeof m.developer !== "object") return { valid:false, exit_code:10, reason:"semantic_error", failed_field:"developer", sha256:null, canonical_file:null };
   if (!m.name) return { valid:false, exit_code:10, reason:"semantic_error", failed_field:"name", sha256:null, canonical_file:null };
   if (!m.description) return { valid:false, exit_code:10, reason:"semantic_error", failed_field:"description", sha256:null, canonical_file:null };
+  if (specId === "SPEC-V2" && !validSemVer(m.version)) return semverFailure();
   if (!m.version) return { valid:false, exit_code:10, reason:"semantic_error", failed_field:"version", sha256:null, canonical_file:null };
   return null;
 }
 
-function runVector(root, v) {
+function runVector(root, v, specId) {
   const dir = path.join(root, v.path);
   const m = json(path.join(dir, "manifest.json"));
-  const s = semantic(m);
+  const s = semantic(m, specId);
   if (s) return s;
 
   const canon = canonicalize(m);
@@ -108,7 +116,7 @@ function runSpec(spec) {
   const root = path.dirname(manifestPath);
   const corpus = json(manifestPath);
   const sealedMismatch = verifySealedSpec(spec);
-  const results = corpus.vectors.map(v => compare(root, v, runVector(root, v)));
+  const results = corpus.vectors.map(v => compare(root, v, runVector(root, v, corpus.spec)));
   const passed = results.filter(r => r.conformance_passed).length;
   const summary = { spec:corpus.spec, corpus_version:corpus.corpus_version, sealed:!!spec.sealed, sealed_manifest_ok:!sealedMismatch, sealed_manifest_mismatch:sealedMismatch, timestamp:new Date().toISOString(), total:results.length, conformance_passed:passed, conformance_failed:results.length - passed, semantic_valid:results.filter(r => r.semantic_valid).length, semantic_invalid:results.filter(r => !r.semantic_valid).length, results };
   const outDir = path.join("results", corpus.spec);
