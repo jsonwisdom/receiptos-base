@@ -1,0 +1,10 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "homepage": "https://example.com",
+  "developer_url": "https://developer.example.com",
+  "repository": "http://github.com/example/repo",
+  "name": "fail-v2-repository-http-test",
+  "version": "1.0.0",
+  "permissions": []
+}
