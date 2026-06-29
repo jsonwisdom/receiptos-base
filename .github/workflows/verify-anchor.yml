@@ -38,6 +38,25 @@ jobs:
           name: spec-summary-${{ matrix.spec }}
           path: results/${{ matrix.spec }}/summary.json
 
+  verify-spec-v2-visible:
+    name: verify-spec-v2-visible
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Run SPEC-V2 conformance bailiff
+        run: node ci/local-runner.js --spec SPEC-V2
+      - name: Upload SPEC-V2 visible summary
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: spec-summary-SPEC-V2-visible
+          path: results/SPEC-V2/summary.json
+
   verify-onchain-anchor:
     runs-on: ubuntu-latest
     steps:
