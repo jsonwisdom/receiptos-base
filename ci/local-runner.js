@@ -39,6 +39,7 @@ function semantic(m) {
   if (typeof m.repository === "string" && !httpsOnly(m.repository)) return { valid:false, exit_code:15, reason:"invalid_url", failed_field:"repository", sha256:null, canonical_file:null };
   if (Object.prototype.hasOwnProperty.call(m, "unexpected")) return { valid:false, exit_code:14, reason:"unexpected_field", failed_field:"unexpected", sha256:null, canonical_file:null };
   if (!Array.isArray(m.permissions)) return { valid:false, exit_code:10, reason:"semantic_error", failed_field:"permissions", sha256:null, canonical_file:null };
+  if (!m.permissions.every(p => typeof p === "string")) return { valid:false, exit_code:10, reason:"semantic_error", failed_field:"permissions", sha256:null, canonical_file:null };
   if (!m.developer || typeof m.developer !== "object") return { valid:false, exit_code:10, reason:"semantic_error", failed_field:"developer", sha256:null, canonical_file:null };
   if (!m.name) return { valid:false, exit_code:10, reason:"semantic_error", failed_field:"name", sha256:null, canonical_file:null };
   if (!m.description) return { valid:false, exit_code:10, reason:"semantic_error", failed_field:"description", sha256:null, canonical_file:null };
