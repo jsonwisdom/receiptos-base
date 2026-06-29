@@ -5,6 +5,8 @@
   "vector_revision": "0.1.0",
   "valid": true,
   "exit_code": 0,
-  "reason": null,
-  "failed_field": null
+  "reason": "ok",
+  "failed_stage": null,
+  "sha256": "f2d3880f8e03f64f16b30e460fcc069792df82d6fd3186f9791eb96fab4b28ba",
+  "canonical_file": "manifest.jcs"
 }
