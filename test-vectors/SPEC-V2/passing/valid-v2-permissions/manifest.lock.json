@@ -1,0 +1,9 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "vector": "valid-v2-permissions",
+  "vector_revision": "0.1.0",
+  "canonicalization": "RFC8785",
+  "canonical_file": "manifest.jcs",
+  "sha256": "8cabfc989829499c6835010aefd5a87624fd8b14dfe18f2be879141206713a15"
+}
