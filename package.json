@@ -1,0 +1,14 @@
+{
+  "name": "receiptos-base",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ReceiptOS: Onchain verifiable receipt + replay engine on Base. Evidence-first verification.",
+  "type": "commonjs",
+  "scripts": {
+    "verify:farcaster:semantic": "node scripts/semantic-verify.js",
+    "verify:farcaster:lock": "node scripts/verify-manifest-lock.js"
+  },
+  "dependencies": {
+    "json-canonicalize": "^1.0.6"
+  }
+}
