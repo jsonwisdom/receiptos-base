@@ -1,0 +1,26 @@
+{
+  "name": "Valid Screenshots App",
+  "description": "A sample web app demonstrating screenshots in the manifest",
+  "developer": {
+    "name": "Test Developer",
+    "url": "https://example.com"
+  },
+  "permissions": [],
+  "screenshots": [
+    {
+      "src": "screenshot-wide.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Wide screenshot showing the app in landscape mode"
+    },
+    {
+      "src": "screenshot-narrow.webp",
+      "sizes": "720x1280",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Narrow screenshot showing the app in portrait mode"
+    }
+  ],
+  "version": "1.0.0"
+}
