@@ -1,0 +1,11 @@
+{
+  "name": "example-fail-unexpected-field",
+  "description": "Manifest contains an unexpected top-level field",
+  "developer": {
+    "name": "Example Dev",
+    "url": "https://example.com"
+  },
+  "permissions": [],
+  "version": "1.0.0",
+  "unexpected": true
+}
