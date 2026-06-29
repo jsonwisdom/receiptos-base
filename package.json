@@ -5,6 +5,7 @@
   "description": "Authority=false Farcaster Mini App manifest verifier with RFC8785 canonicalization, semantic checks, lock verification, and adversarial vectors.",
   "type": "commonjs",
   "main": "index.js",
+  "types": "index.d.ts",
   "bin": {
     "farcaster-verify-semantic": "scripts/semantic-verify.js",
     "farcaster-verify-lock": "scripts/verify-manifest-lock.js",
@@ -14,6 +15,7 @@
   },
   "files": [
     "index.js",
+    "index.d.ts",
     "scripts/semantic-verify.js",
     "scripts/verify-manifest-lock.js",
     "scripts/rfc8785-test-vectors.js",
