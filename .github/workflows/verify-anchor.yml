@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run SPEC-V1 conformance bailiff
-        run: node ci/local-runner.js
+        run: node ci/local-runner.js --spec SPEC-V1
       - name: Upload SPEC-V1 summary
         uses: actions/upload-artifact@v4
         if: always()
