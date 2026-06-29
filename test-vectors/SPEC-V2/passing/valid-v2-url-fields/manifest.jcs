@@ -1,0 +1,1 @@
+{"description":"Passing SPEC-V2 vector for HTTPS URL fields","developer":{"name":"Example Dev","url":"https://developer.example.com"},"homepage":"https://example.com","name":"valid-v2-url-fields-test","permissions":[],"repository":"https://github.com/example/repo","spec":"SPEC-V2","spec_revision":"2.0.0-alpha","version":"1.0.0"}
