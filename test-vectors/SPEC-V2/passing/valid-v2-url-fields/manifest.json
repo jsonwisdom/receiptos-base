@@ -2,7 +2,11 @@
   "spec": "SPEC-V2",
   "spec_revision": "2.0.0-alpha",
   "homepage": "https://example.com",
-  "developer_url": "https://developer.example.com",
+  "developer": {
+    "name": "Example Dev",
+    "url": "https://developer.example.com"
+  },
+  "description": "Passing SPEC-V2 vector for HTTPS URL fields",
   "repository": "https://github.com/example/repo",
   "name": "valid-v2-url-fields-test",
   "version": "1.0.0",
