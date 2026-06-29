@@ -1,7 +1,7 @@
 {
   "spec": "SPEC-V2",
   "spec_revision": "2.0.0-alpha",
-  "corpus_version": "0.5.0",
+  "corpus_version": "0.6.0",
   "canonicalization": "RFC8785",
   "authority": false,
   "vectors": [
@@ -33,6 +33,11 @@
     {
       "id": "fail-v2-permissions-whitespace-only",
       "path": "failing/fail-v2-permissions-whitespace-only",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-permissions-repeated",
+      "path": "failing/fail-v2-permissions-duplicates",
       "type": "failing"
     }
   ],
