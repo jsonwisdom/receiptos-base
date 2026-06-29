@@ -1,0 +1,60 @@
+name: Farcaster Manifest Verification
+
+on:
+  push:
+    paths:
+      - ".well-known/farcaster/**"
+      - "scripts/**"
+      - ".github/workflows/farcaster-manifest.yml"
+  pull_request:
+    paths:
+      - ".well-known/farcaster/**"
+      - "scripts/**"
+      - ".github/workflows/farcaster-manifest.yml"
+  workflow_dispatch:
+
+jobs:
+  verify-farcaster-manifest:
+    name: Verify Farcaster Manifest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check manifest exists
+        run: |
+          test -f .well-known/farcaster/manifest.json
+
+      - name: Semantic Verification
+        run: |
+          node scripts/semantic-verify.js
+
+      - name: Verify Manifest Lock
+        run: |
+          node scripts/verify-manifest-lock.js
+
+      - name: Emit CI Receipt
+        if: always()
+        run: |
+          mkdir -p .receipts
+          cat > ".receipts/farcaster-manifest-${GITHUB_SHA}.json" <<EOF
+          {
+            "receipt_type": "FARCASTER_MANIFEST_CI_RECEIPT_V1",
+            "git_commit": "${GITHUB_SHA}",
+            "workflow": "${GITHUB_WORKFLOW}",
+            "run_id": "${GITHUB_RUN_ID}",
+            "manifest_path": ".well-known/farcaster/manifest.json",
+            "canonical_manifest_path": ".well-known/farcaster/manifest.jcs",
+            "lock_path": ".well-known/farcaster/manifest.lock.json",
+            "semantic_verifier": "scripts/semantic-verify.js",
+            "lock_verifier": "scripts/verify-manifest-lock.js",
+            "authority": false
+          }
+          EOF
+          cat ".receipts/farcaster-manifest-${GITHUB_SHA}.json"
