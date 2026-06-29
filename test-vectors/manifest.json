@@ -1,0 +1,22 @@
+{
+  "schema": "receiptos.test-vector-root.v1",
+  "runner": "ci/local-runner.js",
+  "authority": false,
+  "specs": [
+    {
+      "id": "SPEC-V1",
+      "path": "SPEC-V1/manifest.json",
+      "sealed": true,
+      "sealed_ref": "corpus-v1.0.0",
+      "sealed_commit": "c8b2138dc1f475d2d40eb96b51e612e412632715",
+      "manifest_git_blob_sha": "f2a45637c3bd003ed3e3ded807bedc15776c7c85",
+      "manifest_sha256": "6fd22e9a53c23ff7ecd2a087de9a48f4b253c9f356c8e03fb949dd62e346187c"
+    }
+  ],
+  "doctrine": {
+    "replay_first": true,
+    "authority": false,
+    "sealed_specs_require_manifest_sha256": true,
+    "multi_spec_expansion_must_not_mutate_sealed_specs": true
+  }
+}
