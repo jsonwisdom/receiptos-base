@@ -1,0 +1,15 @@
+{
+  "accepted_for_manifest": true,
+  "authority": false,
+  "batch_root_manifest": true,
+  "errors": [],
+  "inference_performed": false,
+  "leaf_count": 1,
+  "leaves": [
+    "sha256:7107ad37be56fbd8872463c911d650d526f821c371986fd06dddf85378ecaaaa"
+  ],
+  "manifest_use_case": "light_verification",
+  "merkle_root": "sha256:7107ad37be56fbd8872463c911d650d526f821c371986fd06dddf85378ecaaaa",
+  "state_mutated": false,
+  "truth_claim": false
+}
