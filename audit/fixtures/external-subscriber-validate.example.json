@@ -1,0 +1,16 @@
+{
+  "authority": false,
+  "contract_valid": true,
+  "cursor_valid": true,
+  "errors": [],
+  "external_subscriber_validator": true,
+  "feed_valid": true,
+  "forbidden_semantics_valid": true,
+  "inference_performed": false,
+  "ordering_valid": true,
+  "read_only_valid": true,
+  "state_mutated": false,
+  "sticky_fields_valid": true,
+  "subscriber_valid": true,
+  "truth_claim": false
+}
