@@ -1,0 +1,6 @@
+{
+  "report": "rp-002-eas-witness-replay.example.json",
+  "hash_algorithm": "sha256",
+  "canonicalization": "json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False)",
+  "hash": "0ab9432b7988e016d3e7db76ca5e42e55705c173f987108ace4baad174fed8b1"
+}
