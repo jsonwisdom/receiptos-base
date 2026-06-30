@@ -1,0 +1,13 @@
+{
+  "anchor_semantics_valid": true,
+  "authority": false,
+  "errors": [],
+  "gate_passed": true,
+  "inference_performed": false,
+  "record_count": 1,
+  "sorted_storage_timestamps_valid": true,
+  "state_mutated": false,
+  "storage_view_external_conformance_gate": true,
+  "truth_claim": false,
+  "unauthorized_fields_valid": true
+}
