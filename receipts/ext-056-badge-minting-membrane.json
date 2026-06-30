@@ -1,0 +1,46 @@
+{
+  "issue": "EXT-056",
+  "title": "Badge Minting Membrane",
+  "status": "BADGE_MINTING_MEMBRANE_LOCKED",
+  "depends_on": [
+    "EXT-054",
+    "EXT-055"
+  ],
+  "purpose": "Allow arcade badge mint intent while preventing authority, governance rights, vote power, or truth promotion.",
+  "runtime_mode": "witness_only",
+  "authority": false,
+  "truth_claim": false,
+  "resolution_semantics": "absent",
+  "badge_minting_allowed": true,
+  "badge_power": 0,
+  "vote_power": 0,
+  "governance_action_allowed": false,
+  "transfer_governance_rights": false,
+  "promotion_allowed": false,
+  "mint_semantics": {
+    "standard_model": "ERC-1155-style completion badge",
+    "mint_represents": "witness action completion",
+    "mint_does_not_represent": [
+      "truth",
+      "authority",
+      "governance power",
+      "market resolution",
+      "vote delegation"
+    ],
+    "allowed_badge_actions": [
+      "Inspect",
+      "Replay",
+      "Verify",
+      "Challenge",
+      "Trace"
+    ],
+    "forbidden_badge_actions": [
+      "Vote",
+      "Resolve",
+      "Promote Truth",
+      "Grant Authority",
+      "Execute Governance",
+      "Settle Outcome"
+    ]
+  }
+}
