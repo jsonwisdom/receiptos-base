@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "algorithm": "sha256",
+  "mode": "canonical_stack_hash",
+  "inputs": [
+    "deployment/production-lock.json",
+    "deployment/production-manifest.json",
+    "constitution/CLAIM_PROMOTION_GUARD_V0_1.json"
+  ],
+  "excludes": [
+    "runtime alerts",
+    "manifest self-hash",
+    "git metadata",
+    "timestamps"
+  ],
+  "authority": false
+}
