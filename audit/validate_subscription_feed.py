@@ -2,7 +2,7 @@
 """Validate a root subscription feed fixture.
 
 Checks feed shape, storage sequence continuity, root/hash shape,
-allowed fields, and sticky false fields.
+allowed fields, optional storage-time anchor shape, and sticky false fields.
 """
 
 from __future__ import annotations
@@ -38,6 +38,7 @@ ALLOWED_ENTRY = {
     "manifest_hash",
     "leaf_count",
     "proof_surface",
+    "storage_time_anchor",
     "authority",
     "truth_claim",
     "inference_performed",
@@ -49,6 +50,26 @@ STICKY_FALSE = ("authority", "truth_claim", "inference_performed", "state_mutate
 
 def is_sha256_uri(value: Any) -> bool:
     return isinstance(value, str) and value.startswith("sha256:") and len(value) == 71
+
+
+def validate_storage_anchor(anchor: Any, index: int) -> list[str]:
+    if anchor is None:
+        return []
+    errors: list[str] = []
+    if not isinstance(anchor, dict):
+        return [f"storage_anchor_not_object:{index}"]
+    allowed = {"anchor_type", "timestamp_utc", "semantics"}
+    extra = sorted(set(anchor.keys()) - allowed)
+    if extra:
+        errors.append(f"storage_anchor_extra_fields:{index}:" + ",".join(extra))
+    if anchor.get("anchor_type") != "storage_time_only":
+        errors.append(f"storage_anchor_type_invalid:{index}")
+    if anchor.get("semantics") != "log_storage_time_only":
+        errors.append(f"storage_anchor_semantics_invalid:{index}")
+    ts = anchor.get("timestamp_utc")
+    if not isinstance(ts, str) or "T" not in ts or not ts.endswith("Z"):
+        errors.append(f"storage_anchor_timestamp_invalid:{index}")
+    return errors
 
 
 def validate_feed(feed: dict[str, Any], source: str) -> dict[str, Any]:
@@ -109,6 +130,9 @@ def validate_feed(feed: dict[str, Any], source: str) -> dict[str, Any]:
         if entry.get("proof_surface") != "manifest_path":
             errors.append(f"proof_surface_invalid:{index}")
 
+        if "storage_time_anchor" in entry:
+            errors.extend(validate_storage_anchor(entry.get("storage_time_anchor"), index))
+
         for key in STICKY_FALSE:
             if entry.get(key) is not False:
                 errors.append(f"sticky_false_failed:{index}:{key}")
@@ -123,6 +147,7 @@ def validate_feed(feed: dict[str, Any], source: str) -> dict[str, Any]:
         "root_hashes_valid": valid,
         "manifest_hashes_valid": valid,
         "unauthorized_fields_valid": valid,
+        "storage_time_anchors_valid": valid,
         "authority": False,
         "truth_claim": False,
         "inference_performed": False,
