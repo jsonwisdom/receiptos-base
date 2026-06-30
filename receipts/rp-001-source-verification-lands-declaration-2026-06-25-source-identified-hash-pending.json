@@ -1,0 +1,64 @@
+{
+  "artifact_id": "RP-001-SOURCE-VERIFICATION-LANDS-DECLARATION-2026-06-25-SOURCE-IDENTIFIED-HASH-PENDING",
+  "artifact_type": "source_verification_gate_update",
+  "claim_id": "RP-001",
+  "target_entity_id": "LANDS-DECLARATION-2026-06-25",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "source_mode": "user_supplied_public_record_metadata",
+  "independent_web_search_result": "No matching search result returned for the query used in this session.",
+  "gate": {
+    "source_authority": "SOURCE_IDENTIFIED_PENDING_URL_OR_BYTES",
+    "replay": "ARMED_NOT_EXECUTED",
+    "receipt_eligible": false,
+    "hash_ready": false,
+    "anchor_ready": false,
+    "reason": "User supplied docket/document metadata and quoted language, but no exact CourtListener PDF URL, PDF bytes, or SHA-256 value was supplied in the message."
+  },
+  "reported_source_metadata": {
+    "source_label": "CourtListener PDF",
+    "case_number": "1:26-cv-01593-CJN",
+    "document_number": "22-1",
+    "reported_filing_date": "2026-06-24",
+    "court": "U.S. District Court for the District of Columbia",
+    "declarant": "Frank Lands",
+    "reported_title": "Deputy Director for Operations, National Park Service",
+    "reported_incident_date": "2026-06-09",
+    "reported_page_refs": "Page 2, approx. lines 50-54"
+  },
+  "reported_quoted_damage_language": "On June 9, 2026, after the rehabilitation project was substantially complete, the U.S. Park Police responded to an NPS report of damage to the reflecting pool, including a caulk over the foam sealant that was cut with a sharp knife or razor and destruction of delaminating surface material. In addition, approximately 70 fence post tops were thrown into the pool.",
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "reason": "Metadata and quoted language are stronger than prior wrong-target payload, but hash binding cannot complete without exact source URL, bytes, or SHA-256."
+  },
+  "open_questions_preserved": [
+    "Scale of deliberate cuts versus renovation/coating failure.",
+    "Algae causation.",
+    "Full release and hashing of photos, surveillance, court filings, administrative documents, and contractor reports.",
+    "Whether court record language resolves intentional-cut evidence without resolving broader causation of peeling or algae."
+  ],
+  "requirements_for_hash_bind": [
+    "Exact CourtListener PDF URL or uploaded PDF bytes.",
+    "SHA-256 of the exact PDF/source bytes, not only fetched canonical text.",
+    "Stable page/line or paragraph references.",
+    "Optional: CourtListener docket URL and RECAP document identifier."
+  ],
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "rp_001_status_changed": false,
+    "rp_001_confidence_changed": false,
+    "hash_bind_allowed": false,
+    "requires_exact_url_or_bytes_and_sha256": true
+  },
+  "next_valid_verbs": [
+    "hash_bind RP-001 LANDS-DECLARATION-2026-06-25 <sha256> <PDF_OR_URL>",
+    "source_payload RP-001 LANDS-DECLARATION-2026-06-25 <PDF_OR_URL>",
+    "claim lookup RP-001",
+    "commit v2 diff RP-001"
+  ]
+}
