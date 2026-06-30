@@ -1,0 +1,77 @@
+{
+  "artifact_id": "RP-001-REPLAY-SOURCE-TEXT-EXTERNAL-CORROBORATION-2026-06-30",
+  "artifact_type": "replay_result",
+  "claim_id": "RP-001",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "replay_mode": "SOURCE_TEXT_PLUS_EXTERNAL_CORROBORATION",
+  "timestamp": "2026-06-30T11:36:00Z",
+  "target_entity_id": "LANDS-DECLARATION-2026-06-25",
+  "source_url": "https://storage.courtlistener.com/recap/gov.uscourts.dcd.292242/gov.uscourts.dcd.292242.22.1.pdf",
+  "gates": {
+    "passed": [1, 2, 3, 4, 5, 6],
+    "blocked": [7],
+    "gate_7_reason": "Authority elevation remains blocked in source-text mode pending independently recomputed SHA-256 and full byte-level replay."
+  },
+  "verified_claim_components": {
+    "declarant": "Frank Lands",
+    "declarant_title": "Deputy Director for Operations, National Park Service",
+    "declaration_date_or_filing_date": "2026-06-24",
+    "case_context": "Cultural Landscape Foundation v. U.S. Department of the Interior et al., No. 26 Civ. 1593",
+    "incident_date": "2026-06-09",
+    "cuts_with_sharp_implement": "confirmed semantically and textually in declaration",
+    "delaminating_material": "noted in declaration",
+    "fence_posts_in_pool": "approximately 70 fence post tops noted in declaration"
+  },
+  "findings": {
+    "cuts_confirmed": true,
+    "causation_mixed": true,
+    "scale_unresolved": true,
+    "algae_unresolved": true,
+    "docs_partial": true,
+    "photos_or_surveillance_bound": false
+  },
+  "external_corroboration": {
+    "strength": "High",
+    "reported_sources": ["CBS", "PBS", "ABC", "CourtListener docket"],
+    "binding_status": "reported_not_hash_bound"
+  },
+  "gate_status_after_replay": {
+    "source_authority": "URL_AND_TEXT_VERIFIED_PLUS_NEWS_CORROBORATED",
+    "hash_ready": "PENDING_DIGEST",
+    "receipt_eligible": "PROVISIONAL",
+    "anchor_ready": "PROVISIONAL",
+    "replay": "SOURCE_TEXT_PLUS_EXTERNAL_CORROBORATION_COMPLETE"
+  },
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "confidence_signal": "Medium-High signal noted but not applied without explicit v2 confidence-change diff",
+    "reason": "Source text and external corroboration strengthen the intentional-cut subclaim, but scale, algae causation, coating or renovation contribution, visuals, and byte-level hash replay remain incomplete."
+  },
+  "open_questions_preserved": [
+    "Scale of deliberate cuts, including whether larger 300+ foot gash claims are supported by primary evidence.",
+    "Algae causation, including whether algae is linked to vandalism, water chemistry, construction disturbance, or treatment failure.",
+    "Coating or renovation contribution to delamination or peeling.",
+    "Full photo, surveillance, arrest-detail, contractor-document, and court-file hash binding.",
+    "Independent SHA-256 recomputation against PDF bytes."
+  ],
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "rp_001_status_changed": false,
+    "rp_001_confidence_changed": false,
+    "authority_elevated": false,
+    "truth_claim_asserted": false,
+    "requires_explicit_v2_diff_for_confidence_change": true
+  },
+  "next_valid_verbs": [
+    "provide_computed_sha256 RP-001 LANDS-DECLARATION-2026-06-25 <digest>",
+    "claim lookup RP-001",
+    "initiate v2 diff RP-001 confidence change to Medium-High",
+    "commit v2 diff RP-001"
+  ]
+}
