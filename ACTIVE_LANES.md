@@ -42,19 +42,32 @@ authority: false
 ### Evidence Bundle, Per Verifier
 
 - URL_ONLY — Link present, no protocol IDs
-- CANONICAL_METADATA — fid plus full 32-byte castHash plus timestamp obtained
+- CANONICAL_METADATA — fid plus full Farcaster castHash plus timestamp obtained
 - CANONICAL_BYTES — raw_text retrieved from Hub by this verifier
 - HASH_MATCH — SHA-256(raw_text) equals frozen_hash
 - INDEPENDENT_REPLAY — This verifier executed full Hub fetch plus compute
 - HUB_ENDPOINT_USED — Specific Hub node queried
 - REPLAY_TIMESTAMP — When this verifier ran replay
+- NETWORK_RESOLUTION_FAILED — Verifier could not resolve or reach the configured Hub endpoint
 
 ### HubReplayEngine
 
 Input:
 
 ```text
-{ fid: uint64, hash: 0x[64_hex] }
+{ fid: uint64, hash: full Farcaster cast hash }
+```
+
+For current Farcaster casts observed in TNTR-007, the full cast hash is 20 bytes / 40 hex characters after `0x`, for example:
+
+```text
+0x3e909b0a97acb3b65a3b9547802ce5b7940e48ab
+```
+
+Do not hard-code a single Hub hostname. The Hub endpoint must be verifier-configurable:
+
+```text
+HUB_ENDPOINT={configured_hub_base_url}
 ```
 
 Output:
@@ -69,6 +82,14 @@ Steps:
 2. Extract `text`, `timestamp`, `author_fid`, and `hash` from response
 3. Compute `sha256 = SHA-256(UTF-8 bytes of text)`
 4. Emit `CANONICAL_METADATA`, `CANONICAL_BYTES`, `HASH_MATCH` if matched, and `INDEPENDENT_REPLAY`
+
+### Safe-Failure Reasons
+
+- canonical_metadata_unavailable — FID, full cast hash, timestamp, or replay metadata cannot be obtained
+- hub_replay_404 — Configured Hub endpoint returns not found for the provided identifiers
+- hash_mismatch — Retrieved canonical text does not match the expected frozen hash
+- invalid_verifier — Verifier metadata is malformed or unverifiable
+- network_resolution_failed — Verifier cannot resolve or reach the configured Hub endpoint
 
 ### Anti-Tribunal Invariants
 
@@ -87,7 +108,8 @@ Required canonical input:
 
 ```text
 fid: {numeric}
-hash: 0x{64_hex_chars}
+hash: full Farcaster cast hash as returned by Hub/client
+hub: verifier-configured Hub endpoint
 ```
 
 authority: false
