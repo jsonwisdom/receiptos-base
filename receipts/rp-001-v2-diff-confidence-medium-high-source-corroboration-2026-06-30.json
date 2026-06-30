@@ -1,0 +1,54 @@
+{
+  "artifact_id": "RP-001-V2-DIFF-CONFIDENCE-MEDIUM-HIGH-SOURCE-CORROBORATION-2026-06-30",
+  "artifact_type": "v2_diff_proposal",
+  "claim_id": "RP-001",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "diff_status": "initiated_not_finalized",
+  "proposed_change": {
+    "field": "confidence",
+    "from": "Medium",
+    "to": "Medium-High",
+    "status_change": false,
+    "authority_change": false,
+    "truth_claim_change": false
+  },
+  "rationale": [
+    "CourtListener source URL and declaration text for Frank Lands are verified at the source-text layer.",
+    "External corroboration signal is logged as high across reported CBS, PBS, ABC, and CourtListener docket references.",
+    "The declaration strengthens the intentional-cut subclaim for caulk/foam sealant damage and delaminating material after the 2026-06-09 incident."
+  ],
+  "limitations": [
+    "Byte-level SHA-256 remains pending actual digest or independent recomputation.",
+    "Authority remains blocked because hash gate is not cleared.",
+    "Scale of cuts remains unresolved, including larger 300+ foot gash claims.",
+    "Algae causation remains unresolved.",
+    "Coating or renovation failure contribution remains unresolved.",
+    "Photos, surveillance, arrest details, contractor records, and full administrative records remain unbound."
+  ],
+  "gate_state_after_diff": {
+    "source_authority": "URL_AND_TEXT_VERIFIED_PLUS_NEWS_CORROBORATED",
+    "hash_ready": "PENDING_ACTUAL_DIGEST_OR_INDEPENDENT_RECOMPUTE",
+    "receipt_eligible": "PROVISIONAL_ONLY",
+    "anchor_ready": "PROVISIONAL_ONLY",
+    "replay": "SOURCE_TEXT_PLUS_EXTERNAL_CORROBORATION_COMPLETE",
+    "authority": false,
+    "truth_claim": false
+  },
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "confidence_diff_finalized": false,
+    "full_v2_ledger_finalized": false,
+    "hash_bind_completed": false,
+    "authority_flip_rejected": true,
+    "truth_claim_preserved_false": true
+  },
+  "next_valid_verbs": [
+    "commit v2 diff RP-001 confidence change to Medium-High",
+    "provide_computed_sha256 RP-001 LANDS-DECLARATION-2026-06-25 <64_hex_sha256>",
+    "evidence expansion RP-001 PHOTOS <PHOTO_URL_OR_FILE_HASH>",
+    "claim lookup RP-001"
+  ]
+}
