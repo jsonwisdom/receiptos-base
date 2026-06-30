@@ -1,0 +1,40 @@
+{
+  "issue": "EXT-060",
+  "title": "Solidity Mock Badge Contract Skeleton",
+  "status": "MOCK_SOLIDITY_SKELETON_LOCKED",
+  "depends_on": [
+    "EXT-058",
+    "EXT-059"
+  ],
+  "contract_path": "contracts/mock/EXT060MockWitnessBadge.sol",
+  "contract_mode": "mock_skeleton_only",
+  "deploy_allowed": false,
+  "standard_model": "ERC-1155-style",
+  "mint_represents": "witness_action_completion",
+  "runtime_mode": "witness_only",
+  "authority": false,
+  "truth_claim": false,
+  "resolution_semantics": "absent",
+  "badge_power": 0,
+  "vote_power": 0,
+  "governance_action_allowed": false,
+  "transfer_governance_rights": false,
+  "promotion_allowed": false,
+  "required_solidity_markers": [
+    "DEPLOY_ALLOWED = false",
+    "AUTHORITY = false",
+    "TRUTH_CLAIM = false",
+    "GOVERNANCE_ACTION_ALLOWED = false",
+    "TRANSFER_GOVERNANCE_RIGHTS = false",
+    "PROMOTION_ALLOWED = false",
+    "BADGE_POWER = 0",
+    "VOTE_POWER = 0",
+    "revert MockOnlyNoDeployAuthority",
+    "revert ReceiptHashRequired",
+    "revert WitnessCompletionRequired",
+    "revert DuplicateReceiptBadge",
+    "revert TransferDisabled",
+    "revert GovernanceDisabled",
+    "revert TruthPromotionDisabled"
+  ]
+}
