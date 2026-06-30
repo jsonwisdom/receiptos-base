@@ -1,0 +1,15 @@
+{
+  "authority": false,
+  "causation_claim": true,
+  "compared": true,
+  "comparison_type": "claimed_time_order_only",
+  "errors": [],
+  "event_time_comparison": true,
+  "inference_performed": false,
+  "ordered_records": [],
+  "priority_claim": true,
+  "record_count": 0,
+  "state_mutated": false,
+  "storage_time_compared": false,
+  "truth_claim": false
+}
