@@ -1,0 +1,53 @@
+{
+  "artifact_id": "RP-001-EVIDENCE-EXPANSION-NPS-DAMAGE-ASSESSMENT-PHOTOS-2025",
+  "artifact_type": "evidence_expansion",
+  "claim_id": "RP-001",
+  "expansion_sequence": 3,
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "binds": {
+    "entity_id": "NPS-DAMAGE-ASSESSMENT-PHOTOS-2025",
+    "tier": "Tier 1 (Primary Official - Visual Documentation)",
+    "evidence_type": "primary_official_visual_documentation",
+    "description": "Full set of National Park Service inspection photographs documenting the reflecting pool damage, including liner cuts, sealant delamination, and coating failure patterns.",
+    "release_basis": "Assumed to be released via FOIA or administrative disclosure.",
+    "date": "2025-XX-XX",
+    "date_status": "pending_confirmation",
+    "file_sha256": null,
+    "line_numbers": null,
+    "media_references": [],
+    "note": "Visual evidence is staged as an evidence expansion payload. It does not independently resolve causation unless source files, hashes, photo metadata, and context are later bound."
+  },
+  "relevance": [
+    "May clarify visual scale of deliberate liner cuts versus systemic renovation or coating failure.",
+    "May help compare alleged fertilizer-related algae causation against pre-existing water chemistry, coating, or maintenance factors.",
+    "May support or contradict the scope of damage described by official statements and reporting."
+  ],
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "reason": "Photo evidence payload is pending source-file binding and does not yet resolve causation or scale questions."
+  },
+  "open_questions_preserved": [
+    "Exact scale of deliberate cuts versus renovation wear or systemic coating failure.",
+    "Causation of algae bloom: fertilizer introduction versus water chemistry, coating chemistry, or maintenance failures.",
+    "Full release and hashing of inspection photos, surveillance, court filings, and administrative documentation."
+  ],
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "rp_001_status_changed": false,
+    "rp_001_confidence_changed": false,
+    "requires_claim_lookup_before_upgrade": true,
+    "requires_explicit_v2_diff_for_status_change": true
+  },
+  "next_valid_verbs": [
+    "claim lookup RP-001",
+    "evidence expansion RP-001 COURT-FILING-ARREST-CITATION-2025",
+    "initiate v2 diff RP-001 <proposed_change>",
+    "commit v2 diff"
+  ]
+}
