@@ -1,0 +1,15 @@
+{
+  "receipt_id": "TNTR-015-INSTRUMENT-LAYER-GATE",
+  "issue": "EXT-031",
+  "instrument_state": "ACTIVE",
+  "instrument_authority": false,
+  "instrument_resolution": "absent",
+  "forbidden_semantics_enforced": true,
+  "instrument_types": [
+    "challenge_instrument",
+    "provenance_strength_note",
+    "replay_future"
+  ],
+  "settlement_boundary": "receipts_only",
+  "next_gate": "EXT-032"
+}
