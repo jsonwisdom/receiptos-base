@@ -3,6 +3,7 @@
 
 Builds a read-only feed from the verified-root exporter.
 Storage sequence remains storage order only.
+Optional anchors remain storage-time-only.
 """
 
 from __future__ import annotations
@@ -42,7 +43,7 @@ def build_subscription_manifest(log_path: Path, repo_root: Path) -> dict[str, An
 
     entries: list[dict[str, Any]] = []
     for item in exported.get("exports", []):
-        entries.append({
+        record = {
             "entry_id": item.get("entry_id"),
             "entry_sequence": item.get("entry_sequence"),
             "sequence_semantics": "storage_order_only",
@@ -55,7 +56,10 @@ def build_subscription_manifest(log_path: Path, repo_root: Path) -> dict[str, An
             "truth_claim": False,
             "inference_performed": False,
             "state_mutated": False,
-        })
+        }
+        if "storage_time_anchor" in item:
+            record["storage_time_anchor"] = item.get("storage_time_anchor")
+        entries.append(record)
 
     return {
         "root_subscription_manifest": True,
