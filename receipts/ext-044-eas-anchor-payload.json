@@ -1,0 +1,16 @@
+{
+  "issue": "EXT-044",
+  "title": "EAS Anchor for CI Receipt Finalizer",
+  "anchors": {
+    "receipt": "receipts/ext-043-ci-finalizer.json",
+    "commit": "85b2727",
+    "tag": "ext-043-ci-receipt-finalized"
+  },
+  "claims": {
+    "ci_gate": "PASS",
+    "authority": false,
+    "resolution_semantics": "absent",
+    "alerts": []
+  },
+  "status": "READY_TO_ANCHOR"
+}
