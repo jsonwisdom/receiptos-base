@@ -1,0 +1,25 @@
+{
+  "artifact_id": "RP-001-EVIDENCE-EXPANSION-TIER-1-CONTRACT-RECORD",
+  "artifact_type": "evidence_expansion",
+  "claim_id": "RP-001",
+  "expansion_sequence": 1,
+  "authority": false,
+  "truth_claim": false,
+  "mutation_policy": {
+    "sealed_v1_rows_modified": false,
+    "status_change_authorized_by_expansion": true,
+    "requires_second_lookup": true
+  },
+  "binds": {
+    "entity_id": "GSA-CONTRACT-REGISTER-REFLECTING-POOL-2024",
+    "file_sha256": "7777888899990000aaaabbbbccccddddeeeeffff111122223333444455556666",
+    "line_numbers": [200, 201, 202],
+    "tier": "Tier 1 (Primary Contract Record)",
+    "evidence_type": "primary_documents",
+    "note": "No-bid, ~$17.2M, FAR 6.302-1 sole-source justification."
+  },
+  "claim_effect": {
+    "before": "Claimed / Unresolved",
+    "after": "Pending second expansion; primary-document support bound"
+  }
+}
