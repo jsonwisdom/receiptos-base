@@ -1,0 +1,14 @@
+{
+  "audit_log_verifier": true,
+  "authority": false,
+  "entry_count": 2,
+  "errors": [],
+  "inference_performed": false,
+  "log_path": "audit/logs/batch-roots.jsonl",
+  "manifest_hashes_valid": true,
+  "roots_unique": true,
+  "sequence_continuity_valid": true,
+  "state_mutated": false,
+  "truth_claim": false,
+  "verified": true
+}
