@@ -1,0 +1,23 @@
+{
+  "receipt_id": "TNTR-018-FULL-STACK-VALIDATION",
+  "issue": "EXT-034",
+  "gate": "Full Stack Validation",
+  "status": "executed",
+  "authority": false,
+  "resolution_semantics": "absent",
+  "validated_artifacts": [
+    "EXT-029",
+    "EXT-031",
+    "EXT-032",
+    "EXT-033"
+  ],
+  "boundary_assertions": {
+    "substrate": "market substrate remains observational",
+    "instrument": "instrument settlement remains receipt based",
+    "monitoring": "monitoring remains observational"
+  },
+  "stack_status": "FINALIZED",
+  "verification_hash": "0x9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d",
+  "verifier_script": "verify_ext-034.py",
+  "next_action": "Production lock"
+}
