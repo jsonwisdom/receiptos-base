@@ -1,0 +1,42 @@
+{
+  "issue": "EXT-063",
+  "title": "Local Compile Validation Gate",
+  "status": "LOCAL_COMPILE_VALIDATION_LOCKED",
+  "depends_on": [
+    "EXT-061",
+    "EXT-062"
+  ],
+  "target_contract": "contracts/mock/EXT060MockWitnessBadge.sol",
+  "policy_guard": "verify_ext_061_solidity_static_policy_guard.py",
+  "validation_mode": "local_compile_check_only",
+  "compile_validation_allowed": true,
+  "compile_allowed": false,
+  "chain_publish_allowed": false,
+  "artifact_publish_allowed": false,
+  "runtime_mode": "witness_only",
+  "authority": false,
+  "truth_claim": false,
+  "resolution_semantics": "absent",
+  "badge_power": 0,
+  "vote_power": 0,
+  "governance_action_allowed": false,
+  "transfer_governance_rights": false,
+  "promotion_allowed": false,
+  "required_preconditions": [
+    "static_policy_guard_passes",
+    "mock_contract_exists",
+    "constructor_reverts_public_use_semantics",
+    "transfer_functions_revert",
+    "receipt_hash_required",
+    "duplicate_receipt_guard_present",
+    "zero_power_constants_present"
+  ],
+  "forbidden_results": [
+    "chain_publish",
+    "public_contract_address",
+    "published_binary_artifact",
+    "authority_grant",
+    "vote_power_assignment",
+    "truth_claim_promotion"
+  ]
+}
