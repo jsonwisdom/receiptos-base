@@ -46,6 +46,28 @@ Facilitator notes must be stored separately and referenced only by pointer. Note
 5. Update the public index or ledger pointer.
 6. Run synthesis only against the verified frozen original.
 
+## ACTIVE_LANES Transition
+
+Before verified EXT-001 receipt:
+
+```text
+LANE=PRC-JRN-EXT-001
+STATUS=YELLOW
+STATUS_SOURCE=REPORTED
+RECEIPT_PTR=NULL
+```
+
+After verified EXT-001 receipt:
+
+```text
+LANE=PRC-JRN-EXT-001
+STATUS=GREEN
+STATUS_SOURCE=VERIFIED_RECEIPT
+RECEIPT_PTR=sha256:<computed_hash>
+```
+
+This makes the YELLOW to GREEN transition explicit, replayable, and bound to a single SHA-256 pointer. Authority remains false.
+
 ## Rejection Conditions
 
 Reject or mark disputed if:
