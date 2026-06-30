@@ -3,6 +3,7 @@
 
 Records batch root manifests as opaque commitments.
 Append sequence is storage order only.
+Optional anchors record storage time only.
 """
 
 from __future__ import annotations
@@ -35,7 +36,31 @@ def load_entries(log_path: Path) -> list[dict[str, Any]]:
     return entries
 
 
-def build_entry(manifest: dict[str, Any], manifest_path: str, sequence: int) -> tuple[dict[str, Any], list[str]]:
+def build_storage_anchor(timestamp_utc: str | None) -> dict[str, str] | None:
+    if not timestamp_utc:
+        return None
+    return {
+        "anchor_type": "storage_time_only",
+        "timestamp_utc": timestamp_utc,
+        "semantics": "log_storage_time_only",
+    }
+
+
+def validate_storage_anchor(anchor: dict[str, Any] | None) -> list[str]:
+    if anchor is None:
+        return []
+    errors: list[str] = []
+    if anchor.get("anchor_type") != "storage_time_only":
+        errors.append("storage_anchor_type_invalid")
+    if anchor.get("semantics") != "log_storage_time_only":
+        errors.append("storage_anchor_semantics_invalid")
+    timestamp = anchor.get("timestamp_utc")
+    if not isinstance(timestamp, str) or not timestamp.endswith("Z") or "T" not in timestamp:
+        errors.append("storage_anchor_timestamp_invalid")
+    return errors
+
+
+def build_entry(manifest: dict[str, Any], manifest_path: str, sequence: int, timestamp_utc: str | None = None) -> tuple[dict[str, Any], list[str]]:
     errors: list[str] = []
     for key in STICKY_FALSE:
         if manifest.get(key) is not False:
@@ -67,14 +92,18 @@ def build_entry(manifest: dict[str, Any], manifest_path: str, sequence: int) -> 
         "inference_performed": False,
         "state_mutated": False,
     }
+    anchor = build_storage_anchor(timestamp_utc)
+    errors.extend(validate_storage_anchor(anchor))
+    if anchor:
+        entry["storage_time_anchor"] = anchor
     return entry, errors
 
 
-def append_entry(log_path: Path, manifest_path: Path) -> dict[str, Any]:
+def append_entry(log_path: Path, manifest_path: Path, timestamp_utc: str | None = None) -> dict[str, Any]:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     entries = load_entries(log_path)
     sequence = len(entries) + 1
-    entry, errors = build_entry(manifest, str(manifest_path), sequence)
+    entry, errors = build_entry(manifest, str(manifest_path), sequence, timestamp_utc)
 
     existing_roots = {item.get("batch_root") for item in entries}
     if entry.get("batch_root") in existing_roots:
@@ -103,9 +132,10 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Append a batch root manifest to an audit JSONL log.")
     parser.add_argument("--log", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--storage-time-utc")
     args = parser.parse_args()
 
-    result = append_entry(args.log, args.manifest)
+    result = append_entry(args.log, args.manifest, args.storage_time_utc)
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0 if result["append_accepted"] else 1
 
