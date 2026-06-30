@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "tntr-instrument.schema.json",
+  "title": "TNTR Instrument Schema",
+  "authority": false,
+  "type": "object",
+  "properties": {
+    "instrument_id": {"type": "string"},
+    "instrument_type": {
+      "type": "string",
+      "enum": ["replay_future", "provenance_strength_note", "challenge_instrument"]
+    },
+    "primitive_reference": {
+      "type": "string",
+      "enum": ["replay_status", "provenance_strength", "challenge"]
+    },
+    "settlement_rule": {
+      "type": "object",
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": ["replay_receipt", "mesh_receipt", "challenge_receipt"]
+        },
+        "source_ref": {"type": "string"},
+        "mechanical_only": {"type": "boolean", "const": true}
+      },
+      "required": ["source_type", "source_ref", "mechanical_only"],
+      "additionalProperties": false
+    },
+    "authority": {"type": "boolean", "const": false},
+    "forbidden_semantics_enforced": {"type": "boolean", "const": true},
+    "resolution_semantics": {"type": "string", "const": "absent"}
+  },
+  "required": [
+    "instrument_id",
+    "instrument_type",
+    "primitive_reference",
+    "settlement_rule",
+    "authority",
+    "forbidden_semantics_enforced",
+    "resolution_semantics"
+  ],
+  "additionalProperties": false
+}
