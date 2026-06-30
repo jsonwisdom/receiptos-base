@@ -40,7 +40,11 @@
     "authority": false,
     "truth_claim": false
   },
-  "signature": "none-test-only",
+  "signature": {
+    "key_id": "did:example:jsonwisdom#test-key",
+    "signature_bytes": "bm9uZS10ZXN0LW9ubHk=",
+    "profile": "none-test-only"
+  },
   "authority": false,
   "truth_claim": false
 }
