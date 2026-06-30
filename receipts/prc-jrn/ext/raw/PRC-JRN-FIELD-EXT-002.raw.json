@@ -1,0 +1,24 @@
+{
+  "receipt_id": "PRC-JRN-FIELD-EXT-002",
+  "timestamp_utc": "2026-06-29T21:05:00Z",
+  "participant_type": "journalism student",
+  "case_used": "002",
+  "claim_reviewed": "Multiple sources report the same story, so it must be true.",
+  "baseline_assessment": "Supported - repetition builds confidence",
+  "final_assessment": "Insufficient Evidence",
+  "observed_behaviors": {
+    "asked_for_primary_source": true,
+    "distinguished_observation_from_assessment": true,
+    "identified_unknowns": true,
+    "requested_corroboration": true,
+    "revised_assessment": true,
+    "explained_revision": true
+  },
+  "friction": "Echo chamber / consensus bias",
+  "revision_trigger": "All sources trace to single origin, no independent verification",
+  "curriculum_note": "Strengthen source-lineage mapping in Case 002",
+  "constitution_changes_proposed": [],
+  "engine_changes_proposed": [],
+  "evidence_hashes": ["sha256:..."],
+  "signature": "participant_sig_002"
+}
