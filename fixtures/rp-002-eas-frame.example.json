@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "frame_type": "receipt",
   "signature_domain": "receiptos.frame.v1.eas-profile",
-  "payload_hash": "sha256:3616903c91373597c94983d82efc704bd9c2af090e1b14e19f56f92a9ad8ee93",
+  "payload_hash": "sha256:5253367a07c06f834fc40d7de090a152efee26a9d094a1e6c1cec2f3f022a42d",
   "hash_algorithm": "sha256",
   "signature_algorithm": "profile-defined",
   "signer": "did:example:jsonwisdom",
