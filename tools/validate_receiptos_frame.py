@@ -2,10 +2,13 @@
 """ReceiptOS / ESG-001 wire-native frame validator.
 
 This validator intentionally stops at the representation layer:
-canonical JSON bytes, SHA-256 binding, timestamp bounds, nonce structure,
-and explicit authority=false / truth_claim=false.
+canonical JSON bytes, SHA-256 frame-payload binding, timestamp bounds,
+nonce structure, signature envelope shape, and explicit authority=false /
+truth_claim=false.
 
-It does not infer truth, causation, confidence, admissibility, or graph state.
+It does not infer truth, causation, confidence, admissibility, graph state,
+or crypto-policy validity. Algorithm-specific signature verification belongs
+in conformance profiles above the base ReceiptOS / ESG-001 layer.
 """
 
 from __future__ import annotations
@@ -20,8 +23,8 @@ from pathlib import Path
 from typing import Any
 
 HASH_RE = re.compile(r"^sha256:[a-f0-9]{64}$")
+BASE64_RE = re.compile(r"^[A-Za-z0-9+/]*={0,2}$")
 SUPPORTED_HASHES = {"sha256"}
-SUPPORTED_SIGNATURE_ALGORITHMS = {"none-test-only"}
 
 
 def canonical_json_bytes(value: Any) -> bytes:
@@ -40,6 +43,32 @@ def parse_time(value: str) -> dt.datetime:
     if parsed.tzinfo is None:
         raise ValueError("timestamp must include timezone")
     return parsed.astimezone(dt.timezone.utc)
+
+
+def validate_signature_envelope(signature: Any) -> tuple[bool, list[str]]:
+    """Validate signature envelope hygiene without crypto-policy enforcement."""
+    errors: list[str] = []
+    if not isinstance(signature, dict):
+        return False, ["signature_must_be_object"]
+
+    allowed = {"key_id", "signature_bytes", "profile"}
+    for key in signature:
+        if key not in allowed:
+            errors.append(f"signature_unexpected_field:{key}")
+
+    key_id = signature.get("key_id")
+    if not isinstance(key_id, str) or not key_id:
+        errors.append("signature_key_id_invalid")
+
+    signature_bytes = signature.get("signature_bytes")
+    if not isinstance(signature_bytes, str) or not BASE64_RE.match(signature_bytes):
+        errors.append("signature_bytes_invalid_base64_shape")
+
+    profile = signature.get("profile")
+    if profile is not None and (not isinstance(profile, str) or not profile):
+        errors.append("signature_profile_invalid")
+
+    return not errors, errors
 
 
 def validate_frame(frame: dict[str, Any], max_skew_seconds: int) -> dict[str, Any]:
@@ -75,6 +104,10 @@ def validate_frame(frame: dict[str, Any], max_skew_seconds: int) -> dict[str, An
     if not nonce_well_formed:
         errors.append("invalid_nonce_format")
 
+    signature_algorithm = frame.get("signature_algorithm")
+    if not isinstance(signature_algorithm, str) or not signature_algorithm:
+        errors.append("signature_algorithm_invalid")
+
     payload = frame.get("payload")
     hash_match = False
     if isinstance(payload, dict) and isinstance(declared_hash, str):
@@ -95,22 +128,14 @@ def validate_frame(frame: dict[str, Any], max_skew_seconds: int) -> dict[str, An
     except Exception:
         errors.append("invalid_timestamp")
 
-    signature_algorithm = frame.get("signature_algorithm")
-    signature_valid = False
-    if signature_algorithm not in SUPPORTED_SIGNATURE_ALGORITHMS:
-        errors.append("unsupported_signature_algorithm")
-    else:
-        # Skeleton mode: only none-test-only is accepted. Real ed25519/secp256k1
-        # verification belongs here without adding inference semantics.
-        signature_valid = frame.get("signature") == "none-test-only"
-        if not signature_valid:
-            errors.append("signature_invalid")
+    signature_envelope_valid, signature_errors = validate_signature_envelope(frame.get("signature"))
+    errors.extend(signature_errors)
 
     conformant = not errors
     return {
         "valid_encoding": valid_encoding,
         "hash_match": hash_match,
-        "signature_valid": signature_valid,
+        "signature_envelope_valid": signature_envelope_valid,
         "timestamp_within_bounds": timestamp_within_bounds,
         "nonce_well_formed": nonce_well_formed,
         "conformant": conformant,
