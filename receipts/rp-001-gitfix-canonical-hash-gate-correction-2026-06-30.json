@@ -1,0 +1,55 @@
+{
+  "artifact_id": "RP-001-GITFIX-CANONICAL-HASH-GATE-CORRECTION-2026-06-30",
+  "artifact_type": "gitfix_correction_receipt",
+  "claim_id": "RP-001",
+  "target_entity_id": "LANDS-DECLARATION-2026-06-25",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "correction_scope": "Clarify that user-supplied SHA is provisional and does not authorize replay, receipt mint, anchor, confidence mutation, or v2 finalization until an actual digest is supplied and independently recomputable or explicitly accepted under a user-supplied-hash policy.",
+  "references": [
+    {
+      "path": "receipts/rp-001-user-supplied-sha-lands-declaration-2026-06-25.json",
+      "blob_sha": "ddaa1fc5ac99dcbde64f7cc8a80fa109a153c853",
+      "issue": "Receipt correctly preserves authority=false and assistant_independent_byte_recompute=false, but next_valid_verbs included replay/commit paths that may be read as premature while HASH_READY is only user-supplied/pending recompute."
+    }
+  ],
+  "corrected_gate_state": {
+    "source_authority": "URL_AND_TEXT_VERIFIED_PLUS_NEWS_CORROBORATED",
+    "hash_ready": "PENDING_ACTUAL_DIGEST_OR_INDEPENDENT_RECOMPUTE",
+    "receipt_eligible": "PROVISIONAL_ONLY",
+    "anchor_ready": "PROVISIONAL_ONLY",
+    "replay": "SOURCE_TEXT_PLUS_EXTERNAL_CORROBORATION_COMPLETE",
+    "authority": false,
+    "truth_claim": false
+  },
+  "rp_001_state_after_gitfix": {
+    "status": "Partially Verified",
+    "confidence": "Medium",
+    "status_changed": false,
+    "confidence_changed": false
+  },
+  "blocked_until_hash_gate_completes": [
+    "replay RP-001 as authority replay",
+    "receipt mint",
+    "anchor creation",
+    "authority elevation",
+    "truth-claim evaluation",
+    "v2 finalization based on byte-bound evidence"
+  ],
+  "allowed_next_verbs": [
+    "provide_computed_sha256 RP-001 LANDS-DECLARATION-2026-06-25 <64_hex_sha256>",
+    "initiate v2 diff RP-001 confidence change to Medium-High",
+    "claim lookup RP-001",
+    "evidence expansion RP-001 PHOTOS"
+  ],
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "existing_receipts_rewritten": false,
+    "append_only_correction": true,
+    "hash_bind_completed": false,
+    "authority_flip_rejected": true,
+    "truth_claim_preserved_false": true
+  }
+}
