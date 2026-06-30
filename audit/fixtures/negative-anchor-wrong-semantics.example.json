@@ -1,0 +1,35 @@
+{
+  "authority": false,
+  "entries": [
+    {
+      "authority": false,
+      "batch_root": "sha256:7107ad37be56fbd8872463c911d650d526f821c371986fd06dddf85378ecaaaa",
+      "entry_id": "batch-root-entry-000001",
+      "entry_sequence": 1,
+      "inference_performed": false,
+      "leaf_count": 1,
+      "manifest_hash": "sha256:145ec52bff0ed0bb2a7c9cab1deefe3b1e7b9c9aa39fafbf5d90bedc91f4e50e",
+      "manifest_path": "lattice/fixtures/batch-root-manifest-rp001-only.example.json",
+      "proof_surface": "manifest_path",
+      "sequence_semantics": "storage_order_only",
+      "state_mutated": false,
+      "storage_time_anchor": {
+        "anchor_type": "event_time",
+        "semantics": "event_time_order",
+        "timestamp_utc": "2026-06-30T13:00:42Z"
+      },
+      "truth_claim": false
+    }
+  ],
+  "errors": [],
+  "feed_type": "verified_batch_roots",
+  "inference_performed": false,
+  "read_only": true,
+  "root_subscription_manifest": true,
+  "sequence_semantics": "storage_order_only",
+  "state_mutated": false,
+  "subscriber_count": 1,
+  "subscription_ready": true,
+  "truth_claim": false,
+  "verifier_gated": true
+}
