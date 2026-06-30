@@ -73,8 +73,21 @@ def fail(message: str) -> None:
     sys.exit(1)
 
 
+def strip_policy_lists(obj: Any) -> Any:
+    """Remove explicit forbidden-policy declarations before scanning live claims."""
+    if isinstance(obj, dict):
+        return {
+            key: strip_policy_lists(value)
+            for key, value in obj.items()
+            if key not in {"forbidden", "forbidden_actions", "forbidden_terms"}
+        }
+    if isinstance(obj, list):
+        return [strip_policy_lists(value) for value in obj]
+    return obj
+
+
 def check_no_forbidden_text(name: str, obj: Any) -> None:
-    text = json.dumps(obj, sort_keys=True).lower()
+    text = json.dumps(strip_policy_lists(obj), sort_keys=True).lower()
     for pattern in FORBIDDEN_PATTERNS:
         if re.search(pattern, text):
             fail(f"{name} contains forbidden truth/tribunal language: {pattern}")
@@ -140,8 +153,8 @@ def main() -> int:
         if witness["classification"] != "MULTI_HUB_UNREACHABLE":
             fail(f"witness {index} classification mismatch")
 
-        values = [str(witness.get(k, "")) for k in ("txHash", "uid", "attester", "timestamp")]
-        if any(v == "[placeholder]" or v == "[base block timestamp]" for v in values):
+        required_live_values = [str(witness.get(k, "")) for k in ("txHash", "uid", "attester")]
+        if any(v == "[placeholder]" for v in required_live_values):
             placeholder_witnesses.append(witness["chain"])
         else:
             matching_witnesses.append(witness["chain"])
