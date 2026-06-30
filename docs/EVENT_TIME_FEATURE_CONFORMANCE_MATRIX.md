@@ -6,7 +6,7 @@ Issue: #42
 
 One umbrella matrix for the current event-time lane.
 
-This must pass before comparison semantics are introduced.
+This must pass before any consumer is introduced.
 
 ## Command
 
@@ -26,6 +26,7 @@ audit/fixtures/event-time-feature-conformance-matrix.example.json
 - storage import proposals fail
 - parser record matrix passes
 - normalized record matrix passes
+- comparison matrix passes
 
 ## Boundary
 
@@ -33,14 +34,16 @@ No storage-time imports.
 
 No storage-time comparison.
 
-No sorting.
-
 No consumer.
+
+No causal claim.
+
+No priority claim.
 
 Sticky false fields remain false.
 
 ## Next allowed feature
 
 ```text
-event_time/compare_claimed_times.py
+event_time/consumer_conformance_gate.py
 ```
