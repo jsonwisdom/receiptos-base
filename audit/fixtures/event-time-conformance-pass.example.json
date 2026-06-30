@@ -1,0 +1,14 @@
+{
+  "authority": false,
+  "closed_storage_paths_untouched": true,
+  "errors": [],
+  "event_time_conformance_gate": true,
+  "event_time_path_valid": true,
+  "event_time_source_valid": true,
+  "gate_passed": true,
+  "inference_performed": false,
+  "state_mutated": false,
+  "sticky_fields_valid": true,
+  "storage_imports_absent": true,
+  "truth_claim": false
+}
