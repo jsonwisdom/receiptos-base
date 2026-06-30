@@ -11,6 +11,16 @@ Synthetic substitution: prohibited
 
 EXT-001 is reserved for the first real participant artifact. Synthetic validation artifacts, facilitator summaries, rewritten responses, or reconstructed notes must not occupy this slot.
 
+## Constitutional Boundary
+
+GREEN means receipt verified, hash matches, replay succeeds, and authority remains false.
+
+GREEN does not mean the underlying claim is true.
+
+Timestamp, not tribunal.
+
+EXT-001 records provenance and replay status only. It does not create truth authority.
+
 ## Intake Record
 
 Receipt ID: PRC-JRN-FIELD-EXT-001
@@ -77,7 +87,8 @@ Reject or mark disputed if:
 - facilitator notes are mixed into raw output,
 - the hash cannot be reproduced,
 - the freeze pointer is missing,
-- authority is set to true.
+- authority is set to true,
+- GREEN is used as a truth claim instead of a provenance and replay signal.
 
 ## Completion Gate
 
