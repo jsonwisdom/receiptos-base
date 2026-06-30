@@ -1,6 +1,6 @@
 {
-  "framework_version": "PRC-JRN-v1.1",
-  "status": "operational",
+  "framework_version": "PRC-JRN-v1.1.1",
+  "status": "operational_patch_active",
   "constitution_sha256": "63bef9d6e3906d34a44a6ea2b1212cb13cc26aed94cadff7acd880b3f664afb2",
   "engine_sha256": "90fe8c4d010acbc8883af840920014595799d24efb25d8fa191b8e261e043c8d",
   "authority": false,
@@ -9,7 +9,10 @@
     "PRC-JRN-FIELD-002",
     "PRC-JRN-FIELD-004-001",
     "PRC-JRN-FIELD-005-001",
-    "PRC-JRN-FIELD-006-001"
+    "PRC-JRN-FIELD-006-001",
+    "PRC-JRN-FIELD-EXT-002",
+    "PRC-JRN-FIELD-EXT-003",
+    "PRC-JRN-FIELD-EXT-004"
   ],
   "reserved_receipts": [
     {
@@ -17,13 +20,30 @@
       "reason": "artifact-bias target reserved for screenshot evidence-candidate module"
     }
   ],
-  "external_receipts_pending": 5,
+  "external_receipts_pending": 2,
   "external_receipt_queue": [
     "PRC-JRN-FIELD-EXT-001",
-    "PRC-JRN-FIELD-EXT-002",
-    "PRC-JRN-FIELD-EXT-003",
-    "PRC-JRN-FIELD-EXT-004",
     "PRC-JRN-FIELD-EXT-005"
+  ],
+  "synthetic_validation_receipts": [
+    "PRC-JRN-FIELD-EXT-004"
+  ],
+  "authentic_external_receipts": [
+    "PRC-JRN-FIELD-EXT-002",
+    "PRC-JRN-FIELD-EXT-003"
+  ],
+  "patches": [
+    {
+      "patch_id": "PRC-JRN-v1.1.1",
+      "path": "curriculum/prc-jrn-v1.1.1-patch.md",
+      "rules": [
+        "multiple_sources && single_origin && !independent_verification -> insufficient_evidence",
+        "high_fidelity_media && !custody_chain -> insufficient_evidence"
+      ],
+      "constitution_changes": [],
+      "engine_changes": [],
+      "authority": false
+    }
   ],
   "curriculum_deltas": [
     {
@@ -60,6 +80,27 @@
       "delta": "Add Correlation != Causation micro-exercise.",
       "constitution_changes": [],
       "engine_changes": []
+    },
+    {
+      "receipt_id": "PRC-JRN-FIELD-EXT-002",
+      "case_id": "002",
+      "delta": "Strengthen source-lineage mapping in Case 002.",
+      "constitution_changes": [],
+      "engine_changes": []
+    },
+    {
+      "receipt_id": "PRC-JRN-FIELD-EXT-003",
+      "case_id": "004",
+      "delta": "Expand provenance checklist for video in Case 004.",
+      "constitution_changes": [],
+      "engine_changes": []
+    },
+    {
+      "receipt_id": "PRC-JRN-FIELD-EXT-004",
+      "case_id": "004",
+      "delta": "Add combined gate example for high-fidelity media with source-lineage collapse; clarify that media hash alone does not establish custody or operational status; route synthetic tests separately from authentic external participant receipts.",
+      "constitution_changes": [],
+      "engine_changes": []
     }
   ],
   "failure_mode_taxonomy": [
@@ -71,8 +112,8 @@
     { "case_id": "006", "distinction": "Correlation != Causation" }
   ],
   "public_validation_boundary": {
-    "rule": "No simulated receipt may be indexed as external.",
+    "rule": "No simulated receipt may be counted as authentic external participant validation.",
     "first_external_receipt": "PRC-JRN-FIELD-EXT-001",
-    "status": "awaiting authentic raw participant output"
+    "status": "EXT-002 and EXT-003 indexed; EXT-001 remains intake-only; EXT-004 is synthetic_validation; EXT-005 awaiting payload"
   }
 }
