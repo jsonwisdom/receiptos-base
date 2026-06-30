@@ -9,6 +9,16 @@ Lane: PRC-JRN-EXT-001
 
 Define the only admissible mutation from a verified EXT-001 receipt into ACTIVE_LANES.md.
 
+## Constitutional Boundary
+
+GREEN means receipt verified, hash matches, replay succeeds, and authority remains false.
+
+GREEN does not mean the underlying claim is true.
+
+Timestamp, not tribunal.
+
+EXT-001 mutation records provenance and replay status only. It does not promote the artifact into truth authority.
+
 ## Required Payload
 
 ```text
@@ -24,6 +34,7 @@ receipt_sha256: <64 lowercase hex chars>
 - Receipt pointer is content-addressed.
 - No symbolic receipt labels are used.
 - authority remains false.
+- GREEN is treated only as provenance and replay status, never as truth.
 
 ## Deterministic Mutation
 
@@ -59,6 +70,7 @@ Reject mutation if:
 - `authority` is anything other than `false`.
 - `AUDITOR_VIEW` is manually supplied.
 - `RECEIPT_PTR` is symbolic.
+- GREEN is presented as a truth claim.
 
 ## Required Review Sequence
 
