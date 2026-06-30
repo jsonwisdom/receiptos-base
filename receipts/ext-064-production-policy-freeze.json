@@ -1,0 +1,17 @@
+{
+  "issue": "EXT-064",
+  "title": "Production Policy Freeze",
+  "runtime_mode": "witness_only",
+  "authority": false,
+  "truth_claim": false,
+  "resolution_semantics": "absent",
+  "badge_power": 0,
+  "vote_power": 0,
+  "governance_action_allowed": false,
+  "promotion_allowed": false,
+  "transfer_governance_rights": false,
+  "receiptHashRequired": true,
+  "oneBadgePerReceipt": true,
+  "nonTransferable": true,
+  "production_policy_frozen": true
+}
