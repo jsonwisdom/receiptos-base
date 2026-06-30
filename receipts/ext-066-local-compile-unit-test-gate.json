@@ -1,0 +1,23 @@
+{
+  "issue": "EXT-066",
+  "title": "Local Compile & Unit-Test Validation Gate",
+  "depends_on": [
+    "EXT-065"
+  ],
+  "validation_mode": "local_compile_and_unit_test",
+  "compile_validation_allowed": true,
+  "unit_test_allowed": true,
+  "compile_allowed": false,
+  "deploy_allowed": false,
+  "publish_allowed": false,
+  "runtime_mode": "witness_only",
+  "authority": false,
+  "truth_claim": false,
+  "resolution_semantics": "absent",
+  "badge_power": 0,
+  "vote_power": 0,
+  "governance_action_allowed": false,
+  "promotion_allowed": false,
+  "transfer_governance_rights": false,
+  "policy_source": "EXT-064"
+}
