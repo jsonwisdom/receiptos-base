@@ -35,7 +35,7 @@ def export_verified_roots(log_path: Path, repo_root: Path) -> dict[str, Any]:
 
     exports = []
     for entry in load_jsonl(log_path):
-        exports.append({
+        record = {
             "entry_id": entry.get("entry_id"),
             "entry_sequence": entry.get("entry_sequence"),
             "sequence_semantics": "storage_order_only",
@@ -48,7 +48,10 @@ def export_verified_roots(log_path: Path, repo_root: Path) -> dict[str, Any]:
             "truth_claim": False,
             "inference_performed": False,
             "state_mutated": False,
-        })
+        }
+        if "storage_time_anchor" in entry:
+            record["storage_time_anchor"] = entry.get("storage_time_anchor")
+        exports.append(record)
 
     return {
         "verified_root_export": True,
