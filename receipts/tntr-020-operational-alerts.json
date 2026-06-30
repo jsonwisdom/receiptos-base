@@ -1,0 +1,19 @@
+{
+  "receipt_id": "TNTR-020-OPERATIONAL-ALERTS",
+  "issue": "EXT-038",
+  "gate": "Operational Alerts",
+  "status": "configured",
+  "authority": false,
+  "resolution_semantics": "absent",
+  "mode": "signal_only",
+  "alert_classes": [
+    "hash_mismatch",
+    "authority_drift",
+    "resolution_semantics_drift",
+    "forbidden_semantics_drift",
+    "receipt_drift"
+  ],
+  "alerts": [],
+  "verifier_script": "verify_ext-038.py",
+  "next_gate": "EXT-030 optional or EXT-035 extension planning"
+}
