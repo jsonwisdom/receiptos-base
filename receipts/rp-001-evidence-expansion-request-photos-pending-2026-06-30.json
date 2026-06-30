@@ -1,0 +1,46 @@
+{
+  "artifact_id": "RP-001-EVIDENCE-EXPANSION-REQUEST-PHOTOS-PENDING-2026-06-30",
+  "artifact_type": "evidence_expansion_request",
+  "claim_id": "RP-001",
+  "target_entity_id": "PHOTOS",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "request_status": "pending_photo_payload",
+  "requested_scope": [
+    "Reflecting Pool damage imagery",
+    "Renovation context imagery",
+    "Declaration-related scenes",
+    "NPS/public-domain images",
+    "News imagery where provenance and use constraints are clear"
+  ],
+  "required_payload_for_binding": [
+    "Photo URL or uploaded file bytes",
+    "Source owner or issuing agency",
+    "Capture/publication date if available",
+    "SHA-256 for exact image bytes if already computed",
+    "Description of visible damage or context",
+    "License/public-domain status if relevant"
+  ],
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "reason": "Photos expansion is only requested; no actual photo URL, file, byte hash, or provenance payload is bound yet. Separate confidence diff proposal exists but is not finalized by this request."
+  },
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "photo_evidence_bound": false,
+    "hash_bind_completed": false,
+    "authority_flip_rejected": true,
+    "truth_claim_preserved_false": true
+  },
+  "next_valid_verbs": [
+    "evidence expansion RP-001 PHOTOS <PHOTO_URL_OR_FILE_HASH>",
+    "claim lookup RP-001",
+    "commit v2 diff RP-001 confidence change to Medium-High",
+    "provide_computed_sha256 RP-001 LANDS-DECLARATION-2026-06-25 <64_hex_sha256>"
+  ]
+}
