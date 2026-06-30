@@ -1,0 +1,65 @@
+{
+  "version": "TNTR-v1-final",
+  "status": "PRODUCTION",
+  "mesh": "4-chain QUERYABLE",
+  "substrate": "replay-primitives",
+  "instruments": [
+    "replay_future",
+    "provenance_strength_note",
+    "challenge_instrument"
+  ],
+  "monitoring": "active",
+  "authority": false,
+  "resolution_semantics": "absent",
+  "boundary": "timestamp_only",
+  "invariants": [
+    "no_truth",
+    "no_tribunal",
+    "no_verdict"
+  ],
+  "stack_hash": "0x8f7e6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d",
+  "deployment_time": "2026-06-30T12:00:00Z",
+  "gates": {
+    "EXT-029": {
+      "title": "TNTR Market Substrate",
+      "status": "executed",
+      "receipt": "receipts/tntr-014-market-substrate-gate.json"
+    },
+    "EXT-031": {
+      "title": "Instrument Layer Schema",
+      "status": "executed",
+      "receipt": "receipts/tntr-015-instrument-layer-gate.json"
+    },
+    "EXT-032": {
+      "title": "Instrument Deployment",
+      "status": "executed",
+      "receipt": "receipts/tntr-016-instrument-deployment-gate.json"
+    },
+    "EXT-033": {
+      "title": "Monitoring & Adjustment",
+      "status": "executed",
+      "receipt": "receipts/tntr-017-monitoring-gate.json"
+    },
+    "EXT-034": {
+      "title": "Full Stack Validation",
+      "status": "executed",
+      "receipt": "receipts/tntr-018-full-stack-validation.json"
+    }
+  },
+  "deferred_gate": {
+    "issue": "EXT-030",
+    "title": "Replay-Economic Layer",
+    "status": "optional",
+    "note": "Not required for core determinism. Can be activated as EXT-035 or higher without altering frozen core."
+  },
+  "boundary_assertions": {
+    "price": "not_truth",
+    "liquidity": "not_authority",
+    "settlement": "not_verdict",
+    "monitoring": "not_enforcement",
+    "adjustment": "not_verdict",
+    "queryable": "not_resolved",
+    "signal": "not_tribunal"
+  },
+  "verification_hash": "0x9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d"
+}
