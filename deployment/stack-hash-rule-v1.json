@@ -3,8 +3,8 @@
   "algorithm": "sha256",
   "mode": "canonical_stack_hash",
   "inputs": [
-    "deployment/production-lock.json",
-    "deployment/production-manifest.json",
+    "deployment/tntr-v1-production-manifest.json",
+    "receipts/tntr-019-production-lock.json",
     "constitution/CLAIM_PROMOTION_GUARD_V0_1.json"
   ],
   "excludes": [
