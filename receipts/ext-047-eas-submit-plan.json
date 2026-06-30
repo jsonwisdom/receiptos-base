@@ -1,0 +1,14 @@
+{
+  "issue": "EXT-047",
+  "title": "Submit EXT-044 Payload to Base EAS",
+  "input_payload": "receipts/ext-044-eas-anchor-payload.json",
+  "depends_on": [
+    "EXT-044",
+    "EXT-045",
+    "EXT-046"
+  ],
+  "network": "Base",
+  "status": "READY_FOR_SUBMISSION",
+  "authority": false,
+  "resolution_semantics": "absent"
+}
