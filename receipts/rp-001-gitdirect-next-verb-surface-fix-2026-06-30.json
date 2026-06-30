@@ -1,0 +1,51 @@
+{
+  "artifact_id": "RP-001-GITDIRECT-NEXT-VERB-SURFACE-FIX-2026-06-30",
+  "artifact_type": "gitdirect_surface_fix",
+  "claim_id": "RP-001",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "fix_reason": "Prior RP-001 receipts exposed commit/finalization verbs while hash and photo gates were still pending. This artifact supersedes that command surface without rewriting history.",
+  "supersedes_next_valid_verbs_from": [
+    "receipts/rp-001-v2-diff-confidence-medium-high-source-corroboration-2026-06-30.json",
+    "receipts/rp-001-evidence-expansion-request-photos-pending-2026-06-30.json"
+  ],
+  "current_rp_001_state": {
+    "status": "Partially Verified",
+    "confidence": "Medium",
+    "proposed_confidence": "Medium-High",
+    "proposed_confidence_finalized": false,
+    "hash_bind_completed": false,
+    "photo_evidence_bound": false,
+    "authority": false,
+    "truth_claim": false
+  },
+  "current_gate": {
+    "source_authority": "URL_AND_TEXT_VERIFIED_PLUS_NEWS_CORROBORATED",
+    "hash_ready": "PENDING_ACTUAL_DIGEST_OR_INDEPENDENT_RECOMPUTE",
+    "receipt_eligible": "PROVISIONAL_ONLY",
+    "anchor_ready": "PROVISIONAL_ONLY",
+    "replay": "SOURCE_TEXT_PLUS_EXTERNAL_CORROBORATION_COMPLETE"
+  },
+  "blocked_verbs_until_gate_clearance": [
+    "commit v2 diff",
+    "commit v2 diff RP-001",
+    "commit v2 diff RP-001 confidence change to Medium-High",
+    "finalize RP-001 v2 ledger",
+    "mint receipt",
+    "create anchor",
+    "authority replay",
+    "truth-claim evaluation"
+  ],
+  "allowed_next_verbs": [
+    "provide_computed_sha256 RP-001 LANDS-DECLARATION-2026-06-25 <64_hex_sha256>",
+    "evidence expansion RP-001 PHOTOS <PHOTO_URL_OR_FILE_HASH>",
+    "claim lookup RP-001"
+  ],
+  "mutation_policy": {
+    "existing_receipts_rewritten": false,
+    "append_only_surface_fix": true,
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true
+  }
+}
