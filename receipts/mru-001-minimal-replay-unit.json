@@ -1,0 +1,23 @@
+{
+  "artifact_id": "MRU-001",
+  "artifact_type": "minimal_replay_unit",
+  "subject": "ESG-001",
+  "source_artifact": {
+    "path": "docs/ESG-001-Core.md",
+    "sha256": "1d7aff833c7b13b11db5dadef2f02638803f2db5d74ca4e226529e5a04007a42",
+    "provider": "jaywisdom.base.eth"
+  },
+  "evidence_state": "Observed",
+  "provenance_edges": [
+    {
+      "type": "derived_from",
+      "source": "canonical_reasoning_while_building",
+      "target": "docs/ESG-001-Core.md",
+      "justification": "Core protocol distilled into first replayable artifact."
+    }
+  ],
+  "authority": false,
+  "truth_claim": false,
+  "replay_question": "Why does this artifact exist?",
+  "expected_replay_answer": "MRU-001 exists because ESG-001 required a minimal replayable artifact that binds a source document, evidence state, provenance edge, and revision rule into one deterministic unit."
+}
