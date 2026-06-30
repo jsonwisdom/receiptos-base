@@ -113,3 +113,90 @@ hub: verifier-configured Hub endpoint
 ```
 
 authority: false
+
+---
+
+## EXT-008 — MULTI_HUB_FALLBACK
+
+### Purpose
+
+EXT-008 defines how a verifier attempts multiple configured Hub endpoints without turning infrastructure reachability into a truth claim about the artifact.
+
+### Input
+
+```text
+fid: {numeric}
+hash: full Farcaster cast hash as returned by Hub/client
+hub_candidates: ordered list of verifier-configured Hub endpoints
+```
+
+### Evidence Bundle Additions
+
+- HUB_CANDIDATE_LIST — Ordered Hub endpoints attempted by this verifier
+- HUB_ATTEMPT_RESULT — Per-endpoint result including HTTP status, curl exit code, and error text when available
+- MULTI_HUB_UNREACHABLE — All configured Hub endpoints failed due to DNS, connection, TLS, or timeout failure
+- FIRST_SUCCESSFUL_HUB — First endpoint returning valid Hub JSON for the requested fid/hash
+
+### Algorithm
+
+1. Iterate over `hub_candidates` in declared order.
+2. For each Hub, request `{hub}/v1/castById?fid={fid}&hash={hash}`.
+3. Record endpoint, HTTP status, exit code, stderr, and response hash.
+4. Stop at the first endpoint returning parseable Hub JSON containing canonical cast data.
+5. If no endpoint returns canonical JSON, emit `MULTI_HUB_UNREACHABLE` or the most precise safe-failure reason.
+6. Do not emit `RAW_PASS` unless canonical bytes are retrieved and independently hashed by this verifier.
+
+### Safe-Failure Reasons
+
+- multi_hub_unreachable — No configured Hub endpoint was reachable by this verifier
+- hub_candidate_dns_failed — One configured Hub endpoint failed DNS resolution
+- hub_candidate_http_error — One configured Hub endpoint returned a non-success HTTP status
+- hub_candidate_invalid_json — One configured Hub endpoint returned unparsable JSON
+
+### TNTR-007 Multi-Hub Attempt
+
+Observed identifiers:
+
+```text
+fid: 1432701
+hash: 0x01e26d779d81e689ed1c9afa6150fc8bace19fc2
+```
+
+Attempted Hub endpoints:
+
+```text
+https://hub.farcaster.xyz
+http://hub.farcaster.xyz:2281
+http://nemes.farcaster.xyz:2281
+```
+
+Observed result from Cloud Shell:
+
+```text
+curl: (6) Could not resolve host: hub.farcaster.xyz
+HTTP:000
+curl: (6) Could not resolve host: hub.farcaster.xyz
+HTTP:000
+curl: (6) Could not resolve host: nemes.farcaster.xyz
+HTTP:000
+```
+
+Classification:
+
+```text
+network_resolution_failed
+multi_hub_unreachable
+```
+
+TNTR-007 state:
+
+```text
+FETCHABLE_CANDIDATE
+Local Evidence: FID_OBTAINED + CAST_HASH_CANDIDATE + MULTI_HUB_UNREACHABLE
+RAW_PASS: not emitted
+authority: false
+```
+
+### EXT-008 Invariant
+
+Endpoint failure is infrastructure evidence, not artifact evidence. A verifier may report that its configured endpoints failed; it may not conclude that the cast does not exist or that other verifiers cannot replay it.
