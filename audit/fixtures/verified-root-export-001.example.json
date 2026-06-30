@@ -1,0 +1,29 @@
+{
+  "authority": false,
+  "consumer_ready": true,
+  "errors": [],
+  "export_count": 1,
+  "exports": [
+    {
+      "authority": false,
+      "batch_root": "sha256:6ffc207fe8fb31296c27fc1457e233af771dca3800ce299cd262777fef790dad",
+      "entry_id": "batch-root-entry-000001",
+      "entry_sequence": 1,
+      "inference_performed": false,
+      "leaf_count": 2,
+      "manifest_hash": "sha256:bbf12d63597b7c5a09bcb44bda68e8da3883c2a73a8e775eb6e394291a8a276a",
+      "manifest_path": "lattice/fixtures/batch-root-manifest-rp001-rp002.example.json",
+      "sequence_semantics": "storage_order_only",
+      "source_use_case": "light_verification",
+      "state_mutated": false,
+      "truth_claim": false
+    }
+  ],
+  "inference_performed": false,
+  "log_path": "audit/logs/batch-roots.jsonl",
+  "read_only": true,
+  "state_mutated": false,
+  "truth_claim": false,
+  "verified_root_export": true,
+  "verifier_gated": true
+}
