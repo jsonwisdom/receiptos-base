@@ -1,0 +1,49 @@
+{
+  "authority": false,
+  "entries": [
+    {
+      "authority": false,
+      "batch_root": "sha256:6ffc207fe8fb31296c27fc1457e233af771dca3800ce299cd262777fef790dad",
+      "entry_id": "batch-root-entry-000001",
+      "entry_sequence": 1,
+      "inference_performed": false,
+      "leaf_count": 2,
+      "manifest_hash": "sha256:bbf12d63597b7c5a09bcb44bda68e8da3883c2a73a8e775eb6e394291a8a276a",
+      "manifest_path": "lattice/fixtures/batch-root-manifest-rp001-rp002.example.json",
+      "proof_surface": "manifest_path",
+      "sequence_semantics": "storage_order_only",
+      "state_mutated": false,
+      "truth_claim": false
+    },
+    {
+      "authority": false,
+      "batch_root": "sha256:7107ad37be56fbd8872463c911d650d526f821c371986fd06dddf85378ecaaaa",
+      "entry_id": "batch-root-entry-000002",
+      "entry_sequence": 2,
+      "inference_performed": false,
+      "leaf_count": 1,
+      "manifest_hash": "sha256:145ec52bff0ed0bb2a7c9cab1deefe3b1e7b9c9aa39fafbf5d90bedc91f4e50e",
+      "manifest_path": "lattice/fixtures/batch-root-manifest-rp001-only.example.json",
+      "proof_surface": "manifest_path",
+      "sequence_semantics": "storage_order_only",
+      "state_mutated": false,
+      "storage_time_anchor": {
+        "anchor_type": "storage_time_only",
+        "semantics": "log_storage_time_only",
+        "timestamp_utc": "2026-06-30T13:00:42Z"
+      },
+      "truth_claim": false
+    }
+  ],
+  "errors": [],
+  "feed_type": "verified_batch_roots",
+  "inference_performed": false,
+  "read_only": true,
+  "root_subscription_manifest": true,
+  "sequence_semantics": "storage_order_only",
+  "state_mutated": false,
+  "subscriber_count": 2,
+  "subscription_ready": true,
+  "truth_claim": false,
+  "verifier_gated": true
+}
