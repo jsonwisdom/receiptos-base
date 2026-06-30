@@ -16,18 +16,18 @@
     "witness_hashes_match_canonical": true
   },
   "classification": "replay_only",
-  "computed_mesh_state": "PARTIAL_WITNESS",
+  "computed_mesh_state": "QUERYABLE",
   "cro_id": "TNTR-CRO-001",
-  "generated_at": "2026-06-30T04:56:16.740141+00:00",
-  "live_matching_witness_count": 1,
+  "generated_at": "2026-06-30T05:09:40.000000+00:00",
+  "live_matching_witness_count": 2,
   "matching_witness_chains": [
-    "base"
+    "base",
+    "optimism"
   ],
   "mesh_id": "TNTR-MESH-001",
   "placeholder_witness_chains": [
     "arbitrum",
-    "ethereum",
-    "optimism"
+    "ethereum"
   ],
   "publication_role": "provenance_only",
   "receipt_id": "TNTR-013-MULTICHAIN-WITNESS-MESH",
@@ -38,5 +38,5 @@
     "tx_hash": "0xa77cd1390527aa5859c24125aaf579c04a029ac9fdeaacc36d110f183e1d00c2"
   },
   "threshold": 2,
-  "threshold_met": false
+  "threshold_met": true
 }
