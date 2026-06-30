@@ -17,7 +17,7 @@
     "no_tribunal",
     "no_verdict"
   ],
-  "stack_hash": "0x8f7e6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d",
+  "stack_hash": "0x7b99bf6d94e8f90d57c221902669593f6c0b23f481fdc0a87c03707af96f12dc",
   "deployment_time": "2026-06-30T12:00:00Z",
   "gates": {
     "EXT-029": {
@@ -61,5 +61,20 @@
     "queryable": "not_resolved",
     "signal": "not_tribunal"
   },
-  "verification_hash": "0x9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d"
+  "verification_hash": "0x9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d",
+  "stack_hash_rule": "canonical_core_artifacts_v1_excludes_runtime_alerts_and_manifest_self_hash",
+  "stack_hash_inputs": [
+    "market/tntr-market-substrate-v0.json",
+    "market/tntr-instrument-layer-v0.json",
+    "market/tntr-cro-001-instruments.json",
+    "market/instruments/tntr-instrument-deployment-v0.json",
+    "market/ext-033-monitoring-adjustment.json",
+    "market/ext-034-full-stack-validation.json",
+    "receipts/tntr-014-market-substrate-gate.json",
+    "receipts/tntr-015-instrument-layer-gate.json",
+    "receipts/tntr-016-instrument-deployment-gate.json",
+    "receipts/tntr-017-monitoring-gate.json",
+    "receipts/tntr-018-full-stack-validation.json",
+    "receipts/tntr-019-production-lock.json"
+  ]
 }

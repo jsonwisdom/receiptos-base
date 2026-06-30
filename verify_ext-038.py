@@ -97,7 +97,8 @@ def main():
         if manifest_path and Path(manifest_path).exists():
             manifest = load_json(manifest_path)
             expected = manifest.get("stack_hash")
-            actual = recompute_stack_hash(watched)
+            hash_inputs = manifest.get("stack_hash_inputs", watched)
+            actual = recompute_stack_hash(hash_inputs)
             if expected != actual:
                 add_alert(alerts, "hash_mismatch", manifest_path, f"expected {expected}, recomputed {actual}")
 
