@@ -2,6 +2,8 @@
   "authority": false,
   "boundary_case_count": 3,
   "boundary_matrix_passed": true,
+  "comparison_case_count": 3,
+  "comparison_matrix_passed": true,
   "errors": [],
   "event_time_feature_conformance_matrix": true,
   "inference_performed": false,
