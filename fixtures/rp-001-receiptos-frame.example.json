@@ -1,0 +1,46 @@
+{
+  "protocol": "ReceiptOS",
+  "version": "1.0.0",
+  "frame_type": "evidence_graph",
+  "signature_domain": "receiptos.frame.v1",
+  "payload_hash": "sha256:19c19177a88ca7dfbda82171bf73630e9a1f03fe68f261d3945b30d76b5c94bf",
+  "hash_algorithm": "sha256",
+  "signature_algorithm": "none-test-only",
+  "signer": "did:example:jsonwisdom",
+  "timestamp": "2026-06-30T12:45:00Z",
+  "nonce": "sha256:a8ffbcf232a9efa4f17cfe91116371a0d59b7413e82a6f8d2cf131fba89d7714",
+  "payload": {
+    "graph_id": "RP-001",
+    "graph_type": "evidence_graph",
+    "propositions": [
+      {
+        "id": "RP-001-P1",
+        "statement": "LANDS-DECLARATION-2026-06-25 artifact hash has been declared for binding.",
+        "proposition_type": "artifact_binding",
+        "state": "observed",
+        "confidence": null,
+        "authority": false,
+        "truth_claim": false,
+        "evidence_artifacts": [
+          "RP-001-E1"
+        ]
+      }
+    ],
+    "evidence_artifacts": [
+      {
+        "id": "RP-001-E1",
+        "artifact_type": "declared_hash",
+        "hash_algorithm": "sha256",
+        "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "source": "placeholder_for_computed_sha256_command",
+        "immutable": true
+      }
+    ],
+    "edges": [],
+    "authority": false,
+    "truth_claim": false
+  },
+  "signature": "none-test-only",
+  "authority": false,
+  "truth_claim": false
+}
