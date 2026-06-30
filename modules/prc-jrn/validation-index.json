@@ -1,0 +1,78 @@
+{
+  "framework_version": "PRC-JRN-v1.1",
+  "status": "operational",
+  "constitution_sha256": "63bef9d6e3906d34a44a6ea2b1212cb13cc26aed94cadff7acd880b3f664afb2",
+  "engine_sha256": "90fe8c4d010acbc8883af840920014595799d24efb25d8fa191b8e261e043c8d",
+  "authority": false,
+  "receipts_indexed": [
+    "PRC-JRN-FIELD-001",
+    "PRC-JRN-FIELD-002",
+    "PRC-JRN-FIELD-004-001",
+    "PRC-JRN-FIELD-005-001",
+    "PRC-JRN-FIELD-006-001"
+  ],
+  "reserved_receipts": [
+    {
+      "receipt_id": "PRC-JRN-FIELD-003",
+      "reason": "artifact-bias target reserved for screenshot evidence-candidate module"
+    }
+  ],
+  "external_receipts_pending": 5,
+  "external_receipt_queue": [
+    "PRC-JRN-FIELD-EXT-001",
+    "PRC-JRN-FIELD-EXT-002",
+    "PRC-JRN-FIELD-EXT-003",
+    "PRC-JRN-FIELD-EXT-004",
+    "PRC-JRN-FIELD-EXT-005"
+  ],
+  "curriculum_deltas": [
+    {
+      "receipt_id": "PRC-JRN-FIELD-001",
+      "case_id": "003",
+      "delta": "Add urgency-as-trigger module to Case 003.",
+      "constitution_changes": [],
+      "engine_changes": []
+    },
+    {
+      "receipt_id": "PRC-JRN-FIELD-002",
+      "case_id": "003",
+      "delta": "Add source-lineage micro-exercise to Case 003.",
+      "constitution_changes": [],
+      "engine_changes": []
+    },
+    {
+      "receipt_id": "PRC-JRN-FIELD-004-001",
+      "case_id": "004",
+      "delta": "Add Media Quality != Evidence Quality micro-module.",
+      "constitution_changes": [],
+      "engine_changes": []
+    },
+    {
+      "receipt_id": "PRC-JRN-FIELD-005-001",
+      "case_id": "005",
+      "delta": "Add Context is part of the receipt module.",
+      "constitution_changes": [],
+      "engine_changes": []
+    },
+    {
+      "receipt_id": "PRC-JRN-FIELD-006-001",
+      "case_id": "006",
+      "delta": "Add Correlation != Causation micro-exercise.",
+      "constitution_changes": [],
+      "engine_changes": []
+    }
+  ],
+  "failure_mode_taxonomy": [
+    { "case_id": "001", "distinction": "Attention != Evidence" },
+    { "case_id": "002", "distinction": "Headline != Research" },
+    { "case_id": "003", "distinction": "Speed != Verification" },
+    { "case_id": "004", "distinction": "Media Quality != Evidence Quality" },
+    { "case_id": "005", "distinction": "Accurate Fact != Complete Context" },
+    { "case_id": "006", "distinction": "Correlation != Causation" }
+  ],
+  "public_validation_boundary": {
+    "rule": "No simulated receipt may be indexed as external.",
+    "first_external_receipt": "PRC-JRN-FIELD-EXT-001",
+    "status": "awaiting authentic raw participant output"
+  }
+}
