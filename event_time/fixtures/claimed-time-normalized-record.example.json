@@ -1,0 +1,16 @@
+{
+  "authority": false,
+  "claimed_timestamp_normalized_utc": "2026-06-30T13:21:49Z",
+  "claimed_timestamp_raw": "2026-06-30T13:21:49Z",
+  "errors": [],
+  "event_time_record": true,
+  "event_time_source": "external",
+  "inference_performed": false,
+  "normalized": true,
+  "sorted": false,
+  "source_provenance": "external-example-payload-v0",
+  "state_mutated": false,
+  "storage_time_compared": false,
+  "timezone_normalized": true,
+  "truth_claim": false
+}
