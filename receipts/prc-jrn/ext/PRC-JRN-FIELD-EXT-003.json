@@ -1,0 +1,42 @@
+{
+  "receipt_id": "PRC-JRN-FIELD-EXT-003",
+  "framework_version": "PRC-JRN-v1.1",
+  "case_id": "004",
+  "mode": "external_validation",
+  "session": {
+    "date": "2026-06-29T21:06:00Z",
+    "participant_type": "policy analyst",
+    "participant_count": 1,
+    "session_length_minutes": 0
+  },
+  "claim_reviewed": "This high-resolution video proves the event happened as described.",
+  "baseline_assessment": "supported",
+  "final_assessment": "insufficient_evidence",
+  "observations": [],
+  "unknowns": [
+    "Original source unknown",
+    "Metadata unavailable",
+    "Chain of custody not documented",
+    "Possible synthetic or edited elements not resolved"
+  ],
+  "evidence_introduced": [
+    {
+      "label": "No metadata, no chain of custody, possible synthetic elements",
+      "assessment_changed": true,
+      "reason": "Visual fidelity did not establish provenance or evidentiary integrity."
+    }
+  ],
+  "observed_behaviors": {
+    "asked_for_primary_source": true,
+    "distinguished_observation_from_assessment": true,
+    "identified_unknowns": true,
+    "requested_corroboration": true,
+    "revised_assessment": true,
+    "explained_revision": true
+  },
+  "friction": ["High-fidelity illusion / perceptual bias"],
+  "curriculum_delta": ["Expand provenance checklist for video in Case 004"],
+  "constitution_changes_proposed": [],
+  "engine_changes_proposed": [],
+  "authority": false
+}
