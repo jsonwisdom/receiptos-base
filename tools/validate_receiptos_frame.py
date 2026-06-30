@@ -71,7 +71,11 @@ def validate_signature_envelope(signature: Any) -> tuple[bool, list[str]]:
     return not errors, errors
 
 
-def validate_frame(frame: dict[str, Any], max_skew_seconds: int) -> dict[str, Any]:
+def validate_frame(
+    frame: dict[str, Any],
+    max_skew_seconds: int,
+    disable_timestamp: bool = False,
+) -> dict[str, Any]:
     required = [
         "protocol", "version", "frame_type", "signature_domain", "payload_hash",
         "hash_algorithm", "signature_algorithm", "signer", "timestamp", "nonce",
@@ -119,12 +123,16 @@ def validate_frame(frame: dict[str, Any], max_skew_seconds: int) -> dict[str, An
         errors.append("payload_must_be_object")
 
     timestamp_within_bounds = False
+    timestamp_check_disabled = bool(disable_timestamp)
     try:
         ts = parse_time(str(frame.get("timestamp")))
-        now = dt.datetime.now(dt.timezone.utc)
-        timestamp_within_bounds = abs((now - ts).total_seconds()) <= max_skew_seconds
-        if not timestamp_within_bounds:
-            errors.append("timestamp_out_of_bounds")
+        if timestamp_check_disabled:
+            timestamp_within_bounds = True
+        else:
+            now = dt.datetime.now(dt.timezone.utc)
+            timestamp_within_bounds = abs((now - ts).total_seconds()) <= max_skew_seconds
+            if not timestamp_within_bounds:
+                errors.append("timestamp_out_of_bounds")
     except Exception:
         errors.append("invalid_timestamp")
 
@@ -137,6 +145,7 @@ def validate_frame(frame: dict[str, Any], max_skew_seconds: int) -> dict[str, An
         "hash_match": hash_match,
         "signature_envelope_valid": signature_envelope_valid,
         "timestamp_within_bounds": timestamp_within_bounds,
+        "timestamp_check_disabled": timestamp_check_disabled,
         "nonce_well_formed": nonce_well_formed,
         "conformant": conformant,
         "authority": False,
@@ -149,10 +158,15 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Validate a ReceiptOS / ESG-001 frame.")
     parser.add_argument("frame", type=Path)
     parser.add_argument("--max-skew-seconds", type=int, default=300)
+    parser.add_argument(
+        "--disable-timestamp",
+        action="store_true",
+        help="Bypass timestamp freshness check for deterministic fixtures.",
+    )
     args = parser.parse_args()
 
     frame = json.loads(args.frame.read_text(encoding="utf-8"))
-    result = validate_frame(frame, args.max_skew_seconds)
+    result = validate_frame(frame, args.max_skew_seconds, args.disable_timestamp)
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0 if result["conformant"] else 1
 
