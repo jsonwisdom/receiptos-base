@@ -1,0 +1,13 @@
+{
+  "authority": false,
+  "cursor_valid": true,
+  "errors": [],
+  "feed_valid": true,
+  "inference_performed": false,
+  "record_count": 1,
+  "sorted_storage_timestamps_valid": true,
+  "state_mutated": false,
+  "storage_view_subscription_validator": true,
+  "truth_claim": false,
+  "unauthorized_fields_valid": true
+}
