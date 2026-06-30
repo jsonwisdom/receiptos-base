@@ -30,6 +30,10 @@ ReceiptOS core does not define:
 - shared-state replay registries
 - agentic decision loops
 
+## ArtifactHash canonicalization
+
+ArtifactHash canonicalization is deferred to the application profile (e.g., raw payload bytes per content-type, decompressed, pre-transport encoding). The conformance validator treats the provided `artifact_hash` as an opaque cryptographic claim: it MUST verify only structural well-formedness (valid hex) and inclusion under the frame's signature envelope. The validator MUST NOT compute or re-derive the hash itself.
+
 ## Added scaffold
 
 - `schemas/receiptos-frame.schema.json`
