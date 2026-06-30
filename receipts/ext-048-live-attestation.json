@@ -1,0 +1,17 @@
+{
+  "issue": "EXT-048",
+  "title": "Live Base EAS Attestation Capture",
+  "status": "ANCHORED",
+  "network": "Base",
+  "transaction_hash": "0xc5e4ab69f766bdec8b156ff1bdb0c2f4fd9807214dce9d23494750796a90e4de",
+  "attestation_uid": "0x917443357fbcfcc3ed7e684f84b1fb2905f09ea0fae67965f57f55f2ff5ef8be",
+  "schema_uid": "0x507ddacbafa541960018b930850b5d31a5828d317ee9c0a5851a96e954bc553c",
+  "anchored_payload": "EXT-048 payload",
+  "payload_hash": "ec367705093513fdb6efd12122f0c4d79aa51fd687f0f85966b86e1f07e40922",
+  "payload_path": "receipts/ext-044-eas-anchor-payload.json",
+  "commit": "722eca5",
+  "tag": "ext-047-base-eas-submitted",
+  "authority": false,
+  "resolution_semantics": "absent",
+  "truth_claim": false
+}
