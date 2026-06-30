@@ -1,0 +1,22 @@
+{
+  "issue": "EXT-068",
+  "title": "Deployment Authorization Review",
+  "depends_on": ["EXT-067"],
+  "review_mode": "deployment_authorization_review",
+  "authorization_granted": false,
+  "deployment_executed": false,
+  "runtime_mode": "witness_only",
+  "policy_source": "EXT-064",
+  "implementation_source": "EXT-065",
+  "validation_source": "EXT-066",
+  "readiness_source": "EXT-067",
+  "authority": false,
+  "truth_claim": false,
+  "resolution_semantics": "absent",
+  "badge_power": 0,
+  "vote_power": 0,
+  "governance_action_allowed": false,
+  "promotion_allowed": false,
+  "transfer_governance_rights": false,
+  "review_complete": true
+}
