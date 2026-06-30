@@ -1,0 +1,31 @@
+{
+  "ext_id": "EXT-005",
+  "session": {
+    "timestamp": "2026-06-29T21:33:00Z",
+    "participant_id": "TEST-SESSION-005",
+    "context": "Sherco Solar III verified site status"
+  },
+  "claim": {
+    "description": "Confirmed operational panels with on-site witness",
+    "media": [
+      {
+        "type": "image",
+        "fidelity": "high",
+        "url": "ipfs://QmValidHashShercoDrone2026",
+        "metadata": {
+          "exif_timestamp": "2026-06-28T14:00:00Z",
+          "hash": "sha256:a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+          "custody_chain": ["on_site_witness", "drone_operator"],
+          "witness_sig": "EAS:0xValidSigAddress1234567890abcdef1234567890abcdef"
+        }
+      }
+    ],
+    "sources": ["direct_witness_A", "independent_survey_B"]
+  },
+  "provenance_raw": {
+    "origin_trace": "multi_independent",
+    "independent_verification": true,
+    "custody_gap": false,
+    "synthetic_risk": "none"
+  }
+}
