@@ -1,0 +1,42 @@
+{
+  "agreementModel": "IDENTICAL_PAYLOAD_HASH",
+  "authority": false,
+  "boundary_note": "QUERYABLE means threshold agreement over identical payload hash only; it does not mean true, resolved, or authoritative.",
+  "canonical_payload_cid": "bafkreigmjjmqkpvyvx236hazfkr4y4xmwb5adjpqccotumtwuq4akvpwye",
+  "canonical_payload_hash": "cc4a59053eb8adf5bf1c192aa3cc72ecb07a01a5f0109d3a3276a4380555f6c1",
+  "checks": {
+    "agreement_model_identical_payload_hash": true,
+    "authority_false": true,
+    "cro_id_valid": true,
+    "no_truth_escalation": true,
+    "publication_role_provenance_only": true,
+    "required_fields_present": true,
+    "spec_exists": true,
+    "spec_valid_json": true,
+    "witness_hashes_match_canonical": true
+  },
+  "classification": "replay_only",
+  "computed_mesh_state": "PARTIAL_WITNESS",
+  "cro_id": "TNTR-CRO-001",
+  "generated_at": "2026-06-30T04:56:16.740141+00:00",
+  "live_matching_witness_count": 1,
+  "matching_witness_chains": [
+    "base"
+  ],
+  "mesh_id": "TNTR-MESH-001",
+  "placeholder_witness_chains": [
+    "arbitrum",
+    "ethereum",
+    "optimism"
+  ],
+  "publication_role": "provenance_only",
+  "receipt_id": "TNTR-013-MULTICHAIN-WITNESS-MESH",
+  "source": {
+    "attestation_uid": "0x4f6559207f5ee01db76dee47eb68fa16641fe81e65870a92e457c3a52ba0a0a",
+    "chain": "base",
+    "schema_uid": "0xa23bff0257f3fef64621b0c7763316701627d0e6f9b164714d3bbc58d3567fc5",
+    "tx_hash": "0xa77cd1390527aa5859c24125aaf579c04a029ac9fdeaacc36d110f183e1d00c2"
+  },
+  "threshold": 2,
+  "threshold_met": false
+}
