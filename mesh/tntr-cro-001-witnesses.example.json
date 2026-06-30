@@ -6,7 +6,7 @@
     "schema": "0xa23bff0257f3fef64621b0c7763316701627d0e6f9b164714d3bbc58d3567fc5",
     "attester": "0xC345B26094c63C69222Ee775189a3d3eaead5a84",
     "payloadHash": "cc4a59053eb8adf5bf1c192aa3cc72ecb07a01a5f0109d3a3276a4380555f6c1",
-    "timestamp": "[base block timestamp]",
+    "timestamp": "2026-06-29T23:48:05",
     "classification": "MULTI_HUB_UNREACHABLE"
   },
   {
@@ -21,12 +21,12 @@
   },
   {
     "chain": "arbitrum",
-    "txHash": "[placeholder]",
-    "uid": "[placeholder]",
+    "txHash": "0x0e8a6bd804b179de68ce97b515e431b6c231224630ee70ab512489309078b7ce",
+    "uid": "0x627801895643bc19230a1ffe01e68bf3b24e539059882abffa9e1fcb1f504370",
     "schema": "0xa23bff0257f3fef64621b0c7763316701627d0e6f9b164714d3bbc58d3567fc5",
-    "attester": "[placeholder]",
+    "attester": "0xC345B26094c63C69222Ee775189a3d3eaead5a84",
     "payloadHash": "cc4a59053eb8adf5bf1c192aa3cc72ecb07a01a5f0109d3a3276a4380555f6c1",
-    "timestamp": "[placeholder]",
+    "timestamp": "2026-06-30T00:25:30",
     "classification": "MULTI_HUB_UNREACHABLE"
   },
   {
