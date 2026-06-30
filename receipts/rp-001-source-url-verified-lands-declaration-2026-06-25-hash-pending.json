@@ -1,0 +1,52 @@
+{
+  "artifact_id": "RP-001-SOURCE-URL-VERIFIED-LANDS-DECLARATION-2026-06-25-HASH-PENDING",
+  "artifact_type": "source_payload_verification",
+  "claim_id": "RP-001",
+  "target_entity_id": "LANDS-DECLARATION-2026-06-25",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "source_url": "https://storage.courtlistener.com/recap/gov.uscourts.dcd.292242/gov.uscourts.dcd.292242.22.1.pdf",
+  "source_url_resolves": true,
+  "source_metadata_verified": {
+    "case_number": "1:26-cv-01593-CJN",
+    "document": "22-1",
+    "filed": "2026-06-24",
+    "court": "U.S. District Court for the District of Columbia",
+    "declarant": "Frank Lands",
+    "title": "Deputy Director for Operations, National Park Service",
+    "incident_date": "2026-06-09",
+    "page_ref": "Page 2 of 2"
+  },
+  "verified_damage_language_summary": "The declaration states that after rehabilitation was substantially complete, U.S. Park Police responded to an NPS damage report involving caulk over foam sealant cut with a sharp knife or razor, destruction of delaminating surface material, and about 70 fence post tops thrown into the pool.",
+  "gate": {
+    "source_authority": "URL_VERIFIED",
+    "replay": "SOURCE_TEXT_CHECKED",
+    "receipt_eligible": false,
+    "hash_ready": false,
+    "anchor_ready": false,
+    "reason": "Exact source URL and text match are verified, but no actual SHA-256 digest was supplied or computable in this connector session."
+  },
+  "hash_bind_status": "pending_actual_sha256_digest",
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "reason": "Official declaration URL and text are verified, but hash binding and causation closure remain incomplete."
+  },
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "rp_001_status_changed": false,
+    "rp_001_confidence_changed": false,
+    "hash_bind_completed": false,
+    "requires_actual_sha256_digest": true
+  },
+  "next_valid_verbs": [
+    "hash_bind RP-001 LANDS-DECLARATION-2026-06-25 <sha256> https://storage.courtlistener.com/recap/gov.uscourts.dcd.292242/gov.uscourts.dcd.292242.22.1.pdf",
+    "replay RP-001",
+    "commit v2 diff RP-001",
+    "evidence expansion RP-001 PHOTOS"
+  ]
+}
