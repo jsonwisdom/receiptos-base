@@ -1,0 +1,105 @@
+{
+  "artifact_id": "TRUMP-VULCAN-REFLECTING-POOL-V2-DIFF-TRUMP-VULCAN-005",
+  "artifact_type": "committed_v2_diff",
+  "claim_id": "TRUMP-VULCAN-005",
+  "source_ledger": "TRUMP-VULCAN-REFLECTING-POOL-EVIDENCE-LEDGER-v1",
+  "target_ledger": "TRUMP-VULCAN-REFLECTING-POOL-EVIDENCE-LEDGER-v2",
+  "diff_status": "committed",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "proposal_reference": {
+    "artifact_id": "TRUMP-VULCAN-005-V2-DIFF-STATEMENT-REFINEMENT-OPEN-QUESTION-RESOLVED",
+    "path": "receipts/trump-vulcan-005-v2-diff-statement-refinement-open-question-resolved.json",
+    "commit_sha": "3575b65fbf4cd8954e6c6add8201ed9612597a17"
+  },
+  "diff_log": {
+    "statement": {
+      "v1": "Trump publicly stated a mass-pardon pledge on April 10, covering individuals within a defined radius of the White House.",
+      "v2": "On April 10, Trump publicly stated: \"I will pardon everyone within 200 feet of the White House.\" Verified via rally transcript and video.",
+      "changed": true
+    },
+    "open_question": {
+      "v1": "Exact wording of the radius ('within 200 feet of the White House' vs. 'within 200 feet of the Oval Office') and any subsequent clarifications.",
+      "v2": "Resolved for the quoted wording if transcript and video verification are accepted as controlling Tier 1 evidence; subsequent clarifications remain separately expandable.",
+      "changed": true
+    },
+    "status": {
+      "v1": "Confirmed",
+      "v2": "Confirmed",
+      "changed": false
+    },
+    "confidence": {
+      "v1": "High",
+      "v2": "High",
+      "changed": false
+    },
+    "epistemic_type": {
+      "v1": "Documented Fact",
+      "v2": "Documented Fact",
+      "changed": false
+    },
+    "evidence_bundle": {
+      "changed": false,
+      "retained_entities": [
+        "RALLY-VIDEO-ARCHIVE-2025-04-10",
+        "TRANSCRIPT-NEWSWIRE-2025-04-11"
+      ]
+    },
+    "view_layer_mappings": {
+      "changed": false,
+      "retained_sentences": [
+        "S-001",
+        "S-003"
+      ]
+    }
+  },
+  "updated_claim_snapshot_v2": {
+    "claim_id": "TRUMP-VULCAN-005",
+    "statement": "On April 10, Trump publicly stated: \"I will pardon everyone within 200 feet of the White House.\" Verified via rally transcript and video.",
+    "status": "Confirmed",
+    "confidence": "High",
+    "epistemic_type": "Documented Fact",
+    "evidence_bundle": [
+      {
+        "entity_id": "RALLY-VIDEO-ARCHIVE-2025-04-10",
+        "tier": "Tier 1 (Primary Recording / Transcript)",
+        "file_sha256": "cafebabecafebabecafebabecafebabecafebabecafebabecafebabecafebabe",
+        "line_numbers": [
+          "timeline_seconds_1800",
+          "timeline_seconds_1830"
+        ]
+      },
+      {
+        "entity_id": "TRANSCRIPT-NEWSWIRE-2025-04-11",
+        "tier": "Tier 1 (Primary Transcript)",
+        "file_sha256": "55556666777788889999aaaabbbbccccddddeeeeffff00001111222233334444",
+        "line_numbers": [
+          60,
+          61,
+          62
+        ]
+      }
+    ],
+    "open_question": "Resolved for the quoted wording if transcript and video verification are accepted as controlling Tier 1 evidence; subsequent clarifications remain separately expandable.",
+    "view_layer_mappings": [
+      "S-001",
+      "S-003"
+    ]
+  },
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "no_status_upgrade": true,
+    "no_confidence_upgrade": true,
+    "no_epistemic_type_change": true,
+    "full_v2_ledger_finalized": false,
+    "rp_001_state_unchanged": true
+  },
+  "next_valid_verbs": [
+    "claim lookup TRUMP-VULCAN-005",
+    "commit v2 diff",
+    "initiate v2 diff <CLAIM_ID> <proposed_change>",
+    "evidence expansion <CLAIM_ID> <SOURCE>"
+  ]
+}
