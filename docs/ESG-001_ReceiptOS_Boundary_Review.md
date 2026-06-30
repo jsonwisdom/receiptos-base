@@ -34,6 +34,12 @@ ReceiptOS core does not define:
 
 ArtifactHash canonicalization is deferred to the application profile (e.g., raw payload bytes per content-type, decompressed, pre-transport encoding). The conformance validator treats the provided `artifact_hash` as an opaque cryptographic claim: it MUST verify only structural well-formedness (valid hex) and inclusion under the frame's signature envelope. The validator MUST NOT compute or re-derive the hash itself.
 
+## Signature profile boundary
+
+Signature algorithm and key format remain pluggable via conformance profiles rather than mandated in base ESG-001 / ReceiptOS. The core spec defines only the envelope structure, including base64 signature bytes and a `key_id` string. Algorithm-specific rules belong in profiles such as `ESG-001/Ed25519`, `ESG-001/P256`, or future profile identifiers.
+
+This keeps the representation layer transport-neutral and crypto-policy-neutral while preserving stateless verification hooks and auditability across trust boundaries.
+
 ## Added scaffold
 
 - `schemas/receiptos-frame.schema.json`
