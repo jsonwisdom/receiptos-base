@@ -1,3 +1,12 @@
+# ACTIVE_LANES v2 Constitutional Boundary
+
+GREEN means: receipt verified, hash matches, replay succeeds, authority=false.
+GREEN does not mean: the underlying claim is true.
+
+Timestamp, not tribunal.
+
+This boundary is load-bearing. ACTIVE_LANES records provenance and replay status, not truth authority. Downstream lanes inherit this invariant by default.
+
 LANE: AL
 STATUS: GREEN
 STATUS_SOURCE: VERIFIED_RECEIPT
