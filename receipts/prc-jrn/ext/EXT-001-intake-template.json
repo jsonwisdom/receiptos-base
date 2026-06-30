@@ -1,0 +1,54 @@
+{
+  "intake_id": "PRC-JRN-FIELD-EXT-001-INTAKE",
+  "framework_version": "PRC-JRN-v1.1",
+  "status": "open",
+  "boundary": "No simulated receipt may be indexed as external.",
+  "expected_receipt_path": "receipts/prc-jrn/ext/PRC-JRN-FIELD-EXT-001.json",
+  "canonicalization_rules": [
+    "Capture raw participant/session output before interpretation.",
+    "Preserve verbatim participant language where applicable.",
+    "Record temporal fields explicitly.",
+    "Preserve payload as submitted.",
+    "Log provenance: facilitator, session mode, case used, and capture method.",
+    "Record anomalies instead of correcting them silently.",
+    "Do not index without authentic participant friction signatures."
+  ],
+  "receipt_template": {
+    "receipt_id": "PRC-JRN-FIELD-EXT-001",
+    "framework_version": "PRC-JRN-v1.1",
+    "case_id": "",
+    "mode": "external_validation",
+    "session": {
+      "date": "",
+      "facilitator": "",
+      "participant_type": "",
+      "participant_count": 1,
+      "session_length_minutes": 0
+    },
+    "claim_reviewed": "",
+    "baseline_assessment": "under_review",
+    "final_assessment": "under_review",
+    "observations": [],
+    "unknowns": [],
+    "evidence_introduced": [],
+    "observed_behaviors": {
+      "asked_for_primary_source": false,
+      "distinguished_observation_from_assessment": false,
+      "identified_unknowns": false,
+      "requested_corroboration": false,
+      "revised_assessment": false,
+      "explained_revision": false
+    },
+    "friction": [],
+    "curriculum_delta": [],
+    "constitution_changes_proposed": [],
+    "engine_changes_proposed": [],
+    "authority": false
+  },
+  "current_state": {
+    "PRC-JRN-FIELD-EXT-001": "open",
+    "EXT-002-005": "not_collected",
+    "constitution_changes": [],
+    "engine_changes": []
+  }
+}
