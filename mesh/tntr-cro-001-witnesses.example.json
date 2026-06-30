@@ -31,12 +31,12 @@
   },
   {
     "chain": "ethereum",
-    "txHash": "[placeholder]",
-    "uid": "[placeholder]",
+    "txHash": "0xa8f4c9f3be7b8fae87f0d2a96d7bc9858a61830677dc856c68e159827081b9d8",
+    "uid": "0x94af8b947e08328f341e621180df68fad4cec0d076974b5540247d7b8b68bc75",
     "schema": "0xa23bff0257f3fef64621b0c7763316701627d0e6f9b164714d3bbc58d3567fc5",
-    "attester": "[placeholder]",
+    "attester": "0xC345B26094c63C69222Ee775189a3d3eaead5a84",
     "payloadHash": "cc4a59053eb8adf5bf1c192aa3cc72ecb07a01a5f0109d3a3276a4380555f6c1",
-    "timestamp": "[placeholder]",
+    "timestamp": "2026-06-30T00:48:35",
     "classification": "MULTI_HUB_UNREACHABLE"
   }
 ]
