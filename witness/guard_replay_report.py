@@ -26,12 +26,22 @@ def sha256_hex(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def normalize_hash(value: str) -> str:
+    return value.strip().removeprefix("sha256:")
+
+
 def read_expected_hash(expect_file: Path | None, expect_hash: str | None) -> str | None:
     if expect_hash:
-        return expect_hash.strip().removeprefix("sha256:")
+        return normalize_hash(expect_hash)
     if expect_file:
         raw = expect_file.read_text(encoding="utf-8").strip()
-        return raw.removeprefix("sha256:")
+        if raw.startswith("{"):
+            manifest = json.loads(raw)
+            value = manifest.get("hash")
+            if not isinstance(value, str):
+                raise ValueError("json_manifest_missing_hash")
+            return normalize_hash(value)
+        return normalize_hash(raw)
     return None
 
 
