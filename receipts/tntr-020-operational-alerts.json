@@ -2,18 +2,26 @@
   "receipt_id": "TNTR-020-OPERATIONAL-ALERTS",
   "issue": "EXT-038",
   "gate": "Operational Alerts",
-  "status": "configured",
+  "status": "drift_detected",
   "authority": false,
   "resolution_semantics": "absent",
   "mode": "signal_only",
-  "alert_classes": [
-    "hash_mismatch",
-    "authority_drift",
-    "resolution_semantics_drift",
-    "forbidden_semantics_drift",
-    "receipt_drift"
-  ],
-  "alerts": [],
-  "verifier_script": "verify_ext-038.py",
-  "next_gate": "EXT-030 optional or EXT-035 extension planning"
+  "alerts": [
+    {
+      "class": "receipt_drift",
+      "path": "receipts/tntr-015-instrument-layer-gate.json",
+      "detail": "receipt status is not executed or production",
+      "severity": "critical",
+      "action": "signal_only",
+      "authority": false
+    },
+    {
+      "class": "hash_mismatch",
+      "path": "deployment/tntr-v1-production-manifest.json",
+      "detail": "expected 0x8f7e6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d, recomputed 0xa455f33f9b194dcb9659e9b7203eb2bf9679708e59532876e56f80d0a6731d74",
+      "severity": "critical",
+      "action": "signal_only",
+      "authority": false
+    }
+  ]
 }

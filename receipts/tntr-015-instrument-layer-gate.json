@@ -11,5 +11,6 @@
     "replay_future"
   ],
   "settlement_boundary": "receipts_only",
-  "next_gate": "EXT-032"
+  "next_gate": "EXT-032",
+  "status": "executed"
 }
