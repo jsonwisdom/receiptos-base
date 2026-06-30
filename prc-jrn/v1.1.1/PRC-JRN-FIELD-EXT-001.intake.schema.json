@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PRC-JRN-FIELD-EXT-001.intake.schema.json",
+  "title": "PRC-JRN FIELD EXT-001 Intake Schema",
+  "version": "1.0.0",
+  "status": "frozen_until_first_authentic_participant_payload",
+  "authority": false,
+  "purpose": "Capture the first authentic external participant artifact without synthetic substitution or facilitator contamination.",
+  "invariants": [
+    "EXT-001 is reserved for the first authentic participant payload.",
+    "Synthetic validation artifacts may not occupy EXT-001.",
+    "Raw participant output must be preserved before synthesis.",
+    "Facilitator notes must remain segregated from raw participant text.",
+    "Receipt authority remains false; validation records observation, not truth authority."
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_id",
+    "participant_id",
+    "case_id",
+    "captured_at",
+    "raw_payload",
+    "raw_payload_sha256",
+    "facilitator_notes_ref",
+    "append_only_freeze_ref",
+    "index_status",
+    "authority"
+  ],
+  "properties": {
+    "receipt_id": {
+      "const": "PRC-JRN-FIELD-EXT-001"
+    },
+    "participant_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Pseudonymous or consented participant identifier."
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Assigned PRC-JRN case identifier completed by participant."
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp of raw artifact capture."
+    },
+    "raw_payload": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unedited participant output exactly as received."
+    },
+    "raw_payload_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 digest of raw_payload bytes using UTF-8 normalization rules declared by runtime."
+    },
+    "facilitator_notes_ref": {
+      "type": ["string", "null"],
+      "description": "Pointer to segregated facilitator notes, if any. Must not be merged into raw_payload."
+    },
+    "append_only_freeze_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Immutable file, CID, commit, EAS UID, or ERC-1155 metadata pointer containing frozen raw artifact."
+    },
+    "public_ledger_pointer": {
+      "type": ["string", "null"],
+      "description": "Optional public index, EAS, ERC-1155, Git commit, IPFS, or other receipt pointer."
+    },
+    "index_status": {
+      "enum": ["pending", "indexed", "disputed", "rejected"]
+    },
+    "authority": {
+      "const": false
+    }
+  }
+}
