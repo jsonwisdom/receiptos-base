@@ -1,6 +1,7 @@
 name: Production Lock Gate
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
