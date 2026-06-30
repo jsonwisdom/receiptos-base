@@ -12,7 +12,8 @@
     "PRC-JRN-FIELD-006-001",
     "PRC-JRN-FIELD-EXT-002",
     "PRC-JRN-FIELD-EXT-003",
-    "PRC-JRN-FIELD-EXT-004"
+    "PRC-JRN-FIELD-EXT-004",
+    "PRC-JRN-FIELD-EXT-005"
   ],
   "reserved_receipts": [
     {
@@ -20,13 +21,13 @@
       "reason": "artifact-bias target reserved for screenshot evidence-candidate module"
     }
   ],
-  "external_receipts_pending": 2,
+  "external_receipts_pending": 1,
   "external_receipt_queue": [
-    "PRC-JRN-FIELD-EXT-001",
-    "PRC-JRN-FIELD-EXT-005"
+    "PRC-JRN-FIELD-EXT-001"
   ],
   "synthetic_validation_receipts": [
-    "PRC-JRN-FIELD-EXT-004"
+    "PRC-JRN-FIELD-EXT-004",
+    "PRC-JRN-FIELD-EXT-005"
   ],
   "authentic_external_receipts": [
     "PRC-JRN-FIELD-EXT-002",
@@ -101,6 +102,13 @@
       "delta": "Add combined gate example for high-fidelity media with source-lineage collapse; clarify that media hash alone does not establish custody or operational status; route synthetic tests separately from authentic external participant receipts.",
       "constitution_changes": [],
       "engine_changes": []
+    },
+    {
+      "receipt_id": "PRC-JRN-FIELD-EXT-005",
+      "case_id": "004",
+      "delta": "Add positive-path example showing when high-fidelity media can advance beyond advisory status; clarify that supported status requires actual retrieval and verification in authentic contexts, not placeholder identifiers.",
+      "constitution_changes": [],
+      "engine_changes": []
     }
   ],
   "failure_mode_taxonomy": [
@@ -114,6 +122,6 @@
   "public_validation_boundary": {
     "rule": "No simulated receipt may be counted as authentic external participant validation.",
     "first_external_receipt": "PRC-JRN-FIELD-EXT-001",
-    "status": "EXT-002 and EXT-003 indexed; EXT-001 remains intake-only; EXT-004 is synthetic_validation; EXT-005 awaiting payload"
+    "status": "EXT-002 and EXT-003 indexed as authentic external; EXT-001 remains intake-only; EXT-004 and EXT-005 are synthetic_validation receipts"
   }
 }
