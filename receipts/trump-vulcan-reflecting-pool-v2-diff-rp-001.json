@@ -1,0 +1,70 @@
+{
+  "artifact_id": "TRUMP-VULCAN-REFLECTING-POOL-V2-DIFF-RP-001",
+  "artifact_type": "ledger_v2_diff",
+  "source_ledger": "TRUMP-VULCAN-REFLECTING-POOL-EVIDENCE-LEDGER-v1",
+  "target_ledger": "TRUMP-VULCAN-REFLECTING-POOL-EVIDENCE-LEDGER-v2",
+  "diff_status": "committed_proposal",
+  "authority": false,
+  "truth_claim": false,
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "new_claim_added": true,
+    "composite_claim_disturbed": false,
+    "composite_claim_reference": "TRUMP-VULCAN-006"
+  },
+  "changes": [
+    {
+      "operation": "add_claim",
+      "claim_id": "RP-001",
+      "claim": {
+        "claim_id": "RP-001",
+        "statement": "The GSA awarded a no-bid contract valued at approximately $17.2M for work on the White House reflecting pool.",
+        "status": "Partially Confirmed",
+        "epistemic_type": "Documented Fact",
+        "evidence_bundle": [
+          {
+            "entity_id": "GSA-CONTRACT-REGISTER-REFLECTING-POOL-2024",
+            "file_sha256": "7777888899990000aaaabbbbccccddddeeeeffff111122223333444455556666",
+            "line_numbers": [
+              200,
+              201,
+              202
+            ],
+            "tier": "Tier 1 (Primary Contract Record)",
+            "note": "No-bid, ~$17.2M, FAR 6.302-1 sole-source justification."
+          },
+          {
+            "entity_id": "INVESTIGATIVE-OUTLET-REFLECTING-POOL-2025-03-01",
+            "file_sha256": "99990000aaaabbbbccccddddeeeeffff11112222333344445555666677778888",
+            "line_numbers": [
+              35,
+              36,
+              37
+            ],
+            "tier": "Tier 2 (Independent Reporting)",
+            "note": "Confirms lack of competitive bidding; cites internal cost estimates ~$3-5M."
+          }
+        ],
+        "evidence_types": {
+          "primary_documents": [
+            "GSA-CONTRACT-REGISTER-REFLECTING-POOL-2024"
+          ],
+          "investigative_reporting": [
+            "INVESTIGATIVE-OUTLET-REFLECTING-POOL-2025-03-01"
+          ],
+          "official_statements": [],
+          "oversight_findings": [],
+          "court_records": []
+        },
+        "open_question": "Whether cost-justification documents or oversight findings support or contradict the inflation allegation.",
+        "confidence": "Medium-High"
+      }
+    }
+  ],
+  "canonical_surface_after_commit": [
+    "claim lookup RP-001",
+    "evidence expansion RP-001 <new_entity_id>",
+    "v2 diff"
+  ]
+}
