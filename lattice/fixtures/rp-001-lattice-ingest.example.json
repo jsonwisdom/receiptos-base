@@ -1,0 +1,13 @@
+{
+  "authority": false,
+  "guard_consumer_safe": true,
+  "guard_hash_match": true,
+  "inference_performed": false,
+  "ingestion_accepted": true,
+  "lattice_ingestion": true,
+  "reason_codes": [],
+  "source_report": "witness/reports/rp-001-witness-replay.example.json",
+  "source_report_hash": "sha256:7107ad37be56fbd8872463c911d650d526f821c371986fd06dddf85378ecaaaa",
+  "state_mutated": false,
+  "truth_claim": false
+}
