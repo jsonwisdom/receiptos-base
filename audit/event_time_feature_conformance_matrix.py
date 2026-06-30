@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Umbrella conformance matrix for #42 event-time lane.
 
-Runs the boundary gate, parser-record matrix, and normalized-record matrix.
-This must pass before comparison semantics are introduced.
+Runs the boundary gate, parser-record matrix, normalized-record matrix,
+and comparison matrix. This must pass before any consumer is introduced.
 """
 
 from __future__ import annotations
@@ -18,6 +18,7 @@ AUDIT = ROOT / "audit"
 if str(AUDIT) not in sys.path:
     sys.path.insert(0, str(AUDIT))
 
+from event_time_comparison_conformance_matrix import run_matrix as run_comparison_matrix  # noqa: E402
 from event_time_conformance_gate import validate_manifest  # noqa: E402
 from event_time_record_conformance_matrix import run_matrix as run_record_matrix  # noqa: E402
 from normalized_event_time_conformance_matrix import run_matrix as run_normalized_matrix  # noqa: E402
@@ -68,11 +69,13 @@ def run_matrix(repo_root: Path) -> dict[str, Any]:
     boundary_results = [run_boundary_case(case, repo_root) for case in BOUNDARY_CASES]
     record_matrix = run_record_matrix(repo_root)
     normalized_matrix = run_normalized_matrix(repo_root)
+    comparison_matrix = run_comparison_matrix(repo_root)
 
     boundary_passed = all(case["case_passed"] for case in boundary_results)
     record_passed = record_matrix.get("matrix_passed") is True
     normalized_passed = normalized_matrix.get("matrix_passed") is True
-    matrix_passed = boundary_passed and record_passed and normalized_passed
+    comparison_passed = comparison_matrix.get("matrix_passed") is True
+    matrix_passed = boundary_passed and record_passed and normalized_passed and comparison_passed
 
     return {
         "event_time_feature_conformance_matrix": True,
@@ -80,9 +83,11 @@ def run_matrix(repo_root: Path) -> dict[str, Any]:
         "boundary_matrix_passed": boundary_passed,
         "record_matrix_passed": record_passed,
         "normalized_matrix_passed": normalized_passed,
+        "comparison_matrix_passed": comparison_passed,
         "boundary_case_count": len(boundary_results),
         "record_case_count": record_matrix.get("case_count"),
         "normalized_case_count": normalized_matrix.get("case_count"),
+        "comparison_case_count": comparison_matrix.get("case_count"),
         "cases": {
             "boundary": boundary_results,
             "record_matrix_summary": {
@@ -96,6 +101,12 @@ def run_matrix(repo_root: Path) -> dict[str, Any]:
                 "positive_count": normalized_matrix.get("positive_count"),
                 "negative_count": normalized_matrix.get("negative_count"),
                 "errors": normalized_matrix.get("errors", []),
+            },
+            "comparison_matrix_summary": {
+                "case_count": comparison_matrix.get("case_count"),
+                "positive_count": comparison_matrix.get("positive_count"),
+                "negative_count": comparison_matrix.get("negative_count"),
+                "errors": comparison_matrix.get("errors", []),
             },
         },
         "authority": False,
