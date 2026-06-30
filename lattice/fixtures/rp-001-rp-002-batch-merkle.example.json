@@ -1,0 +1,29 @@
+{
+  "accepted_for_batch_merkle": true,
+  "authority": false,
+  "batch_use_case": "batch_verification",
+  "errors": [],
+  "inference_performed": false,
+  "lattice_batch_merkle_catalog": true,
+  "leaf_count": 2,
+  "leaves": [
+    "sha256:0ab9432b7988e016d3e7db76ca5e42e55705c173f987108ace4baad174fed8b1",
+    "sha256:7107ad37be56fbd8872463c911d650d526f821c371986fd06dddf85378ecaaaa"
+  ],
+  "merkle_levels": [
+    [
+      "0ab9432b7988e016d3e7db76ca5e42e55705c173f987108ace4baad174fed8b1",
+      "7107ad37be56fbd8872463c911d650d526f821c371986fd06dddf85378ecaaaa"
+    ],
+    [
+      "6ffc207fe8fb31296c27fc1457e233af771dca3800ce299cd262777fef790dad"
+    ]
+  ],
+  "merkle_root": "sha256:6ffc207fe8fb31296c27fc1457e233af771dca3800ce299cd262777fef790dad",
+  "source_catalogs": [
+    "lattice/fixtures/rp-001-lattice-catalog.example.json",
+    "lattice/fixtures/rp-002-eas-lattice-catalog.example.json"
+  ],
+  "state_mutated": false,
+  "truth_claim": false
+}
