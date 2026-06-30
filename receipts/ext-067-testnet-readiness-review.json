@@ -1,0 +1,23 @@
+{
+  "issue": "EXT-067",
+  "title": "Testnet Readiness Review",
+  "depends_on": [
+    "EXT-066"
+  ],
+  "review_mode": "testnet_readiness_only",
+  "deployment_authorized": false,
+  "deployment_executed": false,
+  "runtime_mode": "witness_only",
+  "policy_source": "EXT-064",
+  "implementation_source": "EXT-065",
+  "validation_source": "EXT-066",
+  "authority": false,
+  "truth_claim": false,
+  "resolution_semantics": "absent",
+  "badge_power": 0,
+  "vote_power": 0,
+  "governance_action_allowed": false,
+  "promotion_allowed": false,
+  "transfer_governance_rights": false,
+  "review_complete": true
+}
