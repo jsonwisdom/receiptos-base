@@ -1,0 +1,21 @@
+{
+  "issue": "EXT-057",
+  "title": "ERC-1155 Badge Mint Plan",
+  "standard": "ERC-1155",
+  "mint_represents": "witness_action_completion",
+  "badge_power": 0,
+  "vote_power": 0,
+  "authority": false,
+  "truth_claim": false,
+  "governance_action_allowed": false,
+  "transfer_governance_rights": false,
+  "promotion_allowed": false,
+  "constraints": {
+    "nonTransferable": true,
+    "oneBadgePerReceipt": true,
+    "receiptHashRequired": true,
+    "badgeCannotVote": true,
+    "badgeCannotResolve": true,
+    "badgeCannotGrantAuthority": true
+  }
+}
