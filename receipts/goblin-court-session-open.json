@@ -1,0 +1,35 @@
+{
+  "artifact_id": "GOBLIN-COURT-SESSION-OPEN-001",
+  "type": "goblin_court_session_status",
+  "version": "1",
+  "status": "COURT_IN_SESSION",
+  "posture": "OBSERVATIONAL_ONLY",
+  "root_privileges": "0x00",
+  "root_access": false,
+  "mutation": false,
+  "authority": false,
+  "truth_claim": false,
+  "canonical_effect": "none",
+  "commit_reference_prior": "b687f3789ea58d58966d18b20d4bb8877598a3e1",
+  "artifact_reference_prior": "receipts/goblin-court-oversight-initialized.json",
+  "jurisdiction_locked": [
+    "meme_variance",
+    "humor_variance",
+    "narrative_drift"
+  ],
+  "active_index": "NON_MUTATIVE_VARIANCE",
+  "initial_case": {
+    "ref": "Jays_Math_Class_v1",
+    "input": "LMFAO",
+    "classification": "NON_MUTATIVE_VARIANCE",
+    "chain_modification": false
+  },
+  "runtime_geometry": {
+    "immutable": true,
+    "deterministic": true,
+    "canonical_mutation_allowed": false,
+    "variance_capture_allowed": true,
+    "variance_execution_allowed": false
+  },
+  "summary": "Goblin Court is open, jailed, watching, and ready to classify future meme, humor, or narrative drift inputs as non-mutative variance."
+}
