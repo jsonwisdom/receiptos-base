@@ -1,0 +1,48 @@
+{
+  "issue": "EXT-094",
+  "title": "Signer Evidence Bundle Intake",
+  "status": "AWAITING_REAL_SIGNER_EVIDENCE",
+  "depends_on": [
+    "EXT-092",
+    "EXT-093"
+  ],
+  "manifest_id": "jaywisdom",
+  "public_witness_url": "https://farcaster.xyz/cmptrwsdm",
+  "canonical_manifest_path": ".well-known/farcaster/manifest.jcs",
+  "lock_path": ".well-known/farcaster/manifest.lock.json",
+  "canonical_hash": "d3e01a4dcb4d64e1617151b211389481c00054f2121a323662546d2e4e2f2cce",
+  "signer": {
+    "key_identifier": null,
+    "association_payload": null,
+    "signature_bytes": null,
+    "domain_binding": "https://cmptrwsdm.com/.well-known/farcaster/manifest.json",
+    "canonical_payload_hash": null
+  },
+  "required_real_inputs": [
+    "real Farcaster signer address or FID",
+    "raw account association payload",
+    "signature bytes",
+    "domain binding statement",
+    "canonical payload hash"
+  ],
+  "verification_procedure": [
+    "capture raw account association payload",
+    "canonicalize payload using declared serialization rule",
+    "compute SHA-256 over canonical payload bytes",
+    "verify signature against declared signer material",
+    "confirm declared domain or identity binding matches manifest scope",
+    "record signer metadata without mutating the locked manifest",
+    "preserve authority=false and truth_claim=false"
+  ],
+  "allowed_next_statuses": [
+    "SIGNER_EVIDENCE_RECORDED",
+    "ASSOCIATION_REJECTED"
+  ],
+  "blocked_statuses": [
+    "CRYPTOGREEN"
+  ],
+  "block_reason": "CRYPTOGREEN requires real signer evidence and successful verification; placeholders are not admissible.",
+  "authority": false,
+  "truth_claim": false,
+  "manifest_mutation": false
+}
