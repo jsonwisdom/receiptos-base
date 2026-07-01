@@ -1,0 +1,70 @@
+{
+  "wave_id": "W031",
+  "wave_title": "Reputation Rascals",
+  "volume": "Volume VI — Social Systems",
+  "release": "R31 — First Printing",
+  "continuity_spec": "v1.2",
+  "canonical_anchor": "GPP-W010-0001",
+  "style_preamble": "original retro gross-out satirical trading card, sticker-card composition, die-cut border, gritty ink texture, bold nameplate, comic grotesque goblin character, social systems satire, conceptual visual metaphor, no real person, no brand logos, no copyrighted characters",
+  "negative_prompt": "photorealistic, real celebrity, real politician, copyrighted character, brand logo, clean corporate clipart, gore, hate symbols, explicit violence, text-heavy poster",
+  "render_defaults": {
+    "width": 1024,
+    "height": 1024,
+    "num_outputs": 1,
+    "guidance_scale": 7.5,
+    "num_inference_steps": 30,
+    "seed": null
+  },
+  "cards": [
+    {
+      "card_id": "GPP-W031-0001",
+      "title": "Signal Sally",
+      "slug": "Signal_Sally",
+      "vector": "Costly Signaling",
+      "system": "Signal cost and spoofing",
+      "one_liner": "Spent everything to look credible. Almost worked.",
+      "hidden_gag_grid": "A1",
+      "prompt": "Signal Sally stands proudly wearing an enormous extravagant peacock-tail display made of money. Each feather is a dollar bill, laminated and pinned. The tail reads HIGH SIGNAL in gold letters. Behind her, a smaller goblin with a paper tail and crayon TRUST sign mimics her, but the fake tail is falling apart. Sally looks triumphant while sweating hard. A tiny imp holds a receipt labeled Life Savings: $1, Trust Gained: $0.50. Another imp sells cheaper tails labeled Reputation Store Brand with a SALE sign. Reputation Gold border with dark scumline."
+    },
+    {
+      "card_id": "GPP-W031-0002",
+      "title": "Credibility Carl",
+      "slug": "Credibility_Carl",
+      "vector": "Trust Propagation",
+      "system": "Reputation scaling without direct verification",
+      "one_liner": "Trusted by someone who trusted someone who guessed.",
+      "hidden_gag_grid": "B3",
+      "prompt": "Credibility Carl stands at the end of a fragile trust-chain made of thin threads. At the start, Goblin A shrugs beside a sign saying I don't actually know her. Goblin B passes a nod. Goblin C nods harder. Goblin D signs a contract based entirely on the chain. Carl proudly holds the signed contract. A tiny imp at the first link whispers I'm just guessing while the final link stamps Trusted via Referral with huge confidence. The first link reads Trust: Pending, the final link reads Trust: Confirmed. Reputation Gold border with trust-chain overlay."
+    },
+    {
+      "card_id": "GPP-W031-0003",
+      "title": "Status Stanley",
+      "slug": "Status_Stanley",
+      "vector": "Network-Derived Status",
+      "system": "Status as emergent endorsement structure",
+      "one_liner": "I'm not important. My connections are.",
+      "hidden_gag_grid": "C4",
+      "prompt": "Status Stanley sits at the center of an endorsement network. Many arrows point to him from influential-looking goblins, but Stanley has no actual content or authority. His podium is labeled Influential and is clearly borrowed. A small throne behind him is marked Rental with a price tag. Some arrows point away and fade, making the borrowed podium wobble. A tiny imp points to a sign reading My Connections Are Important while another imp erases one arrow and watches Stanley panic. Reputation Gold border, social network diagram background."
+    },
+    {
+      "card_id": "GPP-W031-0004",
+      "title": "Gossip Greta",
+      "slug": "Gossip_Greta",
+      "vector": "Reputation Mutation",
+      "system": "Telephone-game distortion in networks",
+      "one_liner": "I heard it from someone who heard it from someone else.",
+      "hidden_gag_grid": "D2",
+      "prompt": "Gossip Greta stands at the center of a telephone-game whisper chain. The word RELIABLE enters the first ear and mutates across goblins into Pliable, then Liable, then Evil by the final ear. Greta proudly announces gossip with a megaphone. A tiny imp at each node adds a distortion layer. At the final node, the word EVIL is surrounded by candles and a tiny Verified stamp. Another imp keeps a Mutation Log with timestamps. Reputation Gold border, dark scumline, comic chaos."
+    },
+    {
+      "card_id": "GPP-W031-0005",
+      "title": "Trust Tessa",
+      "slug": "Trust_Tessa",
+      "vector": "Repeated Interaction",
+      "system": "Trust formation through cumulative cooperation",
+      "one_liner": "Trust is a receipt with a long memory.",
+      "hidden_gag_grid": "E5",
+      "prompt": "Trust Tessa stands beside another goblin, their hands joined by a sturdy lock engraved 100 Interactions. Nearby, a single-interaction chain is broken, its shattered lock labeled 1 Interaction. Tessa looks calm and the other goblin looks relieved. The background shows many clocks and calendars, emphasizing time and repeated cooperation. A tiny imp at the broken chain holds a sign reading Warranty void if context changes. Another imp engraves the main lock with higher numbers as time passes. Reputation Gold border, trust-chain overlay."
+    }
+  ]
+}
