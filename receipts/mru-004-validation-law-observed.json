@@ -1,0 +1,33 @@
+{
+  "artifact_id": "MRU-004",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "validation_law_v1",
+  "evidence_state": "Observed",
+  "subject": {
+    "artifact_id": "MRU-003",
+    "content_sha256": "6e47c1f298a83d4c382f764a852b535d49a37c09c735b57731d7e2e85a53e414"
+  },
+  "prior_replay_ref": "",
+  "provenance": {
+    "edge": "witness_link",
+    "direction": "MRU-004 to MRU-003"
+  },
+  "namespace_invariants": {
+    "validation_semantics": {
+      "conformance_only": true,
+      "directional_purity": "A to B check, no reverse write",
+      "no_transitivity": "pairwise local only; no implied A to C",
+      "temporal_binding": "target_version plus content_sha256 required"
+    }
+  },
+  "timestamp": "2026-06-30T19:15:00Z",
+  "authority": false,
+  "truth_claim": false,
+  "gitfix_notes": {
+    "reported_sha256": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+    "computed_sha256_from_literal_user_bytes": "6e2ba34cab2e2d329a06be3452e85d36ad53545253a28485cdda432eec98daae",
+    "hash_gate": "digest_variance_observed_no_silent_promotion",
+    "semantic_status": "validation_edge_law_observed"
+  }
+}
