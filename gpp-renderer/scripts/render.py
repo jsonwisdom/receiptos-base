@@ -12,7 +12,7 @@ from urllib.request import urlretrieve
 
 import replicate
 
-DEFAULT_MODEL = "black-forest-labs/flux-schnell"
+DEFAULT_MODEL = ""
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -59,7 +59,10 @@ def render_card(model: str, prompt: str, negative_prompt: str, defaults: dict[st
 
 
 def resolve_model(cli_model: str | None) -> str:
-    return cli_model or os.getenv("REPLICATE_MODEL") or DEFAULT_MODEL
+    model = cli_model or os.getenv("REPLICATE_MODEL") or DEFAULT_MODEL
+    if not model:
+        raise RuntimeError("Missing production model. Set REPLICATE_MODEL or pass --model.")
+    return model
 
 
 def main() -> int:
