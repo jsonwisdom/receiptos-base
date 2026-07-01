@@ -32,33 +32,15 @@ jobs:
       - name: Build checksum sidecars
         run: python scripts/checksum_manifest.py --wave W031 --output-dir output/W031 --manifest sidecars/W031_sidecar_manifest.json --prompt ../gpp-renderer/prompts/w031_reputation_rascals.json
 
-      - name: Prepare Google Drive credentials
-        env:
-          GDRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
-        run: |
-          python - <<'PY'
-          import base64
-          import json
-          import os
-          from pathlib import Path
-
-          secret = os.environ.get("GDRIVE_SERVICE_ACCOUNT_JSON", "").strip()
-          if not secret:
-              raise SystemExit("GDRIVE_SERVICE_ACCOUNT_JSON is empty or missing")
-
-          if secret.startswith("{"):
-              credentials = secret
-          else:
-              credentials = base64.b64decode(secret).decode("utf-8")
-
-          json.loads(credentials)
-          Path("credentials.json").write_text(credentials, encoding="utf-8")
-          print("credentials.json written and validated")
-          PY
+      - name: Authenticate Google Drive
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
 
       - name: Upload to Google Drive
         env:
-          GDRIVE_CREDENTIALS_PATH: credentials.json
+          GDRIVE_CREDENTIALS_PATH: ${{ steps.auth.outputs.credentials_file_path }}
         run: python scripts/upload_gdrive.py --wave W031 --folder-name W031_Reputation_Rascals --local-dir output/W031 --sidecars sidecars --root-folder-id 1dowKY26gjqs267L-N_zGJ3eySyysZoqt
 
       - name: Commit outputs to render branch
