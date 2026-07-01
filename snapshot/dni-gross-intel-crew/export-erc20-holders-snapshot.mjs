@@ -24,8 +24,8 @@ import { ethers } from "ethers";
 
 const RPC_URL = process.env.BASE_RPC_URL || "https://mainnet.base.org";
 const COLLECTION = "0xe423ae19FfFcEe95919DDE96a31e828bC060E36F";
-const SNAPSHOT_BLOCK = 48037949;
-const SNAPSHOT_BLOCK_HASH = "0x345633bc5107ddb3a36623413355a7a038f48d6a2d4dfeeaf4ead3ab76b4e4ed";
+const SNAPSHOT_BLOCK = 48046843;
+const SNAPSHOT_BLOCK_HASH = "0x8f3c626fc7cd9b805b8e2ac82643aae3652a99f28ac5aec2f5bbccac0cc73282";
 const GENESIS_UID = "0xe4735bff8c92672ce266364e67966cf35b29b7daeb2a693b7b14d24e338686f0";
 const OUT_DIR = path.join("snapshot", "dni-gross-intel-crew");
 const ZERO = "0x0000000000000000000000000000000000000000";
@@ -78,7 +78,10 @@ async function main() {
   const balances = new Map();
   const chunk = Number(process.env.LOG_CHUNK || 50000);
 
-  for (let fromBlock = 0; fromBlock <= SNAPSHOT_BLOCK; fromBlock += chunk) {
+  const START_BLOCK = Number(process.env.START_BLOCK || 47990000);
+  const DELAY_MS = Number(process.env.LOG_DELAY_MS || 750);
+
+  for (let fromBlock = START_BLOCK; fromBlock <= SNAPSHOT_BLOCK; fromBlock += chunk) {
     const toBlock = Math.min(fromBlock + chunk - 1, SNAPSHOT_BLOCK);
     console.error(`Fetching Transfer logs ${fromBlock}-${toBlock}`);
     const logs = await provider.getLogs({
@@ -87,6 +90,8 @@ async function main() {
       fromBlock,
       toBlock
     });
+
+    await new Promise(r => setTimeout(r, DELAY_MS));
 
     for (const log of logs) {
       const from = topicToAddress(log.topics[1]);
