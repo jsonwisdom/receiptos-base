@@ -1,0 +1,34 @@
+name: Frame OpenAPI Contract Guard
+
+on:
+  push:
+    paths:
+      - 'frame/**'
+      - 'openapi/**'
+      - 'scripts/verify-frame-openapi-contract.js'
+      - '.github/workflows/frame-openapi-contract.yml'
+  pull_request:
+    paths:
+      - 'frame/**'
+      - 'openapi/**'
+      - 'scripts/verify-frame-openapi-contract.js'
+      - '.github/workflows/frame-openapi-contract.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  frame-openapi-contract:
+    name: EXT-101 frame OpenAPI contract verifier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify Frame OpenAPI response contract
+        run: node scripts/verify-frame-openapi-contract.js
