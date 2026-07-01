@@ -40,17 +40,10 @@ jobs:
             gpp-renderer/output/W031
             gpp-renderer/sidecars
 
-      - name: Authenticate Google Drive
-        id: auth
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
-
-      - name: Upload to Google Drive
-        continue-on-error: true
-        env:
-          GDRIVE_CREDENTIALS_PATH: ${{ steps.auth.outputs.credentials_file_path }}
-        run: python scripts/upload_gdrive.py --wave W031 --folder-name W031_Reputation_Rascals --local-dir output/W031 --sidecars sidecars --root-folder-id 1dowKY26gjqs267L-N_zGJ3eySyysZoqt
+      - name: Supadrive upload placeholder
+        run: |
+          echo "Supadrive lane selected. Google Drive lane removed."
+          echo "Current authoritative package: GitHub artifact W031-renders plus committed sidecars."
 
       - name: Commit outputs to render branch
         run: |
