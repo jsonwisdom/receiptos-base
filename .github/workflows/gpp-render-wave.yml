@@ -1,0 +1,77 @@
+name: GPP Render Wave
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: "Prompt manifest path"
+        required: true
+        default: "gpp-renderer/prompts/w031_reputation_rascals.json"
+      wave:
+        description: "Wave id"
+        required: true
+        default: "W031"
+      folder_name:
+        description: "Google Drive wave folder name"
+        required: true
+        default: "W031_Reputation_Rascals"
+  schedule:
+    - cron: "17 9 * * 1"
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: gpp-renderer
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Render cards through Replicate
+        env:
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+          REPLICATE_MODEL: ${{ secrets.REPLICATE_MODEL }}
+        run: |
+          python scripts/render.py \
+            --prompt "../${{ github.event.inputs.prompt || 'gpp-renderer/prompts/w031_reputation_rascals.json' }}" \
+            --out "output/${{ github.event.inputs.wave || 'W031' }}"
+
+      - name: Build checksum sidecars
+        run: |
+          python scripts/checksum_manifest.py \
+            --wave "${{ github.event.inputs.wave || 'W031' }}" \
+            --output-dir "output/${{ github.event.inputs.wave || 'W031' }}" \
+            --manifest "sidecars/${{ github.event.inputs.wave || 'W031' }}_sidecar_manifest.json" \
+            --prompt "../${{ github.event.inputs.prompt || 'gpp-renderer/prompts/w031_reputation_rascals.json' }}"
+
+      - name: Upload to Google Drive
+        env:
+          GDRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
+          GDRIVE_ROOT_FOLDER_ID: ${{ secrets.GDRIVE_ROOT_FOLDER_ID }}
+        run: |
+          python scripts/upload_gdrive.py \
+            --wave "${{ github.event.inputs.wave || 'W031' }}" \
+            --folder-name "${{ github.event.inputs.folder_name || 'W031_Reputation_Rascals' }}" \
+            --local-dir "output/${{ github.event.inputs.wave || 'W031' }}" \
+            --sidecars "sidecars"
+
+      - name: Commit manifests and render logs
+        run: |
+          git config user.name "gpp-render-bot"
+          git config user.email "actions@github.com"
+          git add gpp-renderer/output gpp-renderer/sidecars gpp-renderer/manifests || true
+          git commit -m "Render ${{ github.event.inputs.wave || 'W031' }} assets and sidecars" || echo "No changes to commit"
+          git push
