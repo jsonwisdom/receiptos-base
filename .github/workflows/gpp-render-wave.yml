@@ -2,21 +2,63 @@ name: GPP Render Wave
 
 on:
   workflow_dispatch:
+    inputs:
+      lane:
+        description: "Execution lane. local-dev renders only; production may persist W031 outputs."
+        required: true
+        default: "local-dev"
+        type: choice
+        options:
+          - local-dev
+          - production
+      wave:
+        description: "Wave identifier to render. W031 production remains guarded."
+        required: true
+        default: "W031"
+        type: choice
+        options:
+          - W031
+      production_confirm:
+        description: "Required true for production persistence. Leave false for local-dev."
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: write
 
 jobs:
   render:
+    name: Render ${{ inputs.wave }} / ${{ inputs.lane }}
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: gpp-renderer
+    env:
+      WAVE: ${{ inputs.wave }}
+      LANE: ${{ inputs.lane }}
+      PROMPT_PATH: ../gpp-renderer/prompts/w031_reputation_rascals.json
+      OUTPUT_DIR: output/W031
+      SIDECAR_MANIFEST: sidecars/W031_sidecar_manifest.json
     steps:
       - name: Checkout render branch
         uses: actions/checkout@v4
         with:
           ref: render/w031-reputation-rascals
+
+      - name: Governance lane guard
+        run: |
+          echo "lane=${LANE}"
+          echo "wave=${WAVE}"
+          echo "authority=false"
+          echo "truthClaim=false"
+          if [ "${LANE}" = "production" ] && [ "${{ inputs.production_confirm }}" != "true" ]; then
+            echo "Production persistence requested without production_confirm=true. Blocking."
+            exit 1
+          fi
+          if [ "${LANE}" = "local-dev" ]; then
+            echo "Local-dev lane selected: render/checksum/artifact only; no W031 permanence commit or upload."
+          fi
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -27,12 +69,22 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Render W031 mock cards
-        run: python scripts/render_mock.py --prompt ../gpp-renderer/prompts/w031_reputation_rascals.json --out output/W031
+        run: python scripts/render_mock.py --prompt "$PROMPT_PATH" --out "$OUTPUT_DIR"
 
       - name: Build checksum sidecars
-        run: python scripts/checksum_manifest.py --wave W031 --output-dir output/W031 --manifest sidecars/W031_sidecar_manifest.json --prompt ../gpp-renderer/prompts/w031_reputation_rascals.json
+        run: python scripts/checksum_manifest.py --wave "$WAVE" --output-dir "$OUTPUT_DIR" --manifest "$SIDECAR_MANIFEST" --prompt "$PROMPT_PATH"
 
-      - name: Upload W031 artifact bundle
+      - name: Upload local-dev artifact bundle
+        if: ${{ inputs.lane == 'local-dev' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: W031-local-dev-renders
+          path: |
+            gpp-renderer/output/W031
+            gpp-renderer/sidecars
+
+      - name: Upload production artifact bundle
+        if: ${{ inputs.lane == 'production' && inputs.production_confirm == true }}
         uses: actions/upload-artifact@v4
         with:
           name: W031-renders
@@ -41,14 +93,26 @@ jobs:
             gpp-renderer/sidecars
 
       - name: Supadrive upload placeholder
+        if: ${{ inputs.lane == 'production' && inputs.production_confirm == true }}
         run: |
-          echo "Supadrive lane selected. Google Drive lane removed."
+          echo "Supadrive production lane selected."
           echo "Current authoritative package: GitHub artifact W031-renders plus committed sidecars."
+          echo "Bucket and secret integration intentionally blocked until Supabase ready signal."
 
       - name: Commit outputs to render branch
+        if: ${{ inputs.lane == 'production' && inputs.production_confirm == true }}
         run: |
           git config user.name "gpp-render-bot"
           git config user.email "actions@github.com"
           git add output sidecars || true
           git commit -m "Render W031 mock assets" || echo "No changes to commit"
           git push origin HEAD:render/w031-reputation-rascals
+
+      - name: Local-dev final boundary receipt
+        if: ${{ inputs.lane == 'local-dev' }}
+        run: |
+          echo "LOCAL_DEV_RENDER_COMPLETE=true"
+          echo "W031_PERMANENCE_SCRIPT_TRIGGERED=false"
+          echo "PRODUCTION_UPLOAD_TRIGGERED=false"
+          echo "authority=false"
+          echo "truthClaim=false"
