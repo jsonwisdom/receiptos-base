@@ -43,17 +43,39 @@ def normalize_outputs(output: Any) -> list[str]:
     return [str(output)]
 
 
-def render_card(model: str, prompt: str, negative_prompt: str, defaults: dict[str, Any]) -> list[str]:
-    input_payload: dict[str, Any] = {"prompt": prompt}
+def is_flux_schnell(model: str) -> bool:
+    return "flux-schnell" in model.lower()
 
+
+def build_input_payload(model: str, prompt: str, negative_prompt: str, defaults: dict[str, Any]) -> dict[str, Any]:
+    if is_flux_schnell(model):
+        payload: dict[str, Any] = {
+            "prompt": prompt,
+            "aspect_ratio": "1:1",
+            "output_format": "png",
+            "output_quality": 95,
+            "num_outputs": int(defaults.get("num_outputs") or 1),
+        }
+        steps = defaults.get("num_inference_steps")
+        if steps is not None:
+            payload["num_inference_steps"] = min(int(steps), 4)
+        seed = defaults.get("seed")
+        if seed is not None:
+            payload["seed"] = seed
+        return payload
+
+    payload = {"prompt": prompt}
     if negative_prompt:
-        input_payload["negative_prompt"] = negative_prompt
-
+        payload["negative_prompt"] = negative_prompt
     for key in ["width", "height", "num_outputs", "guidance_scale", "num_inference_steps", "seed"]:
         value = defaults.get(key)
         if value is not None:
-            input_payload[key] = value
+            payload[key] = value
+    return payload
 
+
+def render_card(model: str, prompt: str, negative_prompt: str, defaults: dict[str, Any]) -> list[str]:
+    input_payload = build_input_payload(model, prompt, negative_prompt, defaults)
     output = replicate.run(model, input=input_payload)
     return normalize_outputs(output)
 
