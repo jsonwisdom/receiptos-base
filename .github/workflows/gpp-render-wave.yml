@@ -32,6 +32,14 @@ jobs:
       - name: Build checksum sidecars
         run: python scripts/checksum_manifest.py --wave W031 --output-dir output/W031 --manifest sidecars/W031_sidecar_manifest.json --prompt ../gpp-renderer/prompts/w031_reputation_rascals.json
 
+      - name: Upload W031 artifact bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: W031-renders
+          path: |
+            gpp-renderer/output/W031
+            gpp-renderer/sidecars
+
       - name: Authenticate Google Drive
         id: auth
         uses: google-github-actions/auth@v2
@@ -39,6 +47,7 @@ jobs:
           credentials_json: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
 
       - name: Upload to Google Drive
+        continue-on-error: true
         env:
           GDRIVE_CREDENTIALS_PATH: ${{ steps.auth.outputs.credentials_file_path }}
         run: python scripts/upload_gdrive.py --wave W031 --folder-name W031_Reputation_Rascals --local-dir output/W031 --sidecars sidecars --root-folder-id 1dowKY26gjqs267L-N_zGJ3eySyysZoqt
@@ -47,6 +56,6 @@ jobs:
         run: |
           git config user.name "gpp-render-bot"
           git config user.email "actions@github.com"
-          git add gpp-renderer/output gpp-renderer/sidecars || true
+          git add output sidecars || true
           git commit -m "Render W031 mock assets" || echo "No changes to commit"
           git push origin HEAD:render/w031-reputation-rascals
