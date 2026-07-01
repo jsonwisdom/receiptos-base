@@ -26,11 +26,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Render W031 cards
-        env:
-          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
-          REPLICATE_MODEL: ${{ secrets.REPLICATE_MODEL }}
-        run: python scripts/render.py --prompt ../gpp-renderer/prompts/w031_reputation_rascals.json --out output/W031
+      - name: Render W031 mock cards
+        run: python scripts/render_mock.py --prompt ../gpp-renderer/prompts/w031_reputation_rascals.json --out output/W031
 
       - name: Build checksum sidecars
         run: python scripts/checksum_manifest.py --wave W031 --output-dir output/W031 --manifest sidecars/W031_sidecar_manifest.json --prompt ../gpp-renderer/prompts/w031_reputation_rascals.json
@@ -51,5 +48,5 @@ jobs:
           git config user.name "gpp-render-bot"
           git config user.email "actions@github.com"
           git add gpp-renderer/output gpp-renderer/sidecars || true
-          git commit -m "Render W031 assets" || echo "No changes to commit"
+          git commit -m "Render W031 mock assets" || echo "No changes to commit"
           git push origin HEAD:render/w031-reputation-rascals
