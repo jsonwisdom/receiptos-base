@@ -59,7 +59,7 @@ def render_card(model: str, prompt: str, negative_prompt: str, defaults: dict[st
 
 
 def resolve_model(cli_model: str | None) -> str:
-    model = cli_model or os.getenv("REPLICATE_MODEL") or DEFAULT_MODEL
+    model = (cli_model or os.getenv("REPLICATE_MODEL") or DEFAULT_MODEL).strip()
     if not model:
         raise RuntimeError("Missing production model. Set REPLICATE_MODEL or pass --model.")
     return model
