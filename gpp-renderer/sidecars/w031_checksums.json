@@ -1,0 +1,37 @@
+[
+  {
+    "wave": "W031",
+    "filename": "GPP-W031-0001-Signal_Sally.png",
+    "path": "output/W031/GPP-W031-0001-Signal_Sally.png",
+    "sha256": "ecffe9ca8ac50b3cea77aaf56d7b8e179c18d425d973c0a00167b818a4a3747a",
+    "bytes": 92176
+  },
+  {
+    "wave": "W031",
+    "filename": "GPP-W031-0002-Credibility_Carl.png",
+    "path": "output/W031/GPP-W031-0002-Credibility_Carl.png",
+    "sha256": "3ac0eeb937b34c3044070c7ad232da5f8624d4a11c911dca21e677049f8d4a66",
+    "bytes": 92157
+  },
+  {
+    "wave": "W031",
+    "filename": "GPP-W031-0003-Status_Stanley.png",
+    "path": "output/W031/GPP-W031-0003-Status_Stanley.png",
+    "sha256": "74640a9a35f9c17b90a2b3cfa9d7d68f1c22be8e38a925c912f0ec3a9c6d6626",
+    "bytes": 87844
+  },
+  {
+    "wave": "W031",
+    "filename": "GPP-W031-0004-Gossip_Greta.png",
+    "path": "output/W031/GPP-W031-0004-Gossip_Greta.png",
+    "sha256": "36c10b6acad91e805412945b17e99758912dc0bd3e03f2bdae279b2fa3c85f2a",
+    "bytes": 89847
+  },
+  {
+    "wave": "W031",
+    "filename": "GPP-W031-0005-Trust_Tessa.png",
+    "path": "output/W031/GPP-W031-0005-Trust_Tessa.png",
+    "sha256": "f0ea6916c37a78b696357622ab7bc22d285cc5fdaa5b413bee224f009808f9d4",
+    "bytes": 86399
+  }
+]

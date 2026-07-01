@@ -1,0 +1,52 @@
+[
+  {
+    "card_id": "GPP-W031-0001",
+    "title": "Signal Sally",
+    "output_file": "output/W031/GPP-W031-0001-Signal_Sally.png",
+    "renderer": "no_cost_mock",
+    "width": 2048,
+    "height": 2048,
+    "dpi": 300,
+    "rendered_at_unix": 1782911062
+  },
+  {
+    "card_id": "GPP-W031-0002",
+    "title": "Credibility Carl",
+    "output_file": "output/W031/GPP-W031-0002-Credibility_Carl.png",
+    "renderer": "no_cost_mock",
+    "width": 2048,
+    "height": 2048,
+    "dpi": 300,
+    "rendered_at_unix": 1782911062
+  },
+  {
+    "card_id": "GPP-W031-0003",
+    "title": "Status Stanley",
+    "output_file": "output/W031/GPP-W031-0003-Status_Stanley.png",
+    "renderer": "no_cost_mock",
+    "width": 2048,
+    "height": 2048,
+    "dpi": 300,
+    "rendered_at_unix": 1782911063
+  },
+  {
+    "card_id": "GPP-W031-0004",
+    "title": "Gossip Greta",
+    "output_file": "output/W031/GPP-W031-0004-Gossip_Greta.png",
+    "renderer": "no_cost_mock",
+    "width": 2048,
+    "height": 2048,
+    "dpi": 300,
+    "rendered_at_unix": 1782911063
+  },
+  {
+    "card_id": "GPP-W031-0005",
+    "title": "Trust Tessa",
+    "output_file": "output/W031/GPP-W031-0005-Trust_Tessa.png",
+    "renderer": "no_cost_mock",
+    "width": 2048,
+    "height": 2048,
+    "dpi": 300,
+    "rendered_at_unix": 1782911063
+  }
+]
