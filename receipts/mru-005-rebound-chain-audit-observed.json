@@ -1,0 +1,50 @@
+{
+  "artifact_id": "MRU-005-REBIND",
+  "type": "chain_audit_receipt",
+  "version": "1",
+  "schema": "kernel_self_apply_v1",
+  "evidence_state": "Observed",
+  "subject": {
+    "artifact_id": "MRU-004",
+    "content_sha256": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d"
+  },
+  "prior_replay_ref": "",
+  "provenance": {
+    "edge": "witness_link",
+    "direction": "MRU-005 to MRU-004"
+  },
+  "namespace_invariants": {
+    "self_application": true,
+    "validation_semantics": {
+      "conformance_only": true,
+      "directional_purity": "A to B check, no reverse write",
+      "no_transitivity": "pairwise local only; no implied A to C",
+      "temporal_binding": "target_version plus content_sha256 required"
+    }
+  },
+  "validates_against": {
+    "edge": "conformance_check",
+    "outcome": "observed_pass",
+    "target": "MRU-004",
+    "target_content_sha256": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d"
+  },
+  "timestamp": "2026-06-30T19:16:00Z",
+  "authority": false,
+  "truth_claim": false,
+  "chain_audit": {
+    "command": "python3 tools/replay_why.py --chain_audit",
+    "commit_gitfix": "success_append_only_delta_verified_as_reported",
+    "temporal_bind": "reported_pass_005_to_004_digest_match",
+    "integrity_gate": "pairwise_check_only",
+    "transitivity": "blocked_no_005_to_003_propagation",
+    "replay": "Observed_clean_state_maintained",
+    "result": "kernel_stable_as_reported_domain_separation_verified_composition_closure_reported_complete"
+  },
+  "gitfix_notes": {
+    "reported_sha256": "d3f8e56214b7e19a8039c71a3498f8271e549a19d83297a8920194857b2809e2",
+    "computed_sha256_from_literal_user_bytes": "e462d84ab8c11c167c134e479034886c4de26050dc7af9c001d9e5a97ef495d2",
+    "hash_gate": "digest_variance_observed_no_silent_promotion",
+    "dependency_note": "MRU-004 is now appended in this GitHub sequence, but its reported digest also varies from literal-byte recomputation.",
+    "promotion": "blocked_until_exact_canonical_bytes_and_digests_reconcile"
+  }
+}
