@@ -1,0 +1,51 @@
+{
+  "artifactId": "DNI-GROSS-INTEL-CREW-GENESIS-VERIFY-V1",
+  "status": "GENESIS_ATTESTED",
+  "chain": "Base",
+  "collection": "DNI Gross-Intel Crew",
+  "series": "2026 Midterm Mayhem",
+  "zoraCollectionAddress": "0xe423ae19FfFcEe95919DDE96a31e828bC060E36F",
+  "schemaId": 1643,
+  "schemaUid": "0x4cffe9862b428afde59127d284cad92b29d1d769eb6f7568e992004464df1ea0",
+  "easGenesis": {
+    "uid": "0xe4735bff8c92672ce266364e67966cf35b29b7daeb2a693b7b14d24e338686f0",
+    "transactionId": "0xc4aef3d74a3e3a49b9e28810dd372496b933cc1e98773843ba92364650304660",
+    "created": "2026-06-30T23:35:29",
+    "expiration": "Never",
+    "revoked": false,
+    "revocable": true,
+    "from": "0xC345B26094c63C69222Ee775189a3d3eaead5a84",
+    "to": "0xC345B26094c63C69222Ee775189a3d3eaead5a84"
+  },
+  "decodedData": {
+    "collectionName": "DNI Gross-Intel Crew",
+    "series": "2026 Midterm Mayhem",
+    "tokenId": 0,
+    "title": "Collection Genesis",
+    "contentHash": "0x7869c47dad64c9fcf05cf938880ac5427cca51b3fac452f5ad9b963694aeaaff",
+    "metadataHash": "0xde1d389281f7cc2b2568c598cb67219f5386d91a619e9327bfcaa159fde992c9",
+    "ipfsCid": "bafkreig6du4jfapxzqvsk2gftdfwoim7kodnsgtbt2jspp6kufm732msze",
+    "gitCommit": "d1c61605746840c966250b458412b92476dca330",
+    "creator": "0xC345B26094c63C69222Ee775189a3d3eaead5a84",
+    "zoraCollection": "0xe423ae19FfFcEe95919DDE96a31e828bC060E36F",
+    "edition": 0,
+    "createdAt": 1782862320,
+    "satire": true
+  },
+  "claimsBoundary": {
+    "politicalTruthClaims": false,
+    "satireOnly": true,
+    "provenanceClaimsOnly": true,
+    "authority": false,
+    "truthClaim": false,
+    "boundaryText": "The EAS record attests to artifact identity, hashes, creator linkage, metadata, and publication history only. It does not attest to political truth claims."
+  },
+  "verificationState": {
+    "schemaRegistered": true,
+    "zoraBound": true,
+    "ipfsBound": true,
+    "gitCommitBound": true,
+    "easGenesisLive": true,
+    "revoked": false
+  }
+}
