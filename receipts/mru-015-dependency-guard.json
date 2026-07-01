@@ -1,0 +1,33 @@
+{
+  "artifact_id": "MRU-015-GUARD",
+  "artifact_type": "dependency_guard",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "dependency_guard_v1",
+  "subject": {
+    "blocked_artifact": "MRU-015",
+    "required_prior": "MRU-014B",
+    "required_digest": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d"
+  },
+  "evidence_state": "Observed",
+  "history": "append_only",
+  "authority": false,
+  "truth_claim": false,
+  "bleed": "none",
+  "guard": {
+    "mru_014b_status": "pending",
+    "baseline_status": "blocked",
+    "conformance_status": "blocked",
+    "boundary_lock_status": "blocked",
+    "promotion": "blocked_until_exact_payload_matches_required_digest"
+  },
+  "allowed_next_steps": [
+    "submit exact MRU-014B raw payload with encoding metadata",
+    "verify sha256 over exact payload bytes equals required digest",
+    "record MRU-014B cleared only after byte match",
+    "then draft MRU-015 with last_validated MRU-014B"
+  ],
+  "replay_question": "why_dependency_guard_exists",
+  "replay_answer": "This artifact records that MRU-015 cannot establish a baseline while MRU-014B remains pending.",
+  "timestamp": "2026-06-30T20:10:00Z"
+}
