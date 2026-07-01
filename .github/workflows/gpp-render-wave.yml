@@ -1,0 +1,55 @@
+name: GPP Render Wave
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: gpp-renderer
+    steps:
+      - name: Checkout render branch
+        uses: actions/checkout@v4
+        with:
+          ref: render/w031-reputation-rascals
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Render W031 cards
+        env:
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+          REPLICATE_MODEL: ${{ secrets.REPLICATE_MODEL }}
+        run: python scripts/render.py --prompt ../gpp-renderer/prompts/w031_reputation_rascals.json --out output/W031
+
+      - name: Build checksum sidecars
+        run: python scripts/checksum_manifest.py --wave W031 --output-dir output/W031 --manifest sidecars/W031_sidecar_manifest.json --prompt ../gpp-renderer/prompts/w031_reputation_rascals.json
+
+      - name: Prepare Google Drive credentials
+        env:
+          GDRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
+        run: printf '%s' "$GDRIVE_SERVICE_ACCOUNT_JSON" | base64 -d > credentials.json
+
+      - name: Upload to Google Drive
+        env:
+          GDRIVE_ROOT_FOLDER_ID: ${{ secrets.GDRIVE_ROOT_FOLDER_ID }}
+          GDRIVE_CREDENTIALS_PATH: credentials.json
+        run: python scripts/upload_gdrive.py --wave W031 --folder-name W031_Reputation_Rascals --local-dir output/W031 --sidecars sidecars
+
+      - name: Commit outputs to render branch
+        run: |
+          git config user.name "gpp-render-bot"
+          git config user.email "actions@github.com"
+          git add gpp-renderer/output gpp-renderer/sidecars || true
+          git commit -m "Render W031 assets" || echo "No changes to commit"
+          git push origin HEAD:render/w031-reputation-rascals
