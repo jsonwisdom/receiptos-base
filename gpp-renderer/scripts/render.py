@@ -44,14 +44,11 @@ def normalize_outputs(output: Any) -> list[str]:
 
 
 def render_card(model: str, prompt: str, negative_prompt: str, defaults: dict[str, Any]) -> list[str]:
-    input_payload: dict[str, Any] = {
-        "prompt": prompt,
-    }
+    input_payload: dict[str, Any] = {"prompt": prompt}
 
     if negative_prompt:
         input_payload["negative_prompt"] = negative_prompt
 
-    # Replicate models differ in accepted parameters. These are common to many image models.
     for key in ["width", "height", "num_outputs", "guidance_scale", "num_inference_steps", "seed"]:
         value = defaults.get(key)
         if value is not None:
@@ -61,17 +58,22 @@ def render_card(model: str, prompt: str, negative_prompt: str, defaults: dict[st
     return normalize_outputs(output)
 
 
+def resolve_model(cli_model: str | None) -> str:
+    return cli_model or os.getenv("REPLICATE_MODEL") or DEFAULT_MODEL
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--prompt", required=True, help="Path to wave prompt JSON")
     parser.add_argument("--out", required=True, help="Output directory for PNG files")
-    parser.add_argument("--model", default=os.getenv("REPLICATE_MODEL", DEFAULT_MODEL))
+    parser.add_argument("--model", default=None)
     parser.add_argument("--sleep", type=float, default=1.0, help="Seconds to pause between cards")
     args = parser.parse_args()
 
     if not os.getenv("REPLICATE_API_TOKEN"):
         raise RuntimeError("Missing REPLICATE_API_TOKEN environment variable")
 
+    model = resolve_model(args.model)
     prompt_path = Path(args.prompt)
     output_dir = Path(args.out)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -90,7 +92,7 @@ def main() -> int:
 
         print(f"Rendering {card_id} — {card['title']}")
         prompt = build_prompt(manifest, card)
-        urls = render_card(args.model, prompt, negative_prompt, defaults)
+        urls = render_card(model, prompt, negative_prompt, defaults)
         if not urls:
             raise RuntimeError(f"No output returned for {card_id}")
 
@@ -101,7 +103,7 @@ def main() -> int:
                 "card_id": card_id,
                 "title": card["title"],
                 "slug": slug,
-                "model": args.model,
+                "model": model,
                 "output_file": str(out_path),
                 "source_url_present": bool(urls[0]),
                 "rendered_at_unix": int(time.time()),
