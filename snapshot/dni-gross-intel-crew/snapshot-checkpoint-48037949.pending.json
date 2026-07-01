@@ -1,0 +1,26 @@
+{
+  "artifactId": "DNI-GROSS-INTEL-CREW-SNAPSHOT-CHECKPOINT-48037949-PENDING",
+  "status": "CHECKPOINT_ANCHORED_ROOT_PENDING",
+  "network": "Base Mainnet",
+  "collectionAddress": "0xe423ae19FfFcEe95919DDE96a31e828bC060E36F",
+  "snapshotBlock": 48037949,
+  "snapshotBlockHash": "0x345633bc5107ddb3a36623413355a7a038f48d6a2d4dfeeaf4ead3ab76b4e4ed",
+  "genesisUid": "0xe4735bff8c92672ce266364e67966cf35b29b7daeb2a693b7b14d24e338686f0",
+  "merkleRoot": "PENDING_REAL_ELIGIBLE_HOLDERS_EXPORT",
+  "eligibleHolders": "PENDING_REAL_RPC_EXPORT",
+  "snapshotSpec": {
+    "version": "1.1",
+    "eligibilityRule": "Holder of at least one genesis collection token at snapshotBlock, reconstructed from Transfer events up to and including snapshotBlock.",
+    "addressNormalization": "lowercase hex",
+    "addressSorting": "lexicographical ascending",
+    "leafHash": "keccak256(address)",
+    "dedupe": true
+  },
+  "boundary": {
+    "authority": false,
+    "truthClaim": false,
+    "rootGenerated": false,
+    "claimContractReady": false,
+    "finalityFirst": true
+  }
+}
