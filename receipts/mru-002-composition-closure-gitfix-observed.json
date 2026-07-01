@@ -1,0 +1,38 @@
+{
+  "artifact_id": "MRU-002",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "minimal_composition_v1",
+  "evidence_state": "Observed",
+  "subject": {
+    "artifact_id": "MRU-001",
+    "sha256": "0f373e2780fc8ba1419cafde6a727e2947fef04e"
+  },
+  "prior_replay_ref": "0f373e2780fc8ba1419cafde6a727e2947fef04e",
+  "provenance": {
+    "edge": "witness_link",
+    "direction": "MRU-002 → MRU-001"
+  },
+  "timestamp": "2026-06-30T19:01:21Z",
+  "authority": false,
+  "truth_claim": false,
+  "execution_log": {
+    "command": "python3 tools/replay_why.py --target MRU-002",
+    "steps": [
+      "Step 1 (Resolve): MRU-001 loaded. Check.",
+      "Step 2 (Posture Gate): authority and truth_claim are false. Check.",
+      "Step 3 (Edge Gate): witness_link confirmed. No secondary relations found. Check.",
+      "Step 4 (Replay): MRU-001 returns Observed. Mutation: None. Check.",
+      "Step 5 (Self-Check): Anti-recursion verified. Check.",
+      "Step 6 (Justify): Observed state validated for chain."
+    ],
+    "status": "Composition Closure achieved. No bleed detected. Logged to AL."
+  },
+  "gitfix_notes": {
+    "reported_payload_sha256": "9c148286a11124b61d5642d9183492020216503e911248a07c34d3b6f9175498",
+    "computed_payload_sha256_from_literal_user_bytes": "9d67112529ce85823ff63670d0314cc2b7aa6466d09831232b7cdb7d0fa14982",
+    "hash_gate": "mismatch_observed_no_silent_promotion",
+    "prior_replay_ref_length": 40,
+    "prior_replay_ref_note": "Provided MRU-001 reference is 40 hex characters and should not be labeled sha256 unless independently recomputed as 64 hex."
+  }
+}
