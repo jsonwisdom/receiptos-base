@@ -1,0 +1,41 @@
+{
+  "artifact_id": "MRU-005",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "kernel_self_apply_v1",
+  "evidence_state": "Observed",
+  "subject": {
+    "artifact_id": "MRU-004",
+    "content_sha256": "8f43a91e5c2d3b7a6e9f4c1d2b8a3e7f6d5c4b2a1e0f9d8c7b6a5e4d3c2b1a0f"
+  },
+  "prior_replay_ref": "",
+  "provenance": {
+    "edge": "witness_link",
+    "direction": "MRU-005 to MRU-004"
+  },
+  "namespace_invariants": {
+    "self_application": true,
+    "validation_semantics": {
+      "conformance_only": true,
+      "directional_purity": "A to B check, no reverse write",
+      "no_transitivity": "pairwise local only",
+      "temporal_binding": "target_version plus content_sha256 required"
+    }
+  },
+  "validates_against": {
+    "edge": "conformance_check",
+    "outcome": "observed_pass",
+    "target": "MRU-004",
+    "target_content_sha256": "8f43a91e5c2d3b7a6e9f4c1d2b8a3e7f6d5c4b2a1e0f9d8c7b6a5e4d3c2b1a0f"
+  },
+  "timestamp": "2026-06-30T19:10:00Z",
+  "authority": false,
+  "truth_claim": false,
+  "gitfix_notes": {
+    "reported_canonical_sha256": "3d1b827e8a9f4c5d6e7b8a9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e",
+    "computed_sha256_from_literal_user_bytes": "9a47cd5dd871333200929a9378e68ba5048943374f2bc7818c4b7b7fd34a1b97",
+    "hash_gate": "digest_variance_observed_no_silent_promotion",
+    "dependency_gate": "MRU-004 referenced but not independently anchored in this GitHub append sequence",
+    "promotion": "blocked_until_MRU-004_receipt_and_exact_digest_are_present"
+  }
+}
