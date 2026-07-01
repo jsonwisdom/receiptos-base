@@ -5,12 +5,14 @@ on:
     paths:
       - 'frame/ext-104-authorized-signer-registry.js'
       - 'scripts/verify-authorized-signer-registry.js'
+      - 'scripts/verify-authorized-signer-empty-state.js'
       - 'docs/authorized-signer-registry.md'
       - '.github/workflows/authorized-signer-registry.yml'
   pull_request:
     paths:
       - 'frame/ext-104-authorized-signer-registry.js'
       - 'scripts/verify-authorized-signer-registry.js'
+      - 'scripts/verify-authorized-signer-empty-state.js'
       - 'docs/authorized-signer-registry.md'
       - '.github/workflows/authorized-signer-registry.yml'
 
@@ -29,6 +31,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - name: Verify empty-state signer rejection
+        run: node scripts/verify-authorized-signer-empty-state.js
 
       - name: Verify authorized signer registry boundary
         run: node scripts/verify-authorized-signer-registry.js
