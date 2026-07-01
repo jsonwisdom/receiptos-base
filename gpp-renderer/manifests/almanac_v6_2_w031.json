@@ -1,0 +1,17 @@
+{
+  "almanac": "v6.2",
+  "repo_lane": "render/w031-reputation-rascals",
+  "volume": "VI — Social Systems",
+  "completed_waves": ["W030", "W031"],
+  "active_wave": "W031",
+  "active_wave_title": "Reputation Rascals",
+  "release": "R31",
+  "catalog_count_after_release": 155,
+  "drive_target": "GPP_Cards/First_Printing/W031_Reputation_Rascals",
+  "render_provider": "Replicate",
+  "layer_mapping": {
+    "canon_layer": "card IDs and release identity remain fixed",
+    "editorial_layer": "prompt manifest and sidecar metadata are versioned",
+    "production_layer": "render scripts and generated assets are evolvable"
+  }
+}
