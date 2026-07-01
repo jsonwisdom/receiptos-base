@@ -1,0 +1,5 @@
+default_model: stability-ai/sdxl
+output_width: 2048
+output_height: 2048
+dpi: 300
+artifact_upload: true
