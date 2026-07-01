@@ -1,0 +1,53 @@
+{
+  "artifact_id": "RCPT-EXT-ZORA-GOBLIN-MISMATCH",
+  "case_id": "EXT-ZORA-GOBLIN-MISMATCH",
+  "type": "goblin_court_surface_mismatch_receipt",
+  "version": "1",
+  "framework": "Goblin Court Oversight",
+  "framework_state": "CONSTITUTIONAL_RATIFIED",
+  "posture": "OBSERVATIONAL_ONLY",
+  "status": "FORGE_HALTED",
+  "authority": false,
+  "mutation": false,
+  "truth_claim": false,
+  "canonical_effect": "none",
+  "canonical_head": "MRU-023",
+  "intake": {
+    "surface_event": "ZoraFactory emission / external mint path mismatch",
+    "observation_mode": "externally reproducible_read_only",
+    "target_contract": "0xa5963053b21da20c8bfb47c5fb2206cea6325cf4",
+    "chain": "Base"
+  },
+  "classification": "SURFACE_MISMATCH_DETECTED",
+  "drift_metrics": {
+    "target_surface_requested": "ERC-1155",
+    "actual_surface_observed": "ERC-20 ContentCoin proxy",
+    "surface_alignment": false,
+    "forge_status": "HALTED",
+    "calldata_generation_allowed": false,
+    "replayability": "externally undefined within Goblin Court"
+  },
+  "procedural_findings": {
+    "mintWithRewards_calldata_rejected": true,
+    "runtime_exception_avoided": true,
+    "mru_023_preserved": true,
+    "surface_coercion_attempted": false,
+    "execution_under_ambiguity_allowed": false
+  },
+  "surface_integrity_invariant": {
+    "caller_intent_not_assumed": true,
+    "mismatched_surface_not_coerced": true,
+    "execution_blocked_under_ambiguity": true,
+    "canonical_mutation_under_mismatch": false
+  },
+  "current_state": {
+    "forge_status": "LOCKED_OFFLINE",
+    "state": "READY_FOR_RECALIBRATION",
+    "valid_next_paths": [
+      "INJECT_CORRECT_ERC1155_SURFACE",
+      "ADOPT_ERC20_CONTENTCOIN_FLOW"
+    ]
+  },
+  "court_finding": "Within the Goblin Court framework, EXT-ZORA-GOBLIN-MISMATCH is a clean abort event: the forge halted before incompatible calldata could be generated or any canonical mutation could occur.",
+  "summary": "Surface mismatch detected between requested ERC-1155 forge path and observed ERC-20 ContentCoin surface. Forge halted; MRU-023 remains untouched."
+}
