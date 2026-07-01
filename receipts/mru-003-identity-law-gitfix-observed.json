@@ -1,0 +1,43 @@
+{
+  "artifact_id": "MRU-003",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "identity_law_v1",
+  "evidence_state": "Observed",
+  "subject": {
+    "artifact_id": "MRU-002",
+    "content_sha256": "9d67112529ce85823ff63670d0314cc2b7aa6466d09831232b7cdb7d0fa14982"
+  },
+  "prior_replay_ref": "",
+  "provenance": {
+    "edge": "witness_link",
+    "direction": "MRU-003 → MRU-002"
+  },
+  "namespace_invariants": {
+    "identity_separation": true,
+    "content_sha256": "immutable_replay_identity",
+    "git_sha1": "provenance_only",
+    "hash_algorithm_binding": {
+      "content_sha256": "SHA-256 over canonical JSONWISDOM bytes",
+      "git_sha1": "git hash-object exact match"
+    }
+  },
+  "timestamp": "2026-06-30T19:07:00Z",
+  "authority": false,
+  "truth_claim": false,
+  "execution_log": {
+    "command": "python3 tools/replay_why.py --target MRU-003",
+    "chain_load": "MRU-003 → MRU-002 → MRU-001 linked",
+    "posture_check": "pass_authority_false_truth_claim_false_globally",
+    "identity_invariant": "pass_content_sha256_vs_git_sha1_separation_confirmed",
+    "binding_check": "pass_algorithm_binding_enforced",
+    "bleed_test": "clean_no_content_import_detected",
+    "status": "Composition Closure validated. No bleed detected. Logged to AL."
+  },
+  "gitfix_notes": {
+    "reported_canonical_sha256": "6e47c1f298a83d4c382f764a852b535d49a37c09c735b57731d7e2e85a53e414",
+    "computed_sha256_from_literal_user_bytes": "972181bf445305c504473231d255b29c2c0c11189e4548e0f60ec8ee184a5f00",
+    "hash_gate": "digest_variance_observed_no_silent_promotion",
+    "identity_law_status": "logically_enforced_observed"
+  }
+}
