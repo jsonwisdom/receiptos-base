@@ -57,10 +57,16 @@ jobs:
             --manifest "sidecars/${{ github.event.inputs.wave || 'W031' }}_sidecar_manifest.json" \
             --prompt "../${{ github.event.inputs.prompt || 'gpp-renderer/prompts/w031_reputation_rascals.json' }}"
 
-      - name: Upload to Google Drive
+      - name: Prepare Google Drive credentials
         env:
           GDRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          printf '%s' "$GDRIVE_SERVICE_ACCOUNT_JSON" | base64 -d > credentials.json
+
+      - name: Upload to Google Drive
+        env:
           GDRIVE_ROOT_FOLDER_ID: ${{ secrets.GDRIVE_ROOT_FOLDER_ID }}
+          GDRIVE_CREDENTIALS_PATH: credentials.json
         run: |
           python scripts/upload_gdrive.py \
             --wave "${{ github.event.inputs.wave || 'W031' }}" \
