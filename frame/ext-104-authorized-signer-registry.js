@@ -1,21 +1,41 @@
 'use strict';
 
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 
 function sha256(input) {
   return crypto.createHash('sha256').update(String(input), 'utf8').digest('hex');
 }
 
-const REGISTRY_STATUS = 'PENDING_REAL_SIGNER_REGISTRY';
-const AUTHORIZED_SIGNERS = [];
+const SEED_PATH = path.join(__dirname, '..', 'receipts', 'ext-104-authorized-signer-registry.seed.json');
 const THRESHOLD = null;
 
+function loadSeedRegistry() {
+  const raw = fs.readFileSync(SEED_PATH, 'utf8');
+  const seed = JSON.parse(raw);
+  return {
+    registry_status: 'CANONICAL_FROM_EXT_104_SEED',
+    authorized_signers: Array.isArray(seed.authorized_signers) ? seed.authorized_signers : [],
+    signer_scheme: seed.signer_scheme || null,
+    seed_hash: sha256(raw),
+    source_of_truth: 'receipts/ext-104-authorized-signer-registry.seed.json'
+  };
+}
+
+function currentRegistry() {
+  return loadSeedRegistry();
+}
+
 function baseRegistry(endpoint, status) {
+  const registry = currentRegistry();
   return {
     endpoint,
     status,
     frame_mode: 'EYES_NO_HANDS',
-    registry_status: REGISTRY_STATUS,
+    registry_status: registry.registry_status,
+    registry_source: registry.source_of_truth,
+    registry_hash: registry.seed_hash,
     authority: false,
     truth_claim: false,
     mutation: null,
@@ -24,18 +44,21 @@ function baseRegistry(endpoint, status) {
 }
 
 function authorizedSigners() {
+  const registry = currentRegistry();
   return {
-    ...baseRegistry('authorized_signers', 'PENDING_EMPTY_REGISTRY'),
-    authorized_signers: AUTHORIZED_SIGNERS,
-    registry_hash: sha256(JSON.stringify(AUTHORIZED_SIGNERS)),
-    source_of_truth: 'canonical_registry_artifact_pending',
+    ...baseRegistry('authorized_signers', 'CANONICAL_REGISTRY_LOADED'),
+    authorized_signers: registry.authorized_signers,
+    signer_scheme: registry.signer_scheme,
+    source_of_truth: registry.source_of_truth,
     master_key: null,
     threshold: THRESHOLD
   };
 }
 
 function verifySignature({ signer_id = null, payload_hash = null, signature_bytes = null } = {}) {
-  const authorized = AUTHORIZED_SIGNERS.includes(signer_id);
+  const registry = currentRegistry();
+  const normalizedSigner = typeof signer_id === 'string' ? signer_id.toLowerCase() : signer_id;
+  const authorized = registry.authorized_signers.map((id) => String(id).toLowerCase()).includes(normalizedSigner);
   return {
     ...baseRegistry('verify_signature', authorized ? 'SIGNER_PRESENT_SIGNATURE_UNVERIFIED' : 'UNAUTHORIZED_SIGNER'),
     signer_id,
@@ -49,7 +72,9 @@ function verifySignature({ signer_id = null, payload_hash = null, signature_byte
 }
 
 function verifyMultisig({ signer_ids = [], payload_hash = null, signatures = [] } = {}) {
-  const authorizedSubmitted = signer_ids.filter((id) => AUTHORIZED_SIGNERS.includes(id));
+  const registry = currentRegistry();
+  const authorizedSet = new Set(registry.authorized_signers.map((id) => String(id).toLowerCase()));
+  const authorizedSubmitted = signer_ids.filter((id) => authorizedSet.has(String(id).toLowerCase()));
   const thresholdSatisfied = THRESHOLD !== null && authorizedSubmitted.length >= THRESHOLD;
   return {
     ...baseRegistry('verify_multisig', 'PENDING_THRESHOLD_REGISTRY'),
@@ -74,8 +99,10 @@ function assertSignerRegistryBoundary(response) {
 }
 
 module.exports = {
-  REGISTRY_STATUS,
-  AUTHORIZED_SIGNERS,
+  SEED_PATH,
+  THRESHOLD,
+  loadSeedRegistry,
+  currentRegistry,
   authorizedSigners,
   verifySignature,
   verifyMultisig,
