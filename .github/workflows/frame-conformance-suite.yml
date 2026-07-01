@@ -1,0 +1,44 @@
+name: Frame Conformance Suite
+
+on:
+  push:
+    paths:
+      - 'frame/**'
+      - 'openapi/**'
+      - 'scripts/verify-frame-capability-surface.js'
+      - 'scripts/verify-frame-openapi-contract.js'
+      - 'scripts/verify-frame-conformance-suite.js'
+      - '.github/workflows/frame-conformance-suite.yml'
+  pull_request:
+    paths:
+      - 'frame/**'
+      - 'openapi/**'
+      - 'scripts/verify-frame-capability-surface.js'
+      - 'scripts/verify-frame-openapi-contract.js'
+      - 'scripts/verify-frame-conformance-suite.js'
+      - '.github/workflows/frame-conformance-suite.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  frame-conformance-suite:
+    name: EXT-102 frame conformance suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify zero-mutation guard
+        run: node scripts/verify-frame-capability-surface.js
+
+      - name: Verify OpenAPI response contract
+        run: node scripts/verify-frame-openapi-contract.js
+
+      - name: Run adversarial conformance suite
+        run: node scripts/verify-frame-conformance-suite.js
