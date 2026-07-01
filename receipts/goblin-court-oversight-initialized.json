@@ -1,0 +1,39 @@
+{
+  "artifact_id": "GOBLIN-COURT-OVERSIGHT-001",
+  "type": "goblin_court_oversight_initialization",
+  "version": "1",
+  "status": "OPEN",
+  "mode": "observational_only",
+  "jurisdiction": [
+    "meme",
+    "humor",
+    "narrative_drift"
+  ],
+  "access_level": "root_denied",
+  "canonical_effect": "none",
+  "authority": false,
+  "mutation": false,
+  "truth_claim": false,
+  "governance_protocols": {
+    "testimony_accepted": "Goblins may submit variance data for record.",
+    "archival_policy": "Humor fragments are isolated from the main chain.",
+    "chaos_observation": "Deviations are noted, measured, and filed, not executed.",
+    "authority_separation": "No joke, meme, or goblin input possesses chain-modifying authority.",
+    "canonical_integrity": "The chain remains mutable-locked; memory of chaos does not overwrite truth.",
+    "root_denial": "Goblin-class entities are jailed within the observation sandbox."
+  },
+  "first_case": {
+    "ref": "Jays_Math_Class_v1",
+    "input": "LMFAO",
+    "classification": "NON_MUTATIVE_VARIANCE"
+  },
+  "invariants": {
+    "observe_variance": true,
+    "execute_variance": false,
+    "root_access": false,
+    "canonical_state_mutation": false,
+    "authority_escalation": false,
+    "truth_claim_generation": false
+  },
+  "summary": "Goblin Court Oversight initialized as an audit-only observation layer for meme, humor, and narrative drift variance."
+}
