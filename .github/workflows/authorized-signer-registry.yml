@@ -1,0 +1,34 @@
+name: Authorized Signer Registry Guard
+
+on:
+  push:
+    paths:
+      - 'frame/ext-104-authorized-signer-registry.js'
+      - 'scripts/verify-authorized-signer-registry.js'
+      - 'docs/authorized-signer-registry.md'
+      - '.github/workflows/authorized-signer-registry.yml'
+  pull_request:
+    paths:
+      - 'frame/ext-104-authorized-signer-registry.js'
+      - 'scripts/verify-authorized-signer-registry.js'
+      - 'docs/authorized-signer-registry.md'
+      - '.github/workflows/authorized-signer-registry.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  authorized-signer-registry:
+    name: EXT-104 authorized signer registry verifier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify authorized signer registry boundary
+        run: node scripts/verify-authorized-signer-registry.js
