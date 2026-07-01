@@ -1,0 +1,14 @@
+{
+  "wave": "W031",
+  "wave_title": "Reputation Rascals",
+  "release": "R31 — First Printing",
+  "continuity_spec": "v1.2",
+  "canonical_anchor": "GPP-W010-0001",
+  "status": "placeholder_until_render",
+  "assets": [],
+  "notes": [
+    "Generated checksums will replace or accompany this manifest after render.",
+    "Renderer artifacts belong to the Production Layer.",
+    "Prompt manifest belongs to the Editorial Layer."
+  ]
+}
