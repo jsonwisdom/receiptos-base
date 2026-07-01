@@ -1,0 +1,37 @@
+{
+  "wave": "W031",
+  "title": "Reputation Rascals",
+  "status": "SUPADRIVE_PENDING",
+  "bucket": "gpp-cards",
+  "storage_prefix": "first-printing/W031_Reputation_Rascals",
+  "artifact": "W031-renders.zip",
+  "artifact_sha256": "a916b085e92c6413bced1920b361136cb8039e7a0b8248f3e8356edebf4cd8e2",
+  "workflow_commit": "310a5dd1a318ac4a32da54f048f0743609c94d41",
+  "schema_uid": "0x84a9b8edff82cf52d264c5cfb37bc726f274973f79c499c5a9193fb9a906caf3",
+  "attestation_uid": "0x5f8ed8e12d06ef79a89b9349934994143accba7306840f03ae2b600363df493c",
+  "asset_count": 5,
+  "authority": false,
+  "truthClaim": false,
+  "files": [
+    {
+      "filename": "GPP-W031-0001-Signal_Sally.png",
+      "object_path": "first-printing/W031_Reputation_Rascals/images/GPP-W031-0001-Signal_Sally.png"
+    },
+    {
+      "filename": "GPP-W031-0002-Credibility_Carl.png",
+      "object_path": "first-printing/W031_Reputation_Rascals/images/GPP-W031-0002-Credibility_Carl.png"
+    },
+    {
+      "filename": "GPP-W031-0003-Status_Stanley.png",
+      "object_path": "first-printing/W031_Reputation_Rascals/images/GPP-W031-0003-Status_Stanley.png"
+    },
+    {
+      "filename": "GPP-W031-0004-Gossip_Greta.png",
+      "object_path": "first-printing/W031_Reputation_Rascals/images/GPP-W031-0004-Gossip_Greta.png"
+    },
+    {
+      "filename": "GPP-W031-0005-Trust_Tessa.png",
+      "object_path": "first-printing/W031_Reputation_Rascals/images/GPP-W031-0005-Trust_Tessa.png"
+    }
+  ]
+}
