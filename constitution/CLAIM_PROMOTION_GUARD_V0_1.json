@@ -1,0 +1,59 @@
+{
+  "artifact_id": "CLAIM_PROMOTION_GUARD_V0_1",
+  "version": "0.1",
+  "kind": "constitutional_guard",
+  "status": "restored_missing_stack_hash_input",
+  "authority": false,
+  "resolution_semantics": "absent",
+  "truth_claim": false,
+  "purpose": "Prevent observation, persistence, replay, or documentation from being silently promoted into truth, causation, guilt, or authority.",
+  "scope": "evidence_handling_and_claim_promotion_boundaries",
+  "invariants": [
+    {
+      "id": "CPG_001",
+      "rule": "No truth claim may be inferred from observation alone."
+    },
+    {
+      "id": "CPG_002",
+      "rule": "No causation claim may be inferred without explicit supporting evidence."
+    },
+    {
+      "id": "CPG_003",
+      "rule": "No guilt, intent, or legal conclusion may be inferred by replay status."
+    },
+    {
+      "id": "CPG_004",
+      "rule": "Persistence is not proof."
+    },
+    {
+      "id": "CPG_005",
+      "rule": "Replay verification is not truth verification."
+    },
+    {
+      "id": "CPG_006",
+      "rule": "No silent promotion from record, receipt, or artifact to claim."
+    }
+  ],
+  "allowed_states": [
+    "observed",
+    "recorded",
+    "receipt_created",
+    "replayable",
+    "disputed",
+    "unsupported",
+    "supported_with_scope"
+  ],
+  "forbidden_promotions": [
+    "observed_to_true",
+    "recorded_to_proven",
+    "receipt_created_to_authoritative",
+    "replayable_to_correct",
+    "persistent_to_verified",
+    "frequent_to_causal"
+  ],
+  "notes": [
+    "Restored because deployment/stack-hash-rule-v1.json lists this path as a required stack hash input.",
+    "This artifact does not alter renderer production assets.",
+    "This artifact preserves authority=false and resolution_semantics=absent."
+  ]
+}
