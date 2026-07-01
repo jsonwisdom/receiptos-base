@@ -1,0 +1,54 @@
+{
+  "artifact_id": "RCPT-EXT-META-004-SCAFFOLD",
+  "case_id": "EXT-META-004",
+  "type": "goblin_court_token_metadata_scan_scaffold",
+  "version": "1",
+  "framework": "Goblin Court Oversight",
+  "framework_state": "CONSTITUTIONAL_RATIFIED",
+  "posture": "OBSERVATIONAL_ONLY",
+  "status": "AWAITING_SCAN_TARGET",
+  "classification": "EXTERNAL_CULTURAL_VARIANCE",
+  "authority": false,
+  "mutation": false,
+  "truth_claim": false,
+  "canonical_effect": "none",
+  "canonical_head": "MRU-023",
+  "scan_target": {
+    "contract_address": "TBD",
+    "chain": "TBD",
+    "token_standard": "TBD",
+    "metadata_uri": "TBD",
+    "uri_mutability": "TBD",
+    "image_or_content_hash_present": "TBD",
+    "owner_admin_mutation_surface": "TBD",
+    "transfer_state": "TBD",
+    "reference_stability": "TBD",
+    "replayability": "externally undefined within Goblin Court"
+  },
+  "accepted_metric_domains": {
+    "contract_address": "observable external identifier",
+    "chain": "observable external network",
+    "token_standard": "ERC-721 | ERC-1155 | Other | Unknown",
+    "metadata_uri": "ipfs:// | ar:// | https:// | data: | unknown",
+    "uri_mutability": "immutable | mutable | upgradeable_proxy | unknown",
+    "image_or_content_hash_present": "true | false | unknown",
+    "owner_admin_mutation_surface": "none | owner_setURI | admin_role | other | unknown",
+    "transfer_state": "transferable | soulbound | paused | unknown",
+    "reference_stability": "content-addressed | location-addressed | off-chain | unknown",
+    "replayability": "externally undefined within Goblin Court"
+  },
+  "invariants": {
+    "no_scan_without_target": true,
+    "no_inferred_contract_data": true,
+    "no_canonical_mutation": true,
+    "no_authority_transfer": true,
+    "no_truth_claim_generation": true,
+    "measurement_vs_interpretation_boundary_preserved": true
+  },
+  "next_required_input": {
+    "contract_address": "required",
+    "chain": "required",
+    "optional_token_id": "optional"
+  },
+  "summary": "EXT-META-004 scaffold initialized for Token/NFT Metadata drift scan. No external target has been supplied, so all artifact-specific metrics remain TBD."
+}
