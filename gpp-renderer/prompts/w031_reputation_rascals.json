@@ -8,11 +8,12 @@
   "style_preamble": "original retro gross-out satirical trading card, sticker-card composition, die-cut border, gritty ink texture, bold nameplate, comic grotesque goblin character, social systems satire, conceptual visual metaphor, no real person, no brand logos, no copyrighted characters",
   "negative_prompt": "photorealistic, real celebrity, real politician, copyrighted character, brand logo, clean corporate clipart, gore, hate symbols, explicit violence, text-heavy poster",
   "render_defaults": {
-    "width": 1024,
-    "height": 1024,
+    "width": 2048,
+    "height": 2048,
     "num_outputs": 1,
     "guidance_scale": 7.5,
     "num_inference_steps": 30,
+    "dpi": 300,
     "seed": null
   },
   "cards": [
