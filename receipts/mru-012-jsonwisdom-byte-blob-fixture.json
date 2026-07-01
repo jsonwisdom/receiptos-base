@@ -1,0 +1,43 @@
+{
+  "artifact_id": "MRU-012",
+  "artifact_type": "jsonwisdom_byte_blob_fixture",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "jsonwisdom_byte_blob_fixture_v1",
+  "subject": {
+    "artifact_id": "MRU-004",
+    "fixture_path": "receipts/mru-004-validation-law-canonical.json"
+  },
+  "evidence_state": "Observed",
+  "history": "append_only",
+  "authority": false,
+  "truth_claim": false,
+  "bleed": "none",
+  "fixture": {
+    "path": "receipts/mru-004-validation-law-canonical.json",
+    "encoding": "utf-8",
+    "byte_length": 620,
+    "trailing_newline": true,
+    "spacing_rule": "single spaces after colon and comma as supplied",
+    "sha256": "bcdbd09fa423937dfbdc30186c3b3930e3966e678d6d7c390740cc837884da03",
+    "materialization_commit": "28399717d6d093860a2f1a283538401ff22409f7"
+  },
+  "comparison_targets": {
+    "mru_004_reported_digest": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+    "mru_004_literal_computed_digest": "6e2ba34cab2e2d329a06be3452e85d36ad53545253a28485cdda432eec98daae",
+    "jsonwisdom_fixture_digest": "bcdbd09fa423937dfbdc30186c3b3930e3966e678d6d7c390740cc837884da03"
+  },
+  "outcome": {
+    "fixture_status": "materialized",
+    "resolution_status": "ready_for_MRU-006_precedence_application",
+    "promotion": "blocked_until_replay_confirms_selected_digest_against_committed_bytes"
+  },
+  "replay_commands": {
+    "read_fixture": "git show HEAD:receipts/mru-004-validation-law-canonical.json",
+    "hash_fixture": "git show HEAD:receipts/mru-004-validation-law-canonical.json | sha256sum",
+    "expected_sha256": "bcdbd09fa423937dfbdc30186c3b3930e3966e678d6d7c390740cc837884da03"
+  },
+  "replay_question": "why_jsonwisdom_byte_blob_fixture_exists",
+  "replay_answer": "This artifact materializes the JSONWISDOM byte fixture for MRU-004 so AL can compute against committed bytes rather than descriptions of bytes.",
+  "timestamp": "2026-06-30T19:50:00Z"
+}
