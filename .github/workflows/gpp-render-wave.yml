@@ -40,6 +40,9 @@ jobs:
       PROMPT_PATH: ../gpp-renderer/prompts/w031_reputation_rascals.json
       OUTPUT_DIR: output/W031
       SIDECAR_MANIFEST: sidecars/W031_sidecar_manifest.json
+      SUPADRIVE_MANIFEST: sidecars/W031_supadrive_manifest.json
+      SUPABASE_BUCKET: gpp-cards
+      SUPABASE_OBJECT_PREFIX: first-printing/W031_Reputation_Rascals
     steps:
       - name: Checkout render branch
         uses: actions/checkout@v4
@@ -83,6 +86,137 @@ jobs:
             gpp-renderer/output/W031
             gpp-renderer/sidecars
 
+      - name: Validate Supabase production secrets
+        if: ${{ inputs.lane == 'production' && inputs.production_confirm == true }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          test -n "$SUPABASE_URL" || { echo "Missing SUPABASE_URL secret"; exit 1; }
+          test -n "$SUPABASE_SERVICE_ROLE_KEY" || { echo "Missing SUPABASE_SERVICE_ROLE_KEY secret"; exit 1; }
+          echo "Supabase production secrets present. Values masked by GitHub."
+          echo "authority=false"
+          echo "truthClaim=false"
+
+      - name: Upload W031 assets to Supabase Storage
+        if: ${{ inputs.lane == 'production' && inputs.production_confirm == true }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          python - <<'PY'
+          import datetime as dt
+          import hashlib
+          import json
+          import mimetypes
+          import os
+          import pathlib
+          import sys
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+
+          supabase_url = os.environ["SUPABASE_URL"].rstrip("/")
+          service_key = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
+          bucket = os.environ.get("SUPABASE_BUCKET", "gpp-cards")
+          prefix = os.environ.get("SUPABASE_OBJECT_PREFIX", "first-printing/W031_Reputation_Rascals").strip("/")
+          wave = os.environ.get("WAVE", "W031")
+          output_dir = pathlib.Path(os.environ.get("OUTPUT_DIR", "output/W031"))
+          sidecar_manifest = pathlib.Path(os.environ.get("SIDECAR_MANIFEST", "sidecars/W031_sidecar_manifest.json"))
+          supadrive_manifest = pathlib.Path(os.environ.get("SUPADRIVE_MANIFEST", "sidecars/W031_supadrive_manifest.json"))
+
+          if not output_dir.exists():
+              raise SystemExit(f"Missing output directory: {output_dir}")
+          if not sidecar_manifest.exists():
+              raise SystemExit(f"Missing checksum sidecar manifest: {sidecar_manifest}")
+
+          candidates = []
+          for path in sorted(output_dir.rglob("*")):
+              if path.is_file():
+                  candidates.append(path)
+          candidates.append(sidecar_manifest)
+
+          uploaded = []
+
+          def sha256_file(path: pathlib.Path) -> str:
+              h = hashlib.sha256()
+              with path.open("rb") as f:
+                  for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                      h.update(chunk)
+              return h.hexdigest()
+
+          def object_name_for(path: pathlib.Path) -> str:
+              if path.is_relative_to(output_dir):
+                  rel = path.relative_to(output_dir)
+              else:
+                  rel = pathlib.Path(path.name)
+              return "/".join([prefix, *rel.parts])
+
+          def upload_file(path: pathlib.Path, object_name: str) -> dict:
+              encoded_object = "/".join(urllib.parse.quote(part, safe="") for part in object_name.split("/"))
+              url = f"{supabase_url}/storage/v1/object/{bucket}/{encoded_object}"
+              content_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+              body = path.read_bytes()
+              req = urllib.request.Request(
+                  url,
+                  data=body,
+                  method="POST",
+                  headers={
+                      "Authorization": f"Bearer {service_key}",
+                      "apikey": service_key,
+                      "Content-Type": content_type,
+                      "x-upsert": "true",
+                  },
+              )
+              try:
+                  with urllib.request.urlopen(req, timeout=60) as resp:
+                      status = resp.status
+                      response_text = resp.read().decode("utf-8", errors="replace")
+              except urllib.error.HTTPError as exc:
+                  response_text = exc.read().decode("utf-8", errors="replace")
+                  raise SystemExit(f"Supabase upload failed for {object_name}: HTTP {exc.code} {response_text}") from exc
+              return {
+                  "source_path": str(path),
+                  "object_path": object_name,
+                  "bucket": bucket,
+                  "sha256": sha256_file(path),
+                  "size_bytes": path.stat().st_size,
+                  "content_type": content_type,
+                  "http_status": status,
+                  "response": response_text[:500],
+              }
+
+          for path in candidates:
+              object_name = object_name_for(path)
+              result = upload_file(path, object_name)
+              uploaded.append(result)
+              print(f"uploaded {path} -> {bucket}/{object_name} sha256={result['sha256']}")
+
+          manifest = {
+              "status": "SUPADRIVE_ARCHIVED_PENDING_ATTESTATION",
+              "wave": wave,
+              "bucket": bucket,
+              "prefix": prefix,
+              "created_at_utc": dt.datetime.now(dt.UTC).isoformat(),
+              "authority": False,
+              "truthClaim": False,
+              "uploaded_count": len(uploaded),
+              "objects": uploaded,
+          }
+
+          supadrive_manifest.parent.mkdir(parents=True, exist_ok=True)
+          supadrive_manifest.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+          manifest_object = f"{prefix}/{supadrive_manifest.name}"
+          manifest_upload = upload_file(supadrive_manifest, manifest_object)
+          print(f"uploaded manifest {supadrive_manifest} -> {bucket}/{manifest_object} sha256={manifest_upload['sha256']}")
+
+          print("SUPABASE_UPLOAD_COMPLETE=true")
+          print("SUPADRIVE_ARCHIVED_PENDING_ATTESTATION=true")
+          print("authority=false")
+          print("truthClaim=false")
+          PY
+
       - name: Upload production artifact bundle
         if: ${{ inputs.lane == 'production' && inputs.production_confirm == true }}
         uses: actions/upload-artifact@v4
@@ -92,20 +226,13 @@ jobs:
             gpp-renderer/output/W031
             gpp-renderer/sidecars
 
-      - name: Supadrive upload placeholder
-        if: ${{ inputs.lane == 'production' && inputs.production_confirm == true }}
-        run: |
-          echo "Supadrive production lane selected."
-          echo "Current authoritative package: GitHub artifact W031-renders plus committed sidecars."
-          echo "Bucket and secret integration intentionally blocked until Supabase ready signal."
-
-      - name: Commit outputs to render branch
+      - name: Commit outputs and Supadrive manifest to render branch
         if: ${{ inputs.lane == 'production' && inputs.production_confirm == true }}
         run: |
           git config user.name "gpp-render-bot"
           git config user.email "actions@github.com"
           git add output sidecars || true
-          git commit -m "Render W031 mock assets" || echo "No changes to commit"
+          git commit -m "Render W031 mock assets and Supadrive manifest" || echo "No changes to commit"
           git push origin HEAD:render/w031-reputation-rascals
 
       - name: Local-dev final boundary receipt
