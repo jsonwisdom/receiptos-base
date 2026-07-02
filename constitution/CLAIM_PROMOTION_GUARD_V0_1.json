@@ -1,0 +1,9 @@
+{
+  "version": "0.1",
+  "claim": "RECEIPTOS_BASE_PROMOTION_GUARD",
+  "status": "review-only",
+  "authority": false,
+  "mutation_allowed": false,
+  "timestamp": "2026-07-01",
+  "pr_context": "#47"
+}
