@@ -15,6 +15,25 @@ Purpose:
 - Optionally smoke-test deployed `/sign` and `/stream`.
 - Upload verifier and stream artifacts.
 
+## ROS-0006 Binding
+
+ReceiptOS Wire is bound to:
+
+```text
+ROS-0006: Authorized Identity Invariant
+```
+
+The workflow verifies identity bindings against the operator's Authorized Identity.
+
+The Authorized Identity MAY be:
+
+- an EOA verified by EIP-191 `personal_sign`
+- a contract account verified by ERC-1271 `isValidSignature`
+
+The workflow MUST NOT force EIP-191 posture onto contract accounts.
+
+Unknown identity types fail closed.
+
 ## Modes
 
 ### PR / push
@@ -48,6 +67,12 @@ For ERC-1271 smart-wallet verification, set this repository secret:
 BASE_RPC_URL
 ```
 
+Suggested public Base RPC for initial verification:
+
+```text
+https://mainnet.base.org
+```
+
 No private keys are needed.
 
 ## Boundary
@@ -62,4 +87,12 @@ It preserves:
   "authority": false,
   "truth_claim": false
 }
+```
+
+## Canonical State
+
+```text
+ROS-0006_ACTIVE
+RECEIPTOS_WIRE_WORKFLOW_SUCCESS
+DOCKET_57_BOUND
 ```
