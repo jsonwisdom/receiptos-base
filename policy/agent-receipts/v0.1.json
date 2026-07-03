@@ -1,0 +1,18 @@
+{
+  "policy_id": "default-agent-policy",
+  "policy_version": "0.1.0",
+  "description": "MVP structured policy v0.1 fixture for STALE verification. Contains only the denylist matcher rule.",
+  "authority": false,
+  "rules": [
+    {
+      "rule_id": "AR-002-001",
+      "matcher": "tool_not_in_denylist",
+      "description": "Tool calls must not use denylisted tools.",
+      "deny_tools": [
+        "delete_all",
+        "exfiltrate_secret"
+      ],
+      "severity": "error"
+    }
+  ]
+}
