@@ -171,15 +171,22 @@ async function getGmailAccessToken() {
 
 async function sendEmail(markdown: string) {
   const to = process.env.DAILY_BRIEFING_TO;
-  const from = process.env.DAILY_BRIEFING_FROM || "me";
-  const accessToken = await getGmailAccessToken();
 
-  if (!to || !accessToken) {
+  if (!to) {
     console.log(markdown);
-    console.log("\nDRY_RUN=true: Gmail env vars missing; rendered briefing only.");
+    console.log("\nDRY_RUN=true: DAILY_BRIEFING_TO missing; rendered briefing only.");
     return;
   }
 
+  const accessToken = await getGmailAccessToken();
+
+  if (!accessToken) {
+    console.log(markdown);
+    console.log("\nDRY_RUN=true: Gmail OAuth env vars missing; rendered briefing only.");
+    return;
+  }
+
+  const from = process.env.DAILY_BRIEFING_FROM || to;
   const subject = `JayOps Daily Briefing — ${new Date().toISOString().slice(0, 10)}`;
   const raw = buildMimeMessage({ to, from, subject, body: markdown });
 
@@ -198,6 +205,8 @@ async function sendEmail(markdown: string) {
   }
 
   const result = (await response.json()) as { id?: string; threadId?: string };
+  console.log("Renderer: PASS");
+  console.log("Email delivery: PASS");
   console.log(`EMAIL_DELIVERY_GREEN gmail_message_id=${result.id ?? "missing"} thread_id=${result.threadId ?? "missing"}`);
 }
 
