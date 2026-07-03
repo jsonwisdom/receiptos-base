@@ -70,7 +70,20 @@ function verifySignature(receipt) {
   );
 }
 
-function verifyReceipt(receipt) {
+function verifyPolicyHash(receipt, policy) {
+  const currentPolicyHash = computePolicyHash(policy);
+  if (!receipt.policy || receipt.policy.policy_hash !== currentPolicyHash) {
+    return {
+      terminal: "STALE",
+      reason: "policy_hash mismatch",
+      recorded_policy_hash: receipt.policy && receipt.policy.policy_hash,
+      current_policy_hash: currentPolicyHash,
+    };
+  }
+  return null;
+}
+
+function verifyReceipt(receipt, policy = readJson(POLICY_PATH)) {
   if (typeof receipt !== "object" || receipt === null) {
     return { terminal: "REJECTED", reason: "malformed receipt" };
   }
@@ -80,6 +93,12 @@ function verifyReceipt(receipt) {
   if (!verifySignature(receipt)) {
     return { terminal: "REJECTED", reason: "invalid signature" };
   }
+
+  const stale = verifyPolicyHash(receipt, policy);
+  if (stale) {
+    return stale;
+  }
+
   const replayed = computeContentHash(receipt);
   if (replayed !== receipt.content_hash || receipt.receipt_id !== receipt.content_hash) {
     return {
@@ -197,6 +216,16 @@ function main() {
   assertPolicy("policy denied receipt", policyDeniedReceipt, false);
   assertTerminal("policy denied receipt", verifyReceipt(policyDeniedReceipt), "VERIFIED");
 
+  const stalePolicy = readJson(POLICY_PATH);
+  stalePolicy.rules = stalePolicy.rules.concat({
+    rule_id: "AR-002-STALE-PROBE",
+    matcher: "tool_not_in_denylist",
+    description: "Synthetic policy drift probe.",
+    deny_tools: ["synthetic_drift"],
+    severity: "error",
+  });
+  assertTerminal("policy hash drift", verifyReceipt(receipt, stalePolicy), "STALE");
+
   const tampered = JSON.parse(JSON.stringify(receipt));
   tampered.outputs.output.message = "tampered output";
   assertTerminal("tampered receipt", verifyReceipt(tampered), "REJECTED");
@@ -226,6 +255,7 @@ module.exports = {
   computeContentHash,
   contentPreimage,
   makeSignedReceipt,
+  verifyPolicyHash,
   verifyReceipt,
   verifySignature,
 };
