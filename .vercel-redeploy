@@ -1,4 +1,4 @@
 trigger: vercel-production-redeploy
-reason: force Vercel to build current main after Git connector refresh
-expected_min_commit: 971aec97196f291d48ece03e066db4dff4769038
+reason: force Vercel to build after ethers hash utility fix
+expected_min_commit: cf73a6b67fe47126534e2e8d6d4f22ad32857c8f
 court_state: FRAME_MVP_AWAITING_DEPLOYMENT_RECEIPT
