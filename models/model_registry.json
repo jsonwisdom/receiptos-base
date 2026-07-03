@@ -1,0 +1,11 @@
+{
+  "version": "MODEL_REGISTRY_V1",
+  "policy": {
+    "verified_models_only": true,
+    "directory_is_signal": true,
+    "receiptos_replay_is_verification": true,
+    "authority": false,
+    "truth_claim": false
+  },
+  "providers": []
+}
