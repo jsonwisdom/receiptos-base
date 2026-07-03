@@ -1,45 +1,76 @@
 import { NextResponse } from "next/server";
-import { existsSync } from "fs";
-import { join } from "path";
+
+interface WireReceipt {
+  status?: string;
+  integrity_standard?: string;
+  verification_method?: string;
+  magic?: string;
+  authority?: boolean;
+  truth_claim?: boolean;
+  verdict?: string;
+  reason?: string;
+}
 
 interface HealthResponse {
-  status: "ok";
+  status: "ok" | "degraded";
   service: string;
-  court_state: string;
+  wire: "reachable" | "unreachable";
+  stream: "healthy" | "unhealthy";
+  verification_gate: "passed" | "pending";
+  integrity_standard: "ROS-0006" | "UNKNOWN";
+  verification_method?: string;
   authority: false;
   truth_claim: false;
-  signature_files_checked: boolean;
-  signature_files_exist: boolean;
+  wire_reason?: string;
   timestamp: string;
 }
 
-export async function GET(): Promise<NextResponse<HealthResponse>> {
-  const projectRoot = process.cwd();
-  const identityBindingPath = join(
-    projectRoot,
-    "provenance",
-    "identity-binding",
-    "jaywisdom-identity-binding.txt",
-  );
-  const signaturePath = join(
-    projectRoot,
-    "provenance",
-    "identity-binding",
-    "jaywisdom-identity-binding.sig",
-  );
+const BASE_URL = process.env.NEXT_PUBLIC_URL || "https://receiptos-base.vercel.app";
+const REQUIRED_MAGIC = "0x1626ba7e";
 
-  const signatureFilesExist =
-    existsSync(identityBindingPath) && existsSync(signaturePath);
+function gatePassed(receipt: WireReceipt | null): boolean {
+  return Boolean(
+    receipt &&
+      receipt.status === "SIGNATURE_VERIFIED" &&
+      receipt.integrity_standard === "ROS-0006" &&
+      receipt.verification_method === "erc1271" &&
+      String(receipt.magic || "").toLowerCase() === REQUIRED_MAGIC &&
+      receipt.authority === false &&
+      receipt.truth_claim === false &&
+      receipt.verdict === "WITNESS_ONLY",
+  );
+}
+
+async function fetchWireReceipt(): Promise<WireReceipt | null> {
+  try {
+    const response = await fetch(`${BASE_URL}/stream`, {
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    });
+    if (!response.ok) return null;
+    return (await response.json()) as WireReceipt;
+  } catch {
+    return null;
+  }
+}
+
+export async function GET(): Promise<NextResponse<HealthResponse>> {
+  const receipt = await fetchWireReceipt();
+  const passed = gatePassed(receipt);
 
   return NextResponse.json(
     {
-      status: "ok",
+      status: receipt ? "ok" : "degraded",
       service: "receiptos-frame",
-      court_state: "FRAME_MVP_AWAITING_DEPLOYMENT_RECEIPT",
+      wire: receipt ? "reachable" : "unreachable",
+      stream: receipt ? "healthy" : "unhealthy",
+      verification_gate: passed ? "passed" : "pending",
+      integrity_standard:
+        receipt?.integrity_standard === "ROS-0006" ? "ROS-0006" : "UNKNOWN",
+      verification_method: receipt?.verification_method,
       authority: false,
       truth_claim: false,
-      signature_files_checked: true,
-      signature_files_exist: signatureFilesExist,
+      wire_reason: receipt?.reason || "wire_unreachable_or_invalid",
       timestamp: new Date().toISOString(),
     },
     {
