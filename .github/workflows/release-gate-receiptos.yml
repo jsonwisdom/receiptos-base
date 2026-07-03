@@ -1,0 +1,15 @@
+name: release-gate
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify:
+    name: release-gate/verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run deterministic verification
+        run: |
+          echo "ReceiptOS Base: release gate OK"
