@@ -1,0 +1,4 @@
+trigger: vercel-production-redeploy-after-viem-fix
+fix_commit: 391762e23f1fa84ae97f7764430fecb9585c3b0e
+reason: package.json now includes viem dependency required by src/lib/verifyReceipt.ts
+court_state: FRAME_MVP_AWAITING_DEPLOYMENT_RECEIPT
