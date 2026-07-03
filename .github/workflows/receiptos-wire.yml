@@ -34,10 +34,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Build Next app
         run: npm run build
@@ -61,7 +61,7 @@ jobs:
           if [ "$status" = "SIGNATURE_VERIFIED" ]; then
             exit 0
           fi
-          if [ "$REQUIRE_LIVE_SIGNATURE" = "true" ]; then
+          if [ "$REQUIRE_LIVE_SIGNATURE" = "true" ] || [ "$REQUIRE_LIVE_SIGNATURE" = "True" ]; then
             exit "$code"
           fi
           echo "Verifier is fail-closed but live ERC-1271 may be pending; continuing because require_live_signature=false."
