@@ -1,0 +1,1 @@
+ReceiptOS OG placeholder marker. Replace with public/og/court-room.png binary asset when available.
