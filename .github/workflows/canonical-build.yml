@@ -1,0 +1,36 @@
+name: Canonical Next Build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: npm install and next build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout canonical repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Show provenance
+        run: |
+          echo "repo=${GITHUB_REPOSITORY}"
+          echo "ref=${GITHUB_REF}"
+          echo "sha=${GITHUB_SHA}"
+          node --version
+          npm --version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
