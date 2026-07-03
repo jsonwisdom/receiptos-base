@@ -1,7 +1,13 @@
+import { createHash } from "node:crypto";
 import tls from "node:tls";
+import { createWalletClient, encodeAbiParameters, http, parseAbi } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { base } from "viem/chains";
 
 const SMTP_HOST = "smtp.gmail.com";
 const SMTP_PORT = 465;
+const CANONICALIZER_VERSION = "CANONICAL_SERIALIZATION_RULES_V1";
+const GENESIS_PREV_WITNESS_HASH = `sha256:${"0".repeat(64)}`;
 
 type WorkflowWitness = {
   repo: string;
@@ -28,19 +34,36 @@ type DeploymentWitness = {
 };
 
 type DailyBriefingWitness = {
-  generated_at: string;
-  replay_hash?: string | null;
-  github_workflows: WorkflowWitness[];
-  deployments: DeploymentWitness[];
+  canonicalizer_version: string;
   calendar: CalendarWitness[];
+  deployments: DeploymentWitness[];
+  generated_at: string;
+  github_workflows: WorkflowWitness[];
   invariants: {
-    witness_only: true;
-    fail_closed: true;
-    replayable: true;
-    no_summaries_no_scores: true;
     authority: false;
+    fail_closed: true;
+    no_summaries_no_scores: true;
+    replayable: true;
     truth_claim: false;
+    witness_only: true;
   };
+  prev_witness_hash: string;
+  replay_hash: string | null;
+  repo_commit: string;
+  witness_hash: string | null;
+  workflow_run_id: string;
+};
+
+type EasPayload = {
+  witness_hash: string;
+  prev_witness_hash: string;
+  replay_hash: string;
+  repo_commit: string;
+  workflow_run_id: string;
+  canonicalizer_version: string;
+  generated_at: string;
+  authority: false;
+  truth_claim: false;
 };
 
 function readJsonEnv<T>(name: string, fallback: T): T {
@@ -52,6 +75,44 @@ function readJsonEnv<T>(name: string, fallback: T): T {
   } catch (error) {
     throw new Error(`Invalid JSON in ${name}: ${(error as Error).message}`);
   }
+}
+
+function sha256Hex(bytes: Buffer | string): string {
+  return `sha256:${createHash("sha256").update(bytes).digest("hex")}`;
+}
+
+function normalizeCanonicalValue(value: unknown): unknown {
+  if (value === null || value === undefined) return value;
+  if (typeof value === "string") return value.normalize("NFC").trim();
+  if (typeof value === "number") {
+    if (!Number.isInteger(value)) throw new Error("CANONICALIZATION_FAILURE floats_not_allowed");
+    return value;
+  }
+  if (typeof value === "boolean") return value;
+  if (Array.isArray(value)) return value.map(normalizeCanonicalValue);
+  if (typeof value === "object") {
+    const input = value as Record<string, unknown>;
+    const output: Record<string, unknown> = {};
+    for (const key of Object.keys(input).sort()) {
+      const fieldValue = input[key];
+      if (fieldValue === undefined) continue;
+      output[key.normalize("NFC").trim()] = normalizeCanonicalValue(fieldValue);
+    }
+    return output;
+  }
+  throw new Error(`CANONICALIZATION_FAILURE unsupported_type=${typeof value}`);
+}
+
+function canonicalJson(value: unknown): string {
+  return JSON.stringify(normalizeCanonicalValue(value));
+}
+
+function sealWitness(witness: DailyBriefingWitness): DailyBriefingWitness {
+  const replayBasis: DailyBriefingWitness = { ...witness, replay_hash: null, witness_hash: null };
+  const replay_hash = sha256Hex(canonicalJson(replayBasis));
+  const witnessBasis: DailyBriefingWitness = { ...witness, replay_hash, witness_hash: null };
+  const witness_hash = sha256Hex(canonicalJson(witnessBasis));
+  return { ...witness, replay_hash, witness_hash };
 }
 
 function renderWorkflowRows(items: WorkflowWitness[]): string {
@@ -98,7 +159,12 @@ export function renderDailyBriefing(witness: DailyBriefingWitness): string {
   return `# JayOps Daily Briefing
 
 Generated: ${witness.generated_at}
+Canonicalizer: ${witness.canonicalizer_version}
+Repo commit: ${witness.repo_commit}
+Workflow run: ${witness.workflow_run_id}
+Previous witness hash: ${witness.prev_witness_hash}
 Replay hash: ${witness.replay_hash ?? "missing"}
+Witness hash: ${witness.witness_hash ?? "missing"}
 
 ## Invariants
 
@@ -233,25 +299,116 @@ async function sendEmail(markdown: string) {
   console.log("EMAIL_DELIVERY_GREEN provider=smtp.gmail.com message_id=not_returned_by_smtp");
 }
 
+function buildEasPayload(witness: DailyBriefingWitness): EasPayload {
+  if (!witness.witness_hash || !witness.replay_hash) {
+    throw new Error("EAS_ATTEST_ERROR missing_witness_or_replay_hash");
+  }
+
+  return {
+    witness_hash: witness.witness_hash,
+    prev_witness_hash: witness.prev_witness_hash,
+    replay_hash: witness.replay_hash,
+    repo_commit: witness.repo_commit,
+    workflow_run_id: witness.workflow_run_id,
+    canonicalizer_version: witness.canonicalizer_version,
+    generated_at: witness.generated_at,
+    authority: false,
+    truth_claim: false,
+  };
+}
+
+async function attestToEas(witness: DailyBriefingWitness) {
+  const schemaUid = process.env.EAS_SCHEMA_UID;
+  const privateKey = process.env.EAS_ATTESTER_PRIVATE_KEY;
+  const contractAddress = process.env.EAS_CONTRACT_ADDRESS;
+  const rpcUrl = process.env.EAS_RPC_URL || "https://mainnet.base.org";
+  const recipient = process.env.EAS_RECIPIENT || process.env.DAILY_BRIEFING_RECIPIENT_ADDRESS || "0x0000000000000000000000000000000000000000";
+
+  if (!schemaUid || !privateKey || !contractAddress) {
+    console.log("EAS_ATTEST_DRY_RUN=true: EAS_SCHEMA_UID, EAS_ATTESTER_PRIVATE_KEY, or EAS_CONTRACT_ADDRESS missing.");
+    return;
+  }
+
+  const account = privateKeyToAccount(privateKey as `0x${string}`);
+  const client = createWalletClient({ account, chain: base, transport: http(rpcUrl) });
+  const payload = buildEasPayload(witness);
+  const data = encodeAbiParameters(
+    [
+      { type: "string", name: "witness_hash" },
+      { type: "string", name: "prev_witness_hash" },
+      { type: "string", name: "replay_hash" },
+      { type: "string", name: "repo_commit" },
+      { type: "string", name: "workflow_run_id" },
+      { type: "string", name: "canonicalizer_version" },
+      { type: "string", name: "generated_at" },
+      { type: "bool", name: "authority" },
+      { type: "bool", name: "truth_claim" },
+    ],
+    [
+      payload.witness_hash,
+      payload.prev_witness_hash,
+      payload.replay_hash,
+      payload.repo_commit,
+      payload.workflow_run_id,
+      payload.canonicalizer_version,
+      payload.generated_at,
+      payload.authority,
+      payload.truth_claim,
+    ],
+  );
+
+  const txHash = await client.writeContract({
+    address: contractAddress as `0x${string}`,
+    abi: parseAbi([
+      "function attest((bytes32 schema,(address recipient,uint64 expirationTime,bool revocable,bytes32 refUID,bytes data,uint256 value) data) request) payable returns (bytes32)",
+    ]),
+    functionName: "attest",
+    args: [
+      {
+        schema: schemaUid as `0x${string}`,
+        data: {
+          recipient: recipient as `0x${string}`,
+          expirationTime: 0n,
+          revocable: false,
+          refUID: `0x${"0".repeat(64)}`,
+          data,
+          value: 0n,
+        },
+      },
+    ],
+    value: 0n,
+  });
+
+  console.log(`EAS_ATTEST_SUBMITTED tx_hash=${txHash}`);
+}
+
 async function main() {
-  const witness: DailyBriefingWitness = {
+  const witness = sealWitness({
+    canonicalizer_version: process.env.CANONICALIZER_VERSION || CANONICALIZER_VERSION,
     generated_at: new Date().toISOString(),
-    replay_hash: process.env.DAILY_BRIEFING_REPLAY_HASH || null,
+    prev_witness_hash: process.env.PREV_WITNESS_HASH || GENESIS_PREV_WITNESS_HASH,
+    replay_hash: null,
+    repo_commit: process.env.GITHUB_SHA || process.env.REPO_COMMIT || "missing",
+    workflow_run_id: process.env.GITHUB_RUN_ID || process.env.WORKFLOW_RUN_ID || "missing",
+    witness_hash: null,
     github_workflows: readJsonEnv<WorkflowWitness[]>("DAILY_BRIEFING_GITHUB_WORKFLOWS", []),
     deployments: readJsonEnv<DeploymentWitness[]>("DAILY_BRIEFING_DEPLOYMENTS", []),
     calendar: readJsonEnv<CalendarWitness[]>("DAILY_BRIEFING_CALENDAR", []),
     invariants: {
-      witness_only: true,
-      fail_closed: true,
-      replayable: true,
-      no_summaries_no_scores: true,
       authority: false,
+      fail_closed: true,
+      no_summaries_no_scores: true,
+      replayable: true,
       truth_claim: false,
+      witness_only: true,
     },
-  };
+  });
 
   const markdown = renderDailyBriefing(witness);
+  console.log(`WITNESS_HASH=${witness.witness_hash}`);
+  console.log(`REPLAY_HASH=${witness.replay_hash}`);
   await sendEmail(markdown);
+  await attestToEas(witness);
 }
 
 main().catch((error) => {
