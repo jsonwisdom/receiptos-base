@@ -1,0 +1,46 @@
+{
+  "receipt_version": "agent-receipt/v0.2",
+  "receipt_id": "sha256:117ba9471271c4cfb624e4841a02517246b055dacb31d7ac529b557f8cc7d53e",
+  "timestamp": "2026-07-02T00:00:00Z",
+  "agent_id": "example-agent",
+  "action_type": "llm_call",
+  "inputs": {
+    "tool_name": "llm",
+    "prompt": "generate nondeterministic text"
+  },
+  "outputs": {
+    "text": "uncaptured sample"
+  },
+  "captured_context": [],
+  "policy": {
+    "version": "0.2.0",
+    "policy_hash": "sha256:01a3c1000c070ce6150be81abc594e8cc7646bed9064d596799ee4e12adeceb8",
+    "policy_id": "default-agent-policy"
+  },
+  "policy_result": {
+    "pass": false,
+    "details": {
+      "rules": [
+        {
+          "rule_id": "AR-002-001",
+          "result": "pass",
+          "reason": null
+        },
+        {
+          "rule_id": "AR-002-002",
+          "result": "fail",
+          "reason": "Nondeterministic actions must include captured_context."
+        }
+      ]
+    }
+  },
+  "parent_hash": "sha256:3f37c016aef922b693bd3dbc6f18ae502fea6dbadad22cbd9bbad0a2f0ea7602",
+  "manifest_hash": "sha256:f31dae31307eec030f0e017d57889063be852d06987953a6edaa69240106579c",
+  "content_hash": "sha256:117ba9471271c4cfb624e4841a02517246b055dacb31d7ac529b557f8cc7d53e",
+  "authority": false,
+  "signature": {
+    "scheme": "ed25519",
+    "public_key": "302a300506032b6570032100a492c36db02aaec2774c82952c6b2acdc0f6a734c543a99cad412dce1ff1bb4e",
+    "value": "ZCLu3rn7ZzpZ62XOEaBEhDWy2aZBSkvtGH1oiJPxOvq7+4XeY+ixxsPLmJEFKxlnV8llnl6KwYFeQsJz4kY/AQ=="
+  }
+}
