@@ -1,0 +1,47 @@
+{
+  "ar": "AR-006",
+  "title": "Verifier Consumption Terminal-State Matrix",
+  "source_tag": "mvp-vertical-slice-complete",
+  "verification_order": [
+    "parse_authority",
+    "signature",
+    "policy_hash_freshness",
+    "content_hash_replay",
+    "render_terminal_state"
+  ],
+  "states": [
+    {
+      "state": "VERIFIED",
+      "meaning": "Signature, policy hash, and replay all match.",
+      "rendering": "valid receipt"
+    },
+    {
+      "state": "STALE",
+      "meaning": "Signature is valid, but current policy hash differs from recorded policy hash.",
+      "rendering": "governance halt"
+    },
+    {
+      "state": "REJECTED",
+      "meaning": "Malformed receipt, invalid signature, or authority boundary violation.",
+      "rendering": "hard reject"
+    },
+    {
+      "state": "MISMATCHED",
+      "meaning": "Signature valid and policy current, but replayed content_hash diverges.",
+      "rendering": "replay mismatch"
+    },
+    {
+      "state": "BOOTSTRAP",
+      "meaning": "Genesis or bootstrap bundle accepted under explicit bootstrap rules.",
+      "rendering": "bootstrap-only render"
+    }
+  ],
+  "non_claims": [
+    "semantic correctness",
+    "external dependency honesty",
+    "manifest completeness",
+    "policy quality",
+    "live re-execution"
+  ],
+  "authority": false
+}
