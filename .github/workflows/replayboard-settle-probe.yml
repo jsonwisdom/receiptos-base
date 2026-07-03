@@ -1,13 +1,22 @@
-name: ReplayBoard Settle Probe
+name: ReplayBoard Settle
 
 on:
   workflow_dispatch:
+    inputs:
+      manifest_path:
+        description: Manifest JSON path
+        required: false
+        default: /tmp/replayboard/manifest.json
+      ledger_path:
+        description: Receipt JSONL ledger path
+        required: false
+        default: /tmp/replayboard/settle.jsonl
 
 permissions:
   contents: read
 
 jobs:
-  probe:
+  settle:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,5 +25,39 @@ jobs:
           python-version: "3.12"
       - name: Verify settle runner loads
         run: python -m py_compile ReplayBoard/settle.py
-      - name: Show settle help
-        run: python ReplayBoard/settle.py --help
+      - name: Prepare example evidence and manifest
+        run: |
+          mkdir -p /tmp/replayboard /tmp/replayboard-evidence
+          printf 'ReplayBoard example evidence v1\n' > /tmp/replayboard/source.txt
+          python - <<'PY'
+          import json
+          import pathlib
+          manifest = {
+              "claim_id": "replayboard-example-001",
+              "settle_condition": {
+                  "url": pathlib.Path("/tmp/replayboard/source.txt").resolve().as_uri(),
+                  "status_code": None,
+                  "resolution": "OBSERVED",
+              },
+              "timeout_seconds": 20,
+          }
+          pathlib.Path("/tmp/replayboard/manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+          PY
+      - name: Run settlement
+        id: settle
+        run: |
+          python ReplayBoard/settle.py \
+            --manifest "${{ github.event.inputs.manifest_path }}" \
+            --ledger "${{ github.event.inputs.ledger_path }}" \
+            --raw-output /tmp/replayboard-evidence/evidence.bin
+      - name: Print receipt
+        run: |
+          cat "${{ github.event.inputs.ledger_path }}"
+      - name: Upload settlement artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: replayboard-settle-receipt
+          path: |
+            /tmp/replayboard/manifest.json
+            /tmp/replayboard/settle.jsonl
+            /tmp/replayboard-evidence/evidence.bin
