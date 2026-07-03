@@ -1,0 +1,28 @@
+{
+  "policy_id": "default-agent-policy",
+  "policy_version": "0.1.0",
+  "description": "MVP policy for ReceiptOS Base agent receipt demo.",
+  "authority": false,
+  "rules": [
+    {
+      "rule_id": "AR-001",
+      "description": "Tool call receipts must include tool name, input hash, and output hash.",
+      "severity": "error"
+    },
+    {
+      "rule_id": "AR-002",
+      "description": "Receipts must record policy ID and policy version.",
+      "severity": "error"
+    },
+    {
+      "rule_id": "AR-003",
+      "description": "Receipts must declare canonicalization and hash algorithm for replay.",
+      "severity": "error"
+    },
+    {
+      "rule_id": "AR-004",
+      "description": "Receipts must keep authority=false.",
+      "severity": "error"
+    }
+  ]
+}
