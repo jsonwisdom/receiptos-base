@@ -92,6 +92,14 @@ def atomic_append_jsonl(path: pathlib.Path, row: Dict[str, Any]) -> None:
         os.fsync(handle.fileno())
 
 
+def write_bytes(path: pathlib.Path, data: bytes) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("wb") as handle:
+        handle.write(data)
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
 def last_hash(rows: Iterable[Dict[str, Any]]) -> str:
     last = None
     for row in rows:
@@ -111,7 +119,7 @@ def prior_resolution(rows: Iterable[Dict[str, Any]], claim_id: str) -> Optional[
     return None
 
 
-def fetch_evidence(url: str, timeout_seconds: int, etag: Optional[str], last_modified: Optional[str]) -> Dict[str, Any]:
+def fetch_evidence(url: str, timeout_seconds: int, etag: Optional[str], last_modified: Optional[str], raw_output_path: pathlib.Path) -> Dict[str, Any]:
     headers = {"User-Agent": USER_AGENT, "Accept": "*/*"}
     if etag:
         headers["If-None-Match"] = etag
@@ -123,6 +131,7 @@ def fetch_evidence(url: str, timeout_seconds: int, etag: Optional[str], last_mod
     try:
         with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
             body = response.read()
+            write_bytes(raw_output_path, body)
             selected_headers = {
                 key: value
                 for key, value in response.headers.items()
@@ -136,11 +145,13 @@ def fetch_evidence(url: str, timeout_seconds: int, etag: Optional[str], last_mod
                 "headers": selected_headers,
                 "content_hash": sha256_bytes(body),
                 "body_size_bytes": len(body),
+                "raw_artifact_path": str(raw_output_path),
                 "hash_method": "sha256(raw_response_body_bytes)",
                 "error": None,
             }
     except urllib.error.HTTPError as exc:
         body = exc.read() if exc.fp else b""
+        write_bytes(raw_output_path, body)
         selected_headers = {
             key: value
             for key, value in exc.headers.items()
@@ -154,10 +165,12 @@ def fetch_evidence(url: str, timeout_seconds: int, etag: Optional[str], last_mod
             "headers": selected_headers,
             "content_hash": sha256_bytes(body) if body else None,
             "body_size_bytes": len(body),
+            "raw_artifact_path": str(raw_output_path),
             "hash_method": "sha256(raw_response_body_bytes)",
             "error": f"HTTP_ERROR:{exc.code}",
         }
-    except Exception as exc:  # failures are receipts
+    except Exception as exc:
+        write_bytes(raw_output_path, b"")
         return {
             "requested_url": url,
             "final_url": url,
@@ -166,6 +179,7 @@ def fetch_evidence(url: str, timeout_seconds: int, etag: Optional[str], last_mod
             "headers": {},
             "content_hash": None,
             "body_size_bytes": 0,
+            "raw_artifact_path": str(raw_output_path),
             "hash_method": "sha256(raw_response_body_bytes)",
             "error": f"FETCH_ERROR:{type(exc).__name__}:{exc}",
         }
@@ -191,7 +205,7 @@ def evaluate(manifest: Dict[str, Any], evidence: Dict[str, Any]) -> Tuple[str, O
     return "RESOLVED", resolution, "SETTLE_CONDITION_MATCHED"
 
 
-def make_receipt(manifest: Dict[str, Any], ledger: pathlib.Path) -> Dict[str, Any]:
+def make_receipt(manifest: Dict[str, Any], ledger: pathlib.Path, raw_output_path: pathlib.Path) -> Dict[str, Any]:
     claim_id = manifest.get("claim_id")
     condition = manifest.get("settle_condition")
     if not isinstance(claim_id, str) or not claim_id:
@@ -208,6 +222,7 @@ def make_receipt(manifest: Dict[str, Any], ledger: pathlib.Path) -> Dict[str, An
         int(manifest.get("timeout_seconds", 20)),
         condition.get("etag"),
         condition.get("last_modified"),
+        raw_output_path,
     )
     status, resolution, reason = evaluate(manifest, evidence)
 
@@ -248,10 +263,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="ReplayBoard settle receipt runner")
     parser.add_argument("--manifest", required=True, type=pathlib.Path)
     parser.add_argument("--ledger", required=True, type=pathlib.Path)
+    parser.add_argument("--raw-output", default="/tmp/replayboard-evidence/evidence.bin", type=pathlib.Path)
     parser.add_argument("--print", action="store_true")
     args = parser.parse_args()
 
-    receipt = make_receipt(load_json(args.manifest), args.ledger)
+    receipt = make_receipt(load_json(args.manifest), args.ledger, args.raw_output)
     atomic_append_jsonl(args.ledger, receipt)
 
     if args.print:
@@ -260,6 +276,13 @@ def main() -> int:
         print(f"REPLAYBOARD_SETTLE_STATUS={receipt['status']}")
         print(f"REPLAYBOARD_RECEIPT_HASH={receipt['receipt_hash']}")
         print(f"REPLAYBOARD_CLAIM_ID={receipt['claim_id']}")
+
+    github_output = os.environ.get("GITHUB_OUTPUT")
+    if github_output:
+        with open(github_output, "a", encoding="utf-8") as handle:
+            handle.write(f"settle_status={receipt['status']}\n")
+            handle.write(f"receipt_hash={receipt['receipt_hash']}\n")
+            handle.write(f"claim_id={receipt['claim_id']}\n")
 
     return 0 if receipt["status"] in {"RESOLVED", "ALREADY_RESOLVED", "UNRESOLVED"} else 2
 
