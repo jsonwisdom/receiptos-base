@@ -29,6 +29,8 @@ The Court Clerk records state. The Court Clerk does not create truth.
 | Authorized Identity Gate | #57 | Identity binds to Authorized Identity, not wallet mythology | `/stream`, `/api/frame`, `/api/health`, ROS-0006 | CANONICAL |
 | Receipt Verification API | #58 / Issue #60 | External clients need neutral replay verification | `/api/verify` | IMPLEMENTED_PENDING_DEPLOY |
 | MN Public Record Edge Audit | #63 | Every mesh edge gets a provenance jacket without becoming truth authority | Zora receipt coin + edge audit jacket | MN_EDITION_INDEXED |
+| Node8 MN Movements | MN-MOVE-008 | Node8 is remembered as a Minnesota movement receipt, not protocol authority | Zora Node8 coin | INDEXED |
+| Boss MN Movement Receipts | MN-BOSS | Movement receipts remembered under Court Clerk custody | Zora movement coins | INDEXED |
 
 ## Case: Docket #57 — Authorized Identity Gate
 
@@ -117,6 +119,42 @@ https://zora.co/coin/base:0x9d3fe0dac4a30501968a25a45946290e1889c232?referrer=0x
 }
 ```
 
+## Case: Node8 — MN Movements
+
+### Crux
+
+Node8 is indexed as a Minnesota movement receipt. It is remembered in the Court Clerk console as cultural provenance, not protocol authority.
+
+### Zora Node8 Receipt
+
+```text
+https://zora.co/coin/base:0xd9bb51c33ff48bc7f37f7725876829a57cbd2dc1?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
+```
+
+## Case: Boss MN Movement Receipts
+
+### Crux
+
+Boss movement receipts are indexed under MN Movements. These links are cultural receipts and memory anchors; they do not promote truth or protocol authority.
+
+### Zora Receipts
+
+```text
+https://zora.co/coin/base:0x5c5763744e72768ca5f5d2d85bd2edf454ce0895?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
+https://zora.co/coin/base:0xe9342c753168594940c39da9ce3a249fa3e3fa36?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
+```
+
+### Boundary
+
+```json
+{
+  "movement": "MN Movements",
+  "authority": false,
+  "truth_claim": false,
+  "verdict": "WITNESS_ONLY"
+}
+```
+
 ## Live Console Links
 
 ```text
@@ -125,6 +163,9 @@ Frame:  https://receiptos-base.vercel.app/api/frame
 Health: https://receiptos-base.vercel.app/api/health
 Verify: https://receiptos-base.vercel.app/api/verify
 Zora MN Receipt: https://zora.co/coin/base:0x9d3fe0dac4a30501968a25a45946290e1889c232?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
+Node8 MN Movements: https://zora.co/coin/base:0xd9bb51c33ff48bc7f37f7725876829a57cbd2dc1?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
+Boss MN Receipt A: https://zora.co/coin/base:0x5c5763744e72768ca5f5d2d85bd2edf454ce0895?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
+Boss MN Receipt B: https://zora.co/coin/base:0xe9342c753168594940c39da9ce3a249fa3e3fa36?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
 Docket #57: https://github.com/jsonwisdom/receiptos-base/issues/57
 Docket #58: https://github.com/jsonwisdom/receiptos-base/issues/60
 ```
@@ -146,6 +187,8 @@ Canonical state:
 - LIVE_STREAM_RECEIPT_VERIFIED
 - NO_FAKE_GREEN_ENFORCED
 - MN_EDITION_INDEXED
+- NODE8_MN_MOVEMENTS_INDEXED
+- BOSS_MN_MOVEMENT_RECEIPTS_INDEXED
 
 Rules:
 1. Wire owns verification.
@@ -157,19 +200,14 @@ Rules:
 7. Every docket must map to code, spec, endpoint, issue, and receipt evidence.
 8. Do not promote narrative into verification.
 9. Zora links are cultural receipts, not protocol authority.
+10. Always remember Node8 in MN Movements.
+11. Always remember Boss MN Movement receipts.
 
 Current active docket:
 Docket #63 — MN Public Record Edge Audit.
 
-Required next action:
-Pull latest main, build, deploy, and test:
-- POST /api/verify with receiptId=docket-57-ros-0006
-- hash mismatch fixture
-- unknown receipt fixture
-- GET /api/verify post_required fixture
-
 Target state:
-MN_EDGE_AUDIT_RECEIPT_INDEXED
+MN_MOVEMENT_RECEIPTS_INDEXED
 ```
 
 ## Clerk Commands
