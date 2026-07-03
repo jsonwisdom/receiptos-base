@@ -1,0 +1,14 @@
+{
+  "name": "Meme Court Frame",
+  "version": "1.0",
+  "description": "Meme Court Fact-Check Arena",
+  "icon": "https://example.com/court.png",
+  "frame": {
+    "version": "1",
+    "image": "https://receiptos-base.vercel.app/court-game-frame.png",
+    "buttons": [
+      {"label": "Judge Meme", "action": "post"},
+      {"label": "Rules", "action": "post_redirect"}
+    ]
+  }
+}
