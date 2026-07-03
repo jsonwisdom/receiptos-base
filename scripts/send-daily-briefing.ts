@@ -1,3 +1,8 @@
+import tls from "node:tls";
+
+const SMTP_HOST = "smtp.gmail.com";
+const SMTP_PORT = 465;
+
 type WorkflowWitness = {
   repo: string;
   workflow: string;
@@ -8,7 +13,8 @@ type WorkflowWitness = {
 };
 
 type CalendarWitness = {
-  title: string;
+  title?: string;
+  event?: string;
   start: string;
   end?: string | null;
   url?: string | null;
@@ -81,8 +87,9 @@ function renderCalendarRows(items: CalendarWitness[]): string {
     "| Title | Start | End | URL |",
     "|---|---|---|---|",
     ...items.map((item) => {
+      const title = item.title ?? item.event ?? "missing";
       const url = item.url ? `[open](${item.url})` : "missing";
-      return `| ${item.title} | ${item.start} | ${item.end ?? "missing"} | ${url} |`;
+      return `| ${title} | ${item.start} | ${item.end ?? "missing"} | ${url} |`;
     }),
   ].join("\n");
 }
@@ -117,15 +124,15 @@ No truth claims. No scores. No risk summaries. Witness objects only. authority=f
 `;
 }
 
-function base64UrlEncode(value: string): string {
-  return Buffer.from(value, "utf8").toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+function encodeHeader(value: string): string {
+  return value.replace(/[\r\n]/g, " ");
 }
 
 function buildMimeMessage({ to, from, subject, body }: { to: string; from: string; subject: string; body: string }): string {
   const lines = [
-    `From: ${from}`,
-    `To: ${to}`,
-    `Subject: ${subject}`,
+    `From: ${encodeHeader(from)}`,
+    `To: ${encodeHeader(to)}`,
+    `Subject: ${encodeHeader(subject)}`,
     "MIME-Version: 1.0",
     'Content-Type: text/plain; charset="UTF-8"',
     "Content-Transfer-Encoding: 8bit",
@@ -133,81 +140,97 @@ function buildMimeMessage({ to, from, subject, body }: { to: string; from: strin
     body,
   ];
 
-  return base64UrlEncode(lines.join("\r\n"));
+  return lines.join("\r\n");
 }
 
-async function getGmailAccessToken() {
-  const clientId = process.env.GMAIL_CLIENT_ID;
-  const clientSecret = process.env.GMAIL_CLIENT_SECRET;
-  const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
+function waitFor(socket: tls.TLSSocket, expectedCodes: string[]): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let buffer = "";
+    const timeout = setTimeout(() => {
+      cleanup();
+      reject(new Error(`SMTP_TIMEOUT expected=${expectedCodes.join(",")}`));
+    }, 15000);
 
-  if (!clientId || !clientSecret || !refreshToken) {
-    return null;
-  }
+    const cleanup = () => {
+      clearTimeout(timeout);
+      socket.off("data", onData);
+      socket.off("error", onError);
+    };
 
-  const response = await fetch("https://oauth2.googleapis.com/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      client_id: clientId,
-      client_secret: clientSecret,
-      refresh_token: refreshToken,
-      grant_type: "refresh_token",
-    }),
+    const onError = (error: Error) => {
+      cleanup();
+      reject(error);
+    };
+
+    const onData = (chunk: Buffer) => {
+      buffer += chunk.toString("utf8");
+      const lines = buffer.split(/\r?\n/).filter(Boolean);
+      const lastLine = lines[lines.length - 1] ?? "";
+      const code = lastLine.slice(0, 3);
+      const continuation = lastLine[3] === "-";
+
+      if (!continuation && expectedCodes.includes(code)) {
+        cleanup();
+        resolve(buffer);
+        return;
+      }
+
+      if (!continuation && /^\d{3}/.test(lastLine) && !expectedCodes.includes(code)) {
+        cleanup();
+        reject(new Error(`SMTP_ERROR expected=${expectedCodes.join(",")} response=${buffer.trim()}`));
+      }
+    };
+
+    socket.on("data", onData);
+    socket.on("error", onError);
   });
+}
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`EMAIL_DELIVERY_ERROR gmail_token ${response.status} ${response.statusText}: ${errorText}`);
+async function smtpCommand(socket: tls.TLSSocket, command: string, expectedCodes: string[]) {
+  socket.write(`${command}\r\n`);
+  return waitFor(socket, expectedCodes);
+}
+
+async function sendViaSmtp({ to, from, password, message }: { to: string; from: string; password: string; message: string }) {
+  const socket = tls.connect({ host: SMTP_HOST, port: SMTP_PORT, servername: SMTP_HOST });
+
+  try {
+    await waitFor(socket, ["220"]);
+    await smtpCommand(socket, "EHLO receiptos-base", ["250"]);
+    await smtpCommand(socket, "AUTH LOGIN", ["334"]);
+    await smtpCommand(socket, Buffer.from(from, "utf8").toString("base64"), ["334"]);
+    await smtpCommand(socket, Buffer.from(password, "utf8").toString("base64"), ["235"]);
+    await smtpCommand(socket, `MAIL FROM:<${from}>`, ["250"]);
+    await smtpCommand(socket, `RCPT TO:<${to}>`, ["250", "251"]);
+    await smtpCommand(socket, "DATA", ["354"]);
+    socket.write(`${message}\r\n.\r\n`);
+    await waitFor(socket, ["250"]);
+    await smtpCommand(socket, "QUIT", ["221"]);
+  } finally {
+    socket.end();
   }
-
-  const data = (await response.json()) as { access_token?: string };
-  if (!data.access_token) {
-    throw new Error("EMAIL_DELIVERY_ERROR gmail_token missing access_token");
-  }
-
-  return data.access_token;
 }
 
 async function sendEmail(markdown: string) {
-  const to = process.env.DAILY_BRIEFING_TO;
+  const to = process.env.DAILY_BRIEFING_TO || "jaywisdom44@gmail.com";
+  const from = process.env.DAILY_BRIEFING_FROM || process.env.SMTP_USER || to;
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = process.env.SMTP_PASS;
 
-  if (!to) {
+  if (!smtpUser || !smtpPass) {
     console.log(markdown);
-    console.log("\nDRY_RUN=true: DAILY_BRIEFING_TO missing; rendered briefing only.");
+    console.log("\nDRY_RUN=true: SMTP_USER or SMTP_PASS missing; rendered briefing only.");
     return;
   }
 
-  const accessToken = await getGmailAccessToken();
-
-  if (!accessToken) {
-    console.log(markdown);
-    console.log("\nDRY_RUN=true: Gmail OAuth env vars missing; rendered briefing only.");
-    return;
-  }
-
-  const from = process.env.DAILY_BRIEFING_FROM || to;
   const subject = `JayOps Daily Briefing — ${new Date().toISOString().slice(0, 10)}`;
-  const raw = buildMimeMessage({ to, from, subject, body: markdown });
+  const message = buildMimeMessage({ to, from, subject, body: markdown });
 
-  const response = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ raw }),
-  });
+  await sendViaSmtp({ to, from: smtpUser, password: smtpPass, message });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`EMAIL_DELIVERY_ERROR gmail_send ${response.status} ${response.statusText}: ${errorText}`);
-  }
-
-  const result = (await response.json()) as { id?: string; threadId?: string };
   console.log("Renderer: PASS");
   console.log("Email delivery: PASS");
-  console.log(`EMAIL_DELIVERY_GREEN gmail_message_id=${result.id ?? "missing"} thread_id=${result.threadId ?? "missing"}`);
+  console.log("EMAIL_DELIVERY_GREEN provider=smtp.gmail.com message_id=not_returned_by_smtp");
 }
 
 async function main() {
