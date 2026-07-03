@@ -1,0 +1,4 @@
+trigger: vercel-production-redeploy
+reason: force Vercel to build current main after Git connector refresh
+expected_min_commit: 971aec97196f291d48ece03e066db4dff4769038
+court_state: FRAME_MVP_AWAITING_DEPLOYMENT_RECEIPT
