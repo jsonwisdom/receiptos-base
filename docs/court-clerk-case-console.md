@@ -28,6 +28,7 @@ The Court Clerk records state. The Court Clerk does not create truth.
 |---|---:|---|---|---|
 | Authorized Identity Gate | #57 | Identity binds to Authorized Identity, not wallet mythology | `/stream`, `/api/frame`, `/api/health`, ROS-0006 | CANONICAL |
 | Receipt Verification API | #58 / Issue #60 | External clients need neutral replay verification | `/api/verify` | IMPLEMENTED_PENDING_DEPLOY |
+| MN Public Record Edge Audit | #63 | Every mesh edge gets a provenance jacket without becoming truth authority | Zora receipt coin + edge audit jacket | MN_EDITION_INDEXED |
 
 ## Case: Docket #57 — Authorized Identity Gate
 
@@ -93,6 +94,29 @@ POST /api/verify
 }
 ```
 
+## Case: Docket #63 — MN Public Record Edge Audit
+
+### Crux
+
+MN Edition turns mesh-edge provenance into a public-record style jacket. The Zora coin is an indexed cultural receipt, not a truth authority.
+
+### Zora Receipt Coin
+
+```text
+https://zora.co/coin/base:0x9d3fe0dac4a30501968a25a45946290e1889c232?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
+```
+
+### Boundary
+
+```json
+{
+  "record_type": "FICTIONAL_EDITORIAL_ARTWORK_NOT_OFFICIAL_RECORD",
+  "authority": false,
+  "truth_claim": false,
+  "verdict": "WITNESS_ONLY"
+}
+```
+
 ## Live Console Links
 
 ```text
@@ -100,6 +124,7 @@ Wire:   https://receiptos-base.vercel.app/stream
 Frame:  https://receiptos-base.vercel.app/api/frame
 Health: https://receiptos-base.vercel.app/api/health
 Verify: https://receiptos-base.vercel.app/api/verify
+Zora MN Receipt: https://zora.co/coin/base:0x9d3fe0dac4a30501968a25a45946290e1889c232?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
 Docket #57: https://github.com/jsonwisdom/receiptos-base/issues/57
 Docket #58: https://github.com/jsonwisdom/receiptos-base/issues/60
 ```
@@ -120,6 +145,7 @@ Canonical state:
 - HEALTH_GATE_PASSED
 - LIVE_STREAM_RECEIPT_VERIFIED
 - NO_FAKE_GREEN_ENFORCED
+- MN_EDITION_INDEXED
 
 Rules:
 1. Wire owns verification.
@@ -130,9 +156,10 @@ Rules:
 6. All outputs preserve authority=false and truth_claim=false.
 7. Every docket must map to code, spec, endpoint, issue, and receipt evidence.
 8. Do not promote narrative into verification.
+9. Zora links are cultural receipts, not protocol authority.
 
 Current active docket:
-Docket #58 — Receipt Verification API.
+Docket #63 — MN Public Record Edge Audit.
 
 Required next action:
 Pull latest main, build, deploy, and test:
@@ -142,7 +169,7 @@ Pull latest main, build, deploy, and test:
 - GET /api/verify post_required fixture
 
 Target state:
-DOCKET_58_REPLAY_API_VERIFIED
+MN_EDGE_AUDIT_RECEIPT_INDEXED
 ```
 
 ## Clerk Commands
