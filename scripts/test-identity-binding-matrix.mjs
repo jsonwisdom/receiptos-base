@@ -37,10 +37,12 @@ function sig(overrides = {}) {
     method: "personal_sign",
     signed_file: bindingRel,
     signature: `0x${"11".repeat(65)}`,
+    msg: bindingText,
     message_hash: `0x${sha256(bindingText)}`,
     created_at: "2026-07-03T07:50:00Z",
     authority: false,
     truth_claim: false,
+    test_signature: true,
     ...overrides,
   }, null, 2) + "\n";
 }
@@ -75,6 +77,7 @@ const cases = [
   ["wrong-signer", false, { sigOverrides: { signer: "0x0000000000000000000000000000000000000000" } }],
   ["unsupported-method", false, { sigOverrides: { method: "unsupported" } }],
   ["signed-bytes-mismatch", false, { sigOverrides: { signed_file: "wrong-file.txt" } }],
+  ["message-bytes-mismatch", false, { sigOverrides: { msg: `${bindingText}tampered\n` } }],
   ["valid", true, {}],
 ];
 
@@ -83,7 +86,10 @@ let failed = false;
 try {
   for (const [name, shouldPass, options] of cases) {
     const dir = writeCase(root, name, options);
-    const run = spawnSync(process.execPath, [verifier, dir], { encoding: "utf8" });
+    const run = spawnSync(process.execPath, [verifier, dir], {
+      encoding: "utf8",
+      env: { ...process.env, RECEIPTOS_ALLOW_TEST_SIGNATURE: "1" },
+    });
     const passed = run.status === 0;
 
     console.log(`CASE ${name}: expected=${shouldPass ? "PASS" : "FAIL"} actual=${passed ? "PASS" : "FAIL"}`);
