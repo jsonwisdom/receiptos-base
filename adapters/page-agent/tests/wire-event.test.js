@@ -7,6 +7,7 @@ const { emitPageAgentWireEvent, runVerifiedPageAction } = require("../index");
 const {
   DEFAULT_RECIPIENT,
   WIRE_EVENT_TYPE,
+  canonicalHashBytes32,
   createPageAgentWireEvent,
   toWireEvent,
   verifyWireEventSchema
@@ -56,7 +57,9 @@ test("WireEvent maps PageAgent receipt to EAS schema fields", async () => {
   assert.equal(event.recipient, DEFAULT_RECIPIENT);
   assert.equal(event.replay_required, true);
   assert.equal(event.authority, false);
+  assert.equal(event.hash_algorithm, "sha256");
   assert.equal(event.receipt_type, receipt.type);
+  assert.equal(event.payload_hash, canonicalHashBytes32(receipt.action_result));
   assertBytes32(event.payload_hash);
   assertBytes32(event.command_hash);
   assertBytes32(event.dom_before_hash);
@@ -79,6 +82,21 @@ test("WireEvent schema fails closed on authority drift", async () => {
   assert.deepEqual(verifyWireEventSchema(event), { ok: false, reason: "authority drift" });
 });
 
+test("WireEvent schema fails closed on hash algorithm drift", async () => {
+  const domBefore = loadFixture();
+  const receipt = await runVerifiedPageAction({
+    command,
+    domBefore,
+    execute: deterministicExecutor,
+    timestampMs
+  });
+
+  const event = toWireEvent({ receipt, command, domBefore });
+  event.hash_algorithm = "keccak256";
+
+  assert.deepEqual(verifyWireEventSchema(event), { ok: false, reason: "hash algorithm drift" });
+});
+
 test("WireEvent mapping rejects mismatched DOM before hash", async () => {
   const domBefore = loadFixture();
   const receipt = await runVerifiedPageAction({
@@ -93,11 +111,24 @@ test("WireEvent mapping rejects mismatched DOM before hash", async () => {
   }, /DOM before hash mismatch/);
 });
 
-test("createPageAgentWireEvent emits directly from payload and DOM", async () => {
+test("createPageAgentWireEvent emits directly from canonical payload and DOM", async () => {
   const domBefore = loadFixture();
   const { domAfter, action_result } = await deterministicExecutor({ command, dom: domBefore });
+  const reorderedPayload = {
+    status_transition: action_result.status_transition,
+    selected_element: action_result.selected_element,
+    action_type: action_result.action_type
+  };
+
   const event = createPageAgentWireEvent({
     payload: action_result,
+    domBefore,
+    domAfter,
+    command,
+    timestamp: timestampMs
+  });
+  const reorderedEvent = createPageAgentWireEvent({
+    payload: reorderedPayload,
     domBefore,
     domAfter,
     command,
@@ -108,6 +139,34 @@ test("createPageAgentWireEvent emits directly from payload and DOM", async () =>
   assert.equal(event.recipient, DEFAULT_RECIPIENT);
   assert.equal(event.replay_required, true);
   assert.equal(event.authority, false);
+  assert.equal(event.hash_algorithm, "sha256");
+  assert.equal(event.payload_hash, reorderedEvent.payload_hash);
+  assert.deepEqual(verifyWireEventSchema(event), { ok: true });
+});
+
+test("WireEvent optional extensions are preserved and validated", async () => {
+  const domBefore = loadFixture();
+  const receipt = await runVerifiedPageAction({
+    command,
+    domBefore,
+    execute: deterministicExecutor,
+    timestampMs
+  });
+
+  const event = toWireEvent({
+    receipt,
+    command,
+    domBefore,
+    extensions: {
+      eas_schema_uid: "0x645dbf9ec783f597d1b1747cc24063e8b566a2ff9f5eda3b6f5034fa0d92a20d",
+      replay_engine_version: "page-agent-replay-v0.1.0",
+      prev_receipt_hash: "0x" + "00".repeat(32)
+    }
+  });
+
+  assert.equal(event.eas_schema_uid, "0x645dbf9ec783f597d1b1747cc24063e8b566a2ff9f5eda3b6f5034fa0d92a20d");
+  assert.equal(event.replay_engine_version, "page-agent-replay-v0.1.0");
+  assert.equal(event.prev_receipt_hash, "0x" + "00".repeat(32));
   assert.deepEqual(verifyWireEventSchema(event), { ok: true });
 });
 
@@ -123,5 +182,6 @@ test("emitPageAgentWireEvent returns receipt plus schema-aligned event", async (
   assert.equal(output.receipt.authority, false);
   assert.equal(output.wire_event.authority, false);
   assert.equal(output.wire_event.replay_required, true);
+  assert.equal(output.wire_event.hash_algorithm, "sha256");
   assert.deepEqual(verifyWireEventSchema(output.wire_event), { ok: true });
 });
