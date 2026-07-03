@@ -1,14 +1,15 @@
 {
-  "name": "Meme Court Frame",
-  "version": "1.0",
-  "description": "Meme Court Fact-Check Arena",
-  "icon": "https://example.com/court.png",
-  "frame": {
-    "version": "1",
-    "image": "https://receiptos-base.vercel.app/court-game-frame.png",
-    "buttons": [
-      {"label": "Judge Meme", "action": "post"},
-      {"label": "Rules", "action": "post_redirect"}
-    ]
-  }
+  "name": "Court Game Receipt Verifier",
+  "version": "1.0.0",
+  "description": "Verify your ReceiptOS attestation. No receipt = no authority in Meme Court.",
+  "image": "https://receiptos-base.vercel.app/court-game-frame.png",
+  "buttons": [
+    {
+      "label": "Verify My Receipt",
+      "action": "post"
+    }
+  ],
+  "post_url": "https://receiptos-base.vercel.app/api/frame",
+  "default_uid": "0x7ed8784f88dc16d9720dfd0a6d45a21b02f8d5d128eaf529ffeab0002e9c0af6",
+  "expected_status": "PENDING_SIGNATURE"
 }
