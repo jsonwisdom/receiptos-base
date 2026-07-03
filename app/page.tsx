@@ -1,4 +1,4 @@
-const publicUrl = process.env.NEXT_PUBLIC_URL || "https://receiptos-base.onrender.com";
+const publicUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_URL || "https://receiptos-base-1.onrender.com";
 const ogImagePath = "/og/court-room.png";
 
 export async function generateMetadata() {
@@ -23,9 +23,16 @@ export async function generateMetadata() {
   };
 
   return {
+    metadataBase: new URL(publicUrl),
     title: "ReceiptOS Court Frame",
     description: "Witness-only receipt verification frame. authority=false, truth_claim=false.",
     openGraph: {
+      title: "ReceiptOS Court Frame",
+      description: "No receipt, no authority.",
+      images: [ogImagePath],
+    },
+    twitter: {
+      card: "summary_large_image",
       title: "ReceiptOS Court Frame",
       description: "No receipt, no authority.",
       images: [ogImagePath],
