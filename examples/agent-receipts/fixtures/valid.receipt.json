@@ -1,0 +1,56 @@
+{
+  "receipt_version": "agent-receipt/v0.2",
+  "receipt_id": "sha256:3f37c016aef922b693bd3dbc6f18ae502fea6dbadad22cbd9bbad0a2f0ea7602",
+  "timestamp": "2026-07-02T00:00:00Z",
+  "agent_id": "example-agent",
+  "action_type": "tool_call",
+  "inputs": {
+    "tool_name": "echo",
+    "input": {
+      "message": "hello receiptos agent receipts"
+    }
+  },
+  "outputs": {
+    "tool_name": "echo",
+    "output": {
+      "message": "hello receiptos agent receipts"
+    }
+  },
+  "captured_context": [
+    {
+      "type": "recorded_transformation",
+      "value": "echo returned the same message supplied in inputs"
+    }
+  ],
+  "policy": {
+    "version": "0.2.0",
+    "policy_hash": "sha256:01a3c1000c070ce6150be81abc594e8cc7646bed9064d596799ee4e12adeceb8",
+    "policy_id": "default-agent-policy"
+  },
+  "policy_result": {
+    "pass": true,
+    "details": {
+      "rules": [
+        {
+          "rule_id": "AR-002-001",
+          "result": "pass",
+          "reason": null
+        },
+        {
+          "rule_id": "AR-002-002",
+          "result": "pass",
+          "reason": null
+        }
+      ]
+    }
+  },
+  "parent_hash": null,
+  "manifest_hash": "sha256:f31dae31307eec030f0e017d57889063be852d06987953a6edaa69240106579c",
+  "content_hash": "sha256:3f37c016aef922b693bd3dbc6f18ae502fea6dbadad22cbd9bbad0a2f0ea7602",
+  "authority": false,
+  "signature": {
+    "scheme": "ed25519",
+    "public_key": "302a300506032b6570032100a492c36db02aaec2774c82952c6b2acdc0f6a734c543a99cad412dce1ff1bb4e",
+    "value": "Qc+wwF5yeU83n+F5GjVNW2aIqhKhkvxHyuAXViFxkdhxbxhQcuUnlIYFBafJVcLPlN/jjRe3yjytncpUXg8BBg=="
+  }
+}
