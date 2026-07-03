@@ -1,8 +1,11 @@
 steps:
 - name: node:20
   id: identity-binding-fail-closed-matrix
-  entrypoint: node
+  entrypoint: bash
   args:
-  - scripts/test-identity-binding-matrix.mjs
+  - -lc
+  - |
+    npm ci
+    node scripts/test-identity-binding-matrix.mjs
 options:
   logging: CLOUD_LOGGING_ONLY
