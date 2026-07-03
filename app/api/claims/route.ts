@@ -43,9 +43,15 @@ function isSafeWireRef(value: unknown): value is string {
   return typeof value === "string" && value.length > 0 && value.length <= 512;
 }
 
+function isPromotionString(value: string): boolean {
+  const normalized = value.trim().toUpperCase();
+  if (normalized === "UNPROMOTED") return false;
+  return /(^|[^A-Z])PROMOTED([^A-Z]|$)/.test(normalized);
+}
+
 function containsPromotion(value: unknown): boolean {
   if (value === true) return true;
-  if (typeof value === "string" && value.toUpperCase().includes("PROMOTED")) return true;
+  if (typeof value === "string") return isPromotionString(value);
   if (Array.isArray(value)) return value.some(containsPromotion);
   if (value && typeof value === "object") return Object.values(value as Record<string, unknown>).some(containsPromotion);
   return false;
