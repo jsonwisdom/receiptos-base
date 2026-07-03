@@ -1,9 +1,10 @@
 const publicUrl = process.env.NEXT_PUBLIC_URL || "https://receiptos-base.onrender.com";
+const ogImagePath = "/og/court-room.png";
 
 export async function generateMetadata() {
   const frame = {
     version: "vNext",
-    image: `${publicUrl}/og/court-room.png`,
+    image: ogImagePath,
     buttons: [
       {
         label: "Verify Receipt",
@@ -27,7 +28,7 @@ export async function generateMetadata() {
     openGraph: {
       title: "ReceiptOS Court Frame",
       description: "No receipt, no authority.",
-      images: [`${publicUrl}/og/court-room.png`],
+      images: [ogImagePath],
     },
     other: {
       "fc:frame": JSON.stringify(frame),
