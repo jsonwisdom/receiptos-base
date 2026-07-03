@@ -1,4 +1,4 @@
-const publicUrl = process.env.NEXT_PUBLIC_URL || "https://receiptos-frame.vercel.app";
+const publicUrl = process.env.NEXT_PUBLIC_URL || "https://receiptos-base.onrender.com";
 
 export async function generateMetadata() {
   const frame = {
