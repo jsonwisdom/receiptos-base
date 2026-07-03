@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos-base.vercel.app/schemas/claim-v1.json",
+  "title": "ReceiptOS Claim v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claim_hash",
+    "claim_status",
+    "truth_claim",
+    "verified_wire_reference"
+  ],
+  "properties": {
+    "claim_hash": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9:_\\-.]+$"
+    },
+    "claim_status": {
+      "const": "UNPROMOTED"
+    },
+    "truth_claim": {
+      "const": false
+    },
+    "verified_wire_reference": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    }
+  }
+}
