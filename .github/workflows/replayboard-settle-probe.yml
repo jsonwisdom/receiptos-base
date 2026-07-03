@@ -24,7 +24,9 @@ jobs:
         with:
           python-version: "3.12"
       - name: Verify settle runner loads
-        run: python -m py_compile ReplayBoard/settle.py
+        run: |
+          python -m py_compile ReplayBoard/settle.py
+          python -m py_compile ReplayBoard/verify_settle_ledger.py
       - name: Prepare example evidence and manifest
         run: |
           mkdir -p /tmp/replayboard /tmp/replayboard-evidence
@@ -50,6 +52,11 @@ jobs:
             --manifest "${{ github.event.inputs.manifest_path }}" \
             --ledger "${{ github.event.inputs.ledger_path }}" \
             --raw-output /tmp/replayboard-evidence/evidence.bin
+      - name: Deterministic replay gate
+        run: |
+          python ReplayBoard/verify_settle_ledger.py \
+            --ledger "${{ github.event.inputs.ledger_path }}" \
+            --raw-evidence /tmp/replayboard-evidence/evidence.bin
       - name: Print receipt
         run: |
           cat "${{ github.event.inputs.ledger_path }}"
