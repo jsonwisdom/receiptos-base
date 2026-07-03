@@ -13,20 +13,31 @@ const REQUIRED_SIG = "provenance/identity-binding/jaywisdom-identity-binding.sig
 const REQUIRED_SUMS = "SHA256SUMS";
 const ERC1271_MAGIC_VALUE = "0x1626ba7e";
 const ERC1271_ABI = ["function isValidSignature(bytes32 hash, bytes signature) view returns (bytes4)"];
+const INTEGRITY_STANDARD = "ROS-0006";
+const AUTHORIZED_IDENTITY_TYPE = "contract_account";
+const CHAIN_ID = 8453;
 
 type Receipt = {
   schema: "RE-01/receipt-stream/v1";
+  integrity_standard: "ROS-0006";
   status: string;
   verdict: "WITNESS_ONLY";
   authority: false;
   truth_claim: false;
   signer: string;
+  signer_address: string;
+  authorized_identity: string;
+  authorized_identity_type: "contract_account" | "eoa" | "unknown";
+  chain_id: number;
   reason: string;
-  verification_path?: string;
+  verification_method?: "erc1271" | "eip191";
+  verification_path?: "erc1271" | "eip191";
   binding_sha256?: string;
   signature_sha256?: string;
+  message_hash?: string;
   digest?: string;
   magic?: string;
+  expected_magic?: string;
 };
 
 function sha256(data: string | Buffer) {
@@ -47,12 +58,17 @@ function parseSums(content: string) {
 function base(status: string, reason: string, extra: Partial<Receipt> = {}): Receipt {
   return {
     schema: "RE-01/receipt-stream/v1",
+    integrity_standard: INTEGRITY_STANDARD,
     status,
     reason,
     verdict: "WITNESS_ONLY",
     authority: false,
     truth_claim: false,
     signer: EXPECTED_SIGNER,
+    signer_address: EXPECTED_SIGNER,
+    authorized_identity: EXPECTED_SIGNER,
+    authorized_identity_type: AUTHORIZED_IDENTITY_TYPE,
+    chain_id: CHAIN_ID,
     ...extra,
   };
 }
@@ -102,13 +118,20 @@ async function buildReceipt(): Promise<Receipt> {
   if (isLikelyEoaSignature(signature)) {
     const recovered = verifyMessage(bindingText, signature).toLowerCase();
     if (recovered === EXPECTED_SIGNER) {
+      const digest = hashMessage(bindingText);
       return base("SIGNATURE_VERIFIED", "eip191_recovered_expected_signer", {
+        authorized_identity_type: "eoa",
+        verification_method: "eip191",
         verification_path: "eip191",
         binding_sha256: bindingHash,
         signature_sha256: sigHash,
+        message_hash: digest,
+        digest,
       });
     }
     return base("PENDING_SIGNATURE", "eip191_recovery_wrong_signer", {
+      authorized_identity_type: "eoa",
+      verification_method: "eip191",
       verification_path: "eip191",
       binding_sha256: bindingHash,
       signature_sha256: sigHash,
@@ -118,9 +141,11 @@ async function buildReceipt(): Promise<Receipt> {
   const rpcUrl = process.env.BASE_RPC_URL || process.env.ETH_RPC_URL || process.env.RPC_URL;
   if (!rpcUrl) {
     return base("PENDING_SIGNATURE", "erc1271_rpc_missing", {
+      verification_method: "erc1271",
       verification_path: "erc1271",
       binding_sha256: bindingHash,
       signature_sha256: sigHash,
+      expected_magic: ERC1271_MAGIC_VALUE,
     });
   }
 
@@ -131,20 +156,26 @@ async function buildReceipt(): Promise<Receipt> {
 
   if (magic === ERC1271_MAGIC_VALUE) {
     return base("SIGNATURE_VERIFIED", "erc1271_magic_value_accepted", {
+      verification_method: "erc1271",
       verification_path: "erc1271",
       binding_sha256: bindingHash,
       signature_sha256: sigHash,
+      message_hash: digest,
       digest,
       magic,
+      expected_magic: ERC1271_MAGIC_VALUE,
     });
   }
 
   return base("PENDING_SIGNATURE", "erc1271_magic_value_rejected", {
+    verification_method: "erc1271",
     verification_path: "erc1271",
     binding_sha256: bindingHash,
     signature_sha256: sigHash,
+    message_hash: digest,
     digest,
     magic,
+    expected_magic: ERC1271_MAGIC_VALUE,
   });
 }
 
