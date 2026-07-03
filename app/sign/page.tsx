@@ -8,12 +8,16 @@ const EXPECTED_SIGNER = "0xA380552a27b0a5a2874Ea7AA52CAC09f542002E8";
 const MESSAGE = `subject: jaywisdom.base.eth
 ens: jaywisdom.eth
 wallet: 0xA380552a27b0a5a2874Ea7AA52CAC09f542002E8
-service: ReceiptOS Meme Court Frame MVP
-endpoint: https://receiptos-frame-mvp.vercel.app
+service: ReceiptOS Authorized Identity Gate
+endpoint: https://receiptos-base.vercel.app/stream
 issue: jsonwisdom/receiptos-base#57
-deployment_receipt: gcp-cloud-build:e0e45d99-ab21-49be-b675-bee556623283
-court_state: FRAME_MVP_DEPLOYMENT_RECEIPT_VERIFIED
-signature_gate: SIGNATURE_BUNDLE_PENDING
+integrity_standard: ROS-0006
+docket: DOCKET_57_BOUND
+authorized_identity: 0xA380552a27b0a5a2874Ea7AA52CAC09f542002E8
+authorized_identity_type: contract_account
+canonical_verification_path: erc1271
+required_magic_value: 0x1626ba7e
+wire_state: RECEIPTOS_WIRE_WORKFLOW_SUCCESS
 authority: false
 truth_claim: false
 `;
@@ -38,9 +42,14 @@ export default function SignPage() {
     return JSON.stringify(
       {
         schema: "RECEIPTOS_IDENTITY_BINDING_SIG_V1",
+        integrity_standard: "ROS-0006",
         address: account,
         signer: account,
+        authorized_identity: EXPECTED_SIGNER,
+        authorized_identity_type: "contract_account",
         method: "personal_sign",
+        canonical_verification_path: "erc1271",
+        required_magic_value: "0x1626ba7e",
         signed_file: "provenance/identity-binding/jaywisdom-identity-binding.txt",
         msg: MESSAGE,
         signature,
@@ -86,11 +95,13 @@ export default function SignPage() {
   return (
     <main style={{ fontFamily: "system-ui, sans-serif", padding: 20, maxWidth: 880, margin: "0 auto" }}>
       <h1>ReceiptOS Sign</h1>
-      <p>Connect <strong>jaywisdom.base.eth</strong>, sign the identity binding, then copy the public signature JSON.</p>
+      <p>Connect <strong>jaywisdom.base.eth</strong>, sign the ROS-0006 Authorized Identity payload, then copy the public signature JSON.</p>
 
       <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16, marginBottom: 16 }}>
-        <p><strong>Expected signer</strong></p>
+        <p><strong>Expected Authorized Identity</strong></p>
         <code style={{ overflowWrap: "anywhere" }}>{EXPECTED_SIGNER}</code>
+        <p><strong>Canonical path</strong></p>
+        <code>ERC-1271 / 0x1626ba7e</code>
       </section>
 
       <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16, marginBottom: 16 }}>
@@ -99,7 +110,7 @@ export default function SignPage() {
       </section>
 
       <button onClick={connectAndSign} style={{ fontSize: 18, padding: "14px 18px", borderRadius: 10, border: 0, cursor: "pointer" }}>
-        Connect Wallet + Sign Message
+        Connect Wallet + Sign ROS-0006 Message
       </button>
 
       {account ? (
@@ -120,7 +131,7 @@ export default function SignPage() {
         </section>
       ) : null}
 
-      <p style={{ marginTop: 24, color: "#666" }}>No private keys. No transaction. This only creates public EIP-191 signature evidence. authority=false, truth_claim=false.</p>
+      <p style={{ marginTop: 24, color: "#666" }}>No private keys. No transaction. This creates public signature evidence only. authority=false, truth_claim=false.</p>
     </main>
   );
 }
