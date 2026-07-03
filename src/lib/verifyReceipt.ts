@@ -1,4 +1,4 @@
-import { keccak256, toBytes } from "viem";
+import { keccak256, toUtf8Bytes } from "ethers";
 
 export type ReceiptPacket = {
   receipt_id: string;
@@ -38,7 +38,7 @@ export function computeReceiptId(receipt: Omit<ReceiptPacket, "receipt_id">) {
     authority: false,
   });
 
-  return keccak256(toBytes(canonical));
+  return keccak256(toUtf8Bytes(canonical));
 }
 
 export function verifyReceipt(receipt: ReceiptPacket): VerifyResult {
