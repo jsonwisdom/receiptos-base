@@ -117,33 +117,88 @@ No truth claims. No scores. No risk summaries. Witness objects only. authority=f
 `;
 }
 
-async function sendEmail(markdown: string) {
-  const endpoint = process.env.DAILY_BRIEFING_EMAIL_ENDPOINT;
-  const token = process.env.DAILY_BRIEFING_EMAIL_TOKEN;
-  const to = process.env.DAILY_BRIEFING_TO;
+function base64UrlEncode(value: string): string {
+  return Buffer.from(value, "utf8").toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
 
-  if (!endpoint || !token || !to) {
-    console.log(markdown);
-    console.log("\nDRY_RUN=true: email env vars missing; rendered briefing only.");
-    return;
+function buildMimeMessage({ to, from, subject, body }: { to: string; from: string; subject: string; body: string }): string {
+  const lines = [
+    `From: ${from}`,
+    `To: ${to}`,
+    `Subject: ${subject}`,
+    "MIME-Version: 1.0",
+    'Content-Type: text/plain; charset="UTF-8"',
+    "Content-Transfer-Encoding: 8bit",
+    "",
+    body,
+  ];
+
+  return base64UrlEncode(lines.join("\r\n"));
+}
+
+async function getGmailAccessToken() {
+  const clientId = process.env.GMAIL_CLIENT_ID;
+  const clientSecret = process.env.GMAIL_CLIENT_SECRET;
+  const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
+
+  if (!clientId || !clientSecret || !refreshToken) {
+    return null;
   }
 
-  const response = await fetch(endpoint, {
+  const response = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      to,
-      subject: `JayOps Daily Briefing — ${new Date().toISOString().slice(0, 10)}`,
-      markdown,
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      client_id: clientId,
+      client_secret: clientSecret,
+      refresh_token: refreshToken,
+      grant_type: "refresh_token",
     }),
   });
 
   if (!response.ok) {
-    throw new Error(`Email send failed: ${response.status} ${response.statusText}`);
+    const errorText = await response.text();
+    throw new Error(`EMAIL_DELIVERY_ERROR gmail_token ${response.status} ${response.statusText}: ${errorText}`);
   }
+
+  const data = (await response.json()) as { access_token?: string };
+  if (!data.access_token) {
+    throw new Error("EMAIL_DELIVERY_ERROR gmail_token missing access_token");
+  }
+
+  return data.access_token;
+}
+
+async function sendEmail(markdown: string) {
+  const to = process.env.DAILY_BRIEFING_TO;
+  const from = process.env.DAILY_BRIEFING_FROM || "me";
+  const accessToken = await getGmailAccessToken();
+
+  if (!to || !accessToken) {
+    console.log(markdown);
+    console.log("\nDRY_RUN=true: Gmail env vars missing; rendered briefing only.");
+    return;
+  }
+
+  const subject = `JayOps Daily Briefing — ${new Date().toISOString().slice(0, 10)}`;
+  const raw = buildMimeMessage({ to, from, subject, body: markdown });
+
+  const response = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ raw }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`EMAIL_DELIVERY_ERROR gmail_send ${response.status} ${response.statusText}: ${errorText}`);
+  }
+
+  const result = (await response.json()) as { id?: string; threadId?: string };
+  console.log(`EMAIL_DELIVERY_GREEN gmail_message_id=${result.id ?? "missing"} thread_id=${result.threadId ?? "missing"}`);
 }
 
 async function main() {
