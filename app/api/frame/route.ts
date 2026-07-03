@@ -8,14 +8,30 @@ interface FrameButton {
   target?: string;
 }
 
+interface WireReceipt {
+  status?: string;
+  integrity_standard?: string;
+  verification_method?: string;
+  magic?: string;
+  authority?: boolean;
+  truth_claim?: boolean;
+  verdict?: string;
+  reason?: string;
+  etag?: string;
+}
+
 interface FrameResponse {
   status: string;
+  verification_gate: "passed" | "pending";
+  integrity_standard: "ROS-0006" | "UNKNOWN";
+  verification_method?: string;
   verdict: "WITNESS_ONLY";
   authority: false;
   truth_claim: false;
   message: string;
   uid?: string;
   invalid_input?: boolean;
+  wire_reason?: string;
   image: string;
   buttons: FrameButton[];
   input?: { text: string };
@@ -24,20 +40,62 @@ interface FrameResponse {
 
 const KNOWN_EAS_UID =
   "0x7ed8784f88dc16d9720dfd0a6d45a21b02f8d5d128eaf529ffeab0002e9c0af6";
-const BASE_URL = process.env.NEXT_PUBLIC_URL || "http://localhost:3000";
-const WITNESS_MESSAGE =
-  "On-chain statement-hash witness exists. Wallet signature bundle still pending.";
+const BASE_URL = process.env.NEXT_PUBLIC_URL || "https://receiptos-base.vercel.app";
+const REQUIRED_MAGIC = "0x1626ba7e";
 
-function buildResponse(overrides: Partial<FrameResponse> = {}): FrameResponse {
+function wireVerified(receipt: WireReceipt | null): boolean {
+  return Boolean(
+    receipt &&
+      receipt.status === "SIGNATURE_VERIFIED" &&
+      receipt.integrity_standard === "ROS-0006" &&
+      receipt.verification_method === "erc1271" &&
+      String(receipt.magic || "").toLowerCase() === REQUIRED_MAGIC &&
+      receipt.authority === false &&
+      receipt.truth_claim === false &&
+      receipt.verdict === "WITNESS_ONLY",
+  );
+}
+
+async function fetchWireReceipt(): Promise<WireReceipt | null> {
+  try {
+    const response = await fetch(`${BASE_URL}/stream`, {
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    });
+    if (!response.ok) return null;
+    return (await response.json()) as WireReceipt;
+  } catch {
+    return null;
+  }
+}
+
+function buildResponse(
+  receipt: WireReceipt | null,
+  overrides: Partial<FrameResponse> = {},
+): FrameResponse {
+  const verified = wireVerified(receipt);
+
   return {
-    status: "PENDING_SIGNATURE",
+    status: verified ? "VERIFIED" : "PENDING",
+    verification_gate: verified ? "passed" : "pending",
+    integrity_standard:
+      receipt?.integrity_standard === "ROS-0006" ? "ROS-0006" : "UNKNOWN",
+    verification_method: receipt?.verification_method,
     verdict: "WITNESS_ONLY",
     authority: false,
     truth_claim: false,
-    message: WITNESS_MESSAGE,
+    message: verified
+      ? "VERIFIED: ROS-0006 Authorized Identity receipt accepted by Wire."
+      : "PENDING: Wire has not satisfied the ROS-0006 verification gate.",
+    wire_reason: receipt?.reason || "wire_unreachable_or_invalid",
     image: `${BASE_URL}/og/witness-only.svg`,
     buttons: [
-      { label: "Submit Witness", action: "post" },
+      { label: verified ? "VERIFIED" : "PENDING", action: "post" },
+      {
+        label: "View Wire",
+        action: "post_redirect",
+        target: `${BASE_URL}/stream`,
+      },
       {
         label: "View Docket #57",
         action: "post_redirect",
@@ -72,7 +130,8 @@ async function readInputText(request: NextRequest): Promise<string> {
 }
 
 export async function GET(): Promise<NextResponse<FrameResponse>> {
-  return NextResponse.json(buildResponse(), {
+  const receipt = await fetchWireReceipt();
+  return NextResponse.json(buildResponse(receipt), {
     headers: { "Cache-Control": "no-cache, no-store, must-revalidate" },
   });
 }
@@ -81,20 +140,30 @@ export async function POST(
   request: NextRequest,
 ): Promise<NextResponse<FrameResponse>> {
   try {
+    const receipt = await fetchWireReceipt();
+    const verified = wireVerified(receipt);
     const inputText = await readInputText(request);
     const inputMatches = inputText === KNOWN_EAS_UID;
     const invalidInput = inputText.length > 0 && !inputMatches;
 
     return NextResponse.json(
-      buildResponse({
-        message: inputMatches
-          ? "Witness recorded. Signature bundle verification pending."
-          : "Invalid witness input. Please provide the known EAS UID.",
+      buildResponse(receipt, {
+        status: verified && inputMatches ? "VERIFIED" : verified ? "VERIFIED" : "PENDING",
+        message: verified
+          ? inputMatches
+            ? "VERIFIED: Wire accepted ROS-0006 and witness UID matched."
+            : "VERIFIED: Wire accepted ROS-0006 Authorized Identity receipt."
+          : "PENDING: Wire has not satisfied the ROS-0006 verification gate.",
         uid: inputMatches ? inputText : undefined,
         invalid_input: invalidInput,
         buttons: [
-          { label: inputMatches ? "Recorded" : "Invalid", action: "post" },
-          { label: "Try Again", action: "post" },
+          { label: verified ? "VERIFIED" : "PENDING", action: "post" },
+          { label: inputMatches ? "UID MATCHED" : "Submit UID", action: "post" },
+          {
+            label: "View Wire",
+            action: "post_redirect",
+            target: `${BASE_URL}/stream`,
+          },
         ],
       }),
       {
@@ -104,8 +173,8 @@ export async function POST(
     );
   } catch {
     return NextResponse.json(
-      buildResponse({
-        message: "Error processing witness input.",
+      buildResponse(null, {
+        message: "PENDING: Frame failed closed while reading Wire.",
         invalid_input: true,
         buttons: [{ label: "Retry", action: "post" }],
       }),
