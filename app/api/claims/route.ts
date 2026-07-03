@@ -20,10 +20,10 @@ type ClaimResponse = {
   };
 };
 
-const replay = {
+const replay: ClaimResponse["replay"] = {
   authority: false,
   truth_claim: false,
-  verdict: "WITNESS_ONLY" as const,
+  verdict: "WITNESS_ONLY",
 };
 
 function violation(reason: string): ClaimResponse {
