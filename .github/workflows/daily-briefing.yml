@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DAILY_BRIEFING_REPLAY_HASH: ${{ inputs.replay_hash }}
-      DAILY_BRIEFING_TO: ${{ secrets.DAILY_BRIEFING_TO }}
-      DAILY_BRIEFING_FROM: ${{ secrets.DAILY_BRIEFING_FROM }}
+      DAILY_BRIEFING_TO: jaywisdom44@gmail.com
+      DAILY_BRIEFING_FROM: jaywisdom44@gmail.com
       GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
       GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
       GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
