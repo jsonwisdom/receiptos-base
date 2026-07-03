@@ -12,6 +12,9 @@ Docket: `jsonwisdom/receiptos-base#57`
 - `3ad6a0227d2ae5a6e29ac65fa15a3678afba8541` — root `SHA256SUMS`.
 - `b949ba3ef319ea6f2e9302d3a7f1da7fbce4ae2a` — verifier v2 docs.
 - `889c94e0defc672fd4924e8faf6fdb6b60fcbb4a` — verifier v2 status log.
+- `d4c7276cdc61af9f6726c379731099116511ae8f` — ROS-0006 Authorized Identity invariant.
+- `c2efcf64cf7d37a8731e34b5d1023254a679168f` — Docket #57 binding to ROS-0006.
+- `3e79dd803057e73387f1076e3d656dfef1f2db35` — ReceiptOS Wire workflow bound to ROS-0006.
 
 ## Verification logic
 
@@ -63,8 +66,9 @@ The verifier may report `SIGNATURE_VERIFIED`, but the verdict remains `WITNESS_O
 ## Current state
 
 ```text
-A380_SIGNATURE_CAPTURED
-EIP191_OR_ERC1271_VERIFICATION_PENDING
+RECEIPTOS_WIRE_WORKFLOW_SUCCESS
+ROS-0006_ACTIVE
+DOCKET_57_BOUND
 ```
 
-Next promotion waits for a live ERC-1271 magic-value pass with RPC configured.
+ROS-0006 makes the Authorized Identity the invariant and assigns the canonical verification path by identity type: EIP-191 for EOAs and ERC-1271 for contract accounts.
