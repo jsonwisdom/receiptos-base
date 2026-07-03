@@ -142,6 +142,8 @@ Boss movement receipts are indexed under MN Movements. These links are cultural 
 ```text
 https://zora.co/coin/base:0x5c5763744e72768ca5f5d2d85bd2edf454ce0895?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
 https://zora.co/coin/base:0xe9342c753168594940c39da9ce3a249fa3e3fa36?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
+https://zora.co/coin/base:0x370b5e1eec80a696a243f9be010fbb9cfa4b0c72?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
+https://zora.co/coin/base:0x812dc8649d7ced61278f5c052130f88cc9e374fe?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
 ```
 
 ### Boundary
@@ -166,6 +168,8 @@ Zora MN Receipt: https://zora.co/coin/base:0x9d3fe0dac4a30501968a25a45946290e188
 Node8 MN Movements: https://zora.co/coin/base:0xd9bb51c33ff48bc7f37f7725876829a57cbd2dc1?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
 Boss MN Receipt A: https://zora.co/coin/base:0x5c5763744e72768ca5f5d2d85bd2edf454ce0895?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
 Boss MN Receipt B: https://zora.co/coin/base:0xe9342c753168594940c39da9ce3a249fa3e3fa36?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
+MN Movement Receipt C: https://zora.co/coin/base:0x370b5e1eec80a696a243f9be010fbb9cfa4b0c72?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
+MN Movement Receipt D: https://zora.co/coin/base:0x812dc8649d7ced61278f5c052130f88cc9e374fe?referrer=0x829adfedbe565f9885a7ea6bc78912acaef055e2
 Docket #57: https://github.com/jsonwisdom/receiptos-base/issues/57
 Docket #58: https://github.com/jsonwisdom/receiptos-base/issues/60
 ```
