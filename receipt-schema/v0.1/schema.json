@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos-base.example/receipt-schema/v0.1/schema.json",
+  "title": "ReceiptOSReceiptV0_1",
+  "type": "object",
+  "required": [
+    "schema",
+    "version",
+    "receipt_id",
+    "prev_hash",
+    "event_hash",
+    "stages",
+    "algorithm",
+    "authority"
+  ],
+  "properties": {
+    "schema": { "type": "string", "const": "ReceiptOSReceiptV0_1" },
+    "version": { "type": "string", "const": "0.1" },
+    "receipt_id": { "type": "string" },
+    "prev_hash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "event_hash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "algorithm": { "type": "string", "const": "sha256" },
+    "authority": { "type": "boolean", "const": false },
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["stage_id", "before", "after"],
+        "properties": {
+          "stage_id": { "type": "string" },
+          "before": {
+            "type": "object",
+            "required": ["assets", "tool_chain"],
+            "properties": {
+              "assets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["asset_id", "hash", "media_type"],
+                  "properties": {
+                    "asset_id": { "type": "string" },
+                    "hash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+                    "media_type": { "type": "string" },
+                    "uri": { "type": "string" }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "tool_chain": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["tool_id", "version"],
+                  "properties": {
+                    "tool_id": { "type": "string" },
+                    "version": { "type": "string" },
+                    "parameters": { "type": "object" }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "after": {
+            "type": "object",
+            "required": ["assets"],
+            "properties": {
+              "assets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["asset_id", "hash", "media_type"],
+                  "properties": {
+                    "asset_id": { "type": "string" },
+                    "hash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+                    "media_type": { "type": "string" },
+                    "uri": { "type": "string" }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "anchors": {
+      "type": "object",
+      "properties": {
+        "ipfs_cid": { "type": "string" },
+        "eas_uid": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "metadata": { "type": "object", "additionalProperties": true }
+  },
+  "additionalProperties": false
+}
