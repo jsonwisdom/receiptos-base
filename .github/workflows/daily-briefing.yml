@@ -1,0 +1,43 @@
+name: JayOps Daily Briefing
+
+on:
+  schedule:
+    - cron: "0 14 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      replay_hash:
+        description: "Optional replay hash for this briefing witness"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  render-daily-briefing:
+    name: Render witness-only daily briefing
+    runs-on: ubuntu-latest
+    env:
+      DAILY_BRIEFING_REPLAY_HASH: ${{ inputs.replay_hash }}
+      DAILY_BRIEFING_TO: ${{ secrets.DAILY_BRIEFING_TO }}
+      DAILY_BRIEFING_EMAIL_ENDPOINT: ${{ secrets.DAILY_BRIEFING_EMAIL_ENDPOINT }}
+      DAILY_BRIEFING_EMAIL_TOKEN: ${{ secrets.DAILY_BRIEFING_EMAIL_TOKEN }}
+      DAILY_BRIEFING_GITHUB_WORKFLOWS: "[]"
+      DAILY_BRIEFING_DEPLOYMENTS: "[]"
+      DAILY_BRIEFING_CALENDAR: "[]"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Render briefing
+        run: npx tsx scripts/send-daily-briefing.ts
