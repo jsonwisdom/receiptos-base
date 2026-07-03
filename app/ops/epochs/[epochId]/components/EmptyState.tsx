@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 type RetryAction = () => void;
 
 type Diff = {
@@ -6,7 +8,7 @@ type Diff = {
   actual?: string;
 };
 
-function Panel({ title, children }: { title: string; children: React.ReactNode }) {
+function Panel({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section style={{ border: "2px solid #ef4444", background: "#fef2f2", borderRadius: "0.75rem", padding: "1rem" }}>
       <h1>{title}</h1>
