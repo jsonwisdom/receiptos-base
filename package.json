@@ -50,6 +50,7 @@
     "verify:farcaster:semantic": "node scripts/semantic-verify.js",
     "verify:farcaster:lock": "node scripts/verify-manifest-lock.js",
     "verify:farcaster": "npm run test:rfc8785 && npm run test:farcaster:invalid && npm run test:farcaster:fuzz && npm run verify:farcaster:semantic && npm run verify:farcaster:lock",
+    "verify:receipt": "node examples/agent-receipts/run-demo.js",
     "prepublishOnly": "npm run verify:farcaster"
   },
   "dependencies": {
