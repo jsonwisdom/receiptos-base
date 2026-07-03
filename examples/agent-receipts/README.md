@@ -1,56 +1,63 @@
 # Agent Receipts Demo
 
-> Status: MVP vertical slice terminal states proven
+> Status: committed fixture verifier for Agent Receipt v0.2 terminal states
 
-This demo proves one narrow flow:
+This demo verifies committed Agent Receipt fixtures against the current policy material.
 
 ```text
-one tool call -> receipt hook -> structured policy evaluation -> signed receipt -> replay verification
+receipt fixture -> signature verification -> policy hash freshness -> content_hash replay -> terminal state
 ```
 
-It intentionally uses plain Node.js and built-in `crypto` only. No `npm install` is required.
+It intentionally uses plain Node.js and built-in `crypto` only. No `npm install` is required for the receipt verifier.
 
 ## Run
 
 From the repository root:
 
 ```bash
+npm run verify:receipt
+```
+
+Equivalent direct command:
+
+```bash
 node examples/agent-receipts/run-demo.js
 ```
 
-## Tool Call
+## Fixture Files
 
 ```text
-echo("hello receiptos agent receipts") -> "hello receiptos agent receipts"
+examples/agent-receipts/fixtures/valid.receipt.json
+examples/agent-receipts/fixtures/policy-denied.receipt.json
+examples/agent-receipts/fixtures/stale.receipt.json
+examples/agent-receipts/fixtures/rejected.receipt.json
+examples/agent-receipts/fixtures/mismatched.receipt.json
 ```
 
-The tool input and output fixtures live beside this README:
+Policy fixtures:
 
 ```text
-examples/agent-receipts/tool-call.input.json
-examples/agent-receipts/tool-call.output.json
+policy/agent-receipts/v0.1.json
+policy/agent-receipts/v0.2.json
+policy/agent-receipts/default-policy.json
 ```
+
+`default-policy.json` is the current policy material used by the verifier.
 
 ## What the Runner Does
 
-1. Loads the input, output, and policy fixtures.
-2. Computes `policy.policy_hash` over `{ version, rules }` from `policy/agent-receipts/default-policy.json`.
-3. Builds an Agent Receipt v0.2 object.
-4. Evaluates policy with structured matchers, not `eval()`.
-5. Computes `content_hash` from the AR-001 preimage:
+1. Loads committed receipt fixtures.
+2. Loads `policy/agent-receipts/default-policy.json`.
+3. Verifies Ed25519 signature before replay.
+4. Verifies `policy.policy_hash` freshness before replay.
+5. Replays `content_hash` from the AR-001 preimage:
 
 ```text
 inputs + outputs + captured_context + policy_hash + manifest_hash + parent_hash
 ```
 
-6. Sets `receipt_id = content_hash`.
-7. Signs the full canonical receipt minus the `signature` field.
-8. Writes `receipts/agent-demo.receipt.json`.
-9. Writes `receipts/agent-demo-policy-denied.receipt.json`.
-10. Verifies signature before policy-hash freshness.
-11. Verifies policy hash before replay.
-12. Replays `content_hash`.
-13. Runs terminal-state checks.
+6. Asserts expected terminal states.
+7. Prints trace lines with `content_hash`, `policy_hash`, and reason.
 
 ## Policy Hash Rule
 
@@ -65,35 +72,27 @@ That avoids a circular self-reference. The runner computes `policy_hash` at load
 }
 ```
 
-## Policy Evaluation Rule
-
-The demo does not evaluate policy-authored condition strings.
-
-Policy rules use structured matchers. A future general condition language needs a real parser or sandboxed evaluator before it should be accepted from policy files.
-
 ## Expected Output
 
 ```text
-valid receipt: policy pass=true
-valid receipt: VERIFIED
-policy denied receipt: policy pass=false
-policy denied receipt: VERIFIED
-policy hash drift: STALE
-tampered receipt: REJECTED
-valid signature with replay divergence: MISMATCHED
-receipt_written: receipts/agent-demo.receipt.json
-policy_denied_receipt_written: receipts/agent-demo-policy-denied.receipt.json
+valid receipt: terminal=VERIFIED policy_pass=true content_hash=sha256:3f37c016aef922b693bd3dbc6f18ae502fea6dbadad22cbd9bbad0a2f0ea7602 policy_hash=sha256:01a3c1000c070ce6150be81abc594e8cc7646bed9064d596799ee4e12adeceb8 reason=ok
+policy denied receipt: terminal=VERIFIED policy_pass=false content_hash=sha256:117ba9471271c4cfb624e4841a02517246b055dacb31d7ac529b557f8cc7d53e policy_hash=sha256:01a3c1000c070ce6150be81abc594e8cc7646bed9064d596799ee4e12adeceb8 reason=ok
+stale receipt: terminal=STALE policy_pass=true content_hash=sha256:481df8d9304be7cc9dbad8c7d72f3be0d9723a907157da2727f1495a7098ac98 policy_hash=sha256:fdf97650672d146d731e88aa204309052ff76b9db234012d8b4fec415388e012 reason=policy_hash mismatch
+rejected receipt: terminal=REJECTED policy_pass=true content_hash=sha256:3f37c016aef922b693bd3dbc6f18ae502fea6dbadad22cbd9bbad0a2f0ea7602 policy_hash=sha256:01a3c1000c070ce6150be81abc594e8cc7646bed9064d596799ee4e12adeceb8 reason=invalid signature
+mismatched receipt: terminal=MISMATCHED policy_pass=true content_hash=sha256:ecb0794ab4964a01e7f5128f5fcc0855788fc468b576ca73419782fe8ec67301 policy_hash=sha256:01a3c1000c070ce6150be81abc594e8cc7646bed9064d596799ee4e12adeceb8 reason=content_hash replay mismatch
+fixture_trace: pass
 authority: false
 ```
 
 ## Terminal States
 
-| Terminal | Meaning | Demo Case |
+| Terminal | Meaning | Fixture |
 |---|---|---|
-| `VERIFIED` | Signature, policy hash, and replay all match. | Valid receipt. |
-| `STALE` | Signature is valid, but current policy hash differs from recorded policy hash. | Synthetic policy drift. |
-| `REJECTED` | Receipt is malformed, authority boundary is violated, or signature is invalid. | Tampered signed receipt. |
-| `MISMATCHED` | Signature is valid, but replayed `content_hash` diverges. | Resigned replay-divergent receipt. |
+| `VERIFIED` | Signature, policy hash, and replay all match. | `valid.receipt.json` |
+| `VERIFIED` with `policy_pass=false` | Policy-denied receipt is still signed audit evidence. | `policy-denied.receipt.json` |
+| `STALE` | Signature is valid, but current policy hash differs from recorded policy hash. | `stale.receipt.json` |
+| `REJECTED` | Receipt is malformed, authority boundary is violated, or signature is invalid. | `rejected.receipt.json` |
+| `MISMATCHED` | Signature is valid, policy hash is current, but replayed `content_hash` diverges. | `mismatched.receipt.json` |
 
 ## Failure-Mode Precedence
 
@@ -114,27 +113,6 @@ It does not return `MISMATCHED`, because replay should not run against an invali
 `STALE` is reserved for validly signed receipts whose recorded policy hash no longer matches the supplied current policy material.
 
 `MISMATCHED` is reserved for a well-formed, validly signed, policy-current receipt whose replayed `content_hash` diverges from the recorded value.
-
-## Policy Failure as Evidence
-
-A policy-denied receipt is still emitted and signed.
-
-That means policy violations are audit evidence, not silent drops.
-
-The demo proves this with an `llm_call` that omits `captured_context`. The structured policy denies it, but the receipt still verifies cryptographically.
-
-## Success Criteria
-
-| Property | Demo Check |
-|---|---|
-| Receipt generation | `receipts/agent-demo.receipt.json` is written. |
-| Policy denial evidence | `receipts/agent-demo-policy-denied.receipt.json` is written. |
-| Policy hashing | Receipt includes `policy.policy_hash`. |
-| Policy freshness | Synthetic policy drift returns `STALE`. |
-| Policy evaluation | Receipt includes `policy_result.pass` and rule details. |
-| Replay | Replay recomputes `content_hash`. |
-| Independent verification | Verifier does not need the original runtime. |
-| Authority boundary | Receipt keeps `authority: false`. |
 
 ## Boundary
 
