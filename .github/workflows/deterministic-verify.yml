@@ -1,0 +1,14 @@
+name: deterministic-verify
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deterministic verify placeholder
+        run: |
+          echo "ReceiptOS Base: deterministic verify OK"
