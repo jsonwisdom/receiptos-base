@@ -5,31 +5,15 @@ const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 
+const { canonicalize, sha256Ref } = require("./canonical");
+const { computePolicyHash, evaluatePolicy } = require("./evaluate-policy");
+
 const ROOT = path.resolve(__dirname, "../..");
 const RECEIPT_PATH = path.join(ROOT, "receipts", "agent-demo.receipt.json");
+const POLICY_DENIED_RECEIPT_PATH = path.join(ROOT, "receipts", "agent-demo-policy-denied.receipt.json");
 const INPUT_PATH = path.join(__dirname, "tool-call.input.json");
 const OUTPUT_PATH = path.join(__dirname, "tool-call.output.json");
 const POLICY_PATH = path.join(ROOT, "policy", "agent-receipts", "default-policy.json");
-
-function stable(value) {
-  if (value === null || typeof value !== "object") {
-    return JSON.stringify(value);
-  }
-  if (Array.isArray(value)) {
-    return `[${value.map(stable).join(",")}]`;
-  }
-  const keys = Object.keys(value).sort();
-  return `{${keys.map((key) => `${JSON.stringify(key)}:${stable(value[key])}`).join(",")}}`;
-}
-
-function sha256Hex(value) {
-  const bytes = typeof value === "string" ? value : stable(value);
-  return crypto.createHash("sha256").update(bytes, "utf8").digest("hex");
-}
-
-function sha256Ref(value) {
-  return `sha256:${sha256Hex(value)}`;
-}
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -58,7 +42,7 @@ function computeContentHash(receipt) {
 
 function signReceipt(receipt, privateKey, publicKeyHex) {
   const body = withoutSignature(receipt);
-  const signature = crypto.sign(null, Buffer.from(stable(body)), privateKey).toString("base64");
+  const signature = crypto.sign(null, Buffer.from(canonicalize(body)), privateKey).toString("base64");
   return {
     ...receipt,
     signature: {
@@ -80,7 +64,7 @@ function verifySignature(receipt) {
   });
   return crypto.verify(
     null,
-    Buffer.from(stable(withoutSignature(receipt))),
+    Buffer.from(canonicalize(withoutSignature(receipt))),
     publicKey,
     Buffer.from(receipt.signature.value, "base64"),
   );
@@ -108,11 +92,9 @@ function verifyReceipt(receipt) {
   return { terminal: "VERIFIED", replayed_content_hash: replayed };
 }
 
-function makeReceipt() {
-  const input = readJson(INPUT_PATH);
-  const output = readJson(OUTPUT_PATH);
+function buildReceiptDraft({ input, output, actionType, capturedContext, parentHash }) {
   const policy = readJson(POLICY_PATH);
-  const policyHash = sha256Ref(policy);
+  const policyHash = computePolicyHash(policy);
 
   const manifest = {
     files: [
@@ -122,46 +104,40 @@ function makeReceipt() {
     ],
   };
 
-  const receipt = {
+  const draft = {
     receipt_version: "agent-receipt/v0.2",
     receipt_id: null,
     timestamp: "2026-07-02T00:00:00Z",
     agent_id: "example-agent",
-    action_type: "tool_call",
+    action_type: actionType,
     inputs: input,
     outputs: output,
-    captured_context: [
-      {
-        type: "recorded_transformation",
-        value: "echo returned the same message supplied in inputs",
-      },
-    ],
+    captured_context: capturedContext,
     policy: {
-      version: policy.policy_version || "0.1.0",
+      version: policy.policy_version,
       policy_hash: policyHash,
       policy_id: policy.policy_id,
     },
-    policy_result: {
-      pass: true,
-      details: {
-        rules: (policy.rules || []).map((rule) => ({
-          rule_id: rule.rule_id,
-          result: "pass",
-        })),
-      },
-    },
-    parent_hash: null,
+    policy_result: null,
+    parent_hash: parentHash,
     manifest_hash: sha256Ref(manifest),
     content_hash: null,
     authority: false,
   };
 
-  receipt.content_hash = computeContentHash(receipt);
-  receipt.receipt_id = receipt.content_hash;
+  draft.policy_result = evaluatePolicy(policy, draft);
+  draft.content_hash = computeContentHash(draft);
+  draft.receipt_id = draft.content_hash;
+  return draft;
+}
 
-  const { publicKey, privateKey } = crypto.generateKeyPairSync("ed25519");
-  const publicKeyHex = publicKey.export({ format: "der", type: "spki" }).toString("hex");
-  return signReceipt(receipt, privateKey, publicKeyHex);
+function makeSignedReceipt(options, signingKeypair) {
+  const draft = buildReceiptDraft(options);
+  return signReceipt(
+    draft,
+    signingKeypair.privateKey,
+    signingKeypair.publicKey.export({ format: "der", type: "spki" }).toString("hex"),
+  );
 }
 
 function assertTerminal(name, actual, expected) {
@@ -171,14 +147,55 @@ function assertTerminal(name, actual, expected) {
   console.log(`${name}: ${actual.terminal}`);
 }
 
+function assertPolicy(name, receipt, expected) {
+  if (!receipt.policy_result || receipt.policy_result.pass !== expected) {
+    throw new Error(`${name}: expected policy pass=${expected}`);
+  }
+  console.log(`${name}: policy pass=${expected}`);
+}
+
 function main() {
   fs.mkdirSync(path.dirname(RECEIPT_PATH), { recursive: true });
 
-  const receipt = makeReceipt();
+  const signingKeypair = crypto.generateKeyPairSync("ed25519");
+  const input = readJson(INPUT_PATH);
+  const output = readJson(OUTPUT_PATH);
+
+  const receipt = makeSignedReceipt({
+    input,
+    output,
+    actionType: "tool_call",
+    capturedContext: [
+      {
+        type: "recorded_transformation",
+        value: "echo returned the same message supplied in inputs",
+      },
+    ],
+    parentHash: null,
+  }, signingKeypair);
+
   fs.writeFileSync(RECEIPT_PATH, `${JSON.stringify(receipt, null, 2)}\n`);
 
-  const verified = verifyReceipt(receipt);
-  assertTerminal("valid receipt", verified, "VERIFIED");
+  assertPolicy("valid receipt", receipt, true);
+  assertTerminal("valid receipt", verifyReceipt(receipt), "VERIFIED");
+
+  const policyDeniedReceipt = makeSignedReceipt({
+    input: {
+      tool_name: "llm",
+      prompt: "generate nondeterministic text",
+    },
+    output: {
+      text: "uncaptured sample",
+    },
+    actionType: "llm_call",
+    capturedContext: [],
+    parentHash: receipt.content_hash,
+  }, signingKeypair);
+
+  fs.writeFileSync(POLICY_DENIED_RECEIPT_PATH, `${JSON.stringify(policyDeniedReceipt, null, 2)}\n`);
+
+  assertPolicy("policy denied receipt", policyDeniedReceipt, false);
+  assertTerminal("policy denied receipt", verifyReceipt(policyDeniedReceipt), "VERIFIED");
 
   const tampered = JSON.parse(JSON.stringify(receipt));
   tampered.outputs.output.message = "tampered output";
@@ -186,17 +203,29 @@ function main() {
 
   const unsignedMismatch = JSON.parse(JSON.stringify(receipt));
   unsignedMismatch.content_hash = sha256Ref("validly signed by a future fixture but replay divergent");
-  const { publicKey, privateKey } = crypto.generateKeyPairSync("ed25519");
   unsignedMismatch.signature = undefined;
+  const mismatchKeypair = crypto.generateKeyPairSync("ed25519");
   const resigned = signReceipt(
     unsignedMismatch,
-    privateKey,
-    publicKey.export({ format: "der", type: "spki" }).toString("hex"),
+    mismatchKeypair.privateKey,
+    mismatchKeypair.publicKey.export({ format: "der", type: "spki" }).toString("hex"),
   );
   assertTerminal("valid signature with replay divergence", verifyReceipt(resigned), "MISMATCHED");
 
   console.log(`receipt_written: ${path.relative(ROOT, RECEIPT_PATH)}`);
+  console.log(`policy_denied_receipt_written: ${path.relative(ROOT, POLICY_DENIED_RECEIPT_PATH)}`);
   console.log("authority: false");
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  buildReceiptDraft,
+  computeContentHash,
+  contentPreimage,
+  makeSignedReceipt,
+  verifyReceipt,
+  verifySignature,
+};
