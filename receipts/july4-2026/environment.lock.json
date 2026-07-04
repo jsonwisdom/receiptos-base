@@ -1,0 +1,54 @@
+{
+  "artifact_type": "environment.lock",
+  "canonicalization": "sha256(JCS(environment_manifest))",
+  "environment_manifest_hash": "1fba10714abb968312befa4c325fffa8c36523e9d641c70fc3ca61b485eb0012",
+  "environment_manifest": {
+    "manifest_version": "REPLAY_ENVIRONMENT_MANIFEST_V0_1",
+    "cycle": "JULY_4_2026",
+    "authority": false,
+    "execution": "NOT_STARTED",
+    "clock_mode": "FROZEN",
+    "network_policy": "OFFLINE",
+    "source_control": {
+      "repo": "jsonwisdom/receiptos-base",
+      "commit": "9f3c7b2e4a1d8c6f0b927e5a3c4d8f1b2e9a7c3d",
+      "git_tree_hash": "7a4e2c9b1f6d3e8a0c5b9d2f4e7a1c3b6d8f2e0"
+    },
+    "runtime": {
+      "node_version": "v22.3.0",
+      "python_version": "3.12.3"
+    },
+    "dependencies": {
+      "lockfile_hash": "b8f1c3d7e2a9f4b0c6d1e8a3f7b2c9d5e0a4f1c",
+      "package_set_hash": "c4e9b1a7d3f2c6e0b8a5d9f1c2e7a3b6d0f8c2a"
+    },
+    "inputs": {
+      "receipt_id": "JULY4-2026-RECEIPT-0001",
+      "receipt_hash": "e1f7c3a9d5b2e8f0c4d6a1b7e3f9c2d8a0b5e4f",
+      "schema_version": "RECEIPTOS_SCHEMA_V3_2",
+      "artifact_hashes": []
+    },
+    "semantic_surfaces": "FROZEN",
+    "evidence_surfaces": "FROZEN",
+    "execution_boundary": "SEALED",
+    "environment_manifest": "FROZEN",
+    "replay_ready": true,
+    "status": "FROZEN"
+  },
+  "seal_envelope": {
+    "cycle": "JULY_4_2026",
+    "manifest_id": "REPLAY_ENVIRONMENT_MANIFEST_V0_1",
+    "manifest_hash": "1fba10714abb968312befa4c325fffa8c36523e9d641c70fc3ca61b485eb0012",
+    "receipt_id": "JULY4-2026-RECEIPT-0001",
+    "seal_request": true,
+    "verification": "PASS",
+    "authority": false,
+    "clock_mode": "FROZEN",
+    "network_policy": "OFFLINE",
+    "status": "FROZEN",
+    "execution_boundary": "SEALED",
+    "next_gate": "/receipt.replay"
+  },
+  "terminal": "ENVIRONMENT_LOCK_PASS | authority=false | execution=not_started | replay=authorized",
+  "boundary": "repository artifact only; replay not executed"
+}
