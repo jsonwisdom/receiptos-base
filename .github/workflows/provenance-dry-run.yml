@@ -1,0 +1,75 @@
+name: Provenance Dry-Run
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Pre-Publish Audit"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  provenance:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Verify ReceiptOS anchor
+        run: npm run verify:receiptos:anchor
+
+      - name: Pre-publish audit
+        run: npm run audit:prepublish
+
+      - name: Pack package
+        shell: bash
+        run: |
+          npm pack --json > pack-report.json
+          node -e "const fs=require('fs'); const crypto=require('crypto'); const p=JSON.parse(fs.readFileSync('pack-report.json','utf8'))[0]; const b=fs.readFileSync(p.filename); const out={filename:p.filename,sha256:crypto.createHash('sha256').update(b).digest('hex'),integrity:p.integrity,size:p.size,unpackedSize:p.unpackedSize}; fs.writeFileSync('artifact-hashes.json', JSON.stringify(out,null,2)+'\n');"
+
+      - name: npm provenance dry run
+        shell: bash
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_DRY_RUN }}
+        run: |
+          npm publish --provenance --dry-run --access public 2>&1 | tee provenance.log
+
+      - name: Build provenance summary
+        shell: bash
+        run: |
+          cat > provenance-summary.json <<EOF
+          {
+            "packet": "PACKET-011",
+            "status": "DRY_RUN_COMPLETE",
+            "authority": false,
+            "commit": "${GITHUB_SHA}",
+            "workflow": "${GITHUB_WORKFLOW}",
+            "artifact_hashes": "artifact-hashes.json",
+            "pack_report": "pack-report.json",
+            "provenance_log": "provenance.log"
+          }
+          EOF
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: provenance-dry-run-artifacts
+          path: |
+            provenance.log
+            provenance-summary.json
+            pack-report.json
+            artifact-hashes.json
+          retention-days: 7
+          if-no-files-found: error
