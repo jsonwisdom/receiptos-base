@@ -1,4 +1,5 @@
 use replay_cli::wasm_runner::execute_wasm;
+use replay_cli::signing::sign_packet;
 use sha2::{Digest, Sha256};
 use std::{env, fs, path::PathBuf};
 
@@ -29,6 +30,8 @@ fn main() {
 
     fs::write(out.join("step_runner.wasm.sha256"), hex(&Sha256::digest(&wasm))).unwrap();
     fs::write(out.join("final_state.sha256"), hex(&Sha256::digest(&result.final_state_cbor))).unwrap();
+
+    sign_packet(&out, [7u8; 32]);
 
     println!("TV-061 fixture generated: {}", out.display());
 }
