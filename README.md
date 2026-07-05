@@ -42,6 +42,43 @@ Public commit anchor used by the sample receipt:
 
 Boundary: this demo verifies local receipt binding, canonical receipt hashing, and authority-neutral flags. It does not claim legal truth, runtime authority, or EAS finality. External attestations should be attached as second-stage receipt pointers, not included inside the canonical receipt hash.
 
+## Verify the on-chain ReceiptOS anchor
+
+Packet #007 adds a UID verifier for the dedicated ReceiptOS EAS schema.
+
+Run:
+
+```bash
+node scripts/receiptos.js verify 0xd64a416d76f61c412e2a074a8ff26b03231166890be4356cbfc92a657a03ffa6 \
+  --json \
+  --tx-hash 0x95048e055087326f40600c2de5cb3c687307b466e08fa10fc9e6d57075b8ae8f
+```
+
+Expected terminal behavior:
+
+```text
+exit code 0
+status = PASS
+authority = false
+```
+
+The verifier checks the decoded EAS payload against the known ReceiptOS anchor:
+
+```text
+schema          RECEIPTOS-ANCHOR-001
+schema_uid      0x5a535b9ba95c0a8fd86eac8a6db8b75d79213b388a4c25f17b066cc6543d0aa3
+repository      jsonwisdom/receiptos-base
+merge_commit    95d06d09b0b1ab6896d147ea35d8d235eec7747f
+receipt_hash    0x776021ffc8f70ff10f31911a7aaa9eb9ae9fc805d21e29eca591a6e36879be5c
+artifact_hash   0x2757b42eff5ffe183315cff32bcf5e2e7420c96c192e463421e59a441b852032
+```
+
+JSON contract:
+
+```text
+docs/receiptos-cli-json-contract.md
+```
+
 ## Replay Gate v1
 
 `RAIL_V1_OPERATIONAL`
