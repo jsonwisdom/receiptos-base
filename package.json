@@ -61,7 +61,8 @@
     "verify:farcaster:semantic": "node scripts/semantic-verify.js",
     "verify:farcaster:lock": "node scripts/verify-manifest-lock.js",
     "verify:farcaster": "npm run test:rfc8785 && npm run test:farcaster:invalid && npm run test:farcaster:fuzz && npm run verify:farcaster:semantic && npm run verify:farcaster:lock",
-    "prepublishOnly": "npm run verify:farcaster"
+    "audit:prepublish": "npm audit --audit-level=high && npm run verify:receiptos:anchor && npm pack --dry-run",
+    "prepublishOnly": "npm run audit:prepublish"
   },
   "dependencies": {
     "@supabase/server": "^1.2.0",
