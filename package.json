@@ -1,13 +1,14 @@
 {
-  "name": "@jsonwisdom/farcaster-verify",
+  "name": "@jsonwisdom/receiptos-verifier",
   "version": "0.1.1",
   "private": false,
-  "description": "Authority=false Farcaster Mini App manifest verifier with RFC8785 canonicalization, semantic checks, lock verification, and ReceiptOS provenance checks.",
+  "description": "ReceiptOS verifier CLI for authority=false provenance, EAS anchors, and replayable artifact checks.",
   "type": "commonjs",
   "main": "index.js",
   "types": "index.d.ts",
   "bin": {
     "receiptos": "scripts/receiptos.js",
+    "receiptos-verifier": "scripts/receiptos.js",
     "farcaster-verify-semantic": "scripts/semantic-verify.js",
     "farcaster-verify-lock": "scripts/verify-manifest-lock.js",
     "farcaster-verify-rfc8785": "scripts/rfc8785-test-vectors.js",
@@ -28,14 +29,17 @@
     "docs/farcaster-transparency-log.md"
   ],
   "keywords": [
+    "receiptos",
+    "provenance",
+    "eas",
+    "base",
+    "verification",
+    "authority-false",
     "farcaster",
     "mini-app",
     "manifest",
     "rfc8785",
-    "jcs",
-    "verification",
-    "authority-false",
-    "receiptos"
+    "jcs"
   ],
   "repository": {
     "type": "git",
