@@ -4,6 +4,44 @@
 
 ReceiptOS: Onchain verifiable receipt + replay engine on Base. Evidence-first verification.
 
+## Verify this receipt in 60 seconds
+
+This is the smallest public proof path in the repo: one sample receipt, one verifier command, one expected PASS line.
+
+Run from the repository root:
+
+```bash
+node scripts/verify-60-second.js
+```
+
+Expected output includes:
+
+```text
+artifact_sha256=PASS
+receipt_core_hash=PASS
+authority_false=PASS
+witness_only_true=PASS
+truth_claim_false=PASS
+anchor_commit_present=PASS
+computed_artifact_sha256=2757b42eff5ffe183315cff32bcf5e2e7420c96c192e463421e59a441b852032
+computed_receipt_core_hash=776021ffc8f70ff10f31911a7aaa9eb9ae9fc805d21e29eca591a6e36879be5c
+RECEIPTOS_60_SECOND_VERIFY=PASS
+```
+
+Sample receipt:
+
+```text
+examples/verify-60-second/receipt.sample.json
+```
+
+Public commit anchor used by the sample receipt:
+
+```text
+80be15969a980db3db2d0628179b89d93c78e9a9
+```
+
+Boundary: this demo verifies local receipt binding, canonical receipt hashing, and authority-neutral flags. It does not claim legal truth, runtime authority, or EAS finality. External attestations should be attached as second-stage receipt pointers, not included inside the canonical receipt hash.
+
 ## Replay Gate v1
 
 `RAIL_V1_OPERATIONAL`
