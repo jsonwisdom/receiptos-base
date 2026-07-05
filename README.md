@@ -4,6 +4,21 @@
 
 ReceiptOS: Onchain verifiable receipt + replay engine on Base. Evidence-first verification.
 
+## Install the ReceiptOS verifier
+
+```bash
+npm install -g @jsonwisdom/receiptos-verifier
+```
+
+CLI aliases:
+
+```bash
+receiptos verify <uid> --json
+receiptos-verifier verify <uid> --json
+```
+
+Boundary: the npm package is a verifier. It does not grant runtime authority, make truth claims, or promote observations beyond `authority=false` evidence checks.
+
 ## Verify this receipt in 60 seconds
 
 This is the smallest public proof path in the repo: one sample receipt, one verifier command, one expected PASS line.
