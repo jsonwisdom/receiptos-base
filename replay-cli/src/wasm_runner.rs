@@ -33,17 +33,22 @@ pub fn execute_wasm(
     wasm_bytes: &[u8],
     envelope_cbor: &[u8],
 ) -> Result<ExecutionResult, ReplayExit> {
-    use wasmtime::{Engine, Instance, Module, Store};
+    use wasmtime::{Config, Engine, Instance, Module, Store};
 
     if envelope_cbor.is_empty() {
         return Err(ReplayExit::InvalidEnvelope);
     }
 
-    let engine = Engine::default();
+    let mut config = Config::new();
+        config.consume_fuel(true);
+        let engine = Engine::new(&config)
+        .map_err(|_| ReplayExit::WasmExecutionFailed)?;
     let module = Module::new(&engine, wasm_bytes)
         .map_err(|_| ReplayExit::WasmExecutionFailed)?;
 
     let mut store = Store::new(&engine, ());
+    store.set_fuel(1_000_000)
+        .map_err(|_| ReplayExit::WasmExecutionFailed)?;
     let instance = Instance::new(&mut store, &module, &[])
         .map_err(|_| ReplayExit::WasmExecutionFailed)?;
 
@@ -101,7 +106,8 @@ pub fn execute_wasm(
     Ok(ExecutionResult {
         final_state_cbor,
         guest_exit_code: code,
-        fuel_used: 0,
+        fuel_used: 1_000_000u64
+            .saturating_sub(store.get_fuel().unwrap_or(1_000_000)),
     })
 }
 
@@ -125,7 +131,7 @@ mod tests {
 #[cfg(test)]
 mod get_required_tests {
     use super::*;
-    use wasmtime::{Caller, Engine, Linker, Module, Store};
+    use wasmtime::{Caller, Config, Engine, Linker, Module, Store};
 
     const HASH_PTR: u32 = 0x0100;
     const OUT_PTR: u32 = 0x0200;
@@ -134,7 +140,9 @@ mod get_required_tests {
 
     #[test]
     fn test_get_required_abi() -> Result<(), Box<dyn std::error::Error>> {
-        let engine = Engine::default();
+        let mut config = Config::new();
+    config.consume_fuel(true);
+    let engine = Engine::new(&config)?;
         let mut linker = Linker::<WasmHostState>::new(&engine);
 
         linker.func_wrap("env", "get_required", |mut caller: Caller<'_, WasmHostState>, hp: u32, hl: u32, op: u32, oc: u32| -> i32 {
@@ -166,6 +174,7 @@ mod get_required_tests {
         evidence.insert(VALID_HASH, vec![0xDE, 0xAD, 0xBE, 0xEF]);
 
         let mut store = Store::new(&engine, WasmHostState { evidence });
+        store.set_fuel(1_000_000)?;
         let instance = linker.instantiate(&mut store, &module)?;
         let mem = instance.get_memory(&mut store, "memory").unwrap();
         let test_fn = instance.get_typed_func::<(u32, u32, u32, u32), i32>(&mut store, "test_get_required")?;

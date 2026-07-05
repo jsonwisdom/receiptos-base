@@ -1,0 +1,10 @@
+(module
+  (memory (export "memory") 1)
+  (data (i32.const 2048) "\a0")
+  (func (export "execute") (param i32 i32) (result i32)
+    i32.const 0)
+  (func (export "get_output_ptr") (result i32)
+    i32.const 2048)
+  (func (export "get_output_len") (result i32)
+    i32.const 1)
+)

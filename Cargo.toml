@@ -1,0 +1,3 @@
+[workspace]
+members = ["replay-cli"]
+resolver = "2"
