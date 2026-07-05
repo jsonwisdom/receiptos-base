@@ -1,1 +1,1 @@
-{"events":[{"clock":0,"event":"DEPENDENCY_SELECTED","target":"tv050"},{"clock":1,"event":"DEPENDENCY_HASH_BOUND","sha256":"410ab02a37926775d9b9a0de8f6803bce82ea6c8ddfedd2ed84ca97caefe450f"},{"clock":2,"event":"ARTIFACTS_EMITTED"}],"release_id":"GRP-004-RELEASE-2026-07-04"}
+{"events":[{"clock":0,"event":"TV067_READ_FROM_DISK"},{"clock":1,"event":"TV073_REGENERATED"},{"clock":2,"event":"SIGNED_TEST_VECTOR"}]}

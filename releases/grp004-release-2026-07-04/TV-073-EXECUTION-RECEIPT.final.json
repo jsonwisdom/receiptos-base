@@ -1,1 +1,1 @@
-{"authority":false,"dependency":{"packet_sha256":"410ab02a37926775d9b9a0de8f6803bce82ea6c8ddfedd2ed84ca97caefe450f","source":"golden-corpus/grp004/tv050","state":"VERIFIED"},"release_id":"GRP-004-RELEASE-2026-07-04","status":"SEALED_PENDING_CI","tv_id":"TV-073"}
+{"authority":false,"dependency":{"commit":"5467a06b8b9f1d70209cd3c6d8247bb59e7119d7","packet_sha256":"410ab02a37926775d9b9a0de8f6803bce82ea6c8ddfedd2ed84ca97caefe450f","state":"VERIFIED","target":"TV-067"},"status":"SEALED_TEST_VECTOR","tv_id":"TV-073"}
