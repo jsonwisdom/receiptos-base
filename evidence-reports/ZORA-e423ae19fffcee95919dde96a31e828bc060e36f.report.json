@@ -1,0 +1,21 @@
+{
+  "artifact_id": "0xe423ae19fffcee95919dde96a31e828bc060e36f",
+  "authority": false,
+  "blocked_reason": null,
+  "canonical_hash": "sha256:dab94602bcd96d572cadfb4a8485fe56943c455ab51a2b9bb9c25d2e3ef9aa84",
+  "content_hash": "sha256:80517d0d8d38f6430eff5a7d473b003b75794889c1d0b282b095205cdd5ae2eb",
+  "origin": "Zora/Base",
+  "receipt_id": "ZORA-e423ae19fffcee95919dde96a31e828bc060e36f",
+  "related_receipt": "RECEIPT-001",
+  "status": "VERIFIED",
+  "token_uri": "ipfs://bafkreig6du4jfapxzqvsk2gftdfwoim7kodnsgtbt2jspp6kufm732msze",
+  "type": "external_attestation",
+  "verification": {
+    "authority_check": "PASS",
+    "content_hash_verified": true,
+    "metadata_excluded_from_canonical_hash": true,
+    "placeholder_scan": "PASS",
+    "related_receipt_exists": true,
+    "schema_compliant": true
+  }
+}
