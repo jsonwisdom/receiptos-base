@@ -1,0 +1,46 @@
+name: Observation Protocol V1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/observation-protocol/**'
+      - 'schemas/observation/**'
+      - 'tests/observation/**'
+      - '.github/workflows/observation-protocol.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'docs/observation-protocol/**'
+      - 'schemas/observation/**'
+      - 'tests/observation/**'
+      - '.github/workflows/observation-protocol.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  observation-protocol:
+    name: Observation Protocol Harness
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install jsonschema
+
+      - name: Run Observation Protocol negative fixture harness
+        run: |
+          python3 tests/observation/test_negative_fixtures.py
