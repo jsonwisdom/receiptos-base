@@ -18,7 +18,7 @@
     "content": "Sample manifest content",
     "manifest_sha256": "61da36cfabf86833709df16887b12b89a048ae246a9836721cf383e200e4473a"
   },
-  "nonce": "ffff",
+  "nonce": "r3nonce0002",
   "observation_id": "obs-r3-pass-001",
   "packet_id": "r3-dupe-001",
   "packet_version": "1.0",
