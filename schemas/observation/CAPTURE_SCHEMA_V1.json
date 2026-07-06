@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://jsonwisdom.dev/schemas/observation/CAPTURE_SCHEMA_V1.json",
+  "title": "Capture Schema V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "capture_id",
+    "authority",
+    "chain_id",
+    "contract_address",
+    "block_number",
+    "block_hash",
+    "tx_hash",
+    "capture_timestamp_utc",
+    "observer_id",
+    "capture_method",
+    "source_type",
+    "source_url_or_endpoint",
+    "raw_payload_sha256",
+    "independent_confirmation_required",
+    "fields"
+  ],
+  "properties": {
+    "capture_id": { "type": "string", "minLength": 1 },
+    "authority": { "const": false },
+    "chain_id": { "type": "integer", "minimum": 1 },
+    "contract_address": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+    "block_number": { "type": "integer", "minimum": 0 },
+    "block_hash": { "type": "string", "pattern": "^0x[a-fA-F0-9]{64}$" },
+    "tx_hash": { "type": "string", "pattern": "^0x[a-fA-F0-9]{64}$" },
+    "capture_timestamp_utc": { "type": "string", "format": "date-time" },
+    "observer_id": { "type": "string", "minLength": 1 },
+    "capture_method": { "type": "string", "minLength": 1 },
+    "source_type": {
+      "type": "string",
+      "enum": ["explorer", "raw_rpc", "indexer", "screenshot", "html", "json", "manual_transcription"]
+    },
+    "source_url_or_endpoint": { "type": "string", "minLength": 1 },
+    "raw_payload_sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+    "independent_confirmation_required": { "type": "boolean" },
+    "fields": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "observed",
+          "value",
+          "field_replay_class",
+          "confirmed_by",
+          "confirmation_depth_at_capture"
+        ],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "observed": { "type": "boolean" },
+          "value": {},
+          "field_replay_class": {
+            "type": "string",
+            "enum": ["immutable", "point_in_time", "derived", "annotation_ref"]
+          },
+          "confirmed_by": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "confirmation_depth_at_capture": {
+            "anyOf": [
+              { "type": "integer", "minimum": 0 },
+              { "type": "null" }
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": { "observed": { "const": false } },
+              "required": ["observed"]
+            },
+            "then": {
+              "properties": { "value": { "type": "null" } }
+            }
+          }
+        ]
+      }
+    },
+    "forbidden_content_note": {
+      "type": "string",
+      "description": "Capture records intentionally reject annotation fields via additionalProperties:false."
+    }
+  }
+}
