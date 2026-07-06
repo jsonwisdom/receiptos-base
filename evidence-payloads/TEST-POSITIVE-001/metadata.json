@@ -1,0 +1,7 @@
+{
+  "name": "TEST-POSITIVE-001",
+  "description": "Clean local payload for evidence verification gate testing.",
+  "authority": false,
+  "collection": "ReceiptOS Evidence Gate Test",
+  "test_vector": "positive"
+}
