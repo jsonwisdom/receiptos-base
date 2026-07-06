@@ -1,0 +1,33 @@
+{
+  "authority": false,
+  "card_id": "GPK-001",
+  "input_effect": {
+    "operation": "append_unique",
+    "state_path": "/cards/played",
+    "value": "GPK-001"
+  },
+  "output_effect": {
+    "expected_next_hash": "sha256:630dfcf1cacd8e0b0c90175f2d3b9868bb2e5b1b9d7bff1864be41fce7ce8ace",
+    "state_delta": {
+      "cards": {
+        "played": [
+          "GPK-001"
+        ]
+      }
+    }
+  },
+  "replay": {
+    "engine": "engine/replay.py",
+    "input_hash_required": true,
+    "match_exit_code": 0,
+    "mismatch_exit_code": 1
+  },
+  "satirical_text": "No Receipt Randy enters court with a crown made of snack wrappers. The raccoon stenographer asks for proof. Randy produces vibes. The bridge refuses to open.",
+  "schema_version": "GPK_CARD_SCHEMA_V1",
+  "tags": [
+    "genesis-card",
+    "no-receipt-no-authority",
+    "replay-first"
+  ],
+  "title": "No Receipt Randy"
+}
