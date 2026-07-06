@@ -34,6 +34,22 @@ game_state.json + cards/GPK-XXX.json
 → exit 0 on match, exit 1 on mismatch
 ```
 
+## 3.1 External evidence intake
+
+External artifacts, including Zora/Base media or token metadata, are sidecar attestations only.
+
+They do not mutate `game_state.json`, do not enter `cards/`, and do not affect canonical replay hashes.
+
+External evidence may be appended to `evidence-ledger.json` only when all checks pass:
+
+1. content hash verified
+2. schema compliant under `evidence-ledger.schema.json`
+3. `related_receipt` points to an existing sealed receipt
+4. `authority` is `false`
+5. metadata is excluded from canonical hash calculation
+
+If any check fails, the entry remains `PENDING_REVIEW` or is marked `REJECTED`. No verified commit may be claimed.
+
 ## 4. Hashing rule
 
 All hashes use canonical JSON:
@@ -53,6 +69,22 @@ Expected next hash after `GPK-001`:
 ```text
 sha256:630dfcf1cacd8e0b0c90175f2d3b9868bb2e5b1b9d7bff1864be41fce7ce8ace
 ```
+
+## 4.1 Deterministic invariant clause
+
+Canonical replay hashes SHALL be computed only from protocol-defined game state.
+
+Execution metadata is excluded from canonical hash calculation, including:
+
+- timestamps
+- run IDs
+- host IDs
+- system logs
+- trace IDs
+- execution duration
+- debug output
+
+If a hash changes because metadata changed, the hash is measuring execution context, not replay state.
 
 ## 5. Placeholder scan
 
