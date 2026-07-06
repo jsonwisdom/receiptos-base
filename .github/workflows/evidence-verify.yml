@@ -1,0 +1,115 @@
+name: Evidence Verification Gate
+
+on:
+  pull_request:
+    paths:
+      - "evidence-payloads/**"
+      - "tools/evidence_verify.py"
+      - "evidence-ledger.json"
+      - "evidence-ledger.schema.json"
+      - ".github/workflows/evidence-verify.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "evidence-payloads/**"
+      - "tools/evidence_verify.py"
+      - "evidence-ledger.json"
+      - "evidence-ledger.schema.json"
+      - ".github/workflows/evidence-verify.yml"
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: "Path to local payload file, e.g. evidence-payloads/ZORA-e423ae19fffcee95919dde96a31e828bc060e36f/metadata.json"
+        required: true
+        default: "evidence-payloads/ZORA-e423ae19fffcee95919dde96a31e828bc060e36f/metadata.json"
+      token_uri:
+        description: "Token URI string from contract/RPC/Zora metadata"
+        required: true
+        default: "TOKEN_URI_HERE"
+      artifact_id:
+        description: "Onchain artifact id / contract address"
+        required: true
+        default: "0xe423ae19fffcee95919dde96a31e828bc060e36f"
+      receipt_id:
+        description: "Evidence receipt id"
+        required: true
+        default: "ZORA-e423ae19fffcee95919dde96a31e828bc060e36f"
+
+permissions:
+  contents: read
+
+jobs:
+  evidence-gate:
+    name: Verify supplied evidence payloads
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Explain gate
+        run: |
+          echo "No Payload = No Verification"
+          echo "Harness readiness is not evidence admission"
+          echo "Authority remains false"
+
+      - name: Verify workflow_dispatch payload
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          python3 tools/evidence_verify.py \
+            --payload "${{ github.event.inputs.payload }}" \
+            --token-uri "${{ github.event.inputs.token_uri }}" \
+            --artifact-id "${{ github.event.inputs.artifact_id }}" \
+            --receipt-id "${{ github.event.inputs.receipt_id }}" \
+            | tee evidence-report.json
+
+      - name: Verify discovered metadata payloads
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          shopt -s nullglob
+          files=(evidence-payloads/*/metadata.json)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No evidence-payloads/*/metadata.json files found. Gate remains pending."
+            exit 0
+          fi
+
+          mkdir -p evidence-reports
+          failed=0
+          for payload in "${files[@]}"; do
+            dir="$(dirname "$payload")"
+            manifest="$dir/manifest.env"
+            if [ ! -f "$manifest" ]; then
+              echo "Missing $manifest"
+              failed=1
+              continue
+            fi
+
+            source "$manifest"
+            : "${TOKEN_URI:?TOKEN_URI missing in $manifest}"
+            : "${ARTIFACT_ID:?ARTIFACT_ID missing in $manifest}"
+            : "${RECEIPT_ID:?RECEIPT_ID missing in $manifest}"
+
+            report="evidence-reports/${RECEIPT_ID}.report.json"
+            python3 tools/evidence_verify.py \
+              --payload "$payload" \
+              --token-uri "$TOKEN_URI" \
+              --artifact-id "$ARTIFACT_ID" \
+              --receipt-id "$RECEIPT_ID" \
+              | tee "$report" || failed=1
+          done
+          exit $failed
+
+      - name: Upload evidence reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-verification-reports
+          path: |
+            evidence-report.json
+            evidence-reports/*.json
+          if-no-files-found: ignore
