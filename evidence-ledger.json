@@ -16,6 +16,27 @@
       },
       "boundary": "Static replay only. Not canonical replay. Not live deployment byte-match.",
       "timestamp": "2026-07-06T09:39:00-05:00"
+    },
+    {
+      "receipt_id": "ZORA-e423ae19fffcee95919dde96a31e828bc060e36f",
+      "type": "external_attestation",
+      "authority": false,
+      "status": "PENDING_REVIEW",
+      "origin": "Zora/Base",
+      "artifact_id": "0xe423ae19fffcee95919dde96a31e828bc060e36f",
+      "related_receipt": "RECEIPT-001",
+      "token_uri": null,
+      "content_hash": null,
+      "canonical_hash": null,
+      "blocked_reason": "missing token_uri + content_hash",
+      "verification": {
+        "content_hash_verified": false,
+        "schema_compliant": true,
+        "related_receipt_exists": true,
+        "placeholder_scan": "PENDING",
+        "authority_check": "PENDING",
+        "metadata_excluded_from_canonical_hash": true
+      }
     }
   ]
 }
