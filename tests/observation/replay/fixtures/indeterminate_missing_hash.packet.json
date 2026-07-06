@@ -6,6 +6,7 @@
     "contract_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "contract_valid": true
   },
+  "expected_verdict": "INDETERMINATE",
   "hash_comparison_rules": {
     "expected_hash": "b6598b58c6c96c5df23f1db2464ca1dfac14046d4d136ab6293396e07108151d"
   },
