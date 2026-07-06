@@ -1,0 +1,14 @@
+{
+  "artifact_identifier": "REPLAY_ENGINE_V1",
+  "authority": false,
+  "chain_identifier": "JOY_CHAIN_V1",
+  "comparison_tolerance": "exact_byte_match",
+  "input_hash": "67a0c78f5738a9cfdcf7db3dd2386a9e30f46afb8215e40f0ed53a3383e1dc93",
+  "output_hash": "5baa168c3035b4c957e13bad211462091cffef01e6658a07167dad749dcc1d18",
+  "replay_action": "STATIC_FRONT_DOOR",
+  "resolution_semantics": "absent",
+  "result_state": "REPRODUCED_NOT_ENDORSED",
+  "step_id": "static-replay-v1",
+  "timestamp": "2026-07-06T09:39:00-05:00",
+  "tool_version": "replay-v1"
+}
