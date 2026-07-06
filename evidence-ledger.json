@@ -1,0 +1,21 @@
+{
+  "ledger_version": "0.1",
+  "authority": false,
+  "entries": [
+    {
+      "receipt_id": "RECEIPT-001",
+      "type": "static_replay_reproduced_not_endorsed",
+      "commit": "127a7da",
+      "input_hash": "67a0c78f5738a9cfdcf7db3dd2386a9e30f46afb8215e40f0ed53a3383e1dc93",
+      "output_hash": "5baa168c3035b4c957e13bad211462091cffef01e6658a07167dad749dcc1d18",
+      "replay_command": "python3 engine/replay.py receipts/RECEIPT-001.json",
+      "result": {
+        "state": "REPRODUCED_NOT_ENDORSED",
+        "placeholder_scan": "PASS",
+        "authority": false
+      },
+      "boundary": "Static replay only. Not canonical replay. Not live deployment byte-match.",
+      "timestamp": "2026-07-06T09:39:00-05:00"
+    }
+  ]
+}
