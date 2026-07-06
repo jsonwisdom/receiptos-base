@@ -1,0 +1,22 @@
+{
+  "authority": false,
+  "cards": {
+    "played": []
+  },
+  "court": {
+    "name": "Garbage Pail Kidding Court",
+    "rule_1": "No Receipt = No Authority",
+    "status": "IN_SESSION"
+  },
+  "ledger": {
+    "receipts": [
+      "RECEIPT-003.5"
+    ],
+    "schema_commit": "377db1ee3910ca6aa9ca28af6b1286425186a2f4"
+  },
+  "schema_version": "GPK_GAME_STATE_V1",
+  "scoreboard": {
+    "mismatches": 0,
+    "replay_depth": 0
+  }
+}
