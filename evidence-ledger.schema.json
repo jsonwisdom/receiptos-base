@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jsonwisdom/receiptos-base/evidence-ledger.schema.json",
+  "title": "Evidence Ledger Schema",
+  "description": "Sidecar evidence intake ledger for external attestations. Entries may support review but never grant authority or mutate GPK replay state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ledger_version",
+    "authority",
+    "entries"
+  ],
+  "properties": {
+    "ledger_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "authority": {
+      "type": "boolean",
+      "const": false
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/static_replay_entry"
+          },
+          {
+            "$ref": "#/$defs/external_attestation_entry"
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "sha256_hex": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sha256_prefixed": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "authority_false_result": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "authority"
+      ],
+      "properties": {
+        "authority": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "static_replay_entry": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "receipt_id",
+        "type",
+        "commit",
+        "input_hash",
+        "output_hash",
+        "replay_command",
+        "result",
+        "boundary"
+      ],
+      "properties": {
+        "receipt_id": {
+          "type": "string",
+          "pattern": "^RECEIPT-[0-9]{3}(\\.[0-9]+)?$"
+        },
+        "type": {
+          "type": "string",
+          "const": "static_replay_reproduced_not_endorsed"
+        },
+        "commit": {
+          "type": "string",
+          "minLength": 7
+        },
+        "input_hash": {
+          "$ref": "#/$defs/sha256_hex"
+        },
+        "output_hash": {
+          "$ref": "#/$defs/sha256_hex"
+        },
+        "replay_command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "result": {
+          "$ref": "#/$defs/authority_false_result"
+        },
+        "boundary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "external_attestation_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "receipt_id",
+        "type",
+        "authority",
+        "status",
+        "origin",
+        "artifact_id",
+        "related_receipt",
+        "token_uri",
+        "content_hash",
+        "canonical_hash",
+        "verification"
+      ],
+      "properties": {
+        "receipt_id": {
+          "type": "string",
+          "pattern": "^ZORA-[A-Za-z0-9_.-]+$"
+        },
+        "type": {
+          "type": "string",
+          "const": "external_attestation"
+        },
+        "authority": {
+          "type": "boolean",
+          "const": false
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PENDING_REVIEW",
+            "VERIFIED",
+            "REJECTED"
+          ]
+        },
+        "origin": {
+          "type": "string",
+          "const": "Zora/Base"
+        },
+        "artifact_id": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]+$"
+        },
+        "related_receipt": {
+          "type": "string",
+          "pattern": "^RECEIPT-[0-9]{3}(\\.[0-9]+)?$"
+        },
+        "token_uri": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "$ref": "#/$defs/sha256_prefixed"
+        },
+        "canonical_hash": {
+          "$ref": "#/$defs/sha256_prefixed"
+        },
+        "verification": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "content_hash_verified",
+            "schema_compliant",
+            "related_receipt_exists",
+            "placeholder_scan",
+            "authority_check",
+            "metadata_excluded_from_canonical_hash"
+          ],
+          "properties": {
+            "content_hash_verified": {
+              "type": "boolean"
+            },
+            "schema_compliant": {
+              "type": "boolean"
+            },
+            "related_receipt_exists": {
+              "type": "boolean"
+            },
+            "placeholder_scan": {
+              "type": "string",
+              "enum": [
+                "PASS",
+                "FAIL"
+              ]
+            },
+            "authority_check": {
+              "type": "string",
+              "enum": [
+                "PASS",
+                "FAIL"
+              ]
+            },
+            "metadata_excluded_from_canonical_hash": {
+              "type": "boolean",
+              "const": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
