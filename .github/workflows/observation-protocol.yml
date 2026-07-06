@@ -44,3 +44,7 @@ jobs:
       - name: Run Observation Protocol negative fixture harness
         run: |
           python3 tests/observation/test_negative_fixtures.py
+
+      - name: Validate Round 2 replay packets
+        run: |
+          python3 tests/observation/test_replay_validator.py
