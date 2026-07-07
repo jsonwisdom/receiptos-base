@@ -6,6 +6,8 @@ import pytest
 MANIFEST_TEST_MAP = {
     "valid/manifest.valid.json": 0,
     "invalid/tree_hash_mismatch.json": 4,
+    "invalid/commit_unresolvable.json": 5,
+    "invalid/missing_surface.json": 5,
 }
 
 @pytest.mark.parametrize("manifest_path, expected_code", MANIFEST_TEST_MAP.items())
