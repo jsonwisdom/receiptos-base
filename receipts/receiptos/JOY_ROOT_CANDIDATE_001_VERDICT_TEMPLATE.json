@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1",
+  "verdict_id": "JOY_ROOT_CANDIDATE_001_VERDICT_TEMPLATE",
+  "candidate_id": "JOY_ROOT_CANDIDATE_001",
+  "source_repo": "jsonwisdom/JOY",
+  "source_artifact": "WISDOM/joy_root_candidate_001.json",
+  "ingestion_issue": "jsonwisdom/receiptos-base#104",
+  "current_status": "AWAITING_INGESTION",
+  "terminal_statuses": [
+    "VERIFIED_BY_RECEIPTOS",
+    "REJECTED_BY_RECEIPTOS"
+  ],
+  "receipt_id": "PENDING_REAL_RECEIPT",
+  "leaf_count": "PENDING",
+  "root": "PENDING",
+  "timestamp": "PENDING",
+  "replay_reference": {
+    "joy_candidate": "WISDOM/joy_root_candidate_001.json",
+    "joy_handoff": "docs/JOY_TO_RECEIPTOS_HANDOFF_V0_1.md",
+    "joy_ingestion_request": "receipts/receiptos_ingestion/JOY_ROOT_CANDIDATE_001_INGESTION_REQUEST.json"
+  },
+  "authority": false,
+  "truth_claim": false,
+  "joy_status": "CANDIDATE_DECLARED",
+  "receiptos_status": "AWAITING_INGESTION",
+  "al_status": "BLOCKED_UNTIL_VERIFIED",
+  "notes": "Template only. This is not a verdict. Replace pending fields only after ReceiptOS ingestion and judgment."
+}
