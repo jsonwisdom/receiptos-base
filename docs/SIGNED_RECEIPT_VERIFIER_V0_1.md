@@ -39,6 +39,16 @@ no_fake_green=true
 
 Otherwise the verifier emits `GOVERNANCE_GAP`.
 
-## v0.1 limitation
+## Ed25519 signature requirement
 
-This version validates the signature field and digest continuity seam, but does not yet perform key-based cryptographic signature verification. A later crypto-backed PR must replace the placeholder signature field check with real Ed25519 or ECDSA verification.
+A `LOAD_VERIFIED` witness must include a schema-valid `signature` object:
+
+```text
+alg = Ed25519
+public_key = 32-byte hex public key
+signature = 64-byte hex signature
+```
+
+The verifier checks the signature over the canonical witness payload with the `signature` field removed.
+
+A missing, malformed, invalid, or tampered signature fails closed to `GOVERNANCE_GAP`.
