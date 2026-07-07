@@ -1,0 +1,79 @@
+name: ReceiptOS Website CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: receiptos-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit-build-verify:
+    name: Audit, build, and verify ReceiptOS website
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: NPM audit high+
+        run: npm audit --audit-level=high
+
+      - name: Build website
+        run: npm run build
+
+      - name: Verify Farcaster / manifest gates
+        run: npm run verify:farcaster
+
+      - name: Verify ReceiptOS anchor
+        run: npm run verify:receiptos:anchor
+
+      - name: NPM package dry run
+        run: npm pack --dry-run
+
+      - name: Emit deployment receipt
+        if: always()
+        run: |
+          mkdir -p audit-reports
+          cat > audit-reports/receiptos-ci-${GITHUB_RUN_ID}.json <<EOF
+          {
+            "schema": "RECEIPTOS_CI_AUDIT_V1",
+            "repo": "${GITHUB_REPOSITORY}",
+            "run_id": "${GITHUB_RUN_ID}",
+            "run_attempt": "${GITHUB_RUN_ATTEMPT}",
+            "sha": "${GITHUB_SHA}",
+            "ref": "${GITHUB_REF}",
+            "authority": false,
+            "truth_claim": false,
+            "website_package": "@jsonwisdom/receiptos-verifier",
+            "status": "completed"
+          }
+          EOF
+          cat audit-reports/receiptos-ci-${GITHUB_RUN_ID}.json
+
+      - name: Upload CI audit receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: receiptos-ci-audit-${{ github.run_id }}
+          path: audit-reports/*.json
+          if-no-files-found: error
