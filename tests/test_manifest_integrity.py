@@ -23,3 +23,12 @@ def test_manifest_integrity_gates(manifest_path, expected_code):
         f"{manifest_path} expected exit {expected_code}, got {result.returncode}\n"
         f"STDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}"
     )
+
+def test_replay_run_accepts_valid_manifest():
+    result = subprocess.run(
+        ["receiptos", "replay", "run", "manifests/valid/manifest.valid.json"],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode == 0
+    assert '"receipt_type": "replay_run"' in result.stdout

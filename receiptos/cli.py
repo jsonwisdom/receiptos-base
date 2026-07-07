@@ -152,35 +152,40 @@ def replay_verify(path):
 
 
 def replay_run(path):
-    code = schema_validate(path)
+    manifest, code = load(path)
     if code:
         return code
 
-    d, _ = load(path)
+    verify_code = manifest_verify(path)
+    if verify_code:
+        return verify_code
 
-    for inv in d["replay_invariants"]:
-        if inv not in VALID_INVARIANTS:
-            return EXIT["INVARIANT_FAIL"]
+    manifest_bytes = Path(path).read_bytes()
+    input_hash = hashlib.sha256(manifest_bytes).hexdigest()
 
-    if d["output_hash"] == "0" * 64:
-        return EXIT["TREE_HASH_FAIL"]
-
-    print(json.dumps({
+    receipt = {
         "receipt_version": "0.1",
         "receipt_type": "replay_run",
         "authority": False,
         "engine_id": "receiptos-replay-engine",
         "engine_version": "0.1",
-        "replay_invariants": d["replay_invariants"],
-        "timestamp": d["timestamp"],
-        "input_hash": d["input_hash"],
-        "output_hash": d["output_hash"],
+        "replay_invariants": [
+            "INV_COMMIT_RESOLVABLE",
+            "INV_TREE_HASH_MATCH",
+            "INV_CANONICAL_SURFACES_PRESENT",
+            "INV_DETERMINISTIC_OUTPUT"
+        ],
+        "timestamp": manifest.get("generated_at", "2026-07-07T00:00:00Z"),
+        "input_hash": input_hash,
+        "output_hash": manifest["tree_sha256"],
         "status": "PASS",
         "exit_code": 0,
         "errors": []
-    }, sort_keys=True))
+    }
 
+    print(json.dumps(receipt, sort_keys=True))
     return EXIT["PASS"]
+
 
 def main(argv):
     if len(argv) != 4:
