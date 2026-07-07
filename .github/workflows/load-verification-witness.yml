@@ -1,6 +1,9 @@
 name: LOAD_VERIFICATION_WITNESS
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       transform_version:
@@ -24,12 +27,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
       - name: Run fail-closed witness harness
         run: |
           python tools/load_harness.py \
-            --transform-version "${{ inputs.transform_version }}" \
-            --target-qps "${{ inputs.target_qps }}" \
-            --duration-min "${{ inputs.duration_min }}" \
+            --transform-version "${{ github.event.inputs.transform_version || 'v0.1.0' }}" \
+            --target-qps "${{ github.event.inputs.target_qps || '200' }}" \
+            --duration-min "${{ github.event.inputs.duration_min || '15' }}" \
             --allow-governance-gap-exit-zero
       - name: Upload witness artifacts
         uses: actions/upload-artifact@v4
@@ -37,5 +42,6 @@ jobs:
           name: load-verification-witness
           path: |
             receipts/*.json
+            receipts/*.json.sig
             transparency/log/*.json
             transparency/index/chain_head.json
