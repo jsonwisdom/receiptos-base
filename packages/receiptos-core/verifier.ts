@@ -1,1 +1,3 @@
-export { runL1Verification } from "./verifier.js";
+const coreVerifier = require("./verifier.js");
+
+export const runL1Verification = coreVerifier.runL1Verification;
