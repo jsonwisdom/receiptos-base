@@ -46,7 +46,7 @@ def base_witness():
             "receipt_id": "gap-test",
             "receipt_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "jcs_canonical": True,
-            "signature_verified": False,
+            "signature_verified": True,
         },
         "transparency_continuity": {
             "log_id": "log-test",
@@ -61,8 +61,8 @@ def base_witness():
             "no_synthetic_pass": True,
             "no_public_load_badge_before_witness": True,
         },
-        "membrane_unchanged": False,
-        "failed_conditions": ["signed_receipt_integrity_missing"],
+        "membrane_unchanged": True,
+        "failed_conditions": ["independent_replay_match_missing"],
     }
 
 
@@ -85,7 +85,8 @@ def test_governance_gap_result_can_exit_zero_when_allowed(tmp_path):
     assert result.returncode == 0
     data = json.loads(result.stdout)
     assert data["status"] == "GOVERNANCE_GAP"
-    assert data["checks"]["signature_valid"] is False
+    assert data["checks"]["signature_valid"] is True
+    assert data["checks"]["failed_conditions_empty"] is False
 
 
 def test_schema_invalid_witness_rejected(tmp_path):
@@ -104,8 +105,6 @@ def test_load_verified_requires_matching_digest(tmp_path):
     witness = base_witness()
     witness["gate_result"]["status"] = "LOAD_VERIFIED"
     witness["gate_result"]["checks_passed"] = 11
-    witness["receipt_integrity"]["signature_verified"] = True
-    witness["membrane_unchanged"] = True
     witness["failed_conditions"] = []
     log = {"run_id": "test-run", "status": "LOAD_VERIFIED"}
     head = {
