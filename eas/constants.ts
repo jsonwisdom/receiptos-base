@@ -1,0 +1,13 @@
+export const BASE_CHAIN_ID = 8453 as const;
+
+export const JOY_REPLAY_SCHEMA_UID_V0_1 =
+  '0x5840bf1e71d72a83b820c132b93b3a284a5a07664928342b205938fda0af8055' as const;
+
+export const JOY_REPLAY_ATTESTATION_UID_V0_1 =
+  '0x065812e1fd3825471415d1e8f7cf38f77a450ac9bf204e45af317e6930639a7e' as const;
+
+export const JOY_REPLAY_ATTESTATION_TX_V0_1 =
+  '0x7c15cd42bdf73b3bae0fa7c16bf81c491fdb72b20289bd0b5a029a78e51eaab4' as const;
+
+export const JOY_REPLAY_BOOTSTRAP_CLASSIFICATION_V0_1 =
+  'BOOTSTRAP_NOT_VERIFIED' as const;
