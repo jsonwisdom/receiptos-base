@@ -1,3 +1,4 @@
+import json
 import subprocess
 from pathlib import Path
 
@@ -29,3 +30,38 @@ def test_receipt_integrity_gates(receipt_path, expected_code):
         f"{receipt_path} expected exit {expected_code}, "
         f"got {result.returncode}\nSTDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}"
     )
+
+
+def test_replay_run_tree_hash_fail():
+    """replay_run with tree_sha256 mismatch → exit 4, FAIL receipt"""
+    result = subprocess.run(["receiptos", "replay", "run", "manifests/invalid/tree_hash_mismatch.json"],
+                            capture_output=True, text=True)
+    assert result.returncode == 4
+    receipt = json.loads(result.stdout)
+    assert receipt["status"] == "FAIL"
+    assert receipt["exit_code"] == 4
+    assert "INV_TREE_HASH_MATCH" in receipt["errors"][0]
+    assert receipt["authority"] is False
+    fixture = json.loads(Path("fixtures/receipts/invalid/replay_tree_hash_mismatch.json").read_text())
+    assert receipt["receipt_type"] == fixture["receipt_type"]
+    assert receipt["status"] == fixture["status"]
+
+def test_replay_run_commit_unresolvable():
+    """replay_run with bad commit_sha → exit 5, FAIL receipt"""
+    result = subprocess.run(["receiptos", "replay", "run", "manifests/invalid/commit_unresolvable.json"],
+                            capture_output=True, text=True)
+    assert result.returncode == 5
+    receipt = json.loads(result.stdout)
+    assert receipt["status"] == "FAIL"
+    assert receipt["exit_code"] == 5
+    assert "INV_COMMIT_RESOLVABLE" in receipt["errors"][0]
+
+def test_replay_run_missing_surface():
+    """replay_run with missing canonical_surface → exit 5, FAIL receipt"""
+    result = subprocess.run(["receiptos", "replay", "run", "manifests/invalid/missing_surface.json"],
+                            capture_output=True, text=True)
+    assert result.returncode == 5
+    receipt = json.loads(result.stdout)
+    assert receipt["status"] == "FAIL"
+    assert receipt["exit_code"] == 5
+    assert "INV_CANONICAL_SURFACES_PRESENT" in receipt["errors"][0]

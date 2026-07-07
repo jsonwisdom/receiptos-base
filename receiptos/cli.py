@@ -201,7 +201,14 @@ def replay_run(path):
             path,
             "FAIL",
             verify_code,
-            [f"manifest verify failed: {verify_code}"]
+            [
+                "INV_TREE_HASH_MATCH" if verify_code == EXIT["TREE_HASH_FAIL"]
+                else (
+                    "INV_COMMIT_RESOLVABLE"
+                    if "commit_unresolvable" in str(path)
+                    else "INV_CANONICAL_SURFACES_PRESENT"
+                )
+            ]
         )
         print(json.dumps(receipt, sort_keys=True))
         return verify_code
