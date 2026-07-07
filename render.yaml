@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: receiptos-base
+    name: receiptos-base-1
     runtime: node
     plan: free
     branch: main
@@ -10,8 +10,8 @@ services:
       - key: NODE_VERSION
         value: 22
       - key: NEXT_PUBLIC_SITE_URL
-        value: https://receiptos-base.onrender.com
+        value: https://receiptos-base-1.onrender.com
       - key: NEXT_PUBLIC_URL
-        value: https://receiptos-base.onrender.com
+        value: https://receiptos-base-1.onrender.com
       - key: BASE_RPC_URL
         sync: false
