@@ -1,0 +1,86 @@
+openapi: 3.1.0
+info:
+  title: AL to receiptos-base Interface
+  version: 0.1.0
+paths:
+  /v1/replay:
+    post:
+      summary: Execute deterministic replay over attested events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplayContext'
+      responses:
+        '200':
+          description: Replay result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplayResult'
+components:
+  schemas:
+    ReplayContext:
+      type: object
+      required: [initialState, events, strategy, invariants]
+      properties:
+        initialState:
+          type: object
+          required: [stateRoot, authority, noFakeGreen]
+          properties:
+            stateRoot:
+              type: string
+            authority:
+              const: false
+            noFakeGreen:
+              const: true
+        events:
+          type: array
+          items:
+            type: object
+            required: [uid, schemaUid, eventHash, payload, authority]
+            properties:
+              uid:
+                type: string
+              schemaUid:
+                type: string
+              txHash:
+                type: string
+              eventHash:
+                type: string
+              payload: {}
+              authority:
+                const: false
+        strategy:
+          enum: [linear, fork-aware, doctrinal]
+        invariants:
+          type: array
+          items:
+            type: object
+            required: [id, description, required]
+            properties:
+              id:
+                type: string
+              description:
+                type: string
+              required:
+                const: true
+    ReplayResult:
+      type: object
+      required: [stateRoot, eventCount, strategy, authority, noFakeGreen, verifiedReplay, invariantCount]
+      properties:
+        stateRoot:
+          type: string
+        eventCount:
+          type: integer
+        strategy:
+          enum: [linear, fork-aware, doctrinal]
+        authority:
+          const: false
+        noFakeGreen:
+          const: true
+        verifiedReplay:
+          const: false
+        invariantCount:
+          type: integer
