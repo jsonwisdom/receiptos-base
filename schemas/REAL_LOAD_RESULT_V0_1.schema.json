@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos.local/schemas/REAL_LOAD_RESULT_V0_1.schema.json",
+  "title": "REAL_LOAD_RESULT_V0_1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "result_version",
+    "status",
+    "timestamp",
+    "transform_version",
+    "target_qps",
+    "duration_min",
+    "replay_target",
+    "metrics",
+    "authority",
+    "no_fake_green",
+    "failed_conditions",
+    "output_hash"
+  ],
+  "properties": {
+    "result_version": { "const": "REAL_LOAD_RESULT_V0_1" },
+    "status": { "enum": ["LOAD_CANDIDATE", "GOVERNANCE_GAP"] },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "transform_version": { "const": "v0.1.0" },
+    "target_qps": { "type": "integer", "minimum": 1 },
+    "duration_min": { "type": "integer", "minimum": 15 },
+    "replay_target": { "type": ["string", "null"] },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requested_target_qps",
+        "requested_duration_min",
+        "observed_qps",
+        "latency_p95_ms",
+        "replay_success_rate",
+        "resource_usage"
+      ],
+      "properties": {
+        "requested_target_qps": { "type": "integer", "minimum": 1 },
+        "requested_duration_min": { "type": "integer", "minimum": 1 },
+        "observed_qps": { "type": "number", "minimum": 0 },
+        "latency_p95_ms": { "type": ["number", "null"], "minimum": 0 },
+        "replay_success_rate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "resource_usage": { "type": "object" }
+      }
+    },
+    "authority": { "const": false },
+    "no_fake_green": { "const": true },
+    "failed_conditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "output_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "LOAD_CANDIDATE" } },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "failed_conditions": { "maxItems": 0 },
+          "replay_target": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  ]
+}
