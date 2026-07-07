@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos.local/schemas/SIGNED_LOAD_RECEIPT_VERIFIER_V0_1.schema.json",
+  "title": "SIGNED_LOAD_RECEIPT_VERIFIER_V0_1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "verifier_version",
+    "run_id",
+    "status",
+    "checks",
+    "canonical_digest",
+    "authority",
+    "no_fake_green"
+  ],
+  "properties": {
+    "verifier_version": { "const": "SIGNED_LOAD_RECEIPT_VERIFIER_V0_1" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["LOAD_VERIFIED", "GOVERNANCE_GAP"] },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "receipt_digest_match",
+        "signature_valid",
+        "hash_chain_continuous",
+        "doctrine_guards_pass",
+        "failed_conditions_empty"
+      ],
+      "properties": {
+        "receipt_digest_match": { "type": "boolean" },
+        "signature_valid": { "type": "boolean" },
+        "hash_chain_continuous": { "type": "boolean" },
+        "doctrine_guards_pass": { "type": "boolean" },
+        "failed_conditions_empty": { "type": "boolean" }
+      }
+    },
+    "canonical_digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "authority": { "const": false },
+    "no_fake_green": { "const": true }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "LOAD_VERIFIED" } },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "checks": {
+            "properties": {
+              "receipt_digest_match": { "const": true },
+              "signature_valid": { "const": true },
+              "hash_chain_continuous": { "const": true },
+              "doctrine_guards_pass": { "const": true },
+              "failed_conditions_empty": { "const": true }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
