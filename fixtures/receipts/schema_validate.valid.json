@@ -1,0 +1,18 @@
+{
+  "receipt_version": "0.1",
+  "receipt_type": "schema_validate",
+  "authority": false,
+  "engine_id": "receiptos-replay-engine",
+  "engine_version": "0.1",
+  "replay_invariants": [
+    "INV_SCHEMA_VALID",
+    "INV_NON_AUTHORITY",
+    "INV_DETERMINISTIC_OUTPUT"
+  ],
+  "timestamp": "2026-07-07T06:54:29Z",
+  "input_hash": "6991b6e43f725ec5a6bc9f046cd85d9f5a50383bf355a074da90b9b3b29e22b9",
+  "output_hash": "f255c3b9f427c617ddb8782af23cb0a016f12ecb6f533c4a5408bd13c829344e",
+  "status": "PASS",
+  "exit_code": 0,
+  "errors": []
+}
