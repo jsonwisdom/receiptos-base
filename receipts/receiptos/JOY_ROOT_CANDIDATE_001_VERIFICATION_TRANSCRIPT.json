@@ -1,0 +1,65 @@
+{
+  "schema_version": "0.1",
+  "transcript_id": "JOY_ROOT_CANDIDATE_001_VERIFICATION_TRANSCRIPT",
+  "candidate_id": "JOY_ROOT_CANDIDATE_001",
+  "source_repo": "jsonwisdom/JOY",
+  "source_ref_observed": "main",
+  "source_artifact": {
+    "path": "WISDOM/joy_root_candidate_001.json",
+    "blob_sha": "f5bd45393d0255f561a1fad1cbc5b6a037e0ab20"
+  },
+  "ingestion_issue": "jsonwisdom/receiptos-base#104",
+  "receiptos_verdict_status": "NOT_EMITTED",
+  "transcript_status": "PHASE_1_2_EVIDENCE_ANCHORED",
+  "phases_completed": [
+    "read_candidate",
+    "record_candidate_boundaries",
+    "record_referenced_artifacts",
+    "record_leaves_sha256_presence"
+  ],
+  "candidate_boundaries_observed": {
+    "joy_status": "CANDIDATE_DECLARED",
+    "receiptos_status": "PENDING",
+    "al_status": "BLOCKED_UNTIL_VERIFIED",
+    "authority": false,
+    "execution": false,
+    "verification": false,
+    "candidate_root": "PENDING_RECEIPTOS_VERIFICATION",
+    "no_fake_green": true
+  },
+  "referenced_artifacts_declared_by_candidate": [
+    "docs/JOY_LEAF_QUALIFICATION_RULES_V0_1.md",
+    "schemas/joy/leaf_qualification.schema.json",
+    "WISDOM/joy_leaf_qualification_v0_1.example.json",
+    "docs/JOY_MANIFEST_ROOT_PROTOCOL_V0_1.md",
+    "schemas/joy/manifest_root.schema.json",
+    "WISDOM/joy_manifest_root_v0_1.example.json",
+    "WISDOM/receipt_chain_link_v0_1.md",
+    "WISDOM/receipt_chain_link_v0_1.manifest.json",
+    "schemas/joy/receipt_chain_link_v0_1.schema.json",
+    "docs/JOY_RECEIPT_CHAIN_VALIDATION_MODEL_V0_1.md",
+    "leaves.sha256"
+  ],
+  "referenced_artifact_count": 11,
+  "leaves_sha256_observed": {
+    "path": "leaves.sha256",
+    "blob_sha": "4456a1d63d45165373bdd8ebcf77dfce59ed84b8",
+    "observation": "present and populated; full digest recomputation not yet recorded in this transcript"
+  },
+  "leaf_qualification_rules_observed": {
+    "path": "docs/JOY_LEAF_QUALIFICATION_RULES_V0_1.md",
+    "blob_sha": "f3d1e0228b15483fad1f104b220dc9dcf02b6bf7",
+    "boundary": "JOY records meaning, not cryptographic truth; ReceiptOS performs verification later; AL consumes verified artifacts downstream"
+  },
+  "missing_artifacts_recorded": [],
+  "malformed_references_recorded": [],
+  "duplicate_references_recorded": [],
+  "digest_recompute_status": "NOT_RECORDED",
+  "computed_root_status": "NOT_RECORDED",
+  "terminal_verdict_allowed_values": [
+    "VERIFIED_BY_RECEIPTOS",
+    "REJECTED_BY_RECEIPTOS"
+  ],
+  "al_status_after_transcript": "BLOCKED_UNTIL_VERDICT",
+  "notes": "This transcript anchors Phase 1-2 observations only. It is not a terminal ReceiptOS verdict. Do not create JOY_ROOT_CANDIDATE_001_VERDICT.json or close issue #104 until digest recomputation, root handling if applicable, receipt_id, and terminal status are recorded."
+}
