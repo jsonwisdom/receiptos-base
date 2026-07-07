@@ -26,6 +26,9 @@ jobs:
       - name: Run fail-closed negative tests
         run: python scripts/test-release-gate-negative.py
 
+      - name: Run load witness audit negative tests
+        run: pytest tests/test_load_witness_audit.py
+
       - name: Validate evidence schema files
         run: |
           python - <<'PY'
