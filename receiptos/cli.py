@@ -4,6 +4,7 @@ import re
 import sys
 import subprocess
 import hashlib
+import datetime
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
@@ -151,38 +152,61 @@ def replay_verify(path):
     return EXIT["PASS"]
 
 
-def replay_run(path):
-    manifest, code = load(path)
-    if code:
-        return code
-
-    verify_code = manifest_verify(path)
-    if verify_code:
-        return verify_code
-
+def replay_receipt(manifest, path, status, exit_code, errors):
     manifest_bytes = Path(path).read_bytes()
-    input_hash = hashlib.sha256(manifest_bytes).hexdigest()
-
-    receipt = {
+    return {
         "receipt_version": "0.1",
         "receipt_type": "replay_run",
         "authority": False,
         "engine_id": "receiptos-replay-engine",
         "engine_version": "0.1",
         "replay_invariants": [
+            "INV_READ_ONLY_WORKSPACE",
             "INV_COMMIT_RESOLVABLE",
             "INV_TREE_HASH_MATCH",
             "INV_CANONICAL_SURFACES_PRESENT",
             "INV_DETERMINISTIC_OUTPUT"
         ],
-        "timestamp": manifest.get("generated_at", "2026-07-07T00:00:00Z"),
-        "input_hash": input_hash,
-        "output_hash": manifest["tree_sha256"],
-        "status": "PASS",
-        "exit_code": 0,
-        "errors": []
+        "timestamp": datetime.datetime.now(datetime.UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+        "input_hash": hashlib.sha256(manifest_bytes).hexdigest(),
+        "output_hash": manifest.get("tree_sha256", "0" * 64),
+        "status": status,
+        "exit_code": exit_code,
+        "errors": errors
     }
 
+def replay_run(path):
+    manifest, code = load(path)
+    if code:
+        print(json.dumps({
+            "receipt_version": "0.1",
+            "receipt_type": "replay_run",
+            "authority": False,
+            "engine_id": "receiptos-replay-engine",
+            "engine_version": "0.1",
+            "replay_invariants": ["INV_FAILURE_EXPLICIT"],
+            "timestamp": datetime.datetime.now(datetime.UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+            "input_hash": "0" * 64,
+            "output_hash": "0" * 64,
+            "status": "FAIL",
+            "exit_code": code,
+            "errors": ["input load failed"]
+        }, sort_keys=True))
+        return code
+
+    verify_code = manifest_verify(path)
+    if verify_code:
+        receipt = replay_receipt(
+            manifest,
+            path,
+            "FAIL",
+            verify_code,
+            [f"manifest verify failed: {verify_code}"]
+        )
+        print(json.dumps(receipt, sort_keys=True))
+        return verify_code
+
+    receipt = replay_receipt(manifest, path, "PASS", 0, [])
     print(json.dumps(receipt, sort_keys=True))
     return EXIT["PASS"]
 
