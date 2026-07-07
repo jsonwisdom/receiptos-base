@@ -1,4 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 
-.secrets/
-.env
-.env.*
+# Testing
+.pytest_cache/
+
+# Logs
+*.log
+
+# Environment
+.venv/
+env/
