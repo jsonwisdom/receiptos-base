@@ -1,4 +1,4 @@
-const publicUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_URL || "https://receiptos-base-1.onrender.com";
+const publicUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_URL || "https://receiptos-base.vercel.app";
 const ogImagePath = "/og/court-room.png";
 
 export async function generateMetadata() {
@@ -44,22 +44,5 @@ export async function generateMetadata() {
 }
 
 export default function Page() {
-  return (
-    <main style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}>
-      <h1>ReceiptOS Court Frame</h1>
-      <p>Court is in session.</p>
-      <pre>
-        {JSON.stringify(
-          {
-            status: "FRAME_MVP_PENDING_DEPLOYMENT",
-            verdict: "WITNESS_ONLY",
-            authority: false,
-            truth_claim: false,
-          },
-          null,
-          2,
-        )}
-      </pre>
-    </main>
-  );
+  return <main style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}><h1>ReceiptOS Court Frame</h1><p>Court is in session.</p><pre>{JSON.stringify({ status: "FRAME_MVP_PENDING_DEPLOYMENT", verdict: "WITNESS_ONLY", authority: false, truth_claim: false }, null, 2)}</pre></main>;
 }
