@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos.local/schemas/manifest.schema.json",
+  "title": "ReceiptOS Manifest v0.1",
+  "type": "object",
+  "required": ["manifest_version", "commit_sha", "tree_sha256", "canonical_surfaces"],
+  "properties": {
+    "manifest_version": { "const": "0.1" },
+    "commit_sha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "tree_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "canonical_surfaces": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1
+    },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "generator": { "type": "string" }
+  },
+  "additionalProperties": false
+}

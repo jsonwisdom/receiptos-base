@@ -2,6 +2,8 @@
 import json
 import re
 import sys
+import subprocess
+import hashlib
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
@@ -62,6 +64,55 @@ def load(path):
         return json.loads(p.read_text()), 0
     except Exception:
         return None, EXIT["SCHEMA_FAIL"]
+
+
+def canonical_tree_sha256(commit):
+    result = subprocess.run(
+        ["git", "ls-tree", "-r", "--full-tree", commit],
+        capture_output=True,
+        text=True
+    )
+    if result.returncode != 0:
+        return None
+    canonical = "\n".join(sorted(result.stdout.splitlines()))
+    return hashlib.sha256(canonical.encode()).hexdigest()
+
+def manifest_fail(error, message):
+    print(json.dumps({"valid": False, "error": error, "message": message}, sort_keys=True), file=sys.stderr)
+    return EXIT["MANIFEST_FAIL"]
+
+def manifest_verify(path):
+    manifest, code = load(path)
+    if code:
+        return code
+
+    schema_path = Path("schemas/manifest.schema.json")
+    if not schema_path.exists():
+        return EXIT["INPUT_MISSING"]
+
+    try:
+        schema = json.loads(schema_path.read_text())
+        errors = sorted(Draft202012Validator(schema).iter_errors(manifest), key=lambda e: e.path)
+        if errors:
+            return EXIT["SCHEMA_FAIL"]
+    except Exception:
+        return EXIT["SCHEMA_FAIL"]
+
+    commit = manifest["commit_sha"]
+    tree_sha256 = canonical_tree_sha256(commit)
+    if tree_sha256 is None:
+        return manifest_fail("INV_COMMIT_RESOLVABLE", "commit is not resolvable")
+
+    if tree_sha256 != manifest["tree_sha256"]:
+        print(json.dumps({"valid": False, "error": "INV_TREE_HASH_MATCH", "message": "tree_sha256 mismatch"}, sort_keys=True), file=sys.stderr)
+        return EXIT["TREE_HASH_FAIL"]
+
+    for surface in manifest["canonical_surfaces"]:
+        if subprocess.run(["git", "cat-file", "-e", f"{commit}:{surface}"], capture_output=True).returncode != 0:
+            return manifest_fail("INV_CANONICAL_SURFACES_PRESENT", f"missing surface: {surface}")
+
+    print(json.dumps({"valid": True, "commit_sha": commit, "tree_sha256": tree_sha256}, sort_keys=True))
+    return EXIT["PASS"]
 
 def schema_validate(path):
     d, code = load(path)
@@ -139,6 +190,9 @@ def main(argv):
 
     if group == "schema" and action == "validate":
         return schema_validate(path)
+
+    if group == "manifest" and action == "verify":
+        return manifest_verify(path)
 
     if group == "replay" and action == "verify":
         return replay_verify(path)

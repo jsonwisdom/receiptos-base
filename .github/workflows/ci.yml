@@ -26,4 +26,4 @@ jobs:
           sudo ln -sf "$PWD/receiptos-cli" /usr/local/bin/receiptos
 
       - name: Run tests
-        run: pytest -q tests/test_receipt_integrity.py
+        run: pytest -q tests

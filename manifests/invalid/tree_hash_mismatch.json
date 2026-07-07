@@ -1,0 +1,12 @@
+{
+  "manifest_version": "0.1",
+  "commit_sha": "05058b3b9c26592cd7f869562672727181015f4c",
+  "tree_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "canonical_surfaces": [
+    "schemas/receipt.schema.json",
+    "docs/REPLAY_INVARIANTS_V0_1.md",
+    "receiptos/cli.py"
+  ],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "generator": "receiptos-manual-v0.1"
+}
