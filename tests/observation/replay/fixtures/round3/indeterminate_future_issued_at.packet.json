@@ -1,0 +1,34 @@
+{
+  "byte_length": 19,
+  "collector_identity": {
+    "collector_id": "collector-747-002",
+    "collector_version": "v3.1.0",
+    "contract_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "contract_valid": true
+  },
+  "expected_reason": "future_issued_at",
+  "expected_verdict": "INDETERMINATE",
+  "expires_at": "2026-07-07T16:00:00Z",
+  "hash_comparison_rules": {
+    "expected_hash": "b6598b58c6c96c5df23f1db2464ca1dfac14046d4d136ab6293396e07108151d",
+    "recomputed_hash": "b6598b58c6c96c5df23f1db2464ca1dfac14046d4d136ab6293396e07108151d"
+  },
+  "issued_at": "2026-07-07T14:00:00Z",
+  "manifest": {
+    "content": "Sample manifest content",
+    "manifest_sha256": "61da36cfabf86833709df16887b12b89a048ae246a9836721cf383e200e4473a"
+  },
+  "nonce": "r3nonce0004",
+  "observation_id": "obs-r3-pass-001",
+  "packet_id": "r3-future-001",
+  "packet_version": "1.0",
+  "raw_payload": "SGVsbG8sIFpvcmFGYWN0b3J5IQ==",
+  "raw_payload_sha256": "b6598b58c6c96c5df23f1db2464ca1dfac14046d4d136ab6293396e07108151d",
+  "replay_window_seconds": 60,
+  "source": "zora_factory_monitor",
+  "timestamp": "2026-07-06T14:30:00Z",
+  "verification_context": {
+    "run_id": "2026-07-06-round3-test",
+    "validator_version": "v1.3.0"
+  }
+}

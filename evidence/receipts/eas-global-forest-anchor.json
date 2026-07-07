@@ -1,0 +1,18 @@
+{
+  "authority": false,
+  "chain": "base",
+  "chain_id": 8453,
+  "forest_root": "0x9f77784722956c27e274a68cf97d4e5a5192514d61a5d7c478d56bfaccad7a61",
+  "notes": [
+    "Receipt hash binds to deterministic verifier output.",
+    "Attestation is revocable because of the EAS configuration."
+  ],
+  "receipt_hash": "0x0b3b7495babd70d7204bfbed9490d89f3c5d8439d1a1e521bda1891dcc7f8e33",
+  "revocable": true,
+  "root_match": true,
+  "schema_uid": "0x39a3578a4033e438d10c64191de23cc53016836f2535e7d56fe5d529ef1702a1",
+  "status": "ANCHORED_WITH_REVOCABILITY_VARIANCE",
+  "transaction_id": "0x84dbf17b14b62afcde741fb6113be9ce24a7ec06f25d1f9cdb0ace3e976e637c",
+  "uid": "0xa29eab49ab595b5d93dcb07e612dc0d284c83f2038f5a226c91d7cf9c2b96aa4",
+  "version": "1.0"
+}

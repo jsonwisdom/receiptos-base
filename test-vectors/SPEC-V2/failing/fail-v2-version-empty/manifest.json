@@ -1,0 +1,13 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "homepage": "https://example.com",
+  "developer": {
+    "name": "Example Dev",
+    "url": "https://developer.example.com"
+  },
+  "description": "Failing SPEC-V2 vector for empty SemVer version",
+  "name": "fail-v2-version-empty-test",
+  "version": "",
+  "permissions": []
+}

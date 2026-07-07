@@ -1,0 +1,1 @@
+{"description":"Valid manifest with multiple ordered permissions","developer":{"name":"Example Dev","url":"https://example.com"},"name":"example-permissions","permissions":["read:user","read:storage","write:storage"],"version":"1.0.0"}

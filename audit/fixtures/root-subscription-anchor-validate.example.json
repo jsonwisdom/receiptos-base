@@ -1,0 +1,16 @@
+{
+  "authority": false,
+  "entry_count": 2,
+  "errors": [],
+  "feed_valid": true,
+  "inference_performed": false,
+  "manifest_hashes_valid": true,
+  "root_hashes_valid": true,
+  "sequence_continuity_valid": true,
+  "source": "audit/fixtures/root-subscription-anchor-readiness.example.json",
+  "state_mutated": false,
+  "storage_time_anchors_valid": true,
+  "subscription_feed_validator": true,
+  "truth_claim": false,
+  "unauthorized_fields_valid": true
+}

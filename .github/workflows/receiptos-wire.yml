@@ -1,0 +1,86 @@
+name: ReceiptOS Wire
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_url:
+        description: "Optional deployed ReceiptOS URL to smoke-test, e.g. https://receiptos-frame-mvp.vercel.app"
+        required: false
+        default: "https://receiptos-frame-mvp.vercel.app"
+      require_live_signature:
+        description: "Set true to require live /stream SIGNATURE_VERIFIED"
+        required: false
+        default: "false"
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  wire:
+    name: Verify ReceiptOS Wire
+    runs-on: ubuntu-latest
+    env:
+      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+      DEPLOY_URL: ${{ github.event.inputs.deploy_url || 'https://receiptos-frame-mvp.vercel.app' }}
+      REQUIRE_LIVE_SIGNATURE: ${{ github.event.inputs.require_live_signature || 'false' }}
+    steps:
+      - name: Checkout canonical repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build Next app
+        run: npm run build
+
+      - name: Run fail-closed identity matrix
+        run: node scripts/test-identity-binding-matrix.mjs
+
+      - name: Run production identity verifier
+        id: verifier
+        shell: bash
+        run: |
+          set +e
+          node scripts/verify-identity-binding.mjs > verifier.json
+          code=$?
+          cat verifier.json
+          status=$(node -e "const f=require('./verifier.json'); console.log(f.status)")
+          reason=$(node -e "const f=require('./verifier.json'); console.log(f.reason)")
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          echo "reason=$reason" >> "$GITHUB_OUTPUT"
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          if [ "$status" = "SIGNATURE_VERIFIED" ]; then
+            exit 0
+          fi
+          if [ "$REQUIRE_LIVE_SIGNATURE" = "true" ] || [ "$REQUIRE_LIVE_SIGNATURE" = "True" ]; then
+            exit "$code"
+          fi
+          echo "Verifier is fail-closed but live ERC-1271 may be pending; continuing because require_live_signature=false."
+          exit 0
+
+      - name: Smoke deployed /sign and /stream
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          set -eux
+          curl -fsS "$DEPLOY_URL/sign" >/tmp/sign.html
+          curl -i "$DEPLOY_URL/stream" | tee /tmp/stream.txt
+          grep -i '^etag:' /tmp/stream.txt
+
+      - name: Upload wire artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: receiptos-wire-${{ github.sha }}
+          path: |
+            verifier.json
+            /tmp/stream.txt
+          if-no-files-found: ignore

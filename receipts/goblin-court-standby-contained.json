@@ -1,0 +1,33 @@
+{
+  "artifact_id": "GOBLIN-COURT-STANDBY-CONTAINED-001",
+  "type": "goblin_court_standby_status",
+  "version": "1",
+  "status": "STANDBY_ACTIVE",
+  "session_status_prior": "RECESS_ACTIVE",
+  "posture": "OBSERVATIONAL_ONLY",
+  "root_privileges": "0x00",
+  "root_access": false,
+  "canonical_head": "MRU-023",
+  "canonical_head_status": "VERIFIED_STABLE",
+  "canonical_effect": "none",
+  "authority": false,
+  "mutation": false,
+  "truth_claim": false,
+  "prior_commit": "f24928a365867ffdc11cf2efd6a5778c2fd6f735",
+  "prior_artifact": "receipts/goblin-court-recess-secure.json",
+  "integrity_report": {
+    "jail_status": "secure",
+    "sandbox_isolation": "active",
+    "chain_mutation": false,
+    "variance_escape_detected": false,
+    "goblin_class_variance_contained": true,
+    "production_head_touched": false
+  },
+  "standby_state": {
+    "oversight_layer_idle": true,
+    "watching": true,
+    "ready_for_next_variance_input": true,
+    "input_protocol": "goblin variance entry <CASE_ID> <INPUT_SIGNAL> <CLASSIFICATION>"
+  },
+  "summary": "Goblin Court remains in standby observation with secure jail, active sandbox isolation, root denied, and MRU-023 preserved."
+}

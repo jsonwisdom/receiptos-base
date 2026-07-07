@@ -1,0 +1,23 @@
+{
+  "accepted_for_catalog": true,
+  "authority": false,
+  "catalog_type": "flat_hash_map",
+  "entries": {
+    "sha256:0ab9432b7988e016d3e7db76ca5e42e55705c173f987108ace4baad174fed8b1": {
+      "authority": false,
+      "guard_consumer_safe": true,
+      "guard_hash_match": true,
+      "inference_performed": false,
+      "source_artifact": "lattice/fixtures/rp-002-eas-lattice-ingest.example.json",
+      "source_report": "witness/reports/rp-002-eas-witness-replay.example.json",
+      "state_mutated": false,
+      "truth_claim": false
+    }
+  },
+  "errors": [],
+  "indexed_count": 1,
+  "inference_performed": false,
+  "lattice_catalog": true,
+  "state_mutated": false,
+  "truth_claim": false
+}

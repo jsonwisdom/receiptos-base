@@ -1,0 +1,30 @@
+{
+  "negative_anchor_expected_failures": true,
+  "cases": [
+    {
+      "fixture": "audit/fixtures/negative-anchor-wrong-format.example.json",
+      "expected_error": "storage_anchor_timestamp_invalid:1"
+    },
+    {
+      "fixture": "audit/fixtures/negative-anchor-wrong-semantics.example.json",
+      "expected_error": "storage_anchor_type_invalid:1"
+    },
+    {
+      "fixture": "audit/fixtures/negative-anchor-wrong-semantics.example.json",
+      "expected_error": "storage_anchor_semantics_invalid:1"
+    },
+    {
+      "fixture": "audit/fixtures/negative-anchor-extra-field.example.json",
+      "expected_error": "storage_anchor_extra_fields:1:timeline_rank"
+    },
+    {
+      "fixture": "blocked-by-connector",
+      "case": "sticky false mutation attempt",
+      "expected_error": "sticky_false_failed:1:inference_performed"
+    }
+  ],
+  "authority": false,
+  "truth_claim": false,
+  "inference_performed": false,
+  "state_mutated": false
+}

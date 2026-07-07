@@ -1,0 +1,104 @@
+{
+  "artifactId": "DNI-GROSS-INTEL-CREW-FINALITY-FIRST-V1",
+  "collection": "DNI Gross-Intel Crew",
+  "series": "2026 Midterm Mayhem",
+  "creator": "JayWisdom / Receipt Arcade",
+  "chain": "Base",
+  "zora": {
+    "creatorProfile": "https://zora.co/@jaywisdom",
+    "collectionUrl": "https://zora.co/coin/base:0xe423ae19fffcee95919dde96a31e828bc060e36f",
+    "collectionAddress": "0xe423ae19fffcee95919dde96a31e828bc060e36f",
+    "referrer": "0x829adfedbe565f9885a7ea6bc78912acaef055e2"
+  },
+  "eas": {
+    "network": "Base",
+    "schemaName": "DNI_GROSS_INTEL_CREW_PROVENANCE_V1",
+    "schemaUid": "0x4cffe9862b428afde59127d284cad92b29d1d769eb6f7568e992004464df1ea0",
+    "schemaId": 1643,
+    "revocable": true,
+    "genesisAttestationStatus": "READY_AFTER_COMMIT_HASH_CAPTURE"
+  },
+  "ipfs": {
+    "manifestCid": "bafkreig6du4jfapxzqvsk2gftdfwoim7kodnsgtbt2jspp6kufm732msze",
+    "assetsRootCid": "bafybeifdccmqatcrkhokzq5qqilfcvbykjs3wjofmgdfkmarrdyyxnheli"
+  },
+  "localHashPass": {
+    "bundleSha256": "7869c47dad64c9fcf05cf938880ac5427cca51b3fac452f5ad9b963694aeaaff",
+    "manifestSha256": "de1d389281f7cc2b2568c598cb67219f5386d91a619e9327bfcaa159fde992c9",
+    "sourceSheetSha256": "PRESENT_IN_LOCAL_MANIFEST"
+  },
+  "assets": [
+    {
+      "file": "1A-billy-pulte-less-front.png",
+      "role": "front",
+      "card": 1,
+      "sha256": "265ea6e81f8c552d7789efca5dad7be1efadbd67f01496170d8742f67bf528be"
+    },
+    {
+      "file": "1B-billy-pulte-less-back.png",
+      "role": "back",
+      "card": 1,
+      "sha256": "60f97a3d08d1936a36487b24310a7fd75f80ca00f7ecb93cebd607114eaf029a"
+    },
+    {
+      "file": "1A-billy-pulte-less-foil-front.png",
+      "role": "foil_front",
+      "card": 1,
+      "sha256": "1dc8ac6f72e7296479ae0e0a702fbbd7055309b7115554b063dd3e42821f687d"
+    },
+    {
+      "file": "2A-christina-norton-twist-front.png",
+      "role": "front",
+      "card": 2,
+      "sha256": "be09ce3f429f0ce6032c557cbc1b66e8037ded6db0dd365a16cc7b1bb9bbda83"
+    },
+    {
+      "file": "2B-christina-norton-twist-back.png",
+      "role": "back",
+      "card": 2,
+      "sha256": "532c886a25eeb1557577bbab24201bb6c73e31def28d364d75f7e49336ca9ce0"
+    },
+    {
+      "file": "2A-christina-norton-twist-foil-front.png",
+      "role": "foil_front",
+      "card": 2,
+      "sha256": "7b968b150a964291f3527305e17da0a0a19644a1d75deb9b963e2ae6155d5166"
+    },
+    {
+      "file": "3A-poso-blecchh-front.png",
+      "role": "front",
+      "card": 3,
+      "sha256": "28a62fde8a33b9c1777012636ead9630eaa989ac582d40e4f976c2c06c342f9d"
+    },
+    {
+      "file": "3B-poso-blecchh-back.png",
+      "role": "back",
+      "card": 3,
+      "sha256": "872579a19df3e03dee499c248c6be9e3f0a3b3c2c6bee1ccc4ce6b6b761f685f"
+    },
+    {
+      "file": "3A-poso-blecchh-foil-front.png",
+      "role": "foil_front",
+      "card": 3,
+      "sha256": "ade4dd0f630937494645166fc5eba847b4ff9ca356498e34157acc3507d7744a"
+    }
+  ],
+  "claimsBoundary": {
+    "politicalTruthClaims": false,
+    "satireOnly": true,
+    "provenanceClaimsOnly": true,
+    "revocableAttestations": true,
+    "boundaryText": "Political parody and satire. Fictionalized for entertainment. Not factual depictions. The provenance layer attests only to artifact hashes, creator linkage, metadata, and publication history — not political truth claims."
+  },
+  "attestationInstruction": {
+    "gitCommit": "USE_THE_COMMIT_SHA_RETURNED_BY_THIS_FILE_CREATION_AS_THE_GIT_COMMIT_FIELD_IN_EAS",
+    "contentHash": "0x7869c47dad64c9fcf05cf938880ac5427cca51b3fac452f5ad9b963694aeaaff",
+    "metadataHash": "0xde1d389281f7cc2b2568c598cb67219f5386d91a619e9327bfcaa159fde992c9",
+    "tokenId": 0,
+    "title": "Collection Genesis",
+    "edition": 0,
+    "satire": true
+  },
+  "authority": false,
+  "truthClaim": false
+}

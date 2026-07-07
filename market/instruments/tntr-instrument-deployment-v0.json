@@ -1,0 +1,58 @@
+{
+  "issue": "EXT-032",
+  "deployment": "TNTR Market Instruments v0",
+  "authority": false,
+  "resolution_semantics": "absent",
+  "instrument_authority": false,
+  "instrument_resolution": "absent",
+  "instruments": [
+    {
+      "instrument_id": "TNTR-CRO-001-RF-001",
+      "instrument_type": "replay_future",
+      "primitive_reference": "replay_status",
+      "payloadHash": "cc4a59053eb8adf5bf1c192aa3cc72ecb07a01a5f0109d3a3276a4380555f6c1",
+      "settlement_rule": {
+        "source_type": "replay_receipt",
+        "source_ref": "receipts/tntr-013-multichain-witness-mesh.json",
+        "mechanical_only": true
+      },
+      "authority": false,
+      "forbidden_semantics_enforced": true,
+      "resolution_semantics": "absent",
+      "classification": "observed_signal"
+    },
+    {
+      "instrument_id": "TNTR-CRO-001-PSN-001",
+      "instrument_type": "provenance_strength_note",
+      "primitive_reference": "provenance_strength",
+      "payloadHash": "cc4a59053eb8adf5bf1c192aa3cc72ecb07a01a5f0109d3a3276a4380555f6c1",
+      "settlement_rule": {
+        "source_type": "mesh_receipt",
+        "source_ref": "receipts/tntr-013-multichain-witness-mesh.json",
+        "mechanical_only": true
+      },
+      "authority": false,
+      "forbidden_semantics_enforced": true,
+      "resolution_semantics": "absent",
+      "classification": "observed_signal"
+    },
+    {
+      "instrument_id": "TNTR-CRO-001-CI-001",
+      "instrument_type": "challenge_instrument",
+      "primitive_reference": "challenge",
+      "payloadHash": "cc4a59053eb8adf5bf1c192aa3cc72ecb07a01a5f0109d3a3276a4380555f6c1",
+      "settlement_rule": {
+        "source_type": "challenge_receipt",
+        "source_ref": "receipts/tntr-014-market-substrate-gate.json",
+        "mechanical_only": true
+      },
+      "authority": false,
+      "forbidden_semantics_enforced": true,
+      "resolution_semantics": "absent",
+      "classification": "observed_signal"
+    }
+  ],
+  "forbidden_semantics_enforced": true,
+  "boundary": "settlement_receipts_only",
+  "next_gate": "EXT-033"
+}

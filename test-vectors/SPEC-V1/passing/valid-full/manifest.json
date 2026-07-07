@@ -1,0 +1,26 @@
+{
+  "name": "example-full",
+  "description": "Full valid manifest exercising all semantic fields",
+  "developer": {
+    "name": "Example Developer",
+    "url": "https://example.dev"
+  },
+  "permissions": [
+    "read:user",
+    "read:storage",
+    "write:storage"
+  ],
+  "screenshots": [
+    {
+      "url": "https://example.dev/screenshot1.png",
+      "description": "Main interface"
+    },
+    {
+      "url": "https://example.dev/screenshot2.png",
+      "description": "Settings panel"
+    }
+  ],
+  "version": "1.0.0",
+  "homepage": "https://example.dev/app",
+  "repository": "https://github.com/example/example-full"
+}

@@ -1,0 +1,26 @@
+name: PageAgent Adapter Test Gate
+
+on:
+  pull_request:
+    paths:
+      - "adapters/page-agent/**"
+      - "package.json"
+      - ".github/workflows/page-agent-adapter-test.yml"
+  workflow_dispatch:
+
+jobs:
+  page-agent-adapter-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Run PageAgent adapter deterministic gate
+        run: npm run test:page-agent

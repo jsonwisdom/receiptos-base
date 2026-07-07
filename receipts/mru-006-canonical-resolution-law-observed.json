@@ -1,0 +1,49 @@
+{
+  "artifact_id": "MRU-006",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "canonical_resolution_law_v1",
+  "evidence_state": "Observed",
+  "subject": {
+    "artifact_id": "MRU-005",
+    "content_sha256": "d3f8e56214b7e19a8039c71a3498f8271e549a19d83297a8920194857b2809e2"
+  },
+  "prior_replay_ref": "",
+  "provenance": {
+    "edge": "witness_link",
+    "direction": "MRU-006 to MRU-005"
+  },
+  "namespace_invariants": {
+    "canonical_resolution": {
+      "history_preserved": true,
+      "no_semantic_judgment": true,
+      "precedence": "GITFIX greater than JSONWISDOM",
+      "self_application": true,
+      "tie_breaker": "lexicographically_lowest_sha256"
+    }
+  },
+  "timestamp": "2026-06-30T19:20:00Z",
+  "authority": false,
+  "truth_claim": false,
+  "resolution_audit": {
+    "procedure": "canonical_resolution",
+    "precedence_rule": "GITFIX greater than JSONWISDOM",
+    "mru_004_selection": "GITFIX as reported",
+    "mru_005_selection": "GITFIX as reported",
+    "semantic_check": "no content truth resolution attempted",
+    "history_preserved": true
+  },
+  "execution_log": {
+    "command": "python3 tools/replay_why.py --resolve_all",
+    "reported_status": "Stable",
+    "reported_kernel_state": "Deterministic",
+    "reported_bleed": "none"
+  },
+  "gitfix_notes": {
+    "reported_sha256": "1a7d65b29c48f93e7b1a20d48f92c3a5e8b417d6c29f03e8a71b4c95d2f6a8e1",
+    "computed_sha256_from_literal_user_bytes": "2914c50f2c4f6d5f2382dbb5cdfad7f0def4bd66cc3d1362a3fb9685a11e053d",
+    "hash_gate": "digest_variance_observed_no_silent_promotion",
+    "variance_claim": "reported_zero_variance_not_promoted_due_literal_digest_mismatch",
+    "promotion": "blocked_until_exact_canonical_bytes_and_digests_reconcile"
+  }
+}

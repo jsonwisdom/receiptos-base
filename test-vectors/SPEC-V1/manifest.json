@@ -1,0 +1,66 @@
+{
+  "spec": "SPEC-V1",
+  "spec_revision": "1.0.0",
+  "corpus_version": "1.0.0",
+  "canonicalization": "RFC8785",
+  "authority": false,
+  "vectors": [
+    {
+      "id": "valid-minimal",
+      "path": "passing/valid-minimal",
+      "type": "passing"
+    },
+    {
+      "id": "valid-full",
+      "path": "passing/valid-full",
+      "type": "passing"
+    },
+    {
+      "id": "valid-permissions",
+      "path": "passing/valid-permissions",
+      "type": "passing"
+    },
+    {
+      "id": "valid-screenshots",
+      "path": "passing/valid-screenshots",
+      "type": "passing"
+    },
+    {
+      "id": "valid-deterministic",
+      "path": "passing/valid-deterministic",
+      "type": "passing"
+    },
+    {
+      "id": "fail-semantic",
+      "path": "failing/fail-semantic",
+      "type": "failing"
+    },
+    {
+      "id": "fail-unexpected-field",
+      "path": "failing/fail-unexpected-field",
+      "type": "failing"
+    },
+    {
+      "id": "fail-invalid-url",
+      "path": "failing/fail-invalid-url",
+      "type": "failing"
+    },
+    {
+      "id": "fail-digest",
+      "path": "failing/fail-digest",
+      "type": "failing"
+    },
+    {
+      "id": "fail-canonicalization",
+      "path": "failing/fail-canonicalization",
+      "type": "failing"
+    }
+  ],
+  "release_state": "sealed",
+  "doctrine": {
+    "replay_first": true,
+    "authority": false,
+    "no_invented_bytes": true,
+    "observable_behavior_defines_conformance": true
+  }
+}

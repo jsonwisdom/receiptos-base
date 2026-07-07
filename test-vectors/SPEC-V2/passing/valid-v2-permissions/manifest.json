@@ -1,0 +1,14 @@
+{
+  "name": "example-v2-permissions",
+  "description": "SPEC-V2 non-empty permission array ordering vector",
+  "developer": {
+    "name": "Example Dev",
+    "url": "https://example.com"
+  },
+  "permissions": [
+    "read:user",
+    "read:storage",
+    "write:storage"
+  ],
+  "version": "2.0.0-alpha"
+}

@@ -1,0 +1,27 @@
+{
+  "receipt_id": "TNTR-014-MARKET-SUBSTRATE-GATE",
+  "issue": "EXT-029",
+  "gate_name": "Market Substrate",
+  "status": "executed",
+  "timestamp": "2026-06-30T10:00:00Z",
+  "authority": false,
+  "market_authority": false,
+  "truth_resolution": "absent",
+  "core_lock": "active",
+  "boundary_signatures": {
+    "price_signal": "not_truth",
+    "liquidity_volume": "not_authority",
+    "queryable_state": "not_resolved",
+    "market_consensus": "not_tribunal"
+  },
+  "activated_primitives": {
+    "replay_status": "clean",
+    "provenance_strength": "moderate",
+    "challenge": "none"
+  },
+  "forbidden_semantics_enforced": true,
+  "order_validated": "market_substrate → replay_economic",
+  "next_gate": "EXT-030",
+  "verification_script": "verify_tntr_market_substrate.py",
+  "schema_ref": "tntr-market-primitives.schema.json"
+}

@@ -1,0 +1,10 @@
+{
+  "manifest_id": "jaywisdom",
+  "manifest_path": ".well-known/farcaster/manifest.jcs",
+  "canonical_source": "manifest.jcs",
+  "canonicalization": "RFC8785",
+  "sha256": "d3e01a4dcb4d64e1617151b211389481c00054f2121a323662546d2e4e2f2cce",
+  "created_at": "2026-06-29T01:00:00Z",
+  "status": "LOCKED",
+  "authority": false
+}

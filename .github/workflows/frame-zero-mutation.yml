@@ -1,0 +1,32 @@
+name: Frame Zero Mutation Guard
+
+on:
+  push:
+    paths:
+      - 'frame/**'
+      - 'scripts/verify-frame-capability-surface.js'
+      - '.github/workflows/frame-zero-mutation.yml'
+  pull_request:
+    paths:
+      - 'frame/**'
+      - 'scripts/verify-frame-capability-surface.js'
+      - '.github/workflows/frame-zero-mutation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  frame-zero-mutation:
+    name: EXT-100 frame zero-mutation verifier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify Frame capability surface is read-only
+        run: node scripts/verify-frame-capability-surface.js

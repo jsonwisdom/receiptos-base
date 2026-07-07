@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "anchors": [
+    {
+      "name": "global-forest",
+      "type": "eas",
+      "chain": "base",
+      "chain_id": 8453,
+      "receipt": "evidence/receipts/eas-global-forest-anchor.json",
+      "monitor_revocation": true
+    }
+  ]
+}

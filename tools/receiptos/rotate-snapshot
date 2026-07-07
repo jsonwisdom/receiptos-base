@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROS_ID="${1:-}"
+[ -n "$ROS_ID" ] || { echo "usage: tools/receiptos/rotate-snapshot ROS-XXXX"; exit 1; }
+
+DIR="releases/$ROS_ID"
+mkdir -p "$DIR"
+
+git rev-parse HEAD > "$DIR/head.txt"
+git tag --points-at HEAD > "$DIR/tags-at-head.txt"
+
+find . -type f \
+  -not -path './.git/*' \
+  -not -path './node_modules/*' \
+  -print0 | sort -z | xargs -0 sha256sum \
+  > "$DIR/file-hashes.sha256"
+
+sha256sum "$DIR/file-hashes.sha256" > "$DIR/release-root.sha256"
+
+echo "PASS: snapshot rotated at $DIR"

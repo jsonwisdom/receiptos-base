@@ -1,0 +1,80 @@
+{
+  "artifact_id": "RP-001-EVIDENCE-EXPANSION-COURT-FILING-ARREST-CITATION-2025",
+  "artifact_type": "evidence_expansion",
+  "claim_id": "RP-001",
+  "expansion_sequence": 4,
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "source_mode": "user_supplied_payload",
+  "independent_verification_by_assistant": false,
+  "binds": {
+    "entity_id": "COURT-FILING-ARREST-CITATION-2025",
+    "tier": "Tier 1 / Tier 1-adjacent (Court Filing, Arrest/Citation Records, Official Declarations)",
+    "evidence_type": "court_records_and_official_enforcement_records",
+    "date_status": "pending_confirmation",
+    "file_sha256": null,
+    "line_numbers": null,
+    "document_references": [],
+    "note": "Court/arrest layer is staged from user-supplied payload. Specific filings, docket URLs, hashes, citations, and document line references remain unbound."
+  },
+  "user_supplied_public_record_summary": {
+    "nps_court_declaration": {
+      "named_official": "Frank Lands, Deputy Director for Operations",
+      "reported_filing_date": "2026-06-25 approximate",
+      "reported_court": "D.C. federal court",
+      "reported_incident_date": "2026-06-09",
+      "reported_details": [
+        "U.S. Park Police responded to NPS report of damage after rehabilitation/refilling.",
+        "Caulk over foam sealant reportedly cut with a sharp knife or razor.",
+        "Destruction of delaminating surface material reported.",
+        "Approximately 70 fence post tops reportedly thrown into the pool."
+      ]
+    },
+    "arrests_and_citations": {
+      "reported_arrests": 7,
+      "reported_federal_citations": 7,
+      "reported_police_reports_range": "17-18",
+      "caveat": "Numbers have varied in prior statements; details on exact charges, individuals, and evidentiary linkage remain limited or unreleased."
+    },
+    "notable_public_case": {
+      "name": "David Carter Hearn",
+      "reported_arrest_date": "2026-06-19",
+      "reported_charge": "misdemeanor destruction of government property",
+      "reported_next_appearance": "2026-07-09",
+      "reported_position": "Denies cutting or major damage; says he touched already-peeling liner material."
+    }
+  },
+  "caveats": [
+    "Formal detailed charges beyond the known public case are not fully bound in this receipt.",
+    "No comprehensive hashing or full release of photos/surveillance tied directly to the alleged knife-cut incident is bound here.",
+    "Some arrests/citations may relate to touching, peeling, or minor tampering rather than the primary alleged cut.",
+    "Causation remains unresolved: deliberate damage versus incidental interaction, renovation/coating failure, algae, water chemistry, or maintenance factors."
+  ],
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "reason": "Court/arrest layer strengthens enforcement-record coverage but does not yet bind full filings, hashes, surveillance, forensic photos, or causation closure."
+  },
+  "open_questions_preserved": [
+    "Scale of deliberate cuts versus renovation/coating failure.",
+    "Algae causation.",
+    "Full release and hashing of photos, surveillance, court filings, administrative documents, and contractor reports.",
+    "Cost recovery and damage assessment under NPS Resource Protection protocols."
+  ],
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "rp_001_status_changed": false,
+    "rp_001_confidence_changed": false,
+    "requires_explicit_v2_diff_for_status_or_confidence_change": true
+  },
+  "next_valid_verbs": [
+    "claim lookup RP-001",
+    "evidence expansion RP-001 PHOTOS-SURVEILLANCE",
+    "forensic cross-check knife-cut algae",
+    "commit v2 diff"
+  ]
+}

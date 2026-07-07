@@ -1,0 +1,9 @@
+{
+  "event_time_record_negative_expected_failure": true,
+  "case": "sticky false mutation attempt",
+  "expected_error": "sticky_false_failed:truth_claim",
+  "authority": false,
+  "truth_claim": false,
+  "inference_performed": false,
+  "state_mutated": false
+}

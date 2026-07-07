@@ -1,0 +1,13 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "homepage": "https://example.com",
+  "developer": {
+    "name": "Example Dev",
+    "url": "http://developer.example.com"
+  },
+  "description": "Failing SPEC-V2 vector for non-HTTPS developer URL",
+  "name": "fail-v2-developer-url-http-test",
+  "version": "1.0.0",
+  "permissions": []
+}

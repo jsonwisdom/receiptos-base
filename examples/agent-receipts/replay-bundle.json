@@ -1,0 +1,21 @@
+{
+  "bundle_version": "agent-receipt-replay/v0.1",
+  "bundle_id": "sha256:pending-demo-hash",
+  "demo": "agent-receipts",
+  "canonicalization": "JCS",
+  "hash_algorithm": "SHA-256",
+  "authority": false,
+  "inputs": [
+    "examples/agent-receipts/tool-call.input.json",
+    "examples/agent-receipts/tool-call.output.json",
+    "policy/agent-receipts/default-policy.json"
+  ],
+  "expected_receipt": "receipts/agent-demo.receipt.json",
+  "expected_result": {
+    "receipt_generated": "pass",
+    "policy_evaluated": "pass",
+    "signature_verified": "pass",
+    "replay_hash_match": "pass",
+    "authority": false
+  }
+}

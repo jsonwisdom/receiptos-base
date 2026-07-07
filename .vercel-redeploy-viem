@@ -1,0 +1,4 @@
+trigger: vercel-production-redeploy-after-viem-fix-v2
+fix_commit: 391762e23f1fa84ae97f7764430fecb9585c3b0e
+reason: retry deployment after dependency fix
+court_state: FRAME_MVP_AWAITING_DEPLOYMENT_RECEIPT

@@ -1,0 +1,53 @@
+{
+  "artifact_id": "RP-001-OPERATIONAL-NOTE-COURTLISTENER-DNS-NOT-DOJ-BLOCKING-2026-06-30",
+  "artifact_type": "operational_note",
+  "claim_id": "RP-001",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "standalone_claim_minted": false,
+  "note_scope": "access_diagnostic",
+  "event": {
+    "target_url": "https://storage.courtlistener.com/recap/gov.uscourts.dcd.292242/gov.uscourts.dcd.292242.22.1.pdf",
+    "observed_error": "Could not resolve host: storage.courtlistener.com",
+    "diagnosis": "DNS or runtime network resolution failure against CourtListener storage host; not evidence of DOJ blocking.",
+    "host_classification": "CourtListener/RECAP storage, not DOJ server",
+    "agency_boundary": "PACER/court records are judiciary infrastructure, not Department of Justice infrastructure"
+  },
+  "receiptos_interpretation": {
+    "meta_access_claim": "not_minted",
+    "reason": "One-off access failure has zero bearing on the substantive RP-001 damage claim and does not merit standalone claim indexing.",
+    "audit_value": "Prevents narrative drift from failed fetch to unsupported suppression claim while preserving the procedural event.",
+    "promotion_condition": "Promote to META-ACCESS-001 only if the access failure becomes a public claim requiring debunking or if repeated failures suggest a coordinated obstruction pattern."
+  },
+  "doj_blocking_inference": {
+    "claim": "DOJ is blocking this PDF",
+    "status": "unsupported_no_evidence_found_from_this_event",
+    "confidence": "High that this observed fetch failure was not DOJ blocking",
+    "best_explanation": "CourtListener/local DNS or network access issue, not DOJ suppression"
+  },
+  "rp_001_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "evidence_bundle_changed": false,
+    "hash_gate_changed": false,
+    "photo_gate_changed": false
+  },
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "existing_receipts_rewritten": false,
+    "append_only_note": true,
+    "hash_bind_completed": false,
+    "photo_evidence_bound": false,
+    "authority_flip_rejected": true,
+    "truth_claim_preserved_false": true
+  },
+  "active_surface_after_note": [
+    "provide_computed_sha256 RP-001 LANDS-DECLARATION-2026-06-25 <64_hex_sha256>",
+    "evidence expansion RP-001 PHOTOS <PHOTO_URL_OR_FILE_HASH>",
+    "claim lookup RP-001"
+  ]
+}

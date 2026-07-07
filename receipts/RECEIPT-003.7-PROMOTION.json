@@ -1,0 +1,42 @@
+{
+  "receipt_id": "RECEIPT-003.7-PROMOTION",
+  "type": "validation_promotion_receipt",
+  "authority": false,
+  "status": "VALIDATED",
+  "subject": "RECEIPT-003.7 Evidence Verification CI Gate",
+  "promotion_basis": "Dual-branch workflow evidence reports committed as replayable JSON artifacts.",
+  "head_sha": "8957e13dc99b2822e0f781ac760b470a3ace3c40",
+  "positive_branch": {
+    "run_id": 28803717365,
+    "job": "Verify supplied evidence payloads",
+    "job_conclusion": "success",
+    "workflow_artifact_id": 8113972968,
+    "workflow_artifact_digest": "sha256:0bd93315b7aa8c2e8ca71dcb7ab77631d6701a13e2279ed2d53f178d340558c9",
+    "report_path": "evidence-reports/TEST-POSITIVE-001.report.json",
+    "report_sha256": "sha256:7a0ffc30e5c3297d9aa9e656fe7d483d5de562601f54233abcaa431d2b8be382",
+    "receipt_id": "TEST-POSITIVE-001",
+    "expected_status": "VERIFIED",
+    "expected_placeholder_scan": "PASS"
+  },
+  "negative_branch": {
+    "run_id": 28803858185,
+    "job": "Verify supplied evidence payloads",
+    "job_conclusion": "success",
+    "workflow_artifact_id": 8114033352,
+    "workflow_artifact_digest": "sha256:dae81944ffa11686606402a6ed203a91bcf7a75321ccb77063b2de38eab79886",
+    "report_path": "evidence-reports/TEST-NEGATIVE-001.report.json",
+    "report_sha256": "sha256:fa51281203223962693cc691740e2f408b7ce033d449af135f25d74fe396fac8",
+    "receipt_id": "TEST-NEGATIVE-001",
+    "expected_status": "REJECTED",
+    "expected_placeholder_scan": "FAIL"
+  },
+  "invariants": {
+    "observed_not_equal_verified": true,
+    "positive_path_verified": true,
+    "negative_path_rejected": true,
+    "authority_false": true,
+    "ledger_auto_mutation": false,
+    "zora_issue_95_unchanged": true
+  },
+  "disposition": "RECEIPT-003.7 may be marked VALIDATED. Issue #95 remains PENDING_REVIEW until a real Zora canonical payload is supplied."
+}

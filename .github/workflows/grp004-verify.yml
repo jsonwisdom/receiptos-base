@@ -1,0 +1,40 @@
+name: GRP-004 Verify
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      CARGO_INCREMENTAL: "0"
+      RUST_BACKTRACE: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build locked
+        run: cargo build --locked
+
+      - name: Replay CLI tests
+        run: cargo test -p replay-cli -- --nocapture
+
+      - name: Verify signed GRP-004 corpus packet
+        run: cargo run -p replay-cli --bin receipts -- verify golden-corpus/grp004/tv050
+
+      - name: Upload deterministic verification artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grp004-verification
+          path: |
+            golden-corpus/**/shas.json
+            golden-corpus/**/signatures.json
+            golden-corpus/**/summary.json
+            golden-corpus/**/*.sha256

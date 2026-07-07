@@ -1,0 +1,42 @@
+{
+  "mesh_id": "TNTR-MESH-001",
+  "cro_id": "TNTR-CRO-001",
+  "payloadHash": "cc4a59053eb8adf5bf1c192aa3cc72ecb07a01a5f0109d3a3276a4380555f6c1",
+  "canonical_payload_cid": "bafkreigmjjmqkpvyvx236hazfkr4y4xmwb5adjpqccotumtwuq4akvpwye",
+  "source_chain": "base",
+  "source_schema_uid": "0xa23bff0257f3fef64621b0c7763316701627d0e6f9b164714d3bbc58d3567fc5",
+  "source_attestation_uid": "0x4f6559207f5ee01db76dee47eb68fa16641fe81e65870a92e457c3a52ba0a0a",
+  "source_tx_hash": "0xa77cd1390527aa5859c24125aaf579c04a029ac9fdeaacc36d110f183e1d00c2",
+  "chains": [
+    "base",
+    "optimism",
+    "arbitrum",
+    "ethereum"
+  ],
+  "witnesses": [],
+  "threshold": 2,
+  "witness_threshold": "2-of-N",
+  "agreementModel": "IDENTICAL_PAYLOAD_HASH",
+  "queryable_rule": "QUERYABLE only when at least threshold witnesses independently reference the identical payloadHash; queryable does not mean true or resolved.",
+  "authority": false,
+  "classification": "replay_only",
+  "publication_role": "provenance_only",
+  "meshState": "UNVERIFIED",
+  "allowed_mesh_states": [
+    "DRAFT",
+    "SOURCE_ANCHORED",
+    "PARTIAL_WITNESS",
+    "QUERYABLE",
+    "WITNESS_CONFLICT",
+    "RETIRED"
+  ],
+  "boundary_note": "Multi-chain witness mesh records replicated provenance only. Multi-chain witness does not resolve TNTR, prove market truth, or elevate authority.",
+  "forbidden": [
+    "resolve_truth",
+    "resolve_market",
+    "declare_yes",
+    "declare_no",
+    "authority_true",
+    "truth_consensus"
+  ]
+}

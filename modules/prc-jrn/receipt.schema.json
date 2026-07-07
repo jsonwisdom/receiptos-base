@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jsonwisdom/receiptos-base/modules/prc-jrn/receipt.schema.json",
+  "title": "PRC-JRN Field Receipt v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_id",
+    "framework_version",
+    "case_id",
+    "mode",
+    "claim_reviewed",
+    "baseline_assessment",
+    "final_assessment",
+    "observed_behaviors",
+    "curriculum_delta",
+    "constitution_changes_proposed",
+    "engine_changes_proposed",
+    "authority"
+  ],
+  "properties": {
+    "receipt_id": {
+      "type": "string",
+      "pattern": "^PRC-JRN-FIELD-(EXT-)?[0-9]{3}(-[0-9]{3})?$"
+    },
+    "framework_version": {
+      "type": "string",
+      "const": "PRC-JRN-v1.1"
+    },
+    "case_id": {
+      "type": "string",
+      "enum": ["001", "002", "003", "004", "005", "006"]
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["simulated_validation", "external_validation", "classroom", "workshop", "pilot"]
+    },
+    "session": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "date": { "type": "string" },
+        "facilitator": { "type": "string" },
+        "participant_type": { "type": "string" },
+        "participant_count": { "type": "integer", "minimum": 0 },
+        "session_length_minutes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "claim_reviewed": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseline_assessment": {
+      "$ref": "#/$defs/assessment"
+    },
+    "final_assessment": {
+      "$ref": "#/$defs/assessment"
+    },
+    "observations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "unknowns": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "evidence_introduced": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "assessment_changed"],
+        "properties": {
+          "label": { "type": "string" },
+          "assessment_changed": { "type": "boolean" },
+          "reason": { "type": "string" }
+        }
+      },
+      "default": []
+    },
+    "observed_behaviors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asked_for_primary_source",
+        "distinguished_observation_from_assessment",
+        "identified_unknowns",
+        "requested_corroboration",
+        "revised_assessment",
+        "explained_revision"
+      ],
+      "properties": {
+        "asked_for_primary_source": { "type": "boolean" },
+        "distinguished_observation_from_assessment": { "type": "boolean" },
+        "identified_unknowns": { "type": "boolean" },
+        "requested_corroboration": { "type": "boolean" },
+        "revised_assessment": { "type": "boolean" },
+        "explained_revision": { "type": "boolean" }
+      }
+    },
+    "friction": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "curriculum_delta": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "constitution_changes_proposed": {
+      "type": "array",
+      "items": { "type": "string" },
+      "maxItems": 0,
+      "description": "Expected empty for PRC-JRN v1.x. Non-empty values indicate a proposed major-version fork."
+    },
+    "engine_changes_proposed": {
+      "type": "array",
+      "items": { "type": "string" },
+      "maxItems": 0,
+      "description": "Expected empty for PRC-JRN v1.x. Non-empty values indicate a proposed major-version fork."
+    },
+    "hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "constitution_sha256": {
+          "type": "string",
+          "const": "63bef9d6e3906d34a44a6ea2b1212cb13cc26aed94cadff7acd880b3f664afb2"
+        },
+        "engine_sha256": {
+          "type": "string",
+          "const": "90fe8c4d010acbc8883af840920014595799d24efb25d8fa191b8e261e043c8d"
+        },
+        "receipt_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "authority": {
+      "type": "boolean",
+      "const": false
+    }
+  },
+  "$defs": {
+    "assessment": {
+      "type": "string",
+      "enum": [
+        "supported",
+        "partially_supported",
+        "insufficient_evidence",
+        "contradicted",
+        "under_review"
+      ]
+    }
+  }
+}

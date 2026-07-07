@@ -1,0 +1,34 @@
+{
+  "protocol": "ReceiptOS",
+  "version": "1.0.0",
+  "frame_type": "receipt",
+  "signature_domain": "receiptos.frame.v1.eas-profile",
+  "payload_hash": "sha256:5253367a07c06f834fc40d7de090a152efee26a9d094a1e6c1cec2f3f022a42d",
+  "hash_algorithm": "sha256",
+  "signature_algorithm": "profile-defined",
+  "signer": "did:example:jsonwisdom",
+  "timestamp": "2026-06-30T13:15:00Z",
+  "nonce": "sha256:9b9ece587e15b8d5590e040293e3a56385ab18c68a282a40d611c6e854d81fe9",
+  "payload": {
+    "receipt_id": "RP-002",
+    "profile": "receiptos-eas-v1",
+    "artifact_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "artifact_hash_role": "opaque_profile_claim",
+    "eas": {
+      "chain_id": 8453,
+      "schema_uid": "0x507ddacbafa541960018b930850b5d31a5828d317ee9c0a5851a96e954bc553c",
+      "attestation_uid": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "contract": "0x4200000000000000000000000000000000000021",
+      "tx_hash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "authority": false,
+    "truth_claim": false
+  },
+  "signature": {
+    "key_id": "did:example:jsonwisdom#eas-profile-test-key",
+    "signature_bytes": "ZWFzLXByb2ZpbGUtdGVzdC1zaWduYXR1cmU=",
+    "profile": "eas-attestation-v1"
+  },
+  "authority": false,
+  "truth_claim": false
+}

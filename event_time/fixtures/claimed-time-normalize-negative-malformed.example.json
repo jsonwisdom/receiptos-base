@@ -1,0 +1,15 @@
+{
+  "authority": false,
+  "claimed_timestamp_raw": "not-a-time",
+  "errors": [],
+  "event_time_record": true,
+  "event_time_source": "external",
+  "inference_performed": false,
+  "parsed": true,
+  "sorted": false,
+  "source_provenance": "external-example-payload-v0",
+  "state_mutated": false,
+  "storage_time_compared": false,
+  "timezone_normalized": false,
+  "truth_claim": false
+}

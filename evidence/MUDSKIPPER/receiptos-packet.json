@@ -1,0 +1,16 @@
+{
+  "id": "BUGGLEBUGGLE",
+  "contract": "0x7457401bcae266f8c028c72d9ed6be67d0d7a35a",
+  "creationTx": "0x84ba2a12717f930412beba0c7821f71ff6f593f3e470acc29c027307bc79daea",
+  "metadataCID": "bafybeih65s442fpkb2dttsbz643t5gkm6cbh4txtte7czawpgs6qqd2utu",
+  "mediaCID": "bafybeibt3udrsmmf2wifghmk4rabi7ualpuqakmkxjc4odzq2skqt5vaey",
+  "name": "BUGGLEBUGGLE",
+  "ticker": "BUGGLEBUGGLE",
+  "description": "The Only Fish that can Wink 😉",
+  "gitCommit": "436c330f1a362b322241a64214a2aeac83130b61",
+  "schemaUID": "0x7e29a0932ff347470306acc86127a9d50061431e8e0abb0f7ebbd61f8327aea5",
+  "easUID": "0x764082d4517d38538b078f19614b4f927381f3ac42268a9074c0193066044d67",
+  "easTx": "0xc7b631bd636898aebd856b8d892212aba7f2bd219913aece219c69ee2037c4b6",
+  "authority": false,
+  "status": "sealed"
+}

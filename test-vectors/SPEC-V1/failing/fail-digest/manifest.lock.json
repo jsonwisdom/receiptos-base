@@ -1,0 +1,9 @@
+{
+  "spec": "SPEC-V1",
+  "spec_revision": "1.0.0",
+  "vector": "fail-digest",
+  "vector_revision": "1.0.0",
+  "canonicalization": "RFC8785",
+  "canonical_file": "manifest.jcs",
+  "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+}

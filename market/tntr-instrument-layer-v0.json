@@ -1,0 +1,26 @@
+{
+  "version": "v0",
+  "gate": "EXT-031",
+  "title": "TNTR Instrument Layer",
+  "authority": false,
+  "truth_resolution": "absent",
+  "instrument_boundary": "provenance_only",
+  "forbidden_semantics_enforced": true,
+  "allowed_instrument_types": [
+    "replay_future",
+    "provenance_strength_note",
+    "challenge_instrument"
+  ],
+  "allowed_settlement_sources": [
+    "replay_receipt",
+    "mesh_receipt",
+    "challenge_receipt"
+  ],
+  "invariants": {
+    "price_is_truth": false,
+    "liquidity_is_authority": false,
+    "instrument_is_verdict": false,
+    "queryable_is_resolved": false
+  },
+  "next_gate": "EXT-032"
+}

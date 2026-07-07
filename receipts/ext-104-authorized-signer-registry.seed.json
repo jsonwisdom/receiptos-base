@@ -1,0 +1,21 @@
+{
+  "issue": "EXT-104",
+  "title": "Authorized Signer Registry Seed",
+  "registry_status": "SEEDED_MANUAL_TRUST_ROOT",
+  "manifest_id": "jaywisdom",
+  "manifest_lock_path": ".well-known/farcaster/manifest.lock.json",
+  "canonical_manifest_hash": "d3e01a4dcb4d64e1617151b211389481c00054f2121a323662546d2e4e2f2cce",
+  "authorized_signers": [
+    "0xa380552a27b0a5a2874ea7aa52cac09f542002e8"
+  ],
+  "signer_scheme": "secp256k1",
+  "source": "manual_seed",
+  "frame_policy": "observe_registry_and_verify_math_only",
+  "can_add_signers": false,
+  "can_remove_signers": false,
+  "can_mutate_manifest_lock": false,
+  "authority": false,
+  "truth_claim": false,
+  "mutation": null,
+  "mutations": []
+}

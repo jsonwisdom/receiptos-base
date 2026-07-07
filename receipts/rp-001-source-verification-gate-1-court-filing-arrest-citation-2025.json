@@ -1,0 +1,82 @@
+{
+  "artifact_id": "RP-001-SOURCE-VERIFICATION-GATE-1-COURT-FILING-ARREST-CITATION-2025",
+  "artifact_type": "source_verification_gate",
+  "claim_id": "RP-001",
+  "target_entity_id": "COURT-FILING-ARREST-CITATION-2025",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "gate": {
+    "gate_id": "SOURCE_VERIFICATION_GATE_1",
+    "source_authority": "INCOMPLETE",
+    "replay": "ARMED",
+    "receipt_eligible": false,
+    "hash_ready": false,
+    "anchor_ready": false
+  },
+  "cross_check_result": {
+    "source_mode": "user_supplied_identifiers",
+    "independent_verification_by_assistant": false,
+    "evaluated_identifiers": [
+      {
+        "type": "docket",
+        "value": "1:25-mj-00456-DDC",
+        "result": "No matching public record located for this exact docket tied to the Reflecting Pool incident."
+      },
+      {
+        "type": "declarant",
+        "value": "Special Agent Mark T. Henderson",
+        "result": "No sworn declaration matching this name, title, or exact quoted language found in available filings."
+      },
+      {
+        "type": "filing_date",
+        "value": "2025-04-15",
+        "result": "Does not align with the June 2026 timeline of the renovation/damage reports."
+      },
+      {
+        "type": "quoted_language",
+        "value": "multiple incised cuts suggesting both intentional damage and pre-existing material failure",
+        "result": "Similar but not identical to public reporting centered on a June 9, 2026 incident."
+      }
+    ]
+  },
+  "canonical_public_fixture_candidate": {
+    "declarant": "Frank Lands",
+    "title": "NPS Deputy Director for Operations",
+    "reported_filing_date": "2026-06-25 approximate",
+    "reported_court": "D.D.C.",
+    "reported_incident_date": "2026-06-09",
+    "reported_language_summary": "Cuts in caulk/foam sealant with a sharp knife or razor; fence post tops in the pool.",
+    "status": "candidate_only_pending_pdf_or_exact_link"
+  },
+  "missing_requirements_for_gate_completion": [
+    "Actual PDF bytes or direct PACER/ECF/public court link.",
+    "Corrected docket metadata matching public records.",
+    "Filing date confirmed from source document.",
+    "Declarant name and title confirmed from source document.",
+    "Exact quoted damage language from source document.",
+    "SHA-256 hash of fetched/source document.",
+    "Page, paragraph, or line references."
+  ],
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "reason": "Gate 1 records provenance intent but fails source-authority completion and hash binding."
+  },
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "rp_001_status_changed": false,
+    "rp_001_confidence_changed": false,
+    "receipt_eligible": false,
+    "requires_pdf_or_exact_source_link_before_hash_bind": true
+  },
+  "next_valid_verbs": [
+    "hash_bind RP-001 COURT-FILING-ARREST-CITATION-2025 <sha256>",
+    "request_source_verification RP-001 LANDS-DECLARATION-2026-06-25",
+    "evidence expansion RP-001 PHOTOS-SURVEILLANCE",
+    "claim lookup RP-001"
+  ]
+}

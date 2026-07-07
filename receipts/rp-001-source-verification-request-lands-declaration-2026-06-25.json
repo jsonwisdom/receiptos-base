@@ -1,0 +1,54 @@
+{
+  "artifact_id": "RP-001-SOURCE-VERIFICATION-REQUEST-LANDS-DECLARATION-2026-06-25",
+  "artifact_type": "source_verification_request",
+  "claim_id": "RP-001",
+  "target_entity_id": "LANDS-DECLARATION-2026-06-25",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "request_status": "pending_source_payload",
+  "verification_gate": {
+    "source_authority": "PENDING",
+    "replay": "ARMED_NOT_EXECUTED",
+    "receipt_eligible": false,
+    "hash_ready": false,
+    "anchor_ready": false
+  },
+  "target_verification_requirements": [
+    "Direct PDF or source URL for LANDS-DECLARATION-2026-06-25.",
+    "Docket confirmation including case number and court filing stamp.",
+    "Declarant verification: Frank Lands name and title as written in the document.",
+    "Exact quoted damage language from the declaration.",
+    "Incident tie confirming the 2026-06-09 reference in the document.",
+    "SHA-256 hash of retrieved PDF/source bytes.",
+    "Page, paragraph, line, or exhibit references for quoted material."
+  ],
+  "candidate_context": {
+    "declarant": "Frank Lands",
+    "reported_title": "NPS Deputy Director for Operations",
+    "reported_court": "D.D.C.",
+    "reported_filing_date": "2026-06-25 approximate",
+    "reported_incident_date": "2026-06-09",
+    "status": "candidate_only_until_source_payload_bound"
+  },
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "reason": "Verification request only; no source bytes, URL, hash, or page references supplied yet."
+  },
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "rp_001_status_changed": false,
+    "rp_001_confidence_changed": false,
+    "hash_bind_allowed": false,
+    "requires_pdf_or_exact_source_link": true
+  },
+  "next_valid_verbs": [
+    "source_payload RP-001 LANDS-DECLARATION-2026-06-25 <PDF_OR_URL>",
+    "hash_bind RP-001 LANDS-DECLARATION-2026-06-25 <sha256>",
+    "claim lookup RP-001"
+  ]
+}

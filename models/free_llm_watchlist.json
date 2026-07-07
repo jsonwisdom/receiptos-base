@@ -1,0 +1,48 @@
+{
+  "version": "LLM_RADAR_WATCHLIST_V1",
+  "source_policy": {
+    "directory_is_signal": true,
+    "receiptos_replay_is_verification": true,
+    "authority": false,
+    "truth_claim": false
+  },
+  "sources": [
+    {
+      "source_id": "free-llm-api-resources",
+      "kind": "github_repository",
+      "url": "https://github.com/cheahjs/free-llm-api-resources",
+      "intake_action": "alert_manual_review",
+      "verified": false
+    }
+  ],
+  "providers_to_watch": [
+    {
+      "provider": "groq",
+      "base_url": "https://api.groq.com/openai/v1",
+      "api_key_env": "GROQ_API_KEY",
+      "openai_compatible": true,
+      "status": "watch_only"
+    },
+    {
+      "provider": "google-ai-studio",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta",
+      "api_key_env": "GOOGLE_AI_STUDIO_API_KEY",
+      "openai_compatible": false,
+      "status": "watch_only"
+    },
+    {
+      "provider": "openrouter",
+      "base_url": "https://openrouter.ai/api/v1",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "openai_compatible": true,
+      "status": "watch_only"
+    },
+    {
+      "provider": "github-models",
+      "base_url": "https://models.inference.ai.azure.com",
+      "api_key_env": "GITHUB_TOKEN",
+      "openai_compatible": true,
+      "status": "watch_only"
+    }
+  ]
+}

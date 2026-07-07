@@ -1,0 +1,12 @@
+{
+  "name": "invalid-url-vector",
+  "version": "1.0.0",
+  "description": "Manifest containing an invalid URL to trigger URL policy failure.",
+  "publisher": {
+    "name": "Replay Court",
+    "contact": "mailto:replay@example.com"
+  },
+  "homepage": "ht!tp://not-a-valid-url",
+  "permissions": [],
+  "screenshots": []
+}

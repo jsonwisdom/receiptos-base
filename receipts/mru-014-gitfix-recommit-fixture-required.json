@@ -1,0 +1,37 @@
+{
+  "artifact_id": "MRU-014",
+  "artifact_type": "gitfix_recommit_fixture_gate",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "gitfix_recommit_fixture_gate_v1",
+  "subject": {
+    "artifact_id": "MRU-004",
+    "selected_digest": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+    "selection_source": "MRU-013"
+  },
+  "evidence_state": "Observed",
+  "history": "append_only",
+  "authority": false,
+  "truth_claim": false,
+  "bleed": "none",
+  "gate": {
+    "status": "blocked_payload_required",
+    "reason": "selected_digest has no committed byte fixture that independently hashes to the selected digest",
+    "required_input": "exact MRU-004 GITFIX byte payload whose SHA-256 equals selected_digest",
+    "forbidden_action": "do_not_fabricate_bytes_to_match_digest"
+  },
+  "known_candidates": {
+    "gitfix_selected_digest": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+    "literal_recompute_digest": "6e2ba34cab2e2d329a06be3452e85d36ad53545253a28485cdda432eec98daae",
+    "jsonwisdom_fixture_digest": "bcdbd09fa423937dfbdc30186c3b3930e3966e678d6d7c390740cc837884da03"
+  },
+  "next_allowed_transition": {
+    "artifact_id": "MRU-014A",
+    "action": "materialize_exact_gitfix_payload",
+    "success_condition": "sha256(exact_payload_bytes) == a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+    "then": "update MRU-005 reference and run full chain replay"
+  },
+  "replay_question": "why_recommit_fixture_gate_exists",
+  "replay_answer": "This artifact records that MRU-014 cannot complete recommit until the exact GITFIX bytes for the selected digest are materialized and independently hash to the selected digest.",
+  "timestamp": "2026-06-30T20:00:00Z"
+}

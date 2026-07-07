@@ -1,0 +1,50 @@
+{
+  "cro_id": "TNTR-CRO-001",
+  "gate": "EXT-031",
+  "authority": false,
+  "truth_resolution": "absent",
+  "payloadHash": "cc4a59053eb8adf5bf1c192aa3cc72ecb07a01a5f0109d3a3276a4380555f6c1",
+  "mesh_receipt": "receipts/tntr-013-multichain-witness-mesh.json",
+  "market_substrate_receipt": "receipts/tntr-014-market-substrate-gate.json",
+  "allowed_instruments": [
+    {
+      "instrument_id": "TNTR-CRO-001-RF-001",
+      "instrument_type": "replay_future",
+      "primitive_reference": "replay_status",
+      "settlement_rule": {
+        "source_type": "replay_receipt",
+        "source_ref": "receipts/tntr-013-multichain-witness-mesh.json",
+        "mechanical_only": true
+      },
+      "authority": false,
+      "forbidden_semantics_enforced": true,
+      "resolution_semantics": "absent"
+    },
+    {
+      "instrument_id": "TNTR-CRO-001-PSN-001",
+      "instrument_type": "provenance_strength_note",
+      "primitive_reference": "provenance_strength",
+      "settlement_rule": {
+        "source_type": "mesh_receipt",
+        "source_ref": "receipts/tntr-013-multichain-witness-mesh.json",
+        "mechanical_only": true
+      },
+      "authority": false,
+      "forbidden_semantics_enforced": true,
+      "resolution_semantics": "absent"
+    },
+    {
+      "instrument_id": "TNTR-CRO-001-CI-001",
+      "instrument_type": "challenge_instrument",
+      "primitive_reference": "challenge",
+      "settlement_rule": {
+        "source_type": "challenge_receipt",
+        "source_ref": "receipts/tntr-014-market-substrate-gate.json",
+        "mechanical_only": true
+      },
+      "authority": false,
+      "forbidden_semantics_enforced": true,
+      "resolution_semantics": "absent"
+    }
+  ]
+}

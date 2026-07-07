@@ -1,0 +1,12 @@
+{
+  "spec": "SPEC-V1",
+  "spec_revision": "1.0.0",
+  "vector": "fail-invalid-url",
+  "vector_revision": "1.0.0",
+  "valid": false,
+  "exit_code": 15,
+  "reason": "invalid_url",
+  "failed_field": "homepage",
+  "sha256": null,
+  "canonical_file": null
+}

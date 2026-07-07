@@ -1,0 +1,7 @@
+{
+  "ext": "EXT-042",
+  "status": "pending_ci",
+  "ci_gate": "production_lock",
+  "workflow": ".github/workflows/production-lock-gate.yml",
+  "authority": false
+}

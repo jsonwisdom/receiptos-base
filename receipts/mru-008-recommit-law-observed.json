@@ -1,0 +1,46 @@
+{
+  "artifact_id": "MRU-008",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "recommit_law_v1",
+  "evidence_state": "Observed",
+  "subject": {
+    "artifact_id": "MRU-007",
+    "content_sha256": "f2e8c9b1a3d549f67a2b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f"
+  },
+  "prior_replay_ref": "",
+  "provenance": {
+    "edge": "witness_link",
+    "direction": "MRU-008 to MRU-007"
+  },
+  "recommit_law": {
+    "lane_separation": "GITFIX_writes_JSONWISDOM_serializes_AL_verifies",
+    "no_epistemic_overreach": true,
+    "no_rewrite": "append_only_history",
+    "pending_to_canonical": "requires_real_gitfix_commit",
+    "promotion_gate": "replay_why.py_Observed_only"
+  },
+  "timestamp": "2026-06-30T19:30:00Z",
+  "authority": false,
+  "truth_claim": false,
+  "kernel_closure_log": {
+    "commit": "MRU-004 resolved as reported",
+    "update": "MRU-005 reference bound as reported",
+    "gate": "promotion gate pass as reported",
+    "verification": "chain replay observed as reported",
+    "safe_resolution": "canonical procedure observed"
+  },
+  "operational_summary": {
+    "recommit_law_active": true,
+    "lane_integrity": "GITFIX writes, JSONWISDOM serializes, AL verifies",
+    "history_policy": "append_only_no_rewrite",
+    "bleed": "null_as_reported",
+    "resolution": "completed_as_procedural_observation"
+  },
+  "gitfix_notes": {
+    "reported_sha256": "c4d8e9a2b1f763a5d84c0e2b9f3a6d7c8b4e1f5a9d2b7c6e0a3f4d8b2e1a9c7b",
+    "computed_sha256_from_literal_user_bytes": "da8cc91a7633118e870c666e77663a1285b6834a4da5019185e5df8d85991488",
+    "hash_gate": "digest_variance_observed_no_silent_promotion",
+    "promotion": "procedural_closure_observed_byte_digest_promotion_blocked"
+  }
+}

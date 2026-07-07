@@ -1,0 +1,43 @@
+{
+  "rosId": "ROS-0001",
+  "version": "1.0.0",
+  "artifact": {
+    "name": "artifacts/ROS-0001-cover.jpg",
+    "digest": "30672a02180cee539660a1c467ff24aa71275db63d3e42a1e162c8cab24f12f2",
+    "size": 470076
+  },
+  "publication": {
+    "repository": "https://github.com/jsonwisdom/receiptos-base",
+    "commit": "0112982176dd6eea3650827d3fb9de7a57969486",
+    "tag": "v1.0.0",
+    "timestamp": "2026-06-28T08:12:55Z"
+  },
+  "evidence": {
+    "eas_uid": "0x0e7061cd9bd95b40abda91a62944b2fa72cf64d75d306fbe320caf40174af6ff",
+    "chain": "base",
+    "zora_coin": "0xd0c736467e0d496cc56209a36f28264b86c49582",
+    "ipfs_cid": "bafybeih77wram2cxgfuwzsz4t6adr4do42w344y4gephtodikcakvrtmv4"
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "signer": "jaywisdom.eth",
+    "key_id": "deployer.pub",
+    "sig": "pPbc+IkQFaYSh7WaJ2jlW+uakvNzDH1Mc1UMhJqpXUiHIxalIIyvG9leZHucymLagze5JyrNdam6Oeh7hFbvDg=="
+  },
+  "verificationScript": {
+    "path": "scripts/verify-evidence-bundle.py",
+    "algorithm": "sha256",
+    "digest": "efbb6a700ebbe35b333d2e9801ae815ff05ab16ee02156872d6798d37eddfaa5"
+  },
+  "timestamp": "2026-06-28T08:12:55Z",
+  "verifier": {
+    "name": "receiptos-verifier",
+    "version": "1.0.0",
+    "commit": "0112982176dd6eea3650827d3fb9de7a57969486"
+  },
+  "metadata": {
+    "authority": false,
+    "schema_uid": "0x7e29a0932ff347470306acc86127a9d50061431e8e0abb0f7ebbd61f8327aea5",
+    "eas_tx": "0x4b3f7dfa661910380508ffe6140569aa0aeff2258fc84b7f8f8a8901f979ecb5"
+  }
+}

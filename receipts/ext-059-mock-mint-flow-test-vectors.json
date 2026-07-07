@@ -1,0 +1,104 @@
+{
+  "issue": "EXT-059",
+  "title": "Mock Mint Flow Test Vectors",
+  "status": "MOCK_MINT_FLOW_VECTORS_LOCKED",
+  "depends_on": [
+    "EXT-057",
+    "EXT-058"
+  ],
+  "contract_mode": "mock_semantics_only",
+  "deploy_allowed": false,
+  "runtime_mode": "witness_only",
+  "authority": false,
+  "truth_claim": false,
+  "resolution_semantics": "absent",
+  "badge_power": 0,
+  "vote_power": 0,
+  "governance_action_allowed": false,
+  "transfer_governance_rights": false,
+  "promotion_allowed": false,
+  "valid_vectors": [
+    {
+      "id": "valid-mint-inspect-completion",
+      "action": "Inspect",
+      "receipt_hash_present": true,
+      "witness_completion": true,
+      "duplicate_receipt": false,
+      "expected": "MINT_ALLOWED"
+    },
+    {
+      "id": "valid-mint-replay-completion",
+      "action": "Replay",
+      "receipt_hash_present": true,
+      "witness_completion": true,
+      "duplicate_receipt": false,
+      "expected": "MINT_ALLOWED"
+    },
+    {
+      "id": "valid-mint-trace-completion",
+      "action": "Trace",
+      "receipt_hash_present": true,
+      "witness_completion": true,
+      "duplicate_receipt": false,
+      "expected": "MINT_ALLOWED"
+    }
+  ],
+  "invalid_vectors": [
+    {
+      "id": "fail-missing-receipt-hash",
+      "action": "Verify",
+      "receipt_hash_present": false,
+      "witness_completion": true,
+      "duplicate_receipt": false,
+      "expected": "MINT_REJECTED"
+    },
+    {
+      "id": "fail-no-witness-completion",
+      "action": "Challenge",
+      "receipt_hash_present": true,
+      "witness_completion": false,
+      "duplicate_receipt": false,
+      "expected": "MINT_REJECTED"
+    },
+    {
+      "id": "fail-duplicate-receipt",
+      "action": "Replay",
+      "receipt_hash_present": true,
+      "witness_completion": true,
+      "duplicate_receipt": true,
+      "expected": "MINT_REJECTED"
+    },
+    {
+      "id": "fail-vote-action",
+      "action": "Vote",
+      "receipt_hash_present": true,
+      "witness_completion": true,
+      "duplicate_receipt": false,
+      "expected": "MINT_REJECTED"
+    },
+    {
+      "id": "fail-resolve-action",
+      "action": "Resolve",
+      "receipt_hash_present": true,
+      "witness_completion": true,
+      "duplicate_receipt": false,
+      "expected": "MINT_REJECTED"
+    },
+    {
+      "id": "fail-transfer-attempt",
+      "action": "Transfer",
+      "receipt_hash_present": true,
+      "witness_completion": true,
+      "duplicate_receipt": false,
+      "expected": "TRANSFER_REVERTS"
+    },
+    {
+      "id": "fail-deploy-attempt",
+      "action": "Deploy",
+      "receipt_hash_present": true,
+      "witness_completion": true,
+      "duplicate_receipt": false,
+      "expected": "DEPLOY_REJECTED"
+    }
+  ]
+}

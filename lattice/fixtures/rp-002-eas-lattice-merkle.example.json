@@ -1,0 +1,21 @@
+{
+  "accepted_for_merkle": true,
+  "authority": false,
+  "errors": [],
+  "inference_performed": false,
+  "lattice_merkle_catalog": true,
+  "leaf_count": 1,
+  "leaves": [
+    "sha256:0ab9432b7988e016d3e7db76ca5e42e55705c173f987108ace4baad174fed8b1"
+  ],
+  "merkle_levels": [
+    [
+      "0ab9432b7988e016d3e7db76ca5e42e55705c173f987108ace4baad174fed8b1"
+    ]
+  ],
+  "merkle_root": "sha256:0ab9432b7988e016d3e7db76ca5e42e55705c173f987108ace4baad174fed8b1",
+  "source_catalog": "lattice/fixtures/rp-002-eas-lattice-catalog.example.json",
+  "source_catalog_type": "flat_hash_map",
+  "state_mutated": false,
+  "truth_claim": false
+}

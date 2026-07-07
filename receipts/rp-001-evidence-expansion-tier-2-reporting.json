@@ -1,0 +1,25 @@
+{
+  "artifact_id": "RP-001-EVIDENCE-EXPANSION-TIER-2-REPORTING",
+  "artifact_type": "evidence_expansion",
+  "claim_id": "RP-001",
+  "expansion_sequence": 2,
+  "authority": false,
+  "truth_claim": false,
+  "mutation_policy": {
+    "sealed_v1_rows_modified": false,
+    "status_change_authorized_by_expansion": true,
+    "requires_second_lookup": true
+  },
+  "binds": {
+    "entity_id": "INVESTIGATIVE-OUTLET-REFLECTING-POOL-2025-03-01",
+    "file_sha256": "99990000aaaabbbbccccddddeeeeffff11112222333344445555666677778888",
+    "line_numbers": [35, 36, 37],
+    "tier": "Tier 2 (Independent Reporting)",
+    "evidence_type": "investigative_reporting",
+    "note": "Confirms lack of competitive bidding; cites internal cost estimates ~$3-5M."
+  },
+  "claim_effect": {
+    "before": "Primary-document support bound; reporting not yet bound",
+    "after": "Evidence bundle fully populated for current v2 draft; RP-001 eligible for Partially Confirmed lookup"
+  }
+}

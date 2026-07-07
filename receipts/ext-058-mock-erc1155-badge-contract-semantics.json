@@ -1,0 +1,51 @@
+{
+  "issue": "EXT-058",
+  "title": "Mock ERC-1155 Badge Contract Semantics",
+  "status": "MOCK_CONTRACT_SEMANTICS_LOCKED",
+  "depends_on": [
+    "EXT-056",
+    "EXT-057"
+  ],
+  "standard": "ERC-1155",
+  "contract_mode": "mock_semantics_only",
+  "deploy_allowed": false,
+  "mint_represents": "witness_action_completion",
+  "runtime_mode": "witness_only",
+  "authority": false,
+  "truth_claim": false,
+  "resolution_semantics": "absent",
+  "badge_power": 0,
+  "vote_power": 0,
+  "governance_action_allowed": false,
+  "transfer_governance_rights": false,
+  "promotion_allowed": false,
+  "mock_contract_semantics": {
+    "nonTransferable": true,
+    "oneBadgePerReceipt": true,
+    "receiptHashRequired": true,
+    "mintRequiresWitnessCompletion": true,
+    "badgeCannotVote": true,
+    "badgeCannotResolve": true,
+    "badgeCannotGrantAuthority": true,
+    "badgeCannotPromoteTruth": true,
+    "badgeCannotExecuteGovernance": true,
+    "transferFunctionReverts": true,
+    "safeTransferFromReverts": true,
+    "safeBatchTransferFromReverts": true
+  },
+  "allowed_functions": [
+    "mintCompletionBadge",
+    "hasReceiptBadge",
+    "receiptHashOf",
+    "badgeMetadata"
+  ],
+  "forbidden_functions": [
+    "vote",
+    "resolve",
+    "grantAuthority",
+    "promoteTruth",
+    "executeGovernance",
+    "settleOutcome",
+    "delegateVotePower"
+  ]
+}

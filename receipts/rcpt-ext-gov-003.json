@@ -1,0 +1,50 @@
+{
+  "artifact_id": "RCPT-EXT-GOV-003",
+  "case_id": "EXT-GOV-003",
+  "type": "goblin_court_drift_scan_receipt",
+  "version": "1",
+  "framework": "Goblin Court Oversight",
+  "framework_state": "CONSTITUTIONAL_RATIFIED",
+  "docket_state": "DOCKET_CYCLE_COMPLETE",
+  "posture": "OBSERVATIONAL_ONLY",
+  "authority": false,
+  "mutation": false,
+  "truth_claim": false,
+  "canonical_effect": "none",
+  "canonical_head": "MRU-023",
+  "classification": "EXTERNAL_CULTURAL_VARIANCE",
+  "observation": {
+    "source_type": "DAO Governance Portal",
+    "observation_timestamp": "2026-06-30T21:40:00Z",
+    "provenance": "Publicly accessible thread, revision-controlled"
+  },
+  "drift_metrics": {
+    "revision_count": 3,
+    "change_scope": "Parameter adjustment: Treasury distribution",
+    "approval_state": "Proposed / Active Voting",
+    "governance_model": "DAO",
+    "reference_stability": "Versioned snapshot",
+    "replayability": "Undefined externally within this framework"
+  },
+  "procedural_findings": {
+    "proposal_status": "ACTIVE_VOTING",
+    "revision_history_verified_steps": 3,
+    "semantic_drift_between_revision_2_and_3": "none_observed",
+    "revision_2_to_3_change_type": "strictly_numerical",
+    "measurement_vs_interpretation_boundary_preserved": true
+  },
+  "taxonomy_evaluation": {
+    "ambiguity": "low",
+    "capturability": "high",
+    "repeatability": "high",
+    "taxonomy_expansion_required": false,
+    "new_variance_class_recommended": false
+  },
+  "excluded_interpretations": [
+    "This proposal is fiscally irresponsible.",
+    "This is a strategic treasury optimization."
+  ],
+  "court_finding": "Within the Goblin Court framework, the existing taxonomy and operational metrics handled EXT-GOV-003 without requiring modification or expansion to GOVERNANCE_VARIANCE.",
+  "next_recommended_artifact": "EXT-META-004 Token/NFT Metadata",
+  "summary": "Governance proposal scanned as EXTERNAL_CULTURAL_VARIANCE. Metrics were repeatable, procedural, and non-interpretive. MRU-023 remained untouched."
+}

@@ -1,0 +1,40 @@
+{
+  "artifact_id": "MRU-014A",
+  "artifact_type": "gitfix_payload_attempt",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "gitfix_payload_attempt_v1",
+  "subject": {
+    "artifact_id": "MRU-004",
+    "target_digest": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+    "selection_source": "MRU-013"
+  },
+  "evidence_state": "Observed",
+  "history": "append_only",
+  "authority": false,
+  "truth_claim": false,
+  "bleed": "none",
+  "payload_attempt": {
+    "submitted_payload_description": "MRU-004 JSON object supplied in user message with subject.content_sha256 set to the GITFIX candidate and timestamp 2026-06-30T00:00:00Z",
+    "encoding_checked": "utf-8",
+    "trailing_newline_checked": true,
+    "byte_length_with_trailing_newline": 704,
+    "computed_sha256_with_trailing_newline": "716b9d9337b02f1c258e676dd8aa88f3915adb58de9ebcfb9a6294ca88afc8d7",
+    "reported_expected_sha256": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+    "match": false
+  },
+  "gate_result": {
+    "mru_014a_cleared": false,
+    "promotion": "blocked_on_digest_mismatch",
+    "recommit": "not_performed",
+    "reason": "supplied exact bytes do not independently hash to selected digest"
+  },
+  "next_allowed_transition": {
+    "artifact_id": "MRU-014B",
+    "action": "submit_exact_payload_or_byte_encoding_variant",
+    "success_condition": "sha256(exact_payload_bytes) == a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d"
+  },
+  "replay_question": "why_payload_attempt_failed",
+  "replay_answer": "This artifact records that the supplied MRU-004 payload attempt was checked at the byte boundary and did not hash to the selected GITFIX digest, so recommit and promotion remain blocked.",
+  "timestamp": "2026-06-30T20:05:00Z"
+}

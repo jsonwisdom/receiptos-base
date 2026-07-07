@@ -1,0 +1,29 @@
+{
+  "policy_id": "default-agent-policy",
+  "policy_version": "0.2.0",
+  "description": "MVP structured policy for ReceiptOS Base agent receipt demo. policy_hash is computed over {version, rules} at load time and is not stored in this file.",
+  "authority": false,
+  "rules": [
+    {
+      "rule_id": "AR-002-001",
+      "matcher": "tool_not_in_denylist",
+      "description": "Tool calls must not use denylisted tools.",
+      "deny_tools": [
+        "delete_all",
+        "exfiltrate_secret"
+      ],
+      "severity": "error"
+    },
+    {
+      "rule_id": "AR-002-002",
+      "matcher": "requires_captured_context",
+      "description": "Nondeterministic actions must include captured_context.",
+      "action_types": [
+        "llm_call",
+        "api_response",
+        "wall_clock"
+      ],
+      "severity": "error"
+    }
+  ]
+}

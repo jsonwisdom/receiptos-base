@@ -1,0 +1,50 @@
+name: JayOps Daily Briefing
+
+on:
+  schedule:
+    - cron: "0 14 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      prev_witness_hash:
+        description: "Optional previous witness hash for this briefing witness"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  render-daily-briefing:
+    name: Render witness-only daily briefing
+    runs-on: ubuntu-latest
+    env:
+      PREV_WITNESS_HASH: ${{ inputs.prev_witness_hash }}
+      CANONICALIZER_VERSION: CANONICAL_SERIALIZATION_RULES_V1
+      DAILY_BRIEFING_TO: jaywisdom44@gmail.com
+      DAILY_BRIEFING_FROM: jaywisdom44@gmail.com
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      EAS_SCHEMA_UID: ${{ secrets.EAS_SCHEMA_UID }}
+      EAS_CONTRACT_ADDRESS: ${{ secrets.EAS_CONTRACT_ADDRESS }}
+      EAS_ATTESTER_PRIVATE_KEY: ${{ secrets.EAS_ATTESTER_PRIVATE_KEY }}
+      EAS_RPC_URL: ${{ secrets.EAS_RPC_URL }}
+      EAS_RECIPIENT: ${{ secrets.EAS_RECIPIENT }}
+      DAILY_BRIEFING_GITHUB_WORKFLOWS: "[]"
+      DAILY_BRIEFING_DEPLOYMENTS: "[]"
+      DAILY_BRIEFING_CALENDAR: "[]"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Render briefing
+        run: npx --yes tsx scripts/send-daily-briefing.ts

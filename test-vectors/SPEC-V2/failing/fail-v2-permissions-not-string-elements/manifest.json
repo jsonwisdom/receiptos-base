@@ -1,0 +1,14 @@
+{
+  "name": "example-v2-bad-permission-elements",
+  "description": "SPEC-V2 rejects non-string permission array elements",
+  "developer": {
+    "name": "Example Dev",
+    "url": "https://example.com"
+  },
+  "permissions": [
+    "read:user",
+    123,
+    null
+  ],
+  "version": "2.0.0-alpha"
+}

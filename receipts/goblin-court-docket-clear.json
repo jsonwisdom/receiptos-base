@@ -1,0 +1,35 @@
+{
+  "artifact_id": "GOBLIN-COURT-DOCKET-CLEAR-001",
+  "type": "goblin_court_docket_status",
+  "version": "1",
+  "status": "DOCKET_CLEAR",
+  "session_state": "COURT_IN_SESSION",
+  "posture": "OBSERVATIONAL_ONLY",
+  "root_privileges": "0x00",
+  "root_access": false,
+  "canonical_head": "MRU-023",
+  "canonical_effect": "none",
+  "authority": false,
+  "mutation": false,
+  "truth_claim": false,
+  "prior_session_commit": "ab3a891b83da66214eaf9dba18143b619381ae7d",
+  "prior_artifact": "receipts/goblin-court-session-open.json",
+  "active_index": "NON_MUTATIVE_VARIANCE",
+  "guardrails": {
+    "observational_only": true,
+    "zero_authority": true,
+    "jail_protocol_active": true,
+    "canonical_head_mutation_allowed": false,
+    "variance_capture_allowed": true,
+    "variance_execution_allowed": false,
+    "escalation_attempt_drop_rule": true
+  },
+  "docket": {
+    "pending_variance_entries": 0,
+    "last_recorded_case": "Jays_Math_Class_v1",
+    "last_input_signal": "LMFAO",
+    "last_classification": "NON_MUTATIVE_VARIANCE"
+  },
+  "input_protocol": "goblin variance entry <CASE_ID> <INPUT_SIGNAL> <CLASSIFICATION>",
+  "summary": "Goblin Court remains in session with a clear docket, root denied, and no canonical mutation."
+}

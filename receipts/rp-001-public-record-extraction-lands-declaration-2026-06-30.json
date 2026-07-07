@@ -1,0 +1,80 @@
+{
+  "artifact_id": "RP-001-PUBLIC-RECORD-EXTRACTION-LANDS-DECLARATION-2026-06-30",
+  "artifact_type": "public_record_extraction",
+  "claim_id": "RP-001",
+  "target_entity_id": "LANDS-DECLARATION-2026-06-25",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "source_url": "https://storage.courtlistener.com/recap/gov.uscourts.dcd.292242/gov.uscourts.dcd.292242.22.1.pdf",
+  "source_identity": {
+    "case_name": "Cultural Landscape Foundation v. U.S. Department of the Interior",
+    "case_number": "1:26-cv-01593-CJN",
+    "document": "22-1",
+    "filed_date": "2026-06-24",
+    "declarant": "Frank Lands",
+    "declarant_title": "Deputy Director for Operations, National Park Service",
+    "document_type": "2-page sworn declaration"
+  },
+  "extracted_facts_compressed": [
+    "The Lincoln Memorial Reflecting Pool was drained and a tinted polyurea liner was installed for waterproofing and protection before refilling ahead of U.S. 250th-related events.",
+    "On 2026-06-09, NPS reported damage and U.S. Park Police responded.",
+    "The declaration describes caulk over foam sealant cut with a sharp knife or razor.",
+    "The declaration describes destruction of delaminating surface material.",
+    "The declaration states approximately 70 fence post tops were thrown into the pool.",
+    "NPS planned to drain the pool again after July 4 for repairs and assessment of the lining.",
+    "Frank Lands signed under penalty of perjury, digitally executed 2026-06-24 at 18:09."
+  ],
+  "interpretive_boundary": {
+    "supported_by_declaration": [
+      "Official report of localized sharp-implement damage to caulk/foam sealant.",
+      "Official observation of delaminating surface material destruction.",
+      "Official observation of fence post tops thrown into the pool.",
+      "Post-July 4 repair/assessment plan."
+    ],
+    "not_resolved_by_declaration": [
+      "Whether a 300-350 foot gash claim is supported by primary evidence.",
+      "Whether algae was caused by vandalism, water chemistry, nanobubbler removal, sunlight, construction disturbance, or maintenance failure.",
+      "Whether coating/liner delamination was caused by vandalism, rushed rehabilitation, substrate issues, water intrusion, or normal material failure.",
+      "Whether photos, surveillance, contractor reports, or arrest details confirm the full damage timeline."
+    ]
+  },
+  "receiptos_mapping": {
+    "signal_core": "The Frank Lands declaration is a primary public-record source for the official NPS account of reflecting pool damage after rehabilitation.",
+    "acceleration_path": "Use as a Public Records Receipt template: docket metadata, source URL, declarant verification, exact excerpt, timeline, narrative delta, and hash gate status.",
+    "narrative_delta": "The declaration supports localized sharp-implement damage and related vandalism, but does not itself prove broader public claims about large linear gashes, algae causation, or renovation quality failures."
+  },
+  "gate_state_after_extraction": {
+    "source_authority": "URL_AND_TEXT_VERIFIED_PLUS_NEWS_CORROBORATED",
+    "hash_ready": "PENDING_ACTUAL_DIGEST_OR_INDEPENDENT_RECOMPUTE",
+    "receipt_eligible": "PROVISIONAL_ONLY",
+    "anchor_ready": "PROVISIONAL_ONLY",
+    "replay": "SOURCE_TEXT_PLUS_EXTERNAL_CORROBORATION_COMPLETE",
+    "photo_evidence_bound": false,
+    "hash_bind_completed": false,
+    "authority": false,
+    "truth_claim": false
+  },
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "reason": "Extraction improves structured readability and narrative-delta handling but does not provide PDF byte hash or photo evidence."
+  },
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "existing_receipts_rewritten": false,
+    "append_only_extraction": true,
+    "hash_bind_completed": false,
+    "photo_evidence_bound": false,
+    "authority_flip_rejected": true,
+    "truth_claim_preserved_false": true
+  },
+  "active_surface_after_extraction": [
+    "provide_computed_sha256 RP-001 LANDS-DECLARATION-2026-06-25 <64_hex_sha256>",
+    "evidence expansion RP-001 PHOTOS <PHOTO_URL_OR_FILE_HASH>",
+    "claim lookup RP-001"
+  ]
+}

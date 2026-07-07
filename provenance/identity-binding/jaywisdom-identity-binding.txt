@@ -1,0 +1,11 @@
+subject: jaywisdom.base.eth
+ens: jaywisdom.eth
+wallet: 0xA380552a27b0a5a2874Ea7AA52CAC09f542002E8
+service: ReceiptOS Meme Court Frame MVP
+endpoint: https://receiptos-frame-mvp.vercel.app
+issue: jsonwisdom/receiptos-base#57
+deployment_receipt: gcp-cloud-build:e0e45d99-ab21-49be-b675-bee556623283
+court_state: FRAME_MVP_DEPLOYMENT_RECEIPT_VERIFIED
+signature_gate: SIGNATURE_BUNDLE_PENDING
+authority: false
+truth_claim: false

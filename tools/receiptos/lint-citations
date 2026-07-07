@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TARGET="${1:-.}"
+BAD='proves true|confirms guilt|establishes ownership|legally verifies|official authority|authenticated identity'
+
+if grep -RniE "$BAD" "$TARGET" \
+  --exclude-dir=.git \
+  --exclude=CITATION_POLICY.md \
+  --exclude=lint-citations; then
+  echo "FAIL: prohibited citation language found"
+  exit 70
+fi
+
+echo "PASS: citation language clean"

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos-base.vercel.app/schemas/interpretation-v1.json",
+  "title": "ReceiptOS Interpretation Artifact v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_id",
+    "wire_reference",
+    "policy",
+    "score",
+    "inputs",
+    "computed_at",
+    "authority",
+    "truth_claim",
+    "verdict"
+  ],
+  "properties": {
+    "receipt_id": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "wire_reference": { "type": "string", "minLength": 1, "maxLength": 512 },
+    "policy": { "type": "string", "enum": ["trust-score-v1", "risk-v1"] },
+    "score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "inputs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "computed_at": { "type": "string" },
+    "authority": { "const": false },
+    "truth_claim": { "const": false },
+    "verdict": { "const": "WITNESS_ONLY" }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "TEST-NEGATIVE-001",
+  "description": "TODO: this fixture must fail placeholder scan",
+  "authority": false,
+  "expected_result": "REJECTED"
+}

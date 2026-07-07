@@ -1,0 +1,32 @@
+{
+  "version": "LLM_PROVIDER_SCHEMA_V1",
+  "required_fields": [
+    "provider",
+    "base_url",
+    "api_key_env",
+    "model",
+    "rate_limit",
+    "context_window",
+    "openai_compatible",
+    "verified_at",
+    "receipt_id"
+  ],
+  "field_types": {
+    "provider": "string",
+    "base_url": "string",
+    "api_key_env": "string",
+    "model": "string",
+    "rate_limit": "string",
+    "context_window": "integer|null",
+    "openai_compatible": "boolean",
+    "verified_at": "ISO8601|null",
+    "receipt_id": "string|null"
+  },
+  "invariants": {
+    "directory_is_signal": true,
+    "receiptos_replay_is_verification": true,
+    "verified_registry_only": true,
+    "authority": false,
+    "truth_claim": false
+  }
+}

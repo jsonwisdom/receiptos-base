@@ -1,0 +1,31 @@
+{
+  "artifact_id": "MRU-002-RECONCILIATION",
+  "type": "state_reconciliation_receipt",
+  "version": "1",
+  "subject": "MRU-002",
+  "schema": "alms_state_reconciliation_v1",
+  "timestamp": "2026-06-30T19:01:21Z",
+  "reconciled_state": {
+    "integrity_gate": "Active (Triggered)",
+    "bleed_status": "None (Validated)",
+    "gitfix_state": "Append-only / Validated",
+    "artifact_resolution": "Observed (Non-Promoted)"
+  },
+  "diagnostic_confirmation": {
+    "conflict": "Git object hashes are 40-character hexadecimal strings while ALMS SHA-256 expectations require 64-character hexadecimal strings.",
+    "policy_result": "No silent promotion preserved actual observed reality over expected state.",
+    "security_posture": "Mismatch retained as audit evidence rather than corrected in place."
+  },
+  "alms_posture": {
+    "authority": false,
+    "truth_claim": false,
+    "mutation": "append_only",
+    "promotion": "blocked",
+    "graph_status": "well_formed_despite_identity_discrepancy"
+  },
+  "next_valid_paths": [
+    "MRU-002A recompute canonical SHA-256 over exact committed bytes",
+    "MRU-003 define identity namespace separation for git_sha1 vs content_sha256",
+    "GITFIX-001 add verifier rule rejecting sha256 labels shorter than 64 hex"
+  ]
+}

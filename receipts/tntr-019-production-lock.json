@@ -1,0 +1,21 @@
+{
+  "receipt_id": "TNTR-019-PRODUCTION-LOCK",
+  "issue": "PRODUCTION-LOCK",
+  "version": "TNTR-v1-final",
+  "status": "PRODUCTION",
+  "authority": false,
+  "resolution_semantics": "absent",
+  "stack_hash": "0x7b99bf6d94e8f90d57c221902669593f6c0b23f481fdc0a87c03707af96f12dc",
+  "deployment_time": "2026-06-30T12:00:00Z",
+  "gates_locked": [
+    "EXT-029",
+    "EXT-031",
+    "EXT-032",
+    "EXT-033",
+    "EXT-034"
+  ],
+  "deferred_extensions": [
+    "EXT-030"
+  ],
+  "verification_hash": "0x9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d"
+}

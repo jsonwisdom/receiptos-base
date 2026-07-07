@@ -1,0 +1,67 @@
+{
+  "receipt_id": "PRC-JRN-FIELD-EXT-004",
+  "framework_version": "PRC-JRN-v1.1",
+  "case_id": "004",
+  "mode": "simulated_validation",
+  "session": {
+    "date": "2026-06-29T21:30:00Z",
+    "facilitator": "TEST-SESSION-004",
+    "participant_type": "synthetic_test",
+    "participant_count": 0,
+    "session_length_minutes": 0
+  },
+  "claim_reviewed": "Sherco Solar III site shows full operational panels in high-res drone footage",
+  "baseline_assessment": "partially_supported",
+  "final_assessment": "insufficient_evidence",
+  "observations": [
+    "High-fidelity image was provided.",
+    "Media hash was provided.",
+    "Multiple sources were listed.",
+    "EXIF timestamp was missing.",
+    "Witness signature was missing.",
+    "Custody chain was limited to a single forwarded source.",
+    "Origin trace compressed to a single root via forward.",
+    "Independent verification was false.",
+    "Synthetic risk was medium."
+  ],
+  "unknowns": [
+    "Whether the media originates from the claimed site.",
+    "Whether the image is raw, edited, or synthetic.",
+    "Whether listed sources are independent.",
+    "Whether panels are operational or merely visible.",
+    "Whether timestamp and witness data can be independently verified."
+  ],
+  "evidence_introduced": [
+    {
+      "label": "high_fidelity_media && !custody_chain",
+      "assessment_changed": true,
+      "reason": "High-fidelity media without complete custody chain defaults to insufficient evidence under v1.1.1."
+    },
+    {
+      "label": "multiple_sources && single_origin && !independent_verification",
+      "assessment_changed": true,
+      "reason": "Listed sources compressed to one origin path and did not establish independent corroboration."
+    }
+  ],
+  "observed_behaviors": {
+    "asked_for_primary_source": true,
+    "distinguished_observation_from_assessment": true,
+    "identified_unknowns": true,
+    "requested_corroboration": true,
+    "revised_assessment": true,
+    "explained_revision": true
+  },
+  "friction": [
+    "High-fidelity illusion / perceptual bias",
+    "Echo consensus / source-lineage collapse",
+    "Partial custody gap"
+  ],
+  "curriculum_delta": [
+    "Add combined gate example for high-fidelity media with source-lineage collapse.",
+    "Clarify that media hash alone does not establish custody or operational status.",
+    "Route synthetic tests separately from authentic external participant receipts."
+  ],
+  "constitution_changes_proposed": [],
+  "engine_changes_proposed": [],
+  "authority": false
+}

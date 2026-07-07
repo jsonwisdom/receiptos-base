@@ -1,0 +1,276 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "EXT-101 Frame Read-Only Contract Lock",
+    "version": "0.1.0",
+    "description": "Replay-safe, non-mutating Frame endpoint contract for JAYWISDOM / ReceiptOS. authority=false and truth_claim=false are schema-locked."
+  },
+  "paths": {
+    "/api/frame/capabilities": {
+      "get": {
+        "operationId": "getFrameCapabilities",
+        "responses": {
+          "200": {
+            "description": "Frame capability advertisement",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/$defs/CapabilitiesResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/frame/receipt/{receipt_id}": {
+      "get": {
+        "operationId": "getFrameReceipt",
+        "parameters": [
+          {
+            "name": "receipt_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "minLength": 1 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Receipt found or not found without mutation",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/$defs/ReceiptViewerResponse" }
+              }
+            }
+          },
+          "404": {
+            "description": "Safe not found response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/$defs/ReceiptViewerResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/frame/manifest-lock": {
+      "get": {
+        "operationId": "getFrameManifestLock",
+        "responses": {
+          "200": {
+            "description": "Locked manifest metadata",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/$defs/ManifestLockResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/frame/hash-challenge": {
+      "post": {
+        "operationId": "postFrameHashChallenge",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/$defs/HashChallengeRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pure hash challenge result",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/$defs/HashChallengeResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/frame/witness-surface": {
+      "get": {
+        "operationId": "getFrameWitnessSurface",
+        "parameters": [
+          {
+            "name": "receipt_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Public witness surface metadata",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/$defs/WitnessSurfaceResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/frame/replay-verify": {
+      "post": {
+        "operationId": "postFrameReplayVerify",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "type": "object", "additionalProperties": true }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sandbox read-only replay verification",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/$defs/ReplayVerifyResponse" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "ZeroMutation": {
+      "type": "object",
+      "required": ["authority", "truth_claim", "mutation", "mutations"],
+      "properties": {
+        "authority": { "const": false },
+        "truth_claim": { "const": false },
+        "mutation": { "type": "null" },
+        "mutations": { "type": "array", "maxItems": 0 }
+      }
+    },
+    "BaseReceipt": {
+      "allOf": [
+        { "$ref": "#/$defs/ZeroMutation" },
+        {
+          "type": "object",
+          "required": ["endpoint", "status", "frame_id"],
+          "properties": {
+            "endpoint": { "type": "string", "minLength": 1 },
+            "status": { "type": "string", "minLength": 1 },
+            "frame_id": { "const": "jaywisdom-replay-frame" }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "CapabilitiesResponse": {
+      "allOf": [
+        { "$ref": "#/$defs/BaseReceipt" },
+        {
+          "type": "object",
+          "required": ["methods", "actions"],
+          "properties": {
+            "endpoint": { "const": "frame_capabilities" },
+            "methods": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "actions": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+          }
+        }
+      ]
+    },
+    "ReceiptViewerResponse": {
+      "allOf": [
+        { "$ref": "#/$defs/BaseReceipt" },
+        {
+          "type": "object",
+          "required": ["receipt_id", "receipt_hash", "receipt"],
+          "properties": {
+            "endpoint": { "const": "receipt_viewer" },
+            "status": { "enum": ["FOUND", "NOT_FOUND"] },
+            "receipt_id": { "type": "string" },
+            "receipt_hash": { "type": ["string", "null"] },
+            "receipt": { "type": ["object", "null"], "additionalProperties": true }
+          }
+        }
+      ]
+    },
+    "ManifestLockResponse": {
+      "allOf": [
+        { "$ref": "#/$defs/BaseReceipt" },
+        {
+          "type": "object",
+          "required": ["manifest_id", "manifest_path", "lock_path", "lock_sha256", "canonicalization"],
+          "properties": {
+            "endpoint": { "const": "manifest_lock_inspector" },
+            "manifest_id": { "const": "jaywisdom" },
+            "manifest_path": { "const": ".well-known/farcaster/manifest.jcs" },
+            "lock_path": { "const": ".well-known/farcaster/manifest.lock.json" },
+            "lock_sha256": { "const": "d3e01a4dcb4d64e1617151b211389481c00054f2121a323662546d2e4e2f2cce" },
+            "canonicalization": { "const": "RFC8785" }
+          }
+        }
+      ]
+    },
+    "HashChallengeRequest": {
+      "type": "object",
+      "properties": {
+        "provided_hash": { "type": ["string", "null"] },
+        "bytes": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "HashChallengeResponse": {
+      "allOf": [
+        { "$ref": "#/$defs/BaseReceipt" },
+        {
+          "type": "object",
+          "required": ["challenge_type", "computed_hash", "expected_hash", "match", "signature_valid"],
+          "properties": {
+            "endpoint": { "const": "hash_challenger" },
+            "challenge_type": { "enum": ["provided_hash", "uploaded_bytes"] },
+            "computed_hash": { "type": ["string", "null"] },
+            "expected_hash": { "const": "d3e01a4dcb4d64e1617151b211389481c00054f2121a323662546d2e4e2f2cce" },
+            "match": { "type": "boolean" },
+            "signature_valid": { "const": false }
+          }
+        }
+      ]
+    },
+    "WitnessSurfaceResponse": {
+      "allOf": [
+        { "$ref": "#/$defs/BaseReceipt" },
+        {
+          "type": "object",
+          "required": ["receipt_id", "public_witness_url", "role", "canonical_manifest", "source_of_truth", "domain_binding"],
+          "properties": {
+            "endpoint": { "const": "witness_surface" },
+            "receipt_id": { "type": ["string", "null"] },
+            "public_witness_url": { "const": "https://farcaster.xyz/cmptrwsdm" },
+            "role": { "const": "public_identity_projection" },
+            "canonical_manifest": { "const": false },
+            "source_of_truth": { "const": false },
+            "domain_binding": { "const": "https://cmptrwsdm.com/.well-known/farcaster/manifest.json" }
+          }
+        }
+      ]
+    },
+    "ReplayVerifyResponse": {
+      "allOf": [
+        { "$ref": "#/$defs/BaseReceipt" },
+        {
+          "type": "object",
+          "required": ["replay_mode", "persisted", "request_hash", "lock_sha256", "signer_status", "cryptogreen", "response_hash"],
+          "properties": {
+            "endpoint": { "const": "replay_verify" },
+            "replay_mode": { "const": "sandbox_read_only" },
+            "persisted": { "const": false },
+            "request_hash": { "type": "string" },
+            "lock_sha256": { "const": "d3e01a4dcb4d64e1617151b211389481c00054f2121a323662546d2e4e2f2cce" },
+            "signer_status": { "const": "PENDING_EXTERNAL_SIGN" },
+            "cryptogreen": { "const": false },
+            "response_hash": { "type": "string" }
+          }
+        }
+      ]
+    }
+  }
+}

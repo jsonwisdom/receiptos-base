@@ -1,0 +1,64 @@
+{
+  "anchor_conformance_matrix": true,
+  "authority": false,
+  "case_count": 4,
+  "cases": [
+    {
+      "actual_errors": [],
+      "actual_valid": true,
+      "case_id": "positive_storage_time_anchor",
+      "case_passed": true,
+      "expected_errors": [],
+      "expected_valid": true,
+      "fixture": "audit/fixtures/root-subscription-anchor-readiness.example.json"
+    },
+    {
+      "actual_errors": [
+        "storage_anchor_timestamp_invalid:1"
+      ],
+      "actual_valid": false,
+      "case_id": "negative_wrong_timestamp_format",
+      "case_passed": true,
+      "expected_errors": [
+        "storage_anchor_timestamp_invalid:1"
+      ],
+      "expected_valid": false,
+      "fixture": "audit/fixtures/negative-anchor-wrong-format.example.json"
+    },
+    {
+      "actual_errors": [
+        "storage_anchor_type_invalid:1",
+        "storage_anchor_semantics_invalid:1"
+      ],
+      "actual_valid": false,
+      "case_id": "negative_wrong_anchor_semantics",
+      "case_passed": true,
+      "expected_errors": [
+        "storage_anchor_type_invalid:1",
+        "storage_anchor_semantics_invalid:1"
+      ],
+      "expected_valid": false,
+      "fixture": "audit/fixtures/negative-anchor-wrong-semantics.example.json"
+    },
+    {
+      "actual_errors": [
+        "storage_anchor_extra_fields:1:timeline_rank"
+      ],
+      "actual_valid": false,
+      "case_id": "negative_extra_anchor_field",
+      "case_passed": true,
+      "expected_errors": [
+        "storage_anchor_extra_fields:1:timeline_rank"
+      ],
+      "expected_valid": false,
+      "fixture": "audit/fixtures/negative-anchor-extra-field.example.json"
+    }
+  ],
+  "errors": [],
+  "inference_performed": false,
+  "matrix_passed": true,
+  "negative_count": 3,
+  "positive_count": 1,
+  "state_mutated": false,
+  "truth_claim": false
+}

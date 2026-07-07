@@ -1,0 +1,20 @@
+{
+  "authority": false,
+  "base_conformant": true,
+  "base_errors": [],
+  "conformant": true,
+  "frame_loaded": true,
+  "frame_type": "receipt",
+  "hash_match": true,
+  "inference_performed": false,
+  "nonce_well_formed": true,
+  "profile": "eas-v1",
+  "profile_conformant": true,
+  "profile_errors": [],
+  "signature_envelope_valid": true,
+  "state_mutated": false,
+  "timestamp_check_disabled": true,
+  "timestamp_within_bounds": true,
+  "truth_claim": false,
+  "witness_replay": true
+}

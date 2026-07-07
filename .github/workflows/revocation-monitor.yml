@@ -1,0 +1,21 @@
+name: Revocation Monitor
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+jobs:
+  check-revocation-status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Check EAS revocation status for all anchors
+        env:
+          BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+          REQUIRE_ONCHAIN: "1"
+        run: bash scripts/verify-all-anchors.sh evidence/anchors.json

@@ -1,0 +1,64 @@
+{
+  "receipt_id": "PRC-JRN-FIELD-EXT-005",
+  "framework_version": "PRC-JRN-v1.1.1",
+  "case_id": "004",
+  "mode": "simulated_validation",
+  "session": {
+    "date": "2026-06-29T21:33:00Z",
+    "facilitator": "TEST-SESSION-005",
+    "participant_type": "synthetic_test",
+    "participant_count": 0,
+    "session_length_minutes": 0
+  },
+  "claim_reviewed": "Confirmed operational panels with on-site witness",
+  "baseline_assessment": "under_review",
+  "final_assessment": "supported",
+  "observations": [
+    "High-fidelity image was provided.",
+    "IPFS-style media URL was provided.",
+    "EXIF timestamp was present.",
+    "Media hash was provided.",
+    "Custody chain listed on-site witness and drone operator.",
+    "Witness signature was provided.",
+    "Sources were listed as direct witness and independent survey.",
+    "Origin trace was multi-independent.",
+    "Independent verification was true.",
+    "Custody gap was false.",
+    "Synthetic risk was none within test parameters."
+  ],
+  "unknowns": [
+    "Synthetic positive payload uses placeholder-style identifiers and is not authentic external field evidence.",
+    "Actual IPFS retrieval and EAS verification were not performed in this simulated validation receipt."
+  ],
+  "evidence_introduced": [
+    {
+      "label": "high_fidelity_media && custody_chain && timestamp && witness_sig",
+      "assessment_changed": true,
+      "reason": "Within synthetic test constraints, high-fidelity media included custody, timestamp, hash, and witness signal."
+    },
+    {
+      "label": "multiple_sources && multi_independent && independent_verification",
+      "assessment_changed": true,
+      "reason": "Within synthetic test constraints, source lineage did not compress to a single origin and independent verification was present."
+    }
+  ],
+  "observed_behaviors": {
+    "asked_for_primary_source": true,
+    "distinguished_observation_from_assessment": true,
+    "identified_unknowns": true,
+    "requested_corroboration": true,
+    "revised_assessment": true,
+    "explained_revision": true
+  },
+  "friction": [
+    "Positive-path custody verification",
+    "Synthetic placeholder identifiers require boundary preservation"
+  ],
+  "curriculum_delta": [
+    "Add positive-path example showing when high-fidelity media can advance beyond advisory status.",
+    "Clarify that supported status requires actual retrieval/verification in authentic contexts, not placeholder identifiers."
+  ],
+  "constitution_changes_proposed": [],
+  "engine_changes_proposed": [],
+  "authority": false
+}

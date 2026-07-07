@@ -1,0 +1,74 @@
+name: Verify Anchor
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify-local-anchor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Verify all local anchors
+        run: bash scripts/verify-all-anchors.sh evidence/anchors.json
+
+  verify-spec:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        spec:
+          - SPEC-V1
+          - SPEC-V2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Run SPEC conformance bailiff
+        run: node ci/local-runner.js --spec ${{ matrix.spec }}
+      - name: Upload SPEC summary
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: spec-summary-${{ matrix.spec }}
+          path: results/${{ matrix.spec }}/summary.json
+
+  verify-spec-v2-visible:
+    name: verify-spec-v2-visible
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Run SPEC-V2 conformance bailiff
+        run: node ci/local-runner.js --spec SPEC-V2
+      - name: Upload SPEC-V2 visible summary
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: spec-summary-SPEC-V2-visible
+          path: results/SPEC-V2/summary.json
+
+  verify-onchain-anchor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify all on-chain anchors if BASE_RPC_URL is set
+        env:
+          BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+          REQUIRE_ONCHAIN: "1"
+        run: |
+          if [ -z "${BASE_RPC_URL:-}" ]; then
+            echo "BASE_RPC_URL not set; skipping RPC-backed EAS verification."
+            exit 0
+          fi
+
+          bash scripts/verify-all-anchors.sh evidence/anchors.json

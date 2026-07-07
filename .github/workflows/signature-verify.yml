@@ -1,0 +1,38 @@
+name: Signature Verification Surface Guard
+
+on:
+  push:
+    paths:
+      - 'frame/ext-106-signature-verification-surface.js'
+      - 'frame/ext-104-authorized-signer-registry.js'
+      - 'scripts/verify-signature-surface.js'
+      - 'docs/signature-verification-surface-ext-106.md'
+      - 'receipts/ext-104-authorized-signer-registry.seed.json'
+      - '.github/workflows/signature-verify.yml'
+  pull_request:
+    paths:
+      - 'frame/ext-106-signature-verification-surface.js'
+      - 'frame/ext-104-authorized-signer-registry.js'
+      - 'scripts/verify-signature-surface.js'
+      - 'docs/signature-verification-surface-ext-106.md'
+      - 'receipts/ext-104-authorized-signer-registry.seed.json'
+      - '.github/workflows/signature-verify.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  signature-verify:
+    name: EXT-106 signature verification surface guard
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify staged signature surface
+        run: node scripts/verify-signature-surface.js

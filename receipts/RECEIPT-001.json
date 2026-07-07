@@ -1,0 +1,15 @@
+{
+  "id": "RECEIPT-001",
+  "timestamp": "2026-07-06T09:39:00-05:00",
+  "inputs": {
+    "chain_identifier": "JOY_CHAIN_V1",
+    "artifact_identifier": "REPLAY_ENGINE_V1",
+    "receipt_source": "front-door",
+    "steps": ["load_schema", "load_receipt", "static_replay", "emit_match_boolean"]
+  },
+  "outputs": {
+    "expected_match": true,
+    "result_state": "UNRESOLVED"
+  },
+  "attestations": []
+}

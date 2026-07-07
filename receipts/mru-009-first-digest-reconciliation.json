@@ -1,0 +1,44 @@
+{
+  "artifact_id": "MRU-009",
+  "artifact_type": "reconciliation_event",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "first_digest_reconciliation_v1",
+  "subject": "contested_digest_pair_v1",
+  "evidence_state": "Observed",
+  "history": "append_only",
+  "bleed": "none",
+  "authority": false,
+  "truth_claim": false,
+  "identity_fields": {
+    "candidate_digests": {
+      "reported_digest": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+      "computed_digest": "6e2ba34cab2e2d329a06be3452e85d36ad53545253a28485cdda432eec98daae"
+    },
+    "resolution_method": "canonical_resolution_law_v1",
+    "recommit_rule": "recommit_law_v1"
+  },
+  "execution_lane": {
+    "executor_lane": "GITFIX",
+    "recorder_lane": "JSONWISDOM",
+    "verifier_lane": "AL"
+  },
+  "outcome": {
+    "resolution_status": "attempted",
+    "canonical_candidate": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+    "recommit_status": "pending_confirmation",
+    "promotion": "blocked_on_variance"
+  },
+  "replay_question": "why_resolution_event_exists",
+  "replay_answer": "This artifact records the first lawful attempt to reconcile a contested digest pair under MRU-006 and MRU-008 without asserting canonical identity.",
+  "invariant_trace": {
+    "MRU-003": "reported_vs_computed_digests_kept_separate",
+    "MRU-004": "conformance_check_not_truth_claim",
+    "MRU-005": "kernel_applies_law_to_itself_pairwise",
+    "MRU-006": "canonical_resolution_attempted_by_precedence",
+    "MRU-007": "resolution_event_staging_pattern_used",
+    "MRU-008": "recommit_remains_procedural"
+  },
+  "timestamp": "2026-06-30T19:35:00Z",
+  "jsonwisdom_canonical_sha256": "1ca1704c8e3ad877a32f04d576c0161fa33f636010751520b94ff147cb0b0de1"
+}

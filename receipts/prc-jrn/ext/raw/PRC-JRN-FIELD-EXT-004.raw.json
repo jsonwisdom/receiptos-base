@@ -1,0 +1,31 @@
+{
+  "ext_id": "EXT-004",
+  "session": {
+    "timestamp": "2026-06-29T21:30:00Z",
+    "participant_id": "TEST-SESSION-004",
+    "context": "MN energy policy claim simulation"
+  },
+  "claim": {
+    "description": "Sherco Solar III site shows full operational panels in high-res drone footage",
+    "media": [
+      {
+        "type": "image",
+        "fidelity": "high",
+        "url": "https://example.ipfs/hash/drone-sherco-2026.jpg",
+        "metadata": {
+          "exif_timestamp": null,
+          "hash": "sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+          "custody_chain": ["single_forwarded_source"],
+          "witness_sig": null
+        }
+      }
+    ],
+    "sources": ["local_news_repA", "local_news_repB", "social_media_echo"]
+  },
+  "provenance_raw": {
+    "origin_trace": "single_root_via_forward",
+    "independent_verification": false,
+    "custody_gap": true,
+    "synthetic_risk": "medium"
+  }
+}

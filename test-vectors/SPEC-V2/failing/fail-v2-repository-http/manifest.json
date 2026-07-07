@@ -1,0 +1,14 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "homepage": "https://example.com",
+  "developer": {
+    "name": "Example Dev",
+    "url": "https://developer.example.com"
+  },
+  "description": "Failing SPEC-V2 vector for non-HTTPS repository URL",
+  "repository": "http://github.com/example/repo",
+  "name": "fail-v2-repository-http-test",
+  "version": "1.0.0",
+  "permissions": []
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "tntr-market-primitives.schema.json",
+  "title": "TNTR Market Primitives Schema",
+  "description": "Defines allowed states for market substrate while excluding verdict semantics.",
+  "authority": false,
+  "type": "object",
+  "properties": {
+    "replay_status": {
+      "type": "string",
+      "enum": ["clean", "suspected", "duplicate", "corrupted", "pending_review"],
+      "description": "Tracks replay attack exposure."
+    },
+    "provenance_strength": {
+      "type": "string",
+      "enum": ["weak", "moderate", "strong", "critical", "unverified"],
+      "description": "Weight of source origin."
+    },
+    "challenge": {
+      "type": "string",
+      "enum": ["none", "filed", "under_review", "upheld", "dismissed", "escalated"],
+      "description": "Contestation state without verdict semantics."
+    },
+    "authority": {
+      "type": "boolean",
+      "const": false,
+      "description": "Explicitly locked to false."
+    },
+    "status_flag": {
+      "type": "string",
+      "enum": ["pending", "open", "threshold_met", "contested", "closed"],
+      "description": "Gate state without final claim adjudication."
+    }
+  },
+  "required": ["replay_status", "provenance_strength", "challenge", "authority"],
+  "additionalProperties": false
+}

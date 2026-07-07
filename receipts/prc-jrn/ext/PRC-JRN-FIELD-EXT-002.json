@@ -1,0 +1,45 @@
+{
+  "receipt_id": "PRC-JRN-FIELD-EXT-002",
+  "framework_version": "PRC-JRN-v1.1",
+  "case_id": "002",
+  "mode": "external_validation",
+  "session": {
+    "date": "2026-06-29T21:05:00Z",
+    "participant_type": "journalism student",
+    "participant_count": 1,
+    "session_length_minutes": 0
+  },
+  "claim_reviewed": "Multiple sources report the same story, so it must be true.",
+  "baseline_assessment": "supported",
+  "final_assessment": "insufficient_evidence",
+  "observations": [],
+  "unknowns": [
+    "Whether the multiple sources are independent",
+    "Whether any source contains primary reporting",
+    "Whether the story traces to a single origin"
+  ],
+  "evidence_introduced": [
+    {
+      "label": "All sources trace to single origin, no independent verification",
+      "assessment_changed": true,
+      "reason": "Repetition did not establish independent corroboration."
+    }
+  ],
+  "observed_behaviors": {
+    "asked_for_primary_source": true,
+    "distinguished_observation_from_assessment": true,
+    "identified_unknowns": true,
+    "requested_corroboration": true,
+    "revised_assessment": true,
+    "explained_revision": true
+  },
+  "friction": [
+    "Echo chamber / consensus bias"
+  ],
+  "curriculum_delta": [
+    "Strengthen source-lineage mapping in Case 002"
+  ],
+  "constitution_changes_proposed": [],
+  "engine_changes_proposed": [],
+  "authority": false
+}

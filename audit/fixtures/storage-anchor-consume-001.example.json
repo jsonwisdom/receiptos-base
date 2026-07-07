@@ -1,0 +1,26 @@
+{
+  "anchor_count": 1,
+  "anchor_only": true,
+  "anchors": [
+    {
+      "anchor_type": "storage_time_only",
+      "authority": false,
+      "batch_root": "sha256:7107ad37be56fbd8872463c911d650d526f821c371986fd06dddf85378ecaaaa",
+      "entry_id": "batch-root-entry-000002",
+      "entry_sequence": 2,
+      "inference_performed": false,
+      "semantics": "log_storage_time_only",
+      "sequence_semantics": "storage_order_only",
+      "state_mutated": false,
+      "timestamp_utc": "2026-06-30T13:00:42Z",
+      "truth_claim": false
+    }
+  ],
+  "authority": false,
+  "errors": [],
+  "feed_validated": true,
+  "inference_performed": false,
+  "state_mutated": false,
+  "storage_anchor_consumer": true,
+  "truth_claim": false
+}

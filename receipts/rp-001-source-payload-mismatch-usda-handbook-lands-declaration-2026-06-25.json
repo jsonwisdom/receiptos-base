@@ -1,0 +1,51 @@
+{
+  "artifact_id": "RP-001-SOURCE-PAYLOAD-MISMATCH-USDA-HANDBOOK-LANDS-DECLARATION-2026-06-25",
+  "artifact_type": "source_payload_mismatch",
+  "claim_id": "RP-001",
+  "target_entity_id": "LANDS-DECLARATION-2026-06-25",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "source_payload_received": {
+    "submitted_url": "https://www.rma.usda.gov/sites/default/files/2025-06/2026-18190-General-Standards-Handbook.pdf",
+    "local_mirror_claimed": "/mnt/data/2026-18190-General-Standards-Handbook.pdf",
+    "submitted_document_label": "USDA 2026 General Standards Handbook"
+  },
+  "verification_result": {
+    "source_authority": "INCOMPLETE",
+    "match_to_target": false,
+    "receipt_eligible": false,
+    "hash_ready": false,
+    "anchor_ready": false,
+    "reason": "Submitted PDF is a USDA Risk Management Agency General Standards Handbook and does not match the requested D.D.C. filing/declaration by Frank Lands concerning the 2026-06-09 Reflecting Pool incident."
+  },
+  "target_requirements_unmet": [
+    "Direct PDF or source URL for LANDS-DECLARATION-2026-06-25.",
+    "D.D.C. docket confirmation and filing stamp.",
+    "Declarant verification for Frank Lands as named declarant.",
+    "Exact damage language from the declaration.",
+    "Reference to the 2026-06-09 incident.",
+    "SHA-256 hash of the correct source document.",
+    "Page, paragraph, line, or exhibit references."
+  ],
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "reason": "Wrong-target source payload; no admissible RP-001 evidence was bound."
+  },
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "rp_001_status_changed": false,
+    "rp_001_confidence_changed": false,
+    "hash_bind_allowed": false,
+    "log_as_separate_evidence": false
+  },
+  "next_valid_verbs": [
+    "source_payload RP-001 LANDS-DECLARATION-2026-06-25 <CORRECT_PDF_OR_URL>",
+    "request_source_verification RP-001 <CORRECTED_ENTITY_ID>",
+    "claim lookup RP-001"
+  ]
+}

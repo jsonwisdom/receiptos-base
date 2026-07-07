@@ -1,0 +1,16 @@
+{
+  "event_time_boundary_proposal": true,
+  "proposal_id": "event-time-boundary-v0",
+  "issue": "#42",
+  "touched_files": [
+    "docs/EVENT_TIME_SEMANTICS_BOUNDARY.md",
+    "audit/event_time_conformance_gate.py"
+  ],
+  "imports": [],
+  "event_time_source": "external",
+  "event_time_path": "event_time/",
+  "authority": false,
+  "truth_claim": false,
+  "inference_performed": false,
+  "state_mutated": false
+}

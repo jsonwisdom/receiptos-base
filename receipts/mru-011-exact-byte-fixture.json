@@ -1,0 +1,54 @@
+{
+  "artifact_id": "MRU-011",
+  "artifact_type": "exact_byte_fixture",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "exact_byte_fixture_v1",
+  "subject": {
+    "artifact_id": "MRU-004",
+    "source_receipt_path": "receipts/mru-004-validation-law-observed.json"
+  },
+  "evidence_state": "Observed",
+  "history": "append_only",
+  "authority": false,
+  "truth_claim": false,
+  "bleed": "none",
+  "fixture_scope": "four_way_digest_comparison",
+  "byte_references": {
+    "reported_digest": {
+      "value": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+      "source": "MRU-004 gitfix_notes.reported_sha256",
+      "role": "claimed_canonical_candidate"
+    },
+    "computed_digest": {
+      "value": "6e2ba34cab2e2d329a06be3452e85d36ad53545253a28485cdda432eec98daae",
+      "source": "MRU-004 gitfix_notes.computed_sha256_from_literal_user_bytes",
+      "role": "literal_user_bytes_recompute"
+    },
+    "committed_file_bytes": {
+      "path": "receipts/mru-004-validation-law-observed.json",
+      "git_blob_sha": "cfcba9902bd27ac09025f23046a0bc38cffa688a",
+      "role": "repository_stored_fixture"
+    },
+    "jsonwisdom_serialized_bytes": {
+      "status": "not_yet_materialized_as_blob",
+      "required_next": "commit exact canonical no-whitespace JSONWISDOM bytes for MRU-004 as a byte fixture or encoded blob pointer",
+      "role": "canonical_hash_input_candidate"
+    }
+  },
+  "replay_commands": {
+    "read_committed_file": "git show HEAD:receipts/mru-004-validation-law-observed.json",
+    "hash_committed_file": "git show HEAD:receipts/mru-004-validation-law-observed.json | sha256sum",
+    "hash_jsonwisdom_fixture": "sha256sum <exact_jsonwisdom_bytes_fixture>",
+    "compare": "reported_digest vs computed_digest vs committed_file_digest vs jsonwisdom_fixture_digest"
+  },
+  "outcome": {
+    "fixture_status": "partial_exact_fixture",
+    "missing_input": "jsonwisdom_serialized_bytes_blob",
+    "promotion": "blocked_until_all_four_digest_inputs_are_materialized_and_replayed",
+    "next_allowed_transition": "MRU-012 materialize JSONWISDOM byte blob or MRU-004 exact recommit fixture"
+  },
+  "replay_question": "why_exact_byte_fixture_exists",
+  "replay_answer": "This artifact records the first replay-ready fixture boundary for MRU-004 digest reconciliation by separating reported digest, computed digest, committed repository bytes, and JSONWISDOM serialized bytes without asserting canonical identity.",
+  "timestamp": "2026-06-30T19:45:00Z"
+}

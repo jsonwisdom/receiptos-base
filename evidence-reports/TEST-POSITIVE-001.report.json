@@ -1,0 +1,21 @@
+{
+  "artifact_id": "0x0000000000000000000000000000000000000002",
+  "authority": false,
+  "blocked_reason": null,
+  "canonical_hash": "sha256:60ed40ad7076d7589fe9e30002e3d5718777adb5f3108f63b1605c12df249428",
+  "content_hash": "sha256:30f123bd4d9fd870c9cafb21b5cb15bf05ecc0c4cdb764d94f8fd17df4c0d2b3",
+  "origin": "Zora/Base",
+  "receipt_id": "TEST-POSITIVE-001",
+  "related_receipt": "RECEIPT-001",
+  "status": "VERIFIED",
+  "token_uri": "test://positive-001",
+  "type": "external_attestation",
+  "verification": {
+    "authority_check": "PASS",
+    "content_hash_verified": true,
+    "metadata_excluded_from_canonical_hash": true,
+    "placeholder_scan": "PASS",
+    "related_receipt_exists": true,
+    "schema_compliant": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "issue": "EXT-065",
+  "title": "Reference ERC-1155 Implementation",
+  "status": "REFERENCE_IMPLEMENTATION_LOCKED",
+  "depends_on": [
+    "EXT-064"
+  ],
+  "contract_path": "contracts/reference/EXT065ReferenceWitnessBadge.sol",
+  "policy_source": "EXT-064",
+  "contract_mode": "reference_implementation",
+  "runtime_mode": "witness_only",
+  "authority": false,
+  "truth_claim": false,
+  "resolution_semantics": "absent",
+  "badge_power": 0,
+  "vote_power": 0,
+  "governance_action_allowed": false,
+  "promotion_allowed": false,
+  "transfer_governance_rights": false,
+  "receiptHashRequired": true,
+  "oneBadgePerReceipt": true,
+  "nonTransferable": true
+}

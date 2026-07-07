@@ -1,0 +1,8 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "permissions": "read,write,admin",
+  "data": {
+    "hello": "world"
+  }
+}

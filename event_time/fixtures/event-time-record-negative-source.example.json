@@ -1,0 +1,15 @@
+{
+  "authority": false,
+  "claimed_timestamp_raw": "2026-06-30T13:21:49Z",
+  "errors": [],
+  "event_time_record": true,
+  "event_time_source": "internal",
+  "inference_performed": false,
+  "parsed": true,
+  "sorted": false,
+  "source_provenance": "internal-test-source",
+  "state_mutated": false,
+  "storage_time_compared": false,
+  "timezone_normalized": false,
+  "truth_claim": false
+}

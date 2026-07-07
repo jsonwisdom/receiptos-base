@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos.local/profiles/eas-v1.schema.json",
+  "title": "ReceiptOS EAS v1 Profile Binding",
+  "description": "Application profile for binding ReceiptOS frames to Ethereum Attestation Service (EAS) attestations without changing the base ESG-001 / ReceiptOS representation protocol.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "artifact_hash_canonicalization",
+    "signature_profile",
+    "eas"
+  ],
+  "properties": {
+    "profile": { "const": "receiptos-eas-v1" },
+    "artifact_hash_canonicalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hash_algorithm", "canonical_bytes"],
+      "properties": {
+        "hash_algorithm": { "const": "sha256" },
+        "canonical_bytes": {
+          "type": "string",
+          "description": "Profile-defined canonicalization rule. For EAS v1, this is SHA-256 over the EAS attestation payload bytes defined by the application profile, such as ABI-encoded payload bytes. The base validator does not compute this hash."
+        }
+      }
+    },
+    "signature_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile"],
+      "properties": {
+        "profile": { "const": "eas-attestation-v1" },
+        "verification_layer": {
+          "type": "string",
+          "description": "Profile-specific verification layer, such as EAS contract or off-chain EIP-712 verification. Not enforced by the base validator."
+        }
+      }
+    },
+    "eas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chain_id", "schema_uid", "attestation_uid"],
+      "properties": {
+        "chain_id": { "type": "integer", "minimum": 1 },
+        "schema_uid": { "type": "string", "pattern": "^0x[a-fA-F0-9]{64}$" },
+        "attestation_uid": { "type": "string", "pattern": "^0x[a-fA-F0-9]{64}$" },
+        "contract": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+        "tx_hash": { "type": "string", "pattern": "^0x[a-fA-F0-9]{64}$" }
+      }
+    }
+  }
+}

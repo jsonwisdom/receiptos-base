@@ -1,0 +1,15 @@
+{
+  "receipt_id": "RECEIPTOS-60SEC-001",
+  "artifact_id": "README-VERIFY-DEMO-001",
+  "artifact_sha256": "2757b42eff5ffe183315cff32bcf5e2e7420c96c192e463421e59a441b852032",
+  "artifact_text": "ReceiptOS verifies process evidence before authority.",
+  "authority": false,
+  "witness_only": true,
+  "truth_claim": false,
+  "anchor": {
+    "type": "git_commit",
+    "repo": "jsonwisdom/receiptos-base",
+    "commit": "80be15969a980db3db2d0628179b89d93c78e9a9"
+  },
+  "receipt_core_hash": "776021ffc8f70ff10f31911a7aaa9eb9ae9fc805d21e29eca591a6e36879be5c"
+}

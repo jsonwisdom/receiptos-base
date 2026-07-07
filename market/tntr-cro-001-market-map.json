@@ -1,0 +1,39 @@
+{
+  "mapping_id": "CRO-001",
+  "gate": "EXT-029",
+  "authority": false,
+  "mappings": {
+    "price_feed": {
+      "source": "oracle.aggregate.price",
+      "target": "substrate.price_signal",
+      "semantic_type": "observed_rate",
+      "is_truth": false,
+      "transform": "pass_through"
+    },
+    "liquidity_volume": {
+      "source": "market.orderbook.depth_24h",
+      "target": "substrate.liquidity_pool",
+      "semantic_type": "available_volume",
+      "is_authority": false,
+      "transform": "rolling_average"
+    },
+    "query_response": {
+      "source": "node.query.availability",
+      "target": "substrate.queryable_state",
+      "semantic_type": "data_presence",
+      "is_resolved": false,
+      "transform": "timestamp_check"
+    },
+    "signal_consensus": {
+      "source": "market.sentiment.consensus",
+      "target": "substrate.market_consensus",
+      "semantic_type": "aggregated_signal",
+      "is_tribunal": false,
+      "transform": "weighted_median"
+    }
+  },
+  "forbidden_mappings": {
+    "note": "No map points to truth, authority, guilt, or proven states."
+  },
+  "next_gate_reference": "EXT-030"
+}

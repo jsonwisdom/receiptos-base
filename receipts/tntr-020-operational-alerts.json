@@ -1,0 +1,19 @@
+{
+  "receipt_id": "TNTR-020-OPERATIONAL-ALERTS",
+  "issue": "EXT-038",
+  "gate": "Operational Alerts",
+  "status": "drift_detected",
+  "authority": false,
+  "resolution_semantics": "absent",
+  "mode": "signal_only",
+  "alerts": [
+    {
+      "class": "hash_mismatch",
+      "path": "deployment/tntr-v1-production-manifest.json",
+      "detail": "expected 0x7b99bf6d94e8f90d57c221902669593f6c0b23f481fdc0a87c03707af96f12dc, recomputed 0xf1d991ae5a89930372f8cb2000251baf446b61ed88eff5ed7857cd371f9ee527",
+      "severity": "critical",
+      "action": "signal_only",
+      "authority": false
+    }
+  ]
+}

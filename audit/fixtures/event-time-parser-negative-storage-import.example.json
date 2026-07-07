@@ -1,0 +1,17 @@
+{
+  "event_time_boundary_proposal": true,
+  "proposal_id": "event-time-parser-negative-storage-import",
+  "issue": "#42",
+  "touched_files": [
+    "event_time/parse_claimed_time.py"
+  ],
+  "imports": [
+    "audit.storage_view_subscription_feed"
+  ],
+  "event_time_source": "external",
+  "event_time_path": "event_time/",
+  "authority": false,
+  "truth_claim": false,
+  "inference_performed": false,
+  "state_mutated": false
+}

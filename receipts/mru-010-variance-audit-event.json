@@ -1,0 +1,58 @@
+{
+  "artifact_id": "MRU-010",
+  "artifact_type": "variance_audit_event",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "variance_audit_event_v1",
+  "subject": {
+    "artifact_id": "MRU-009",
+    "contested_pair": "MRU-004 reported_digest vs computed_digest"
+  },
+  "evidence_state": "Observed",
+  "history": "append_only",
+  "authority": false,
+  "truth_claim": false,
+  "bleed": "none",
+  "variance_pair": {
+    "reported_digest": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+    "computed_digest": "6e2ba34cab2e2d329a06be3452e85d36ad53545253a28485cdda432eec98daae",
+    "source_event": "MRU-009"
+  },
+  "audit_scope": {
+    "checks": [
+      "canonical_key_order",
+      "whitespace_absence",
+      "unicode_encoding_utf8",
+      "line_ending_normalization",
+      "literal_byte_boundary",
+      "field_name_consistency",
+      "reported_digest_source_trace"
+    ],
+    "excluded": [
+      "semantic_truth_resolution",
+      "authority_assignment",
+      "history_rewrite",
+      "transitive_promotion"
+    ]
+  },
+  "lane_roles": {
+    "GITFIX": "executes byte comparison and recommit only after cause is isolated",
+    "JSONWISDOM": "serializes exact bytes and records byte boundary",
+    "AL": "verifies posture and blocks promotion while variance remains"
+  },
+  "outcome": {
+    "variance_status": "unresolved_under_audit",
+    "promotion": "blocked_on_variance",
+    "recommit": "deferred_until_root_cause_documented",
+    "next_allowed_transition": "MRU-011 exact_byte_fixture_or_MRU-004_recommit_confirmation"
+  },
+  "replay_question": "why_variance_audit_exists",
+  "replay_answer": "This artifact records that a digest variance remains after MRU-009 and must be audited at the byte-boundary before any recommit can safely promote canonical identity.",
+  "invariant_trace": {
+    "MRU-003": "reported_digest_and_computed_digest_remain_distinct",
+    "MRU-006": "resolution_precedence_does_not_override_byte_mismatch",
+    "MRU-008": "recommit_requires_real_confirmation",
+    "MRU-009": "attempted_resolution_preserved_without_promotion"
+  },
+  "timestamp": "2026-06-30T19:40:00Z"
+}

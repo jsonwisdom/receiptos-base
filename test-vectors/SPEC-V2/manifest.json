@@ -1,0 +1,105 @@
+{
+  "spec": "SPEC-V2",
+  "spec_revision": "2.0.0-alpha",
+  "corpus_version": "0.7.0",
+  "canonicalization": "RFC8785",
+  "authority": false,
+  "vectors": [
+    {
+      "id": "valid-v2-minimal",
+      "path": "passing/valid-v2-minimal",
+      "type": "passing"
+    },
+    {
+      "id": "valid-v2-permissions",
+      "path": "passing/valid-v2-permissions",
+      "type": "passing"
+    },
+    {
+      "id": "fail-v2-permissions-not-array",
+      "path": "failing/fail-v2-permissions-not-array",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-permissions-not-string-elements",
+      "path": "failing/fail-v2-permissions-not-string-elements",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-permissions-empty-string",
+      "path": "failing/fail-v2-permissions-empty-string",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-permissions-whitespace-only",
+      "path": "failing/fail-v2-permissions-whitespace-only",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-permissions-repeated",
+      "path": "failing/fail-v2-permissions-duplicates",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-homepage-http",
+      "path": "failing/fail-v2-homepage-http",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-developer-url-http",
+      "path": "failing/fail-v2-developer-url-http",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-repository-http",
+      "path": "failing/fail-v2-repository-http",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-malformed-url",
+      "path": "failing/fail-v2-malformed-url",
+      "type": "failing"
+    },
+    {
+      "id": "valid-v2-url-fields",
+      "path": "passing/valid-v2-url-fields",
+      "type": "passing"
+    },
+    {
+      "id": "fail-v2-version-empty",
+      "path": "failing/fail-v2-version-empty",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-version-v2.0",
+      "path": "failing/fail-v2-version-v2.0",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-version-02.0.0",
+      "path": "failing/fail-v2-version-02.0.0",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-version-2.0.0.0",
+      "path": "failing/fail-v2-version-2.0.0.0",
+      "type": "failing"
+    },
+    {
+      "id": "fail-v2-version-invalid-prerelease",
+      "path": "failing/fail-v2-version-invalid-prerelease",
+      "type": "failing"
+    },
+    {
+      "id": "valid-v2-version-semver",
+      "path": "passing/valid-v2-version-semver",
+      "type": "passing"
+    }
+  ],
+  "release_state": "open",
+  "doctrine": {
+    "replay_first": true,
+    "authority": false,
+    "observable_behavior_defines_conformance": true
+  }
+}

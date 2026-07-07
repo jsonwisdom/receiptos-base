@@ -1,0 +1,56 @@
+name: Reusable Farcaster Verify
+
+on:
+  workflow_call:
+    inputs:
+      manifest_path:
+        required: false
+        type: string
+        default: ".well-known/farcaster/manifest.json"
+      manifest_jcs_path:
+        required: false
+        type: string
+        default: ".well-known/farcaster/manifest.jcs"
+      manifest_lock_path:
+        required: false
+        type: string
+        default: ".well-known/farcaster/manifest.lock.json"
+
+jobs:
+  farcaster-verify:
+    name: Farcaster Manifest Verify
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install verifier
+        run: npm install -D @jsonwisdom/farcaster-verify
+
+      - name: RFC8785 Test Vectors
+        run: npx farcaster-verify-rfc8785
+
+      - name: Invalid Vector Rejection Tests
+        run: npx farcaster-verify-invalid
+
+      - name: Deterministic Fuzz Vectors
+        run: npx farcaster-verify-fuzz
+
+      - name: Semantic Verification
+        env:
+          MANIFEST_PATH: ${{ inputs.manifest_path }}
+          MANIFEST_JCS_PATH: ${{ inputs.manifest_jcs_path }}
+          MANIFEST_LOCK_PATH: ${{ inputs.manifest_lock_path }}
+        run: npx farcaster-verify-semantic
+
+      - name: Lock Verification
+        env:
+          MANIFEST_JCS_PATH: ${{ inputs.manifest_jcs_path }}
+          MANIFEST_LOCK_PATH: ${{ inputs.manifest_lock_path }}
+        run: npx farcaster-verify-lock

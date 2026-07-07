@@ -1,0 +1,22 @@
+{
+  "subscriber_contract_v0": true,
+  "read_only": true,
+  "allowed_methods": ["GET"],
+  "cursor_field": "storage_timestamp_utc",
+  "allowed_ordering": "storage_time_only",
+  "forbidden_semantics": [
+    "event_time",
+    "event_order",
+    "causation",
+    "causal",
+    "priority",
+    "evidentiary_strength",
+    "truth_progression",
+    "authority_true"
+  ],
+  "preserve_sticky_fields": true,
+  "authority": false,
+  "truth_claim": false,
+  "inference_performed": false,
+  "state_mutated": false
+}

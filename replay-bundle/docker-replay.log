@@ -1,0 +1,7 @@
+ROUND_020 Replay Starting...
+Receipt hash: 0xdf0e9e385ad3f3ad610f3e4cae6506ab2c83fa5beb75dd921402070c4a80603f
+Expected hash: 0xdf0e9e385ad3f3ad610f3e4cae6506ab2c83fa5beb75dd921402070c4a80603f
+EAS match check: PASS
+ROUND_020 REPLAY: PASS
+ROUND_021 Self-Test:
+{"actual_receipt_hash":"0xdf0e9e385ad3f3ad610f3e4cae6506ab2c83fa5beb75dd921402070c4a80603f","authority":false,"expected_receipt_hash":"0xdf0e9e385ad3f3ad610f3e4cae6506ab2c83fa5beb75dd921402070c4a80603f","python":"3.12.13","round":"021","status":"PASS"}

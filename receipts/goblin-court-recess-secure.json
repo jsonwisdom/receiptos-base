@@ -1,0 +1,34 @@
+{
+  "artifact_id": "GOBLIN-COURT-RECESS-SECURE-001",
+  "type": "goblin_court_recess_status",
+  "version": "1",
+  "status": "RECESS_ACTIVE",
+  "session_status_prior": "DOCKET_CLEAR",
+  "posture": "OBSERVATIONAL_ONLY",
+  "root_privileges": "0x00",
+  "root_access": false,
+  "canonical_head": "MRU-023",
+  "canonical_effect": "none",
+  "authority": false,
+  "mutation": false,
+  "truth_claim": false,
+  "prior_commit": "1eb18875b0343f6bd512efe857936c32712bfa16",
+  "prior_artifact": "receipts/goblin-court-docket-clear.json",
+  "pending_variance_entries": 0,
+  "invariants": {
+    "infrastructure_stable": true,
+    "goblin_jail_secure": true,
+    "sandbox_isolation_active": true,
+    "variance_escape_detected": false,
+    "canonical_chain_mutated": false,
+    "canonical_head_preserved": true,
+    "governance_observational": true,
+    "root_denied": true
+  },
+  "readiness": {
+    "court_in_recess": true,
+    "ready_for_next_variance_input": true,
+    "input_protocol": "goblin variance entry <CASE_ID> <INPUT_SIGNAL> <CLASSIFICATION>"
+  },
+  "summary": "Goblin Court is in audit-only recess with clear docket, secure jail, root denied, and MRU-023 preserved."
+}

@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jsonwisdom/receiptos-base/cards/schema.json",
+  "title": "GPK Card Schema",
+  "description": "Atomic satirical card schema for deterministic replay. Flavor may joke; state transitions must verify. Authority remains false.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "card_id",
+    "schema_version",
+    "title",
+    "authority",
+    "satirical_text",
+    "input_effect",
+    "output_effect",
+    "replay"
+  ],
+  "properties": {
+    "card_id": {
+      "type": "string",
+      "pattern": "^GPK-[0-9]{3}$",
+      "description": "Canonical card identifier."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "GPK_CARD_SCHEMA_V1"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority": {
+      "type": "boolean",
+      "const": false,
+      "description": "Cards never grant authority. Replay only."
+    },
+    "satirical_text": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Flavor text. PLACEHOLDER_SCAN permits TODO here only."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "input_effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state_path",
+        "operation",
+        "value"
+      ],
+      "properties": {
+        "state_path": {
+          "type": "string",
+          "pattern": "^(/[A-Za-z0-9_.-]+)+$",
+          "description": "JSON pointer-like target path inside game_state.json."
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "set",
+            "increment",
+            "append_unique",
+            "append"
+          ]
+        },
+        "value": {
+          "description": "Deterministic value applied by the card. Must contain no placeholders."
+        }
+      }
+    },
+    "output_effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state_delta",
+        "expected_next_hash"
+      ],
+      "properties": {
+        "state_delta": {
+          "type": "object",
+          "description": "Expected post-application delta. Must contain no placeholders."
+        },
+        "expected_next_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "description": "Hash of canonical next_state."
+        }
+      }
+    },
+    "replay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "engine",
+        "input_hash_required",
+        "mismatch_exit_code",
+        "match_exit_code"
+      ],
+      "properties": {
+        "engine": {
+          "type": "string",
+          "const": "engine/replay.py"
+        },
+        "input_hash_required": {
+          "type": "boolean",
+          "const": true
+        },
+        "mismatch_exit_code": {
+          "type": "integer",
+          "const": 1
+        },
+        "match_exit_code": {
+          "type": "integer",
+          "const": 0
+        }
+      }
+    }
+  }
+}

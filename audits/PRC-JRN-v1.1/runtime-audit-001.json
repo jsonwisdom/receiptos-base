@@ -1,0 +1,28 @@
+{
+  "receipt_id": "PRC-JRN-RUNTIME-AUDIT-001",
+  "framework_version": "PRC-JRN-v1.1",
+  "status": "indexed",
+  "source": "user-reported direct engine.js execution",
+  "command": "node modules/prc-jrn/engine.js",
+  "output": {
+    "ok": true,
+    "anchors": {
+      "constitution_sha256": "63bef9d6e3906d34a44a6ea2b1212cb13cc26aed94cadff7acd880b3f664afb2",
+      "engine_sha256": "90fe8c4d010acbc8883af840920014595799d24efb25d8fa191b8e261e043c8d"
+    },
+    "sample_receipt_hash": "sha256:58a4c9bb9eabf6e45a70a082f5d2d00f491e03b2c82c39055613830f7a6bcb7a"
+  },
+  "expected_anchors": {
+    "constitution_sha256": "63bef9d6e3906d34a44a6ea2b1212cb13cc26aed94cadff7acd880b3f664afb2",
+    "engine_sha256": "90fe8c4d010acbc8883af840920014595799d24efb25d8fa191b8e261e043c8d"
+  },
+  "anchor_match": true,
+  "constitution_changes_proposed": [],
+  "engine_changes_proposed": [],
+  "authority": false,
+  "public_validation_boundary": {
+    "external_receipts_indexed": 0,
+    "first_external_receipt": "PRC-JRN-FIELD-EXT-001",
+    "status": "awaiting authentic raw participant output"
+  }
+}

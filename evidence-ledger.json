@@ -1,0 +1,42 @@
+{
+  "ledger_version": "0.1",
+  "authority": false,
+  "entries": [
+    {
+      "receipt_id": "RECEIPT-001",
+      "type": "static_replay_reproduced_not_endorsed",
+      "commit": "127a7da",
+      "input_hash": "67a0c78f5738a9cfdcf7db3dd2386a9e30f46afb8215e40f0ed53a3383e1dc93",
+      "output_hash": "5baa168c3035b4c957e13bad211462091cffef01e6658a07167dad749dcc1d18",
+      "replay_command": "python3 engine/replay.py receipts/RECEIPT-001.json",
+      "result": {
+        "state": "REPRODUCED_NOT_ENDORSED",
+        "placeholder_scan": "PASS",
+        "authority": false
+      },
+      "boundary": "Static replay only. Not canonical replay. Not live deployment byte-match.",
+      "timestamp": "2026-07-06T09:39:00-05:00"
+    },
+    {
+      "receipt_id": "ZORA-e423ae19fffcee95919dde96a31e828bc060e36f",
+      "type": "external_attestation",
+      "authority": false,
+      "status": "VERIFIED",
+      "origin": "Zora/Base",
+      "artifact_id": "0xe423ae19fffcee95919dde96a31e828bc060e36f",
+      "related_receipt": "RECEIPT-001",
+      "token_uri": "ipfs://bafkreig6du4jfapxzqvsk2gftdfwoim7kodnsgtbt2jspp6kufm732msze",
+      "content_hash": "sha256:80517d0d8d38f6430eff5a7d473b003b75794889c1d0b282b095205cdd5ae2eb",
+      "canonical_hash": "sha256:dab94602bcd96d572cadfb4a8485fe56943c455ab51a2b9bb9c25d2e3ef9aa84",
+      "blocked_reason": null,
+      "verification": {
+        "content_hash_verified": true,
+        "schema_compliant": true,
+        "related_receipt_exists": true,
+        "placeholder_scan": "PASS",
+        "authority_check": "PASS",
+        "metadata_excluded_from_canonical_hash": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "issue": "EXT-051",
+  "title": "Governance Membrane: No Vote From Witness",
+  "status": "GOVERNANCE_MEMBRANE_LOCKED",
+  "depends_on": [
+    "EXT-048",
+    "EXT-049",
+    "EXT-050"
+  ],
+  "authority": false,
+  "truth_claim": false,
+  "resolution_semantics": "absent",
+  "runtime_mode": "witness_only",
+  "governance_action_allowed": false,
+  "vote_power": 0,
+  "recommendation_allowed": true,
+  "promotion_allowed": false,
+  "membrane": {
+    "witness_receipts_may_inform_review": true,
+    "witness_receipts_may_cast_vote": false,
+    "witness_receipts_may_claim_authority": false,
+    "witness_receipts_may_promote_truth": false
+  }
+}

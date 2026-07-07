@@ -1,0 +1,54 @@
+{
+  "artifact_id": "MRU-007",
+  "type": "mru_receipt",
+  "version": "1",
+  "schema": "resolution_event_v1",
+  "evidence_state": "Observed",
+  "subject": {
+    "artifact_id": "MRU-004",
+    "content_sha256": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d"
+  },
+  "prior_replay_ref": "",
+  "provenance": {
+    "edge": "witness_link",
+    "direction": "MRU-007 to MRU-004"
+  },
+  "resolution_event": {
+    "rule_applied": "MRU-006",
+    "precedence": "GITFIX_wins",
+    "chosen_digest": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d",
+    "promotion_status": "pending_recommit",
+    "candidates": [
+      {
+        "source": "GITFIX",
+        "digest": "a86f787e91d582f3c091a1b418a08c8e1467406a6b5d848039c941e7370a256d"
+      },
+      {
+        "source": "JSONWISDOM",
+        "digest": "b29f3c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b"
+      }
+    ]
+  },
+  "timestamp": "2026-06-30T19:25:00Z",
+  "authority": false,
+  "truth_claim": false,
+  "execution_flow": {
+    "gitfix_commit": "canonical digest a86f... selected as reported source for MRU-004",
+    "reference_update": "MRU-005 validates_against pointers reconciled against selected a86f... digest as reported",
+    "chain_replay": "MRU-007 to MRU-004 to MRU-003 pairwise path reported observed",
+    "al_record": "mechanical trail archived"
+  },
+  "system_status": {
+    "variance": "resolution_event_recorded",
+    "history": "preserved_with_candidates_retained",
+    "chain": "reported_stable_loop_free",
+    "promotion": "pending_recommit_confirmation_for_MRU-004"
+  },
+  "gitfix_notes": {
+    "reported_sha256": "f2e8c9b1a3d549f67a2b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f",
+    "computed_sha256_from_literal_user_bytes": "162776371e14e85dbafcf1a6aec5787e3c1fe0324e3d30fd75064f655a7a3007",
+    "hash_gate": "digest_variance_observed_no_silent_promotion",
+    "template_status": "chained_resolution_template_observed",
+    "promotion": "blocked_until_MRU-004_recommit_confirmation_and_exact_digest_reconciliation"
+  }
+}

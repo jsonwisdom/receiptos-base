@@ -1,0 +1,82 @@
+name: release-witness
+
+on:
+  push:
+    tags:
+      - "ros-*"
+      - "v*"
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  witness:
+    name: receiptos/witness
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Derive ROS ID
+        id: derive
+        shell: bash
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          case "$tag" in
+            ros-[0-9][0-9][0-9][0-9])
+              ros_id="${tag^^}"
+              ;;
+            v1.0.0)
+              ros_id="ROS-0001"
+              ;;
+            *)
+              echo "Unsupported release tag for witness: $tag" >&2
+              exit 1
+              ;;
+          esac
+          echo "ros_id=$ros_id" >> "$GITHUB_OUTPUT"
+          echo "ROS_ID=$ros_id" >> "$GITHUB_ENV"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install verifier dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Verify existing evidence bundle
+        run: |
+          case "$ROS_ID" in
+            ROS-0001)
+              python scripts/verify-evidence-bundle.py \
+                evidence/ROS-0001/evidence-bundle.json \
+                artifacts/ROS-0001-cover.jpg
+              ;;
+            *)
+              echo "No witness mapping configured for $ROS_ID" >&2
+              exit 1
+              ;;
+          esac
+
+      - name: Print replay receipt
+        run: |
+          echo "ReceiptOS Release Witness"
+          echo "Tag: $GITHUB_REF_NAME"
+          echo "Commit: $GITHUB_SHA"
+          echo "ROS_ID: $ROS_ID"
+          echo "Status: PASS"
+
+      - name: Upload evidence bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ROS_ID }}-evidence-bundle
+          retention-days: 90
+          path: |
+            evidence/${{ env.ROS_ID }}/evidence-bundle.json
+            artifacts/ROS-0001-cover.jpg

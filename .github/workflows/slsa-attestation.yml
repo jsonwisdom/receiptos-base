@@ -1,0 +1,42 @@
+name: SLSA Attestation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  attest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install
+        run: npm install
+
+      - name: Verify anchor
+        run: npm run verify:receiptos:anchor
+
+      - name: Audit
+        run: npm run audit:prepublish
+
+      - name: Pack
+        run: npm pack
+
+      - name: Attest package tarball
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: '*.tgz'
+
+      - name: Upload tarball
+        uses: actions/upload-artifact@v4
+        with:
+          name: slsa-attestation-artifacts
+          path: '*.tgz'

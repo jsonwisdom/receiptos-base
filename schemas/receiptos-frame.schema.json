@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos.local/schemas/receiptos-frame.schema.json",
+  "title": "ReceiptOS Frame Schema",
+  "description": "Wire-native ReceiptOS / ESG-001 representation frame. Conformance is limited to canonical encoding, hash binding, signature envelope structure, bounded timestamp, nonce structure, and explicit non-authority flags.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "version",
+    "frame_type",
+    "signature_domain",
+    "payload_hash",
+    "hash_algorithm",
+    "signature_algorithm",
+    "signer",
+    "timestamp",
+    "nonce",
+    "payload",
+    "signature",
+    "authority",
+    "truth_claim"
+  ],
+  "properties": {
+    "protocol": { "const": "ReceiptOS" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[A-Za-z0-9.-]+)?$" },
+    "frame_type": { "type": "string", "enum": ["evidence_graph", "evidence_artifact", "receipt"] },
+    "signature_domain": { "type": "string", "minLength": 1 },
+    "payload_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "hash_algorithm": { "const": "sha256" },
+    "signature_algorithm": { "type": "string", "minLength": 1 },
+    "signer": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "nonce": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "payload": { "type": "object" },
+    "signature": {
+      "type": "object",
+      "properties": {
+        "key_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Profile-defined key identifier, such as a fingerprint, kid, DID, or profile-specific key reference."
+        },
+        "signature_bytes": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]*={0,2}$",
+          "description": "Base64-encoded signature bytes, raw and not armored."
+        },
+        "profile": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Optional URI or name of the cryptographic profile, such as ed25519-sha512 or p256-sha256."
+        }
+      },
+      "required": ["key_id", "signature_bytes"],
+      "additionalProperties": false
+    },
+    "authority": { "const": false },
+    "truth_claim": { "const": false }
+  }
+}

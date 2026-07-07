@@ -1,0 +1,43 @@
+name: Authorized Signer Registry Guard
+
+on:
+  push:
+    paths:
+      - 'frame/ext-104-authorized-signer-registry.js'
+      - 'scripts/verify-authorized-signer-registry.js'
+      - 'scripts/verify-empty-registry-denial-fixture.js'
+      - 'docs/authorized-signer-registry.md'
+      - 'docs/registry-canonization-ext-105.md'
+      - 'receipts/ext-104-authorized-signer-registry.seed.json'
+      - '.github/workflows/authorized-signer-registry.yml'
+  pull_request:
+    paths:
+      - 'frame/ext-104-authorized-signer-registry.js'
+      - 'scripts/verify-authorized-signer-registry.js'
+      - 'scripts/verify-empty-registry-denial-fixture.js'
+      - 'docs/authorized-signer-registry.md'
+      - 'docs/registry-canonization-ext-105.md'
+      - 'receipts/ext-104-authorized-signer-registry.seed.json'
+      - '.github/workflows/authorized-signer-registry.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  authorized-signer-registry:
+    name: EXT-105 authorized signer registry verifier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify empty registry denial fixture
+        run: node scripts/verify-empty-registry-denial-fixture.js
+
+      - name: Verify canonical authorized signer registry
+        run: node scripts/verify-authorized-signer-registry.js

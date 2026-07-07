@@ -1,0 +1,22 @@
+{
+  "receipt_id": "TNTR-017-MONITORING-GATE",
+  "issue": "EXT-033",
+  "gate": "Monitoring & Adjustment",
+  "status": "executed",
+  "authority": false,
+  "monitoring_authority": false,
+  "resolution_semantics": "absent",
+  "monitoring_fields": [
+    "liquidity_signal",
+    "price_signal",
+    "settlement_behavior"
+  ],
+  "adjustment_parameters": {
+    "decay_factor": 0.999,
+    "volatility_floor": 0.01,
+    "risk_scaler": 1.05,
+    "cycle": "block_based"
+  },
+  "forbidden_semantics_enforced": true,
+  "next_gate": "EXT-034"
+}

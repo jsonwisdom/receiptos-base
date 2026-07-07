@@ -1,0 +1,40 @@
+{
+  "version": "v0",
+  "gate": "EXT-029",
+  "title": "TNTR Market Substrate",
+  "authority": false,
+  "status": "open",
+  "locked_boundaries": {
+    "price_signal": {
+      "mapped_to": "quote_observation",
+      "is_truth": false,
+      "note": "price ≠ truth"
+    },
+    "liquidity_pool": {
+      "mapped_to": "depth_aggregate",
+      "is_authority": false,
+      "note": "liquidity ≠ authority"
+    },
+    "queryable_state": {
+      "mapped_to": "data_availability",
+      "is_resolved": false,
+      "note": "QUERYABLE ≠ resolved"
+    },
+    "market_consensus": {
+      "mapped_to": "signal_strength",
+      "is_tribunal": false,
+      "note": "market signal ≠ tribunal"
+    }
+  },
+  "primitives": {
+    "replay_status": "clean",
+    "provenance_strength": "moderate",
+    "challenge": "none"
+  },
+  "semantic_lock": {
+    "truth_value": null,
+    "verdict": null,
+    "certainty": "unset"
+  },
+  "next_gate": "EXT-030"
+}

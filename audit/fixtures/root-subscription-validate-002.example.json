@@ -1,0 +1,15 @@
+{
+  "authority": false,
+  "entry_count": 2,
+  "errors": [],
+  "feed_valid": true,
+  "inference_performed": false,
+  "manifest_hashes_valid": true,
+  "root_hashes_valid": true,
+  "sequence_continuity_valid": true,
+  "source": "audit/fixtures/root-subscription-manifest-002.example.json",
+  "state_mutated": false,
+  "subscription_feed_validator": true,
+  "truth_claim": false,
+  "unauthorized_fields_valid": true
+}

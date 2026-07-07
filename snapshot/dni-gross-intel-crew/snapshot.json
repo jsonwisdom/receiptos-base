@@ -1,0 +1,10 @@
+{
+  "status": "REPLAY_COMPLETE",
+  "network": "Base Mainnet",
+  "collectionAddress": "0xe423ae19FfFcEe95919DDE96a31e828bC060E36F",
+  "firstCodeBlock": 48044784,
+  "snapshotBlock": 48046843,
+  "snapshotBlockHash": "0x8f3c626fc7cd9b805b8e2ac82643aae3652a99f28ac5aec2f5bbccac0cc73282",
+  "holderCount": 3,
+  "merkleRoot": "0x8fb9a4fb8ebfbcc86d1ea76e89207a528b42cc6b0d8fa9e922ea495d9101caa5"
+}

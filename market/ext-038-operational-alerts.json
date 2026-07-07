@@ -1,0 +1,71 @@
+{
+  "gate": "EXT-038",
+  "title": "Operational Alerts Gate",
+  "status": "configured",
+  "authority": false,
+  "resolution_semantics": "absent",
+  "mode": "signal_only",
+  "production_manifest": "deployment/tntr-v1-production-manifest.json",
+  "alert_classes": [
+    {
+      "id": "hash_mismatch",
+      "severity": "critical",
+      "action": "signal_only",
+      "authority": false,
+      "description": "manifest stack hash differs from recomputed local stack digest"
+    },
+    {
+      "id": "authority_drift",
+      "severity": "critical",
+      "action": "signal_only",
+      "authority": false,
+      "description": "artifact authority field is missing or not false"
+    },
+    {
+      "id": "resolution_semantics_drift",
+      "severity": "critical",
+      "action": "signal_only",
+      "authority": false,
+      "description": "artifact resolution semantics moved away from absent"
+    },
+    {
+      "id": "forbidden_semantics_drift",
+      "severity": "critical",
+      "action": "signal_only",
+      "authority": false,
+      "description": "artifact contains a forbidden adjudication token"
+    },
+    {
+      "id": "receipt_drift",
+      "severity": "critical",
+      "action": "signal_only",
+      "authority": false,
+      "description": "expected receipt or verifier is missing or non-executed"
+    }
+  ],
+  "watched_artifacts": [
+    "deployment/tntr-v1-production-manifest.json",
+    "market/tntr-market-substrate-v0.json",
+    "market/tntr-instrument-layer-v0.json",
+    "market/tntr-cro-001-instruments.json",
+    "market/instruments/tntr-instrument-deployment-v0.json",
+    "market/ext-033-monitoring-adjustment.json",
+    "market/ext-034-full-stack-validation.json",
+    "receipts/tntr-014-market-substrate-gate.json",
+    "receipts/tntr-015-instrument-layer-gate.json",
+    "receipts/tntr-016-instrument-deployment-gate.json",
+    "receipts/tntr-017-monitoring-gate.json",
+    "receipts/tntr-018-full-stack-validation.json",
+    "receipts/tntr-019-production-lock.json"
+  ],
+  "required_verifiers": [
+    "verify_tntr_market_substrate.py",
+    "verify_tntr_instrument_layer.py",
+    "verify_tntr_instrument_deployment.py",
+    "verify_ext-033.py",
+    "verify_ext-034.py",
+    "verify_production_lock.py"
+  ],
+  "forbidden_semantics_enforced": true,
+  "next_gate": "EXT-030 optional or EXT-035 extension planning"
+}

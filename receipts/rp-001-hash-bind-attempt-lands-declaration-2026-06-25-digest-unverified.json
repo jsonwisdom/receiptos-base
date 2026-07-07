@@ -1,0 +1,47 @@
+{
+  "artifact_id": "RP-001-HASH-BIND-ATTEMPT-LANDS-DECLARATION-2026-06-25-DIGEST-UNVERIFIED",
+  "artifact_type": "hash_bind_attempt",
+  "claim_id": "RP-001",
+  "target_entity_id": "LANDS-DECLARATION-2026-06-25",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "source_url": "https://storage.courtlistener.com/recap/gov.uscourts.dcd.292242/gov.uscourts.dcd.292242.22.1.pdf",
+  "submitted_sha256": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+  "hash_bind_status": "not_completed_digest_unverified",
+  "source_text_status": "verified_by_pdf_text_extraction",
+  "verified_metadata": {
+    "case_number": "1:26-cv-01593-CJN",
+    "document": "22-1",
+    "filed": "2026-06-24",
+    "declarant": "Frank Lands",
+    "title": "Deputy Director for Operations, National Park Service",
+    "incident_date": "2026-06-09"
+  },
+  "gate": {
+    "source_authority": "URL_AND_TEXT_VERIFIED",
+    "hash_ready": false,
+    "receipt_eligible": false,
+    "anchor_ready": false,
+    "reason": "Submitted digest was not independently recomputed against PDF bytes in this run; source text and metadata were verified from the public PDF."
+  },
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium"
+  },
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "rp_001_status_changed": false,
+    "rp_001_confidence_changed": false,
+    "authority_flip_rejected": true,
+    "hash_bind_completed": false
+  },
+  "next_valid_verbs": [
+    "provide_computed_sha256 RP-001 LANDS-DECLARATION-2026-06-25 <digest>",
+    "claim lookup RP-001",
+    "commit v2 diff RP-001"
+  ]
+}

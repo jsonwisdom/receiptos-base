@@ -1,0 +1,12 @@
+{
+  "spec": "SPEC-V1",
+  "spec_revision": "1.0.0",
+  "vector": "fail-semantic",
+  "vector_revision": "1.0.0",
+  "valid": false,
+  "exit_code": 10,
+  "reason": "semantic_error",
+  "failed_field": "developer",
+  "sha256": null,
+  "canonical_file": null
+}

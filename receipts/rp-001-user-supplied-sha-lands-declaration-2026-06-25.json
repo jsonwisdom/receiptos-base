@@ -1,0 +1,61 @@
+{
+  "artifact_id": "RP-001-USER-SUPPLIED-SHA-LANDS-DECLARATION-2026-06-25",
+  "artifact_type": "user_supplied_hash_binding",
+  "claim_id": "RP-001",
+  "target_entity_id": "LANDS-DECLARATION-2026-06-25",
+  "canonical_mode": true,
+  "authority": false,
+  "truth_claim": false,
+  "source_url": "https://storage.courtlistener.com/recap/gov.uscourts.dcd.292242/gov.uscourts.dcd.292242.22.1.pdf",
+  "submitted_sha256": "4f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9",
+  "sha_source": "user_supplied_as_computed_against_retrieved_pdf_bytes",
+  "assistant_independent_byte_recompute": false,
+  "assistant_source_text_verification": true,
+  "verified_pdf_fields": {
+    "court": "United States District Court for the District of Columbia",
+    "case_number_visible": "No. 26 Civ. 1593 / Case 1:26-cv-01593-CJN",
+    "document": "22-1",
+    "filed": "2026-06-24",
+    "declarant": "Frank Lands",
+    "title": "Deputy Director for Operations, National Park Service",
+    "incident_date": "2026-06-09",
+    "page_refs": "Page 2 of 2, visible lines 34-38 in extracted text"
+  },
+  "verified_damage_language_summary": "The PDF states that on June 9, 2026, after rehabilitation was substantially complete, U.S. Park Police responded to an NPS report of damage including caulk over foam sealant cut with a sharp knife or razor, destruction of delaminating surface material, and approximately 70 fence post tops thrown into the pool.",
+  "gate": {
+    "source_authority": "URL_AND_TEXT_VERIFIED_USER_SHA_SUPPLIED",
+    "hash_ready": "USER_SUPPLIED_PENDING_INDEPENDENT_RECOMPUTE",
+    "receipt_eligible": "PROVISIONAL",
+    "anchor_ready": "PROVISIONAL",
+    "replay": "READY_FOR_SOURCE_TEXT_REPLAY",
+    "reason": "The source URL and PDF text are verified. The SHA-256 digest is bound as supplied by the user, but was not independently recomputed by the assistant runtime."
+  },
+  "claim_effect": {
+    "status_before": "Partially Verified",
+    "status_after": "Partially Verified",
+    "confidence_before": "Medium",
+    "confidence_after": "Medium",
+    "reason": "The declaration strengthens the official intentional-cut subclaim but does not resolve broader scale, algae causation, coating failure, or photo/surveillance questions."
+  },
+  "open_questions_preserved": [
+    "Scale of deliberate cuts: localized damage versus larger gash claims.",
+    "Algae causation.",
+    "Coating or renovation contribution to delamination/peeling.",
+    "Photo, surveillance, arrest-detail, and contractor-document hash binding.",
+    "Independent recomputation of submitted PDF SHA-256 by a local verifier."
+  ],
+  "mutation_policy": {
+    "v1_rows_modified": false,
+    "sealed_claims_preserved": true,
+    "rp_001_status_changed": false,
+    "rp_001_confidence_changed": false,
+    "authority_flip_rejected": true,
+    "truth_claim_preserved_false": true
+  },
+  "next_valid_verbs": [
+    "replay RP-001",
+    "commit v2 diff RP-001",
+    "evidence expansion RP-001 PHOTOS",
+    "claim lookup RP-001"
+  ]
+}

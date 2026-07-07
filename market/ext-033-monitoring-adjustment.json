@@ -1,0 +1,33 @@
+{
+  "gate": "EXT-033",
+  "title": "Monitoring & Adjustment Gate",
+  "authority": false,
+  "resolution_semantics": "absent",
+  "monitoring_authority": false,
+  "monitoring": {
+    "price_signal": {
+      "source": "instrument.price",
+      "assertion": "not_truth",
+      "drift_detection": "semantic_drift_price"
+    },
+    "liquidity_signal": {
+      "source": "instrument.liquidity",
+      "assertion": "not_authority",
+      "drift_detection": "semantic_drift_liquidity"
+    },
+    "settlement_behavior": {
+      "source": "instrument_activation.settlement_rule",
+      "assertion": "not_verdict",
+      "drift_detection": "semantic_drift_settlement"
+    }
+  },
+  "adjustment_parameters": {
+    "decay_factor": 0.999,
+    "volatility_floor": 0.01,
+    "risk_scaler": 1.05,
+    "cycle": "block_based"
+  },
+  "forbidden_semantics_enforced": true,
+  "boundary": "monitoring_observes_only",
+  "next_gate": "EXT-034"
+}

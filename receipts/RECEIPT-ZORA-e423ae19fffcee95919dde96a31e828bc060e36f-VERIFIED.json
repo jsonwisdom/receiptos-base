@@ -1,0 +1,30 @@
+{
+  "receipt_id": "RECEIPT-ZORA-e423ae19fffcee95919dde96a31e828bc060e36f-VERIFIED",
+  "type": "external_attestation_promotion_receipt",
+  "authority": false,
+  "status": "VERIFIED",
+  "subject": "Issue #95 Zora metadata bridge verification",
+  "artifact_id": "0xe423ae19fffcee95919dde96a31e828bc060e36f",
+  "run_id": 28805875439,
+  "job": "Verify supplied evidence payloads",
+  "job_conclusion": "success",
+  "workflow_artifact_id": 8114851663,
+  "workflow_artifact_digest": "sha256:7426d8c83d261fe85a3e1aa66601dd80522f9245c8abe791e6c4cb621d4792ea",
+  "workflow_head_sha": "10b91e4112bc9063cc90429b65e6f0c307679218",
+  "bridge_path": "provenance/zora-metadata-bridge-v1.json",
+  "report_path": "evidence-reports/ZORA-e423ae19fffcee95919dde96a31e828bc060e36f.report.json",
+  "report_sha256": "sha256:9a377e579a0c26dd0e54cca05f164dc96b283e3ee3ab866ae8cea181215a7c97",
+  "token_uri": "ipfs://bafkreig6du4jfapxzqvsk2gftdfwoim7kodnsgtbt2jspp6kufm732msze",
+  "content_hash": "sha256:80517d0d8d38f6430eff5a7d473b003b75794889c1d0b282b095205cdd5ae2eb",
+  "canonical_hash": "sha256:dab94602bcd96d572cadfb4a8485fe56943c455ab51a2b9bb9c25d2e3ef9aa84",
+  "verification": {
+    "status": "VERIFIED",
+    "placeholder_scan": "PASS",
+    "authority_check": "PASS",
+    "schema_compliant": true,
+    "content_hash_verified": true,
+    "metadata_excluded_from_canonical_hash": true,
+    "ledger_promoted_manually": true
+  },
+  "disposition": "Issue #95 is disposition-eligible as VERIFIED. Authority remains false."
+}
