@@ -1,48 +1,8 @@
-const publicUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_URL || "https://receiptos-base.vercel.app";
-const ogImagePath = "/og/court-room.png";
-
-export async function generateMetadata() {
-  const frame = {
-    version: "vNext",
-    image: ogImagePath,
-    buttons: [
-      {
-        label: "Verify Receipt",
-        action: "post",
-      },
-      {
-        label: "View Case",
-        action: "link",
-        target: "https://github.com/jsonwisdom/receiptos-base/issues/57",
-      },
-    ],
-    input: {
-      text: "Enter EAS UID",
-    },
-    postUrl: `${publicUrl}/api/frame`,
-  };
-
-  return {
-    metadataBase: new URL(publicUrl),
-    title: "ReceiptOS Court Frame",
-    description: "Witness-only receipt verification frame. authority=false, truth_claim=false.",
-    openGraph: {
-      title: "ReceiptOS Court Frame",
-      description: "No receipt, no authority.",
-      images: [ogImagePath],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "ReceiptOS Court Frame",
-      description: "No receipt, no authority.",
-      images: [ogImagePath],
-    },
-    other: {
-      "fc:frame": JSON.stringify(frame),
-    },
-  };
-}
-
-export default function Page() {
-  return <main style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}><h1>ReceiptOS Court Frame</h1><p>Court is in session.</p><pre>{JSON.stringify({ status: "FRAME_MVP_PENDING_DEPLOYMENT", verdict: "WITNESS_ONLY", authority: false, truth_claim: false }, null, 2)}</pre></main>;
+export default function Layer1Portal() {
+  return (
+    <div>
+      <h1>ReceiptOS L1 Verifier Portal</h1>
+      <p>Deterministic verification workspace. Client calls /api/verify only.</p>
+    </div>
+  );
 }
