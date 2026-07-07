@@ -1,0 +1,16 @@
+{
+  "run_id": "pass-string-placeholder",
+  "transform_version": "v0.1.0",
+  "target_qps": 200,
+  "duration_min": 15,
+  "timestamp": "2026-07-07T15:45:26Z",
+  "gate_result": {
+    "status": "LOAD_VERIFIED",
+    "failed_conditions": []
+  },
+  "receipt_integrity": "PASS",
+  "transparency_continuity": "PASS",
+  "transform_version_pinned": "PASS",
+  "doctrine_guards": "PASS",
+  "membrane_unchanged": "PASS"
+}
