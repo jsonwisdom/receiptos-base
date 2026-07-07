@@ -13,6 +13,7 @@ TEST_HEAD = "675299ee0ceb6db36070e600ef599fccb4b14b30"
 def test_harness_emits_signed_governance_gap_bundle(tmp_path):
     run_id = "signed-gap-test"
     env = os.environ.copy()
+    env.pop("GITHUB_SHA", None)
     env["CHAIN_HEAD"] = TEST_HEAD
     result = subprocess.run(
         [
@@ -29,12 +30,13 @@ def test_harness_emits_signed_governance_gap_bundle(tmp_path):
         text=True,
         capture_output=True,
     )
-    assert result.returncode == 0
+    assert result.returncode == 0, result.stderr
 
-    receipt_path = tmp_path / "receipts" / f"{run_id}.json"
-    sig_path = tmp_path / "receipts" / f"{run_id}.json.sig"
-    log_path = tmp_path / "transparency" / "log" / f"log-{TEST_HEAD}.json"
-    chain_head_path = tmp_path / "transparency" / "index" / "chain_head.json"
+    emitted = json.loads(result.stdout)
+    receipt_path = tmp_path / emitted["receipt"]
+    sig_path = tmp_path / emitted["signature"]
+    log_path = tmp_path / emitted["transparency_log"]
+    chain_head_path = tmp_path / emitted["chain_head"]
 
     assert receipt_path.exists()
     assert sig_path.exists()
@@ -64,7 +66,7 @@ def test_harness_emits_signed_governance_gap_bundle(tmp_path):
         text=True,
         capture_output=True,
     )
-    assert verify.returncode == 0
+    assert verify.returncode == 0, verify.stderr
     verified = json.loads(verify.stdout)
     assert verified["status"] == "GOVERNANCE_GAP"
     assert verified["checks"]["signature_valid"] is True
