@@ -1,0 +1,14 @@
+{
+  "run_id": "synthetic-incomplete-load-claim",
+  "transform_version": "v0.1.0",
+  "target_qps": 200,
+  "duration_min": 15,
+  "gate_result": {
+    "status": "LOAD_VERIFIED",
+    "timestamp": "2026-07-07T10:25:00Z",
+    "checks_passed": 11,
+    "drift_detected": false,
+    "replay_surface": "AL → receiptos-base",
+    "public_surface": "aligned"
+  }
+}
