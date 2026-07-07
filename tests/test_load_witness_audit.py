@@ -49,6 +49,11 @@ def test_rejects_digest_mismatch_for_load_verified(tmp_path):
             "jcs_canonical": True,
             "signature_verified": True,
         },
+        "signature": {
+            "alg": "Ed25519",
+            "public_key": "0000000000000000000000000000000000000000000000000000000000000000",
+            "signature": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        },
         "transparency_continuity": {
             "log_id": "log-digest-mismatch",
             "chain_head": "3ab6d83fb6ff9d34884c21fa0bf53969af7c8237",

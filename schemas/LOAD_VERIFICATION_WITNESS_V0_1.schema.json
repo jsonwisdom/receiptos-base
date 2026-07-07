@@ -55,6 +55,16 @@
         "signature_verified": { "const": true }
       }
     },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["alg", "public_key", "signature"],
+      "properties": {
+        "alg": { "const": "Ed25519" },
+        "public_key": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "signature": { "type": "string", "pattern": "^[a-f0-9]{128}$" }
+      }
+    },
     "transparency_continuity": {
       "type": "object",
       "additionalProperties": false,
@@ -95,6 +105,7 @@
         }
       },
       "then": {
+        "required": ["signature"],
         "properties": {
           "failed_conditions": { "maxItems": 0 },
           "membrane_unchanged": { "const": true },

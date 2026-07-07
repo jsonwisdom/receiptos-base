@@ -2,8 +2,8 @@
 """Signed receipt and transparency verifier v0.1.
 
 This verifier is independent from the load runner. It never trusts runner status
-alone. It checks witness schema, receipt digest, signature fields, transparency
-continuity, and doctrine guards before allowing a LOAD_VERIFIED result.
+alone. It checks witness schema, receipt digest, Ed25519 signature verification,
+transparency continuity, and doctrine guards before allowing a LOAD_VERIFIED result.
 """
 
 from __future__ import annotations
@@ -18,11 +18,14 @@ from typing import Any
 
 try:
     import jsonschema
+    from cryptography.exceptions import InvalidSignature
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 except ImportError as exc:  # pragma: no cover
     raise SystemExit(f"missing dependency: {exc}")
 
 HEX_64 = re.compile(r"^[a-f0-9]{64}$")
 HEX_40 = re.compile(r"^[a-f0-9]{40}$")
+HEX_128 = re.compile(r"^[a-f0-9]{128}$")
 
 SENTINEL_SHA256 = {
     "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
@@ -59,21 +62,47 @@ def validate_schema(witness: dict[str, Any], schema: dict[str, Any]) -> None:
         fail(f"INVALID_WITNESS_SCHEMA: {exc.message}")
 
 
+def witness_signing_payload(witness: dict[str, Any]) -> str:
+    core = dict(witness)
+    core.pop("signature", None)
+    return canonical_json(core)
+
+
 def verify_receipt_digest(witness: dict[str, Any]) -> bool:
     integrity = witness["receipt_integrity"]
     receipt_sha = integrity["receipt_sha256"]
     require(receipt_sha not in SENTINEL_SHA256, "SENTINEL_RECEIPT_DIGEST")
     core = dict(witness)
     core.pop("receipt_integrity", None)
+    core.pop("signature", None)
     computed = sha256_text(canonical_json(core))
     return computed == receipt_sha
 
 
+def verify_ed25519_signature(witness: dict[str, Any]) -> bool:
+    signature = witness.get("signature")
+    if not isinstance(signature, dict):
+        return False
+    if signature.get("alg") != "Ed25519":
+        return False
+
+    public_key_hex = signature.get("public_key")
+    signature_hex = signature.get("signature")
+    if not isinstance(public_key_hex, str) or not HEX_64.match(public_key_hex):
+        return False
+    if not isinstance(signature_hex, str) or not HEX_128.match(signature_hex):
+        return False
+
+    try:
+        public_key = Ed25519PublicKey.from_public_bytes(bytes.fromhex(public_key_hex))
+        public_key.verify(bytes.fromhex(signature_hex), witness_signing_payload(witness).encode("utf-8"))
+        return True
+    except (ValueError, InvalidSignature):
+        return False
+
+
 def verify_signature_fields(witness: dict[str, Any]) -> bool:
-    # v0.1 does not implement cryptographic signature verification. It requires
-    # the witness to expose signature_verified=true and defers actual key-based
-    # signature verification to a later crypto-backed implementation.
-    return witness["receipt_integrity"].get("signature_verified") is True
+    return witness["receipt_integrity"].get("signature_verified") is True and verify_ed25519_signature(witness)
 
 
 def verify_transparency(witness: dict[str, Any], transparency_log: dict[str, Any], chain_head: dict[str, Any]) -> bool:
