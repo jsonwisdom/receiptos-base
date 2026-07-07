@@ -1,0 +1,36 @@
+{
+  "witness_version": "LOAD_VERIFICATION_WITNESS_V0_1",
+  "run_id": "sentinel-hash-placeholder",
+  "transform_version": "v0.1.0",
+  "target_qps": 200,
+  "duration_min": 15,
+  "gate_result": {
+    "status": "LOAD_VERIFIED",
+    "timestamp": "2026-07-07T15:45:26Z",
+    "checks_passed": 11,
+    "drift_detected": false,
+    "replay_surface": "AL → receiptos-base",
+    "public_surface": "aligned"
+  },
+  "receipt_integrity": {
+    "receipt_id": "sentinel-placeholder",
+    "receipt_sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+    "jcs_canonical": true,
+    "signature_verified": true
+  },
+  "transparency_continuity": {
+    "log_id": "log-sentinel-placeholder",
+    "chain_head": "3ab6d83fb6ff9d34884c21fa0bf53969af7c8237",
+    "merged_public_surface_sha": "1539e812a5784dc0719c5c8b883615c73255d4c3",
+    "continuous_from": "1539e812a5784dc0719c5c8b883615c73255d4c3"
+  },
+  "transform_version_pinned": true,
+  "doctrine_guards": {
+    "authority_false": true,
+    "no_fake_green": true,
+    "no_synthetic_pass": true,
+    "no_public_load_badge_before_witness": true
+  },
+  "membrane_unchanged": true,
+  "failed_conditions": []
+}
