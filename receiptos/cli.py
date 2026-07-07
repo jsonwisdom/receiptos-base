@@ -4,6 +4,8 @@ import re
 import sys
 from pathlib import Path
 
+from jsonschema import Draft202012Validator
+
 EXIT = {
     "PASS": 0,
     "USAGE_ERROR": 1,
@@ -66,25 +68,17 @@ def schema_validate(path):
     if code:
         return code
 
-    for k in REQ:
-        if k not in d:
-            return EXIT["SCHEMA_FAIL"]
+    schema_path = Path("schemas/receipt.schema.json")
+    if not schema_path.exists():
+        return EXIT["INPUT_MISSING"]
 
-    if d["receipt_version"] != "0.1":
-        return EXIT["SCHEMA_FAIL"]
-    if d["receipt_type"] not in VALID_TYPES:
-        return EXIT["SCHEMA_FAIL"]
-    if d["authority"] is not False:
-        return EXIT["SCHEMA_FAIL"]
-    if d["engine_id"] != "receiptos-replay-engine":
-        return EXIT["SCHEMA_FAIL"]
-    if d["engine_version"] != "0.1":
-        return EXIT["SCHEMA_FAIL"]
-    if not isinstance(d["replay_invariants"], list) or not d["replay_invariants"]:
-        return EXIT["SCHEMA_FAIL"]
-    if not HEX64.match(d["input_hash"]) or not HEX64.match(d["output_hash"]):
-        return EXIT["SCHEMA_FAIL"]
-    if d["status"] not in ["PASS", "FAIL"]:
+    try:
+        schema = json.loads(schema_path.read_text())
+        validator = Draft202012Validator(schema)
+        errors = sorted(validator.iter_errors(d), key=lambda e: e.path)
+        if errors:
+            return EXIT["SCHEMA_FAIL"]
+    except Exception:
         return EXIT["SCHEMA_FAIL"]
 
     return EXIT["PASS"]
