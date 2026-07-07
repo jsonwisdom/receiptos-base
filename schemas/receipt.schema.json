@@ -1,110 +1,49 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/jsonwisdom/receiptos-base/schemas/receipt.schema.json",
-  "title": "ReceiptOS Process Receipt Schema v0.1",
-  "description": "Schema for ReceiptOS process-provenance receipts. This validates evidence about repository artifacts and replay steps, not legal truth or institutional authority.",
+  "$id": "https://receiptos.local/schemas/receipt.schema.json",
+  "title": "ReceiptOS Receipt v0.1",
   "type": "object",
-  "additionalProperties": false,
   "required": [
-    "receipt_id",
+    "receipt_version",
     "receipt_type",
-    "schema_version",
-    "repo",
-    "commit_sha",
-    "artifact_path",
-    "artifact_blob_sha",
-    "artifact_sha256",
-    "observed_at",
-    "verification_method",
     "authority",
-    "mutable_context_excluded"
+    "engine_id",
+    "engine_version",
+    "replay_invariants",
+    "timestamp",
+    "input_hash",
+    "output_hash",
+    "status"
   ],
   "properties": {
-    "receipt_id": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Stable identifier for this receipt."
-    },
+    "receipt_version": { "const": "0.1" },
     "receipt_type": {
-      "type": "string",
       "enum": [
-        "PROCESS_PROVENANCE",
-        "COMMIT_BOUND_ARTIFACT",
-        "REPLAY_RESULT",
-        "EXTERNAL_WITNESS"
+        "manifest_verify",
+        "tree_hash",
+        "schema_validate",
+        "invariants_check",
+        "replay_run",
+        "replay_verify"
       ]
     },
-    "schema_version": {
-      "type": "string",
-      "const": "0.1.0"
-    },
-    "repo": {
-      "type": "string",
-      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
-    },
-    "commit_sha": {
-      "type": "string",
-      "pattern": "^[a-f0-9]{40}$"
-    },
-    "artifact_path": {
-      "type": "string",
-      "minLength": 1
-    },
-    "artifact_blob_sha": {
-      "type": "string",
-      "pattern": "^[a-f0-9]{40}$",
-      "description": "Git blob SHA for the artifact content."
-    },
-    "artifact_sha256": {
-      "type": "string",
-      "pattern": "^[a-f0-9]{64}$",
-      "description": "SHA256 of the artifact bytes or canonical serialized artifact."
-    },
-    "tree_sha256": {
-      "type": "string",
-      "pattern": "^[a-f0-9]{64}$",
-      "description": "Optional SHA256 over a deterministic git ls-tree output or equivalent replay surface."
-    },
-    "observed_at": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "verification_method": {
-      "type": "string",
-      "minLength": 1
-    },
-    "witnesses": {
+    "authority": { "const": false },
+    "engine_id": { "const": "receiptos-replay-engine" },
+    "engine_version": { "const": "0.1" },
+    "replay_invariants": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["witness_type", "claim", "authority"],
-        "properties": {
-          "witness_type": {
-            "type": "string",
-            "enum": ["LOCAL_GIT", "GITHUB_API", "EXTERNAL_MODEL", "USER_TRANSCRIPT", "OTHER"]
-          },
-          "claim": {
-            "type": "string",
-            "minLength": 1
-          },
-          "authority": {
-            "type": "boolean",
-            "const": false
-          }
-        }
-      },
-      "default": []
+      "items": { "type": "string" },
+      "minItems": 1
     },
-    "authority": {
-      "type": "boolean",
-      "const": false,
-      "description": "ReceiptOS receipts do not establish legal truth or institutional authority."
-    },
-    "mutable_context_excluded": {
-      "type": "boolean",
-      "const": true,
-      "description": "Mutable repository metadata is excluded from SHA-bound proof unless separately captured and committed."
+    "timestamp": { "type": "string", "format": "date-time" },
+    "input_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "output_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "status": { "enum": ["PASS", "FAIL"] },
+    "exit_code": { "type": "integer", "minimum": 0, "maximum": 9 },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" }
     }
-  }
+  },
+  "additionalProperties": false
 }
