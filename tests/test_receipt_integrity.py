@@ -5,6 +5,7 @@ import pytest
 
 RECEIPT_TEST_MAP = {
     "schema_validate.valid.json": 0,
+    "valid/replay_run.valid.json": 0,
     "invalid/version_mismatch.json": 3,
     "invalid/authority_true.json": 3,
     "invalid/hash_mismatch.json": 4,
