@@ -1,0 +1,76 @@
+openapi: 3.1.0
+info:
+  title: JOY to receiptos-base Client Contract
+  version: 0.1.0
+paths:
+  /v1/joy/replay:
+    post:
+      summary: Submit a JOY replay request to receiptos-base
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JOYReplayRequest'
+      responses:
+        '200':
+          description: Replay response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReceiptOSReplayResult'
+components:
+  schemas:
+    JOYReplayRequest:
+      type: object
+      required: [requestId, subject, transformVersion, inputHash, replayMode, receiptIntent, authority, noFakeGreen]
+      properties:
+        requestId:
+          type: string
+        subject:
+          type: string
+        transformVersion:
+          const: v0.1.0
+        inputHash:
+          type: string
+        replayMode:
+          enum: [dry_run, witnessed_run]
+        receiptIntent:
+          enum: [bootstrap, witness]
+        authority:
+          const: false
+        noFakeGreen:
+          const: true
+    ReceiptOSReplayResult:
+      type: object
+      required: [requestId, status, stateRoot, receiptId, eventCount, authority, noFakeGreen, verifiedReplay, loadVerified, gateResult]
+      properties:
+        requestId:
+          type: string
+        status:
+          enum: [ACCEPTED_FOR_REPLAY, WITNESS_ONLY, GOVERNANCE_GAP, REJECTED_CONTRACT_VIOLATION]
+        stateRoot:
+          type: string
+        receiptId:
+          type: string
+        eventCount:
+          type: integer
+          minimum: 0
+        authority:
+          const: false
+        noFakeGreen:
+          const: true
+        verifiedReplay:
+          const: false
+        loadVerified:
+          const: false
+        gateResult:
+          type: object
+          required: [status, failedConditions]
+          properties:
+            status:
+              enum: [PASS, GOVERNANCE_GAP, CONTRACT_VIOLATION]
+            failedConditions:
+              type: array
+              items:
+                type: string
