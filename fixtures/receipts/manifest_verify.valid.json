@@ -1,0 +1,19 @@
+{
+  "receipt_version": "0.1",
+  "receipt_type": "manifest_verify",
+  "authority": false,
+  "engine_id": "receiptos-replay-engine",
+  "engine_version": "0.1",
+  "replay_invariants": [
+    "INV_COMMIT_RESOLVABLE",
+    "INV_SCHEMA_VALID",
+    "INV_NON_AUTHORITY",
+    "INV_DETERMINISTIC_OUTPUT"
+  ],
+  "timestamp": "2026-07-07T07:00:25Z",
+  "input_hash": "f990388dfd832584103b4e2f75736a2f56fbc9c81466925637b0a071a3bff158",
+  "output_hash": "ca20e904898cf20f4de1f6c5b36e14acd85b36c4709e1e792182ad54fd97a95b",
+  "status": "PASS",
+  "exit_code": 0,
+  "errors": []
+}
