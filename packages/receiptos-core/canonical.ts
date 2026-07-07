@@ -1,12 +1,18 @@
-// Deterministic canonicalization for L1 verifier
+import { canonicalize as jcsCanonicalize } from "json-canonicalize";
+import { createHash } from "node:crypto";
 
-export function canonicalize(input: any): string {
-  // Stable sort keys, no Date, no stringify for hash
-  if (input === null || typeof input !== 'object') return JSON.stringify(input);
-  if (Array.isArray(input)) {
-    return '[' + input.map(canonicalize).join(',') + ']';
-  }
-  const keys = Object.keys(input).sort();
-  const pairs = keys.map(k => `${JSON.stringify(k)}:${canonicalize(input[k])}`);
-  return '{' + pairs.join(',') + '}';
+export function canonicalJSON(value: unknown): string {
+  return jcsCanonicalize(value);
+}
+
+export function sha256Hex(value: string | Buffer): string {
+  return createHash("sha256").update(value).digest("hex");
+}
+
+export function hashCanonical(value: unknown): string {
+  return sha256Hex(canonicalJSON(value));
+}
+
+export function receiptIdFromCore(core: unknown): string {
+  return `ros-${hashCanonical(core)}`;
 }
