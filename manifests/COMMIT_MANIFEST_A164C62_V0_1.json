@@ -7,5 +7,6 @@
   "mutable_context_excluded": true,
   "boundary_file": "constitution/RECEIPTOS_PROVENANCE_BOUNDARY_V0_1.md",
   "verification_rule": "Only Git-tracked content at the referenced commit is SHA-bound evidence.",
-  "replay_command": "git checkout a164c62aa194dbf92d4e743f1ab75800feee96b6 && git ls-tree -r a164c62aa194dbf92d4e743f1ab75800feee96b6"
+  "replay_command": "git checkout a164c62aa194dbf92d4e743f1ab75800feee96b6 && git ls-tree -r a164c62aa194dbf92d4e743f1ab75800feee96b6",
+  "tree_sha256": "474286cc2fbce886bd74f9ad5e2a43392232ae980b46e28b939545c4bf8256ad"
 }
