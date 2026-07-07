@@ -99,6 +99,38 @@ def replay_verify(path):
 
     return EXIT["PASS"]
 
+
+def replay_run(path):
+    code = schema_validate(path)
+    if code:
+        return code
+
+    d, _ = load(path)
+
+    for inv in d["replay_invariants"]:
+        if inv not in VALID_INVARIANTS:
+            return EXIT["INVARIANT_FAIL"]
+
+    if d["output_hash"] == "0" * 64:
+        return EXIT["TREE_HASH_FAIL"]
+
+    print(json.dumps({
+        "receipt_version": "0.1",
+        "receipt_type": "replay_run",
+        "authority": False,
+        "engine_id": "receiptos-replay-engine",
+        "engine_version": "0.1",
+        "replay_invariants": d["replay_invariants"],
+        "timestamp": d["timestamp"],
+        "input_hash": d["input_hash"],
+        "output_hash": d["output_hash"],
+        "status": "PASS",
+        "exit_code": 0,
+        "errors": []
+    }, sort_keys=True))
+
+    return EXIT["PASS"]
+
 def main(argv):
     if len(argv) != 4:
         return EXIT["USAGE_ERROR"]
@@ -110,6 +142,9 @@ def main(argv):
 
     if group == "replay" and action == "verify":
         return replay_verify(path)
+
+    if group == "replay" and action == "run":
+        return replay_run(path)
 
     return EXIT["USAGE_ERROR"]
 
