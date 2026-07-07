@@ -1,0 +1,41 @@
+name: LOAD_VERIFICATION_WITNESS
+
+on:
+  workflow_dispatch:
+    inputs:
+      transform_version:
+        description: Transform version
+        required: true
+        default: v0.1.0
+      target_qps:
+        description: Target QPS
+        required: true
+        default: '200'
+      duration_min:
+        description: Duration minutes
+        required: true
+        default: '15'
+
+jobs:
+  witness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run fail-closed witness harness
+        run: |
+          python tools/load_harness.py \
+            --transform-version "${{ inputs.transform_version }}" \
+            --target-qps "${{ inputs.target_qps }}" \
+            --duration-min "${{ inputs.duration_min }}" \
+            --allow-governance-gap-exit-zero
+      - name: Upload witness artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: load-verification-witness
+          path: |
+            receipts/*.json
+            transparency/log/*.json
+            transparency/index/chain_head.json
