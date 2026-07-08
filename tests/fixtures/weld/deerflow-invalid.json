@@ -1,0 +1,13 @@
+{
+  "weld_id": "deerflow-v1-NEG-001",
+  "timestamp": "2026-07-08T11:07:00Z",
+  "authority": false,
+  "flow_definition": {
+    "harness": "DeerFlow",
+    "mode": "readonly_observation",
+    "agent_role": "external_execution_harness",
+    "claimed_action": "missing_receipt_anchor",
+    "receiptos_role": "admissibility_gate"
+  },
+  "cloud_observation": {}
+}
