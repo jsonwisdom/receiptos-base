@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos.local/schemas/receipt_card_v0.2.json",
+  "title": "ReceiptOS Card Packet v0.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_id",
+    "version",
+    "series",
+    "card_number",
+    "title",
+    "ticker",
+    "description",
+    "evidence",
+    "birth_witness",
+    "custody",
+    "classifications",
+    "identity_anchor",
+    "authority",
+    "core_hash",
+    "cid"
+  ],
+  "properties": {
+    "receipt_id": { "type": "string", "pattern": "^(sha256:)?[0-9a-fA-F]{64}$" },
+    "version": { "const": "0.2.0" },
+    "series": { "type": "string", "minLength": 1 },
+    "card_number": { "type": "string", "pattern": "^[0-9]{3,}$" },
+    "title": { "type": "string", "minLength": 1 },
+    "ticker": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["eas_uid", "ipfs_cid", "anchor_chain", "observed_at", "pinned_at"],
+      "properties": {
+        "eas_uid": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+        "ipfs_cid": { "type": "string", "pattern": "^(Qm[1-9A-HJ-NP-Za-km-z]{44}|b[a-z2-7]{20,})$" },
+        "anchor_chain": { "type": "string", "minLength": 1 },
+        "raw_sources": { "type": "array", "items": { "type": "string" } },
+        "observed_at": { "type": "string", "format": "date-time" },
+        "pinned_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "birth_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["witness_hash", "method", "created_at"],
+      "properties": {
+        "witness_hash": { "type": "string", "pattern": "^[0-9a-fA-F]{64}$" },
+        "method": { "enum": ["manual", "github_issue", "eas", "ipfs", "agent_intake"] },
+        "created_at": { "type": "string", "format": "date-time" },
+        "source_ref": { "type": "string" }
+      }
+    },
+    "custody": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_state", "previous_receipt", "chain_head", "operator"],
+      "properties": {
+        "current_state": {
+          "enum": [
+            "OBSERVED",
+            "CAPTURED",
+            "CLASSIFIED",
+            "PACKAGED",
+            "HASHED",
+            "PINNED",
+            "ATTESTED",
+            "APPROVED",
+            "VARIANT_GENERATED",
+            "PUBLISHED",
+            "REPLAYED",
+            "ARCHIVED",
+            "REJECTED",
+            "DISPUTED",
+            "EVIDENCE_REVIEW"
+          ]
+        },
+        "previous_receipt": { "type": ["string", "null"] },
+        "chain_head": { "type": "string", "pattern": "^(sha256:)?[0-9a-fA-F]{64}$" },
+        "operator": { "type": "string", "minLength": 1 },
+        "transition_receipts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["from", "to", "at"],
+            "properties": {
+              "from": { "type": ["string", "null"] },
+              "to": { "type": "string" },
+              "at": { "type": "string", "format": "date-time" },
+              "reason": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "classifications": { "type": "array", "items": { "type": "string" } },
+    "identity_anchor": { "type": "string", "minLength": 1 },
+    "authority": { "const": false },
+    "core_hash": { "type": "string", "pattern": "^(sha256:)?[0-9a-fA-F]{64}$" },
+    "cid": { "type": "string" },
+    "hashes": { "type": "object" },
+    "variants": { "type": "object" },
+    "approval_status": { "enum": ["pending", "approved", "rejected"] },
+    "publish_targets": { "type": "array", "items": { "enum": ["zora", "x", "github", "ipfs"] } },
+    "replay_status": { "type": "object" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "previous_receipt": { "type": ["string", "null"] }
+  }
+}
