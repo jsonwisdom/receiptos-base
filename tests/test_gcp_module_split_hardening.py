@@ -31,7 +31,7 @@ VALID_PACKET = {
         "observation": "empty instance list",
         "items": [],
     },
-    "checksum": "sha256:test-placeholder",
+    "checksum": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
     "observed_at": "2026-07-08T12:00:00Z",
     "classifications": [
         "GCP_READONLY_OBSERVATION",
