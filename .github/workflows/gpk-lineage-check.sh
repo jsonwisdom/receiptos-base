@@ -62,7 +62,7 @@ while IFS= read -r path; do
 
   case "$path" in
     quarantine/*/quarantine.json|quarantine/cards/*/quarantine.json|quarantine/waves/*/quarantine.json)
-      python3 - "$path" <<'PY' || exit 12
+      if ! err=$(python3 - "$path" <<'PY' 2>&1
 import json, sys
 p=sys.argv[1]
 d=json.load(open(p, encoding='utf-8'))
@@ -75,10 +75,12 @@ if d["canon_status"] != "QUARANTINE":
 if d["override_status"] is not True:
     raise SystemExit("quarantine override_status must be true")
 PY
-      rc=$?; [ "$rc" -eq 0 ] || fail "quarantine validation failed: $path"
+      ); then
+        fail "quarantine validation failed: $path :: $err"
+      fi
       ;;
     canon/*/OVERRIDE/*.json|canon/cards/*/OVERRIDE/*.json|canon/waves/*/OVERRIDE/*.json)
-      python3 - "$path" <<'PY' || exit 13
+      if ! err=$(python3 - "$path" <<'PY' 2>&1
 import json, sys
 p=sys.argv[1]
 d=json.load(open(p, encoding='utf-8'))
@@ -89,7 +91,9 @@ if missing:
 if d["status"] not in ("OVERRIDDEN", "SUPERSEDED"):
     raise SystemExit("override status must be OVERRIDDEN or SUPERSEDED")
 PY
-      rc=$?; [ "$rc" -eq 0 ] || fail "override validation failed: $path"
+      ); then
+        fail "override validation failed: $path :: $err"
+      fi
       ;;
   esac
 done <<< "$changed_files"
