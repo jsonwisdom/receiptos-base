@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos.local/schemas/receipt_card_v0.2.json",
+  "title": "ReceiptOS Card Packet v0.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_id",
+    "version",
+    "series",
+    "card_number",
+    "title",
+    "ticker",
+    "description",
+    "evidence",
+    "classifications",
+    "identity_anchor",
+    "authority",
+    "core_hash",
+    "cid"
+  ],
+  "properties": {
+    "receipt_id": { "type": "string", "pattern": "^(keccak256:)?[0-9a-fA-F]{64}$" },
+    "version": { "const": "0.2.0" },
+    "series": { "type": "string", "minLength": 1 },
+    "card_number": { "type": "string", "pattern": "^[0-9]{3,}$" },
+    "title": { "type": "string", "minLength": 1 },
+    "ticker": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["eas_uid", "ipfs_cid"],
+      "properties": {
+        "eas_uid": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+        "ipfs_cid": { "type": "string", "pattern": "^(Qm[1-9A-HJ-NP-Za-km-z]{44}|b[a-z2-7]{20,})$" },
+        "anchor_chain": { "type": "string" },
+        "raw_sources": { "type": "array", "items": { "type": "string" } },
+        "observed_at": { "type": "string", "format": "date-time" },
+        "pinned_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "classifications": { "type": "array", "items": { "type": "string" } },
+    "identity_anchor": { "type": "string", "minLength": 1 },
+    "authority": { "const": false },
+    "core_hash": { "type": "string", "pattern": "^(keccak256:)?[0-9a-fA-F]{64}$" },
+    "cid": { "type": "string" },
+    "hashes": { "type": "object" },
+    "variants": { "type": "object" },
+    "approval_status": { "enum": ["pending", "approved", "rejected"] },
+    "publish_targets": { "type": "array", "items": { "enum": ["zora", "x", "github", "ipfs"] } },
+    "replay_status": { "type": "object" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "previous_receipt": { "type": ["string", "null"] }
+  }
+}
