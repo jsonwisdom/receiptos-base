@@ -1,0 +1,37 @@
+{
+  "weld_id": "deerflow-v1-001",
+  "timestamp": "2026-07-08T11:07:00Z",
+  "authority": false,
+  "receipt_anchor": "GRP-004-PROMO-20260708-6d405d9e",
+  "flow_definition": {
+    "harness": "DeerFlow",
+    "mode": "readonly_observation",
+    "agent_role": "external_execution_harness",
+    "claimed_action": "observe_gcp_compute_instances",
+    "receiptos_role": "admissibility_gate"
+  },
+  "cloud_observation": {
+    "authority": false,
+    "project_id": "jaywisdom-boardroom",
+    "operator_identity": "deerflow-worker",
+    "command": [
+      "gcloud",
+      "compute",
+      "instances",
+      "list",
+      "--format=json"
+    ],
+    "evidence": {
+      "source": "deerflow-worker",
+      "observation": "gcloud compute instances list returned an empty instance list for jaywisdom-boardroom.",
+      "items": []
+    },
+    "checksum": "sha256:eaaf315bb8db5ace8c42194a58adc1830991beae142286419ec5f9a6db909a08",
+    "observed_at": "2026-07-08T11:07:00Z",
+    "classifications": [
+      "DEERFLOW_WELD_DEMO",
+      "GCP_READONLY_OBSERVATION"
+    ]
+  },
+  "signature": "sha256:12a9f49d06ad1dc80ddf866bb15b3f78851dfbbf3eb303bc55b437de7a2552b2"
+}
