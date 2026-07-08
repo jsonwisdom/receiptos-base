@@ -1,0 +1,70 @@
+{
+  "artifact_type": "GPK_FACTORY_AGENT_MANIFEST",
+  "schema_version": "v0.1",
+  "project_name": "Jay's GitHub Garbage Pail Kids Factory",
+  "codename": "Agentic Topps Secret Project",
+  "authority": false,
+  "canon_mutation": false,
+  "real_canon_touched": false,
+  "factory_invariants": [
+    "no_unwitnessed_state",
+    "no_silent_mutation",
+    "ci_before_claims",
+    "receipts_before_narrative",
+    "authority_false",
+    "github_walkable_provenance"
+  ],
+  "agents": [
+    {
+      "agent_id": "receipt-ricky",
+      "gpk_name": "Receipt Ricky",
+      "role": "Evidence Intake Goblin",
+      "lane": "intake",
+      "spec_path": "agents/gpk-factory/receipt-ricky.md",
+      "primary_output": "GPK_EVIDENCE_PACKET"
+    },
+    {
+      "agent_id": "canon-carrie",
+      "gpk_name": "Canon Carrie",
+      "role": "Canon Gatekeeper Kid",
+      "lane": "validation",
+      "spec_path": "agents/gpk-factory/canon-carrie.md",
+      "primary_output": "GPK_CANON_READINESS_REPORT"
+    },
+    {
+      "agent_id": "override-ollie",
+      "gpk_name": "Override Ollie",
+      "role": "Quarantine Goblin / De-Canon Clerk",
+      "lane": "correction",
+      "spec_path": "agents/gpk-factory/override-ollie.md",
+      "primary_output": "GPK_OVERRIDE_ARTIFACT"
+    },
+    {
+      "agent_id": "lore-larry",
+      "gpk_name": "Lore Larry",
+      "role": "Continuity Creep",
+      "lane": "lore_audit",
+      "spec_path": "agents/gpk-factory/lore-larry.md",
+      "primary_output": "GPK_LORE_DRIFT_REPORT"
+    },
+    {
+      "agent_id": "press-patty",
+      "gpk_name": "Press Patty",
+      "role": "Packaging Kid / Release Goblin",
+      "lane": "release_packaging",
+      "spec_path": "agents/gpk-factory/press-patty.md",
+      "primary_output": "GPK_RELEASE_PACKET"
+    }
+  ],
+  "factory_flow": [
+    "receipt-ricky",
+    "canon-carrie",
+    "lore-larry",
+    "press-patty"
+  ],
+  "correction_lane": [
+    "override-ollie"
+  ],
+  "first_test_target": "gpk-card-test-001",
+  "status": "AGENTS_DEFINED_NOT_YET_EXECUTED"
+}
