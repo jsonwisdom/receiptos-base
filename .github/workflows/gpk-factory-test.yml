@@ -1,0 +1,71 @@
+name: GPK Factory Disposable Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_id:
+        description: "Disposable target only"
+        required: true
+        default: "gpk-card-test-001"
+        type: string
+  pull_request:
+    paths:
+      - "agents/gpk-factory/**"
+      - "tools/run_gpk_factory_test.py"
+      - "tests/fixtures/gpk-factory/**"
+      - "schemas/receipt_card_v0.2.json"
+      - ".github/workflows/gpk-factory-test.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  factory-test:
+    name: Disposable GPK factory handoff
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Enforce disposable target
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARGET="${{ inputs.target_id || 'gpk-card-test-001' }}"
+          if [ "$TARGET" != "gpk-card-test-001" ]; then
+            echo "Only gpk-card-test-001 is authorized for this workflow."
+            exit 1
+          fi
+
+      - name: Run lineage check first
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash .github/workflows/gpk-lineage-check.sh main HEAD
+
+      - name: Run factory handoff test
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/run_gpk_factory_test.py
+
+      - name: Assert no real canon touched
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git status --short | grep -E '^(.. )?(canon/|quarantine/)' ; then
+            echo "Factory test attempted to touch canon/ or quarantine/."
+            exit 1
+          fi
+          test -f agents/gpk-factory/outbox/gpk-card-test-001/factory_test_summary.json
+          grep -q '"real_canon_touched": false' agents/gpk-factory/outbox/gpk-card-test-001/factory_test_summary.json
+          grep -q '"canon_mutation": false' agents/gpk-factory/outbox/gpk-card-test-001/factory_test_summary.json
+          grep -q '"authority": false' agents/gpk-factory/outbox/gpk-card-test-001/factory_test_summary.json
+
+      - name: Print witness summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat agents/gpk-factory/outbox/gpk-card-test-001/factory_test_summary.json
