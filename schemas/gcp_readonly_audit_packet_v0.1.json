@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jsonwisdom.github.io/receiptos/schemas/gcp_readonly_audit_packet_v0.1.json",
+  "title": "GCP Read-only Audit Packet v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "authority",
+    "project_id",
+    "operator_identity",
+    "command",
+    "evidence",
+    "checksum"
+  ],
+  "properties": {
+    "authority": {
+      "const": false
+    },
+    "project_id": {
+      "const": "jaywisdom-boardroom"
+    },
+    "operator_identity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "command": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "evidence": {
+      "type": ["object", "array", "string", "number", "boolean", "null"]
+    },
+    "checksum": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "classifications": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
