@@ -22,7 +22,7 @@
     "cid"
   ],
   "properties": {
-    "receipt_id": { "type": "string", "pattern": "^(keccak256:)?[0-9a-fA-F]{64}$" },
+    "receipt_id": { "type": "string", "pattern": "^(sha256:)?[0-9a-fA-F]{64}$" },
     "version": { "const": "0.2.0" },
     "series": { "type": "string", "minLength": 1 },
     "card_number": { "type": "string", "pattern": "^[0-9]{3,}$" },
@@ -78,7 +78,7 @@
           ]
         },
         "previous_receipt": { "type": ["string", "null"] },
-        "chain_head": { "type": "string", "pattern": "^(keccak256:)?[0-9a-fA-F]{64}$" },
+        "chain_head": { "type": "string", "pattern": "^(sha256:)?[0-9a-fA-F]{64}$" },
         "operator": { "type": "string", "minLength": 1 },
         "transition_receipts": {
           "type": "array",
@@ -99,7 +99,7 @@
     "classifications": { "type": "array", "items": { "type": "string" } },
     "identity_anchor": { "type": "string", "minLength": 1 },
     "authority": { "const": false },
-    "core_hash": { "type": "string", "pattern": "^(keccak256:)?[0-9a-fA-F]{64}$" },
+    "core_hash": { "type": "string", "pattern": "^(sha256:)?[0-9a-fA-F]{64}$" },
     "cid": { "type": "string" },
     "hashes": { "type": "object" },
     "variants": { "type": "object" },
