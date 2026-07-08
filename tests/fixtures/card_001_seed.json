@@ -1,5 +1,5 @@
 {
-  "receipt_id": "keccak256:0000000000000000000000000000000000000000000000000000000000000000",
+  "receipt_id": "sha256:2e37f5dffe884c2223381fa1cddbbd01d42c9f3cf91c5492931e14c5b33474af",
   "version": "0.2.0",
   "series": "cloud_saga_series",
   "card_number": "001",
@@ -15,7 +15,7 @@
     "pinned_at": "2026-07-08T00:00:00Z"
   },
   "birth_witness": {
-    "witness_hash": "4dcdb352bfff0c852a556c59567869bd16365cb45e26035b2f94f40abd850654",
+    "witness_hash": "2e37f5dffe884c2223381fa1cddbbd01d42c9f3cf91c5492931e14c5b33474af",
     "method": "eas",
     "created_at": "2026-07-08T00:00:00Z",
     "source_ref": "0x4dcdb352bfff0c852a556c59567869bd16365cb45e26035b2f94f40abd850654"
@@ -23,7 +23,7 @@
   "custody": {
     "current_state": "CAPTURED",
     "previous_receipt": null,
-    "chain_head": "keccak256:0000000000000000000000000000000000000000000000000000000000000000",
+    "chain_head": "sha256:2e37f5dffe884c2223381fa1cddbbd01d42c9f3cf91c5492931e14c5b33474af",
     "operator": "jaywisdom.base.eth",
     "transition_receipts": [
       {
@@ -43,7 +43,7 @@
   ],
   "identity_anchor": "jaywisdom.base.eth",
   "authority": false,
-  "core_hash": "keccak256:0000000000000000000000000000000000000000000000000000000000000000",
+  "core_hash": "sha256:2e37f5dffe884c2223381fa1cddbbd01d42c9f3cf91c5492931e14c5b33474af",
   "cid": "bafkreihkplguzcftebvs5qjgf6trw7h73frpmm7bdwjgrd7j6ahswrnzqu",
   "hashes": {},
   "variants": {},
