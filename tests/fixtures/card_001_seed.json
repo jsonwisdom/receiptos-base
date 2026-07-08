@@ -1,0 +1,39 @@
+{
+  "receipt_id": "keccak256:0000000000000000000000000000000000000000000000000000000000000000",
+  "version": "0.2.0",
+  "series": "cloud_saga_series",
+  "card_number": "001",
+  "title": "RECURSIVE CLOUD",
+  "ticker": "$LOOP",
+  "description": "A mobile-only developer audited a cloud project using replayable evidence instead of assumptions. Cloud Shell authentication stalled. The browser became the primary proof surface. Support access was gated. A budget was established. Long-lived credentials remained under investigation. The receipts outlast the recursion.",
+  "evidence": {
+    "eas_uid": "0x4dcdb352bfff0c852a556c59567869bd16365cb45e26035b2f94f40abd850654",
+    "ipfs_cid": "bafkreihkplguzcftebvs5qjgf6trw7h73frpmm7bdwjgrd7j6ahswrnzqu",
+    "anchor_chain": "base",
+    "raw_sources": [],
+    "observed_at": "2026-07-08T00:00:00Z",
+    "pinned_at": "2026-07-08T00:00:00Z"
+  },
+  "classifications": [
+    "operator_control_plane_failure",
+    "cloud_shell_operator_access_failure_reproduced",
+    "browser_proof_surface",
+    "support_escalation_blocked",
+    "safe_baseline_not_reached"
+  ],
+  "identity_anchor": "jaywisdom.base.eth",
+  "authority": false,
+  "core_hash": "keccak256:0000000000000000000000000000000000000000000000000000000000000000",
+  "cid": "bafkreihkplguzcftebvs5qjgf6trw7h73frpmm7bdwjgrd7j6ahswrnzqu",
+  "hashes": {},
+  "variants": {},
+  "approval_status": "pending",
+  "publish_targets": [],
+  "replay_status": {
+    "count": 0,
+    "last_replay": null
+  },
+  "created_at": "2026-07-08T00:00:00Z",
+  "updated_at": "2026-07-08T00:00:00Z",
+  "previous_receipt": null
+}
