@@ -4,6 +4,9 @@ from typing import Sequence
 
 
 _ALLOWED_COMMAND_PATHS = {
+    ("compute", "instances", "list"),
+    ("compute", "disks", "list"),
+    ("compute", "networks", "list"),
     ("iam", "service-accounts", "describe"),
     ("iam", "service-accounts", "keys", "list"),
     ("services", "list"),
@@ -32,6 +35,8 @@ _BLOCKED_TOKENS = {
     "set-iam-policy",
 }
 
+_SHELL_CHARS = {";", "|", "&", ">", "<", "$", "(", ")"}
+
 
 def _command_path(argv: list[str]) -> tuple[str, ...]:
     path = []
@@ -43,6 +48,9 @@ def _command_path(argv: list[str]) -> tuple[str, ...]:
 
 
 def is_allowed_gcloud_command(argv: Sequence[str]) -> bool:
+    if isinstance(argv, (str, bytes)):
+        return False
+
     argv = list(argv)
 
     if not argv or argv[0] != "gcloud":
@@ -50,6 +58,10 @@ def is_allowed_gcloud_command(argv: Sequence[str]) -> bool:
 
     if not any(arg == "--format=json" or arg.startswith("--format=json") for arg in argv):
         return False
+
+    for token in argv:
+        if any(char in token for char in _SHELL_CHARS):
+            return False
 
     for token in argv[1:]:
         if token.lstrip("-") in _BLOCKED_TOKENS:
