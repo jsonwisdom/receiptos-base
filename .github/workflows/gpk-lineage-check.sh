@@ -7,6 +7,7 @@ set -euo pipefail
 # - canonical files are not edited unless the change is an explicit lineage/status pointer
 # - correction/override/quarantine artifacts must reference prior canon hash
 # - superseded canon must preserve created_at, receipt_hash, and canon_hash
+# - superseded_by references must resolve to an existing canon id/hash/tag
 
 BASE_REF="${1:-${GITHUB_BASE_REF:-main}}"
 HEAD_REF="${2:-HEAD}"
@@ -41,8 +42,56 @@ PY
   exit 1
 }
 
+check_dangling_superseded_by() {
+  [ -d canon ] || return 0
+  if ! err=$(python3 - <<'PY' 2>&1
+import json
+from pathlib import Path
+
+canon = Path("canon")
+refs = set()
+docs = []
+
+for path in canon.rglob("*.json"):
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        continue
+    docs.append((path, data))
+    for key in ("id", "card_id", "wave_id", "canon_id", "canon_hash", "canon_tag", "tag", "release_tag"):
+        value = data.get(key)
+        if isinstance(value, str) and value:
+            refs.add(value)
+
+missing = []
+for path, data in docs:
+    value = data.get("superseded_by")
+    if value in (None, "", False):
+        continue
+    values = value if isinstance(value, list) else [value]
+    for item in values:
+        if not isinstance(item, str) or not item:
+            missing.append(f"{path}: invalid superseded_by value")
+        elif item not in refs:
+            missing.append(f"{path}: dangling superseded_by={item}")
+
+if missing:
+    raise SystemExit("; ".join(missing))
+PY
+  ); then
+    fail "dangling superseded_by reference detected :: $err"
+  fi
+}
+
 changed_files=$(git diff --name-only "$BASE_REF" "$HEAD_REF" -- 'canon/**' 'quarantine/**' || true)
-[ -n "$changed_files" ] || exit 0
+
+# Always scan existing canon lineage, even when the current diff has no canon/quarantine changes.
+check_dangling_superseded_by
+
+if [ -z "$changed_files" ]; then
+  echo "Lineage check: PASS"
+  exit 0
+fi
 
 # 1. No silent deletion inside canon/.
 while IFS= read -r path; do
@@ -113,4 +162,4 @@ while IFS= read -r path; do
   fi
 done <<< "$changed_files"
 
-echo "GPK lineage check passed: no silent drift detected."
+echo "Lineage check: PASS"
