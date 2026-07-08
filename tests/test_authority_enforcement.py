@@ -1,15 +1,13 @@
-"""
-ReceiptOS authority invariant scaffold.
+import pytest
 
-Status: scaffold only.
-Issue: #119.
+from receiptos.core.authority import AuthorityViolation, enforce_authority
 
-This file intentionally contains no executable test yet.
-The next implementation commit must introduce the first failing invariant test.
 
-Required future checks:
-- receipt authority must be exactly false
-- missing authority must fail validation
-- non-false authority values must fail validation
-- schema must use const false
-"""
+def test_runtime_gate_accepts_literal_false():
+    assert enforce_authority(False) is True
+
+
+def test_runtime_gate_rejects_non_false_values():
+    for candidate in [not False, None, 0, "false"]:
+        with pytest.raises(AuthorityViolation):
+            enforce_authority(candidate)
