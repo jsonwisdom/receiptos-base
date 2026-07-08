@@ -1,3 +1,13 @@
 {
-  "authority": false
+  "authority": false,
+  "command": [
+    "gcloud",
+    "compute",
+    "instances",
+    "list",
+    "--format=json"
+  ],
+  "evidence": {
+    "note": "Seed fixture for Phase 2 read-only GCP audit."
+  }
 }
