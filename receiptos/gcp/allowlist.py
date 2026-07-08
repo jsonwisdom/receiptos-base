@@ -48,12 +48,13 @@ def command_path(argv: list[str]) -> tuple[str, ...]:
 
 
 def is_allowed_gcloud_command(argv: Sequence[str]) -> bool:
-    if isinstance(argv, (str, bytes)):
+    if not isinstance(argv, list):
         return False
 
-    argv = list(argv)
-
     if not argv or argv[0] != "gcloud":
+        return False
+
+    if not all(isinstance(token, str) for token in argv):
         return False
 
     if not any(arg == "--format=json" or arg.startswith("--format=json") for arg in argv):
