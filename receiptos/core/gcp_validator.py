@@ -10,7 +10,8 @@ from receiptos.core.authority import AuthorityViolation, enforce_authority
 from receiptos.core.cloud_commands import is_allowed_gcloud_command
 
 
-SCHEMA_PATH = Path("schemas/gcp_readonly_audit_packet_v0.1.json")
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+SCHEMA_PATH = _REPO_ROOT / "schemas" / "gcp_readonly_audit_packet_v0.1.json"
 
 
 class GCPPacketValidationError(ValueError):
@@ -34,6 +35,9 @@ def validate_gcp_readonly_packet(packet: Mapping[str, Any], *, schema_path: Path
     command = packet.get("command")
     if not isinstance(command, list):
         raise GCPPacketValidationError("command must be a tokenized list")
+
+    if not all(isinstance(token, str) for token in command):
+        raise GCPPacketValidationError("command tokens must be strings")
 
     if not is_allowed_gcloud_command(command):
         raise GCPPacketValidationError("command is not allowed by the GCP read-only membrane")

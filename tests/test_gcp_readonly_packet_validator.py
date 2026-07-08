@@ -1,5 +1,6 @@
 import copy
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -20,6 +21,17 @@ def test_valid_packet_passes_validator():
     assert validate_gcp_readonly_packet(packet) is True
 
 
+def test_valid_packet_passes_validator_outside_repo_cwd(tmp_path):
+    packet = load_fixture()
+    previous_cwd = Path.cwd()
+
+    try:
+        os.chdir(tmp_path)
+        assert validate_gcp_readonly_packet(packet) is True
+    finally:
+        os.chdir(previous_cwd)
+
+
 def test_validator_rejects_authority_change():
     packet = load_fixture()
     packet["authority"] = True
@@ -33,6 +45,14 @@ def test_validator_rejects_raw_string_command():
     packet["command"] = "not-tokenized"
 
     with pytest.raises(GCPPacketValidationError):
+        validate_gcp_readonly_packet(packet)
+
+
+def test_validator_rejects_non_string_command_tokens():
+    packet = load_fixture()
+    packet["command"] = ["gcloud", "compute", 123, "list", "--format=json"]
+
+    with pytest.raises(GCPPacketValidationError, match="command tokens must be strings"):
         validate_gcp_readonly_packet(packet)
 
 
