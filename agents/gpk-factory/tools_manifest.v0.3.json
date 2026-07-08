@@ -1,0 +1,154 @@
+{
+  "artifact_type": "GPK_FACTORY_TOOLS_MANIFEST",
+  "schema_version": "v0.3",
+  "factory": "jay-github-gpk-factory",
+  "authority": false,
+  "batch_size": 16,
+  "storage_anchored": true,
+  "lineage_check": "verified",
+  "summary_hash": "3a531ef6a4002b6f1597524994d6d61f6b89e410d95e7ff6b76b963f24d45a15",
+  "tool_boundaries": {
+    "mode": "quarantined",
+    "default_policy": "deny",
+    "unknown_tool_policy": "reject",
+    "unlisted_tool_policy": "reject",
+    "network_policy": "disabled_unless_explicitly_declared",
+    "write_policy": "outbox_only_unless_workflow_authorized",
+    "canon_write_policy": "forbidden_in_batch_renderer",
+    "quarantine_write_policy": "forbidden_unless_override_lane_active",
+    "delivery_policy": "forbidden",
+    "media_policy": "text_only",
+    "authority_policy": "must_remain_false"
+  },
+  "allowedTools": [
+    {
+      "tool_id": "lineage_check",
+      "command": "bash .github/workflows/gpk-lineage-check.sh main HEAD",
+      "boundary": "read_repo_plus_failure_receipt",
+      "allowed_reads": [
+        "canon/**",
+        "quarantine/**",
+        ".github/workflows/gpk-lineage-check.sh"
+      ],
+      "allowed_writes": [
+        "receipts/failures/GPK_CANON_CORRECT_FAIL_*.json"
+      ],
+      "forbidden_writes": [
+        "canon/**",
+        "quarantine/**"
+      ],
+      "requires_authority_false": true
+    },
+    {
+      "tool_id": "factory_test_runner",
+      "command": "python3 tools/run_gpk_factory_test.py",
+      "boundary": "disposable_outbox_only",
+      "allowed_reads": [
+        "agents/gpk-factory/**",
+        "tests/fixtures/gpk-factory/gpk-card-test-001.json",
+        "schemas/receipt_card_v0.2.json"
+      ],
+      "allowed_writes": [
+        "agents/gpk-factory/outbox/gpk-card-test-001/**"
+      ],
+      "forbidden_writes": [
+        "canon/**",
+        "quarantine/**"
+      ],
+      "requires_authority_false": true
+    },
+    {
+      "tool_id": "batch_renderer_v0_3",
+      "command": "python3 tools/render_gpk_batch.py --batch-size 16 --headless",
+      "boundary": "headless_batch_outbox_only",
+      "allowed_reads": [
+        "agents/gpk-factory/**",
+        "tests/fixtures/gpk-factory/**",
+        "schemas/**"
+      ],
+      "allowed_writes": [
+        "agents/gpk-factory/outbox/batches/**",
+        "receipts/gpk-factory/batches/**"
+      ],
+      "forbidden_writes": [
+        "canon/**",
+        "quarantine/**"
+      ],
+      "requires_authority_false": true
+    },
+    {
+      "tool_id": "summary_hasher",
+      "command": "python3 tools/hash_gpk_summary.py",
+      "boundary": "receipt_hash_only",
+      "allowed_reads": [
+        "agents/gpk-factory/outbox/**",
+        "receipts/gpk-factory/**"
+      ],
+      "allowed_writes": [
+        "receipts/gpk-factory/summary_hash.txt",
+        "receipts/gpk-factory/summary_hash.json"
+      ],
+      "forbidden_writes": [
+        "canon/**",
+        "quarantine/**"
+      ],
+      "requires_authority_false": true
+    }
+  ],
+  "forbiddenTools": [
+    "image_generation",
+    "image_prompt_generation",
+    "external_delivery",
+    "network_upload",
+    "minting",
+    "publication",
+    "canon_direct_write",
+    "quarantine_direct_write_without_override_lane",
+    "authority_true_setter"
+  ],
+  "batch_renderer_constraints": {
+    "parallel": true,
+    "anchored": true,
+    "sealed": true,
+    "lineage_verified": true,
+    "headless": true,
+    "tool_boundaries": "quarantined",
+    "batch_size": 16,
+    "ipfs_mode": "mock_anchor_allowed",
+    "visual_rendering": false,
+    "render_visual_flag_allowed": false
+  },
+  "receipt_requirements": {
+    "each_receipt_requires": [
+      "receipt_id",
+      "tool_id",
+      "tool_boundary",
+      "input_hash",
+      "output_hash",
+      "storage_anchor",
+      "authority_false",
+      "lineage_status"
+    ],
+    "summary_requires": [
+      "summary_hash",
+      "receipt_count",
+      "batch_size",
+      "tool_boundaries",
+      "lineage_check",
+      "storage_anchored"
+    ]
+  },
+  "fail_closed_conditions": [
+    "unknown_tool_invoked",
+    "tool_writes_outside_allowed_paths",
+    "canon_path_mutated",
+    "quarantine_path_mutated_without_override_lane",
+    "authority_true_detected",
+    "lineage_check_missing",
+    "summary_hash_mismatch",
+    "batch_size_mismatch",
+    "media_output_detected",
+    "delivery_method_detected"
+  ],
+  "status": "TOOLS_MEMBRANE_DEFINED"
+}
