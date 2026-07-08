@@ -1,0 +1,60 @@
+{
+  "receipt_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "version": "0.2.0",
+  "series": "Jay's GitHub Garbage Pail Kids Factory Test Lane",
+  "card_number": "001",
+  "title": "TESTY CHECKS",
+  "ticker": "TESTY",
+  "description": "Disposable factory test card for validating agent handoffs without touching real canon.",
+  "evidence": {
+    "eas_uid": "0x2222222222222222222222222222222222222222222222222222222222222222",
+    "ipfs_cid": "bafkreigh2akiscaildcqlu5w7h3j2xqv2qv2qv2qv2qv2qv2qv2qv2qv2",
+    "anchor_chain": "github:test-lane",
+    "raw_sources": [
+      "agents/gpk-factory/manifest.json",
+      "schemas/receipt_card_v0.2.json"
+    ],
+    "observed_at": "2026-07-08T00:00:00Z",
+    "pinned_at": "2026-07-08T00:00:00Z"
+  },
+  "birth_witness": {
+    "witness_hash": "3333333333333333333333333333333333333333333333333333333333333333",
+    "method": "agent_intake",
+    "created_at": "2026-07-08T00:00:00Z",
+    "source_ref": "agents/gpk-factory/receipt-ricky.md"
+  },
+  "custody": {
+    "current_state": "EVIDENCE_REVIEW",
+    "previous_receipt": null,
+    "chain_head": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "operator": "jsonwisdom/receiptos-base:gpk-factory-test",
+    "transition_receipts": [
+      {
+        "from": null,
+        "to": "EVIDENCE_REVIEW",
+        "at": "2026-07-08T00:00:00Z",
+        "reason": "Disposable factory test lane initialized."
+      }
+    ]
+  },
+  "classifications": [
+    "gpk_factory_test",
+    "disposable",
+    "non_canon"
+  ],
+  "identity_anchor": "jaywisdom.base.eth:test:gpk-card-test-001",
+  "authority": false,
+  "core_hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+  "cid": "bafkreigh2akiscaildcqlu5w7h3j2xqv2qv2qv2qv2qv2qv2qv2qv2qv2",
+  "approval_status": "pending",
+  "publish_targets": [
+    "github"
+  ],
+  "replay_status": {
+    "factory_test_only": true,
+    "real_canon_touched": false
+  },
+  "created_at": "2026-07-08T00:00:00Z",
+  "updated_at": "2026-07-08T00:00:00Z",
+  "previous_receipt": null
+}
