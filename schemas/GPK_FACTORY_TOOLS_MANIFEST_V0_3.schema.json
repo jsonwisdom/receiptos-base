@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos.local/schemas/GPK_FACTORY_TOOLS_MANIFEST_V0_3.schema.json",
+  "title": "GPK Factory Tools Manifest v0.3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "schema_version",
+    "factory",
+    "authority",
+    "batch_size",
+    "storage_anchored",
+    "lineage_check",
+    "summary_hash",
+    "tool_boundaries",
+    "allowedTools",
+    "forbiddenTools",
+    "batch_renderer_constraints",
+    "receipt_requirements",
+    "fail_closed_conditions",
+    "status"
+  ],
+  "properties": {
+    "artifact_type": { "const": "GPK_FACTORY_TOOLS_MANIFEST" },
+    "schema_version": { "const": "v0.3" },
+    "factory": { "type": "string", "minLength": 1 },
+    "authority": { "const": false },
+    "batch_size": { "const": 16 },
+    "storage_anchored": { "const": true },
+    "lineage_check": { "const": "verified" },
+    "summary_hash": { "type": "string", "pattern": "^[0-9a-fA-F]{64}$" },
+    "tool_boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "default_policy",
+        "unknown_tool_policy",
+        "unlisted_tool_policy",
+        "network_policy",
+        "write_policy",
+        "canon_write_policy",
+        "quarantine_write_policy",
+        "delivery_policy",
+        "media_policy",
+        "authority_policy"
+      ],
+      "properties": {
+        "mode": { "const": "quarantined" },
+        "default_policy": { "const": "deny" },
+        "unknown_tool_policy": { "const": "reject" },
+        "unlisted_tool_policy": { "const": "reject" },
+        "network_policy": { "type": "string", "minLength": 1 },
+        "write_policy": { "type": "string", "minLength": 1 },
+        "canon_write_policy": { "type": "string", "pattern": "forbidden" },
+        "quarantine_write_policy": { "type": "string", "minLength": 1 },
+        "delivery_policy": { "const": "forbidden" },
+        "media_policy": { "const": "text_only" },
+        "authority_policy": { "const": "must_remain_false" }
+      }
+    },
+    "allowedTools": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tool_id",
+          "command",
+          "boundary",
+          "allowed_reads",
+          "allowed_writes",
+          "forbidden_writes",
+          "requires_authority_false"
+        ],
+        "properties": {
+          "tool_id": { "type": "string", "minLength": 1 },
+          "command": { "type": "string", "minLength": 1 },
+          "boundary": { "type": "string", "minLength": 1 },
+          "allowed_reads": { "type": "array", "items": { "type": "string" } },
+          "allowed_writes": { "type": "array", "items": { "type": "string" } },
+          "forbidden_writes": { "type": "array", "items": { "type": "string" } },
+          "requires_authority_false": { "const": true }
+        }
+      }
+    },
+    "forbiddenTools": { "type": "array", "items": { "type": "string" } },
+    "batch_renderer_constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parallel",
+        "anchored",
+        "sealed",
+        "lineage_verified",
+        "headless",
+        "tool_boundaries",
+        "batch_size",
+        "ipfs_mode",
+        "visual_rendering",
+        "render_visual_flag_allowed"
+      ],
+      "properties": {
+        "parallel": { "const": true },
+        "anchored": { "const": true },
+        "sealed": { "const": true },
+        "lineage_verified": { "const": true },
+        "headless": { "const": true },
+        "tool_boundaries": { "const": "quarantined" },
+        "batch_size": { "const": 16 },
+        "ipfs_mode": { "type": "string", "minLength": 1 },
+        "visual_rendering": { "const": false },
+        "render_visual_flag_allowed": { "const": false }
+      }
+    },
+    "receipt_requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["each_receipt_requires", "summary_requires"],
+      "properties": {
+        "each_receipt_requires": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "summary_requires": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "fail_closed_conditions": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "status": { "const": "TOOLS_MEMBRANE_DEFINED" }
+  }
+}
