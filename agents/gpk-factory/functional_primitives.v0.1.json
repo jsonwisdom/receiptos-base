@@ -1,0 +1,77 @@
+{
+  "artifact_type": "GPK_FACTORY_FUNCTIONAL_PRIMITIVES",
+  "schema_version": "v0.1",
+  "factory": "Jay's GitHub Garbage Pail Kids Factory",
+  "mode": "TEXT_ONLY",
+  "authority": false,
+  "media_output_allowed": false,
+  "image_prompt_allowed": false,
+  "delivery_methods_allowed": false,
+  "constraints": [
+    {
+      "id": "NO_IMAGE",
+      "function": "no_image",
+      "type": "constraint",
+      "description": "This operation must not generate, request, reference, or attach any image artifact."
+    },
+    {
+      "id": "NO_IMAGE_PROMPT",
+      "function": "no_image_prompt",
+      "type": "constraint",
+      "description": "This operation must not generate or consume any prompt intended for image creation."
+    },
+    {
+      "id": "NO_DELIVERY_METHODS",
+      "function": "no_delivery_methods",
+      "type": "constraint",
+      "description": "This operation must not invoke, simulate, or describe delivery, transport, publication, or transmission methods."
+    }
+  ],
+  "composite_envelope": {
+    "function": "apply_text_only_constraints",
+    "mode": "TEXT_ONLY",
+    "authority": false,
+    "requires": [
+      "NO_IMAGE",
+      "NO_IMAGE_PROMPT",
+      "NO_DELIVERY_METHODS"
+    ]
+  },
+  "entertainment_primitives": [
+    {
+      "function": "render_character_card_text",
+      "type": "character_card_text",
+      "allowed_output": "structured_text_only",
+      "authority": false
+    },
+    {
+      "function": "simulate_factory_run",
+      "type": "factory_simulation_text",
+      "allowed_output": "structured_text_only",
+      "authority": false
+    },
+    {
+      "function": "generate_story_event",
+      "type": "story_event_text",
+      "allowed_output": "structured_text_only",
+      "authority": false
+    }
+  ],
+  "forbidden_outputs": [
+    "image_artifact",
+    "image_prompt",
+    "media_delivery",
+    "publication_action",
+    "minting_action",
+    "transport_action"
+  ],
+  "allowed_outputs": [
+    "text_card_metadata",
+    "text_character_description",
+    "text_factory_simulation",
+    "text_story_event",
+    "text_receipt_packet",
+    "text_continuity_report"
+  ],
+  "status": "TEXT_ONLY_FUNCTIONAL_PRIMITIVES_DEFINED"
+}
