@@ -1,0 +1,108 @@
+version: receiptos-state-machine-v1
+issue: 119
+authority: false
+status: scaffold
+
+states:
+  - OBSERVED
+  - CAPTURED
+  - CLASSIFIED
+  - PACKAGED
+  - HASHED
+  - PINNED
+  - ATTESTED
+  - APPROVED
+  - VARIANT_GENERATED
+  - PUBLISHED
+  - REPLAYED
+  - ARCHIVED
+  - REJECTED
+  - DISPUTED
+  - EVIDENCE_REVIEW
+
+terminal_states:
+  - ARCHIVED
+
+allowed_transitions:
+  OBSERVED:
+    - CAPTURED
+    - REJECTED
+    - DISPUTED
+  CAPTURED:
+    - CLASSIFIED
+    - REJECTED
+    - DISPUTED
+  CLASSIFIED:
+    - PACKAGED
+    - REJECTED
+    - DISPUTED
+  PACKAGED:
+    - HASHED
+    - REJECTED
+    - DISPUTED
+  HASHED:
+    - PINNED
+    - REJECTED
+    - DISPUTED
+  PINNED:
+    - ATTESTED
+    - REJECTED
+    - DISPUTED
+  ATTESTED:
+    - APPROVED
+    - REJECTED
+    - DISPUTED
+  APPROVED:
+    - VARIANT_GENERATED
+    - REJECTED
+    - DISPUTED
+  VARIANT_GENERATED:
+    - PUBLISHED
+    - REJECTED
+    - DISPUTED
+  PUBLISHED:
+    - REPLAYED
+    - DISPUTED
+  REPLAYED:
+    - ARCHIVED
+    - DISPUTED
+  REJECTED:
+    - ARCHIVED
+  DISPUTED:
+    - EVIDENCE_REVIEW
+  EVIDENCE_REVIEW:
+    - REJECTED
+    - APPROVED
+    - ARCHIVED
+  ARCHIVED: []
+
+forbidden_transitions:
+  - from: CAPTURED
+    to: APPROVED
+    reason: skips classification, packaging, hash, pin, and attestation
+  - from: PUBLISHED
+    to: VARIANT_GENERATED
+    reason: variants must derive before publication
+  - from: ARCHIVED
+    to: '*'
+    reason: archived is immutable terminal
+  - from: REJECTED
+    to: APPROVED
+    reason: rejected cannot approve without evidence review path
+  - from: PUBLISHED
+    to: ARCHIVED
+    reason: publication must pass through replay before archive
+  - from: ATTESTED
+    to: VARIANT_GENERATED
+    reason: immutable core approval must precede variant generation
+
+gates:
+  publish_requires:
+    - PINNED
+    - ATTESTED
+    - APPROVED
+    - VARIANT_GENERATED
+  archive_requires:
+    - REPLAYED
+  authority:
+    const: false
