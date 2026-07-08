@@ -1,0 +1,280 @@
+name: GPK Canon Correct v0.1
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Correction mode: quarantine, override, or lineage_check"
+        required: true
+        default: "quarantine"
+        type: choice
+        options:
+          - quarantine
+          - override
+          - lineage_check
+      target_type:
+        description: "Target type"
+        required: true
+        default: "card"
+        type: choice
+        options:
+          - card
+          - wave
+      target_id:
+        description: "Card or wave id, e.g. gpk-card-042"
+        required: true
+        type: string
+      reason_code:
+        description: "Reason code, e.g. METADATA_ERROR, EVIDENCE_DRIFT, LORE_CONFLICT"
+        required: true
+        type: string
+      evidence_anchor:
+        description: "Resolvable evidence anchor: issue, commit, PR, IPFS, Arweave, or URL"
+        required: true
+        type: string
+      target_canon_hash:
+        description: "Current canon_hash being quarantined or superseded"
+        required: true
+        type: string
+      failed_invariant:
+        description: "Invariant breached, required for override mode"
+        required: false
+        type: string
+      supersedes:
+        description: "Superseded canon tag/hash/id, required for override mode"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  VALIDATOR_VERSION: "v0.1"
+  TARGET_ID: ${{ inputs.target_id }}
+
+jobs:
+  canon-correct:
+    name: Manual canon correction
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate manual trigger and inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          case "${{ inputs.mode }}" in
+            quarantine|override|lineage_check) ;;
+            *) echo "Invalid mode"; exit 1 ;;
+          esac
+
+          test -n "${{ inputs.target_id }}"
+          test -n "${{ inputs.reason_code }}"
+          test -n "${{ inputs.evidence_anchor }}"
+          test -n "${{ inputs.target_canon_hash }}"
+
+          if [ "${{ inputs.mode }}" = "override" ]; then
+            test -n "${{ inputs.failed_invariant }}"
+            test -n "${{ inputs.supersedes }}"
+          fi
+
+      - name: Resolve target paths
+        id: paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.target_type }}" = "card" ]; then
+            CANON_DIR="canon/cards/${{ inputs.target_id }}"
+            QUARANTINE_DIR="quarantine/cards/${{ inputs.target_id }}"
+            TAG_PREFIX="gpk-card-${{ inputs.target_id }}"
+          else
+            CANON_DIR="canon/waves/${{ inputs.target_id }}"
+            QUARANTINE_DIR="quarantine/waves/${{ inputs.target_id }}"
+            TAG_PREFIX="gpk-wave-${{ inputs.target_id }}"
+          fi
+          echo "canon_dir=$CANON_DIR" >> "$GITHUB_OUTPUT"
+          echo "quarantine_dir=$QUARANTINE_DIR" >> "$GITHUB_OUTPUT"
+          echo "tag_prefix=$TAG_PREFIX" >> "$GITHUB_OUTPUT"
+
+      - name: Quarantine gate
+        if: ${{ inputs.mode == 'quarantine' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          CANON_DIR="${{ steps.paths.outputs.canon_dir }}"
+          QUARANTINE_DIR="${{ steps.paths.outputs.quarantine_dir }}"
+
+          if [ ! -d "$CANON_DIR" ]; then
+            mkdir -p receipts/failures
+            cat > "receipts/failures/GPK_CANON_CORRECT_FAIL_${{ inputs.target_id }}.json" <<JSON
+          {
+            "receipt_type": "GPK_CANON_CORRECT_FAIL",
+            "status": "FAIL",
+            "reason": "target not found in canon directory",
+            "target_id": "${{ inputs.target_id }}",
+            "validator_version": "${VALIDATOR_VERSION}"
+          }
+          JSON
+            cat "receipts/failures/GPK_CANON_CORRECT_FAIL_${{ inputs.target_id }}.json"
+            exit 1
+          fi
+
+          if [ -e "$QUARANTINE_DIR/quarantine.json" ]; then
+            echo "Active quarantine already exists for ${{ inputs.target_id }}"
+            exit 1
+          fi
+
+          mkdir -p "$QUARANTINE_DIR"
+          python3 - <<'PY'
+          import json, os, hashlib, datetime
+          target_id = os.environ["INPUT_TARGET_ID"]
+          payload = {
+            "artifact_type": "GPK_QUARANTINE_RECEIPT",
+            "schema_version": "v0.1",
+            "target_type": os.environ["INPUT_TARGET_TYPE"],
+            "target_id": target_id,
+            "reason_code": os.environ["INPUT_REASON_CODE"],
+            "evidence_anchor": os.environ["INPUT_EVIDENCE_ANCHOR"],
+            "target_canon_hash": os.environ["INPUT_TARGET_CANON_HASH"],
+            "canon_status": "QUARANTINE",
+            "override_status": True,
+            "validator_version": os.environ.get("VALIDATOR_VERSION", "v0.1"),
+            "created_at": datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+          }
+          encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+          payload["quarantine_hash"] = hashlib.sha256(encoded).hexdigest()
+          out = os.environ["QUARANTINE_OUT"]
+          os.makedirs(os.path.dirname(out), exist_ok=True)
+          with open(out, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=2, sort_keys=True)
+            f.write("\n")
+          PY
+        env:
+          INPUT_TARGET_ID: ${{ inputs.target_id }}
+          INPUT_TARGET_TYPE: ${{ inputs.target_type }}
+          INPUT_REASON_CODE: ${{ inputs.reason_code }}
+          INPUT_EVIDENCE_ANCHOR: ${{ inputs.evidence_anchor }}
+          INPUT_TARGET_CANON_HASH: ${{ inputs.target_canon_hash }}
+          QUARANTINE_OUT: ${{ steps.paths.outputs.quarantine_dir }}/quarantine.json
+
+      - name: Override execution
+        if: ${{ inputs.mode == 'override' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          CANON_DIR="${{ steps.paths.outputs.canon_dir }}"
+          QUARANTINE_DIR="${{ steps.paths.outputs.quarantine_dir }}"
+          OVERRIDE_DIR="$CANON_DIR/OVERRIDE"
+
+          test -d "$CANON_DIR"
+          test -f "$QUARANTINE_DIR/quarantine.json"
+
+          mkdir -p "$OVERRIDE_DIR"
+          python3 - <<'PY'
+          import json, os, hashlib, datetime
+          target_id = os.environ["INPUT_TARGET_ID"]
+          created_at = datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+          override = {
+            "artifact_type": "GPK_OVERRIDE_ARTIFACT",
+            "schema_version": "v0.1",
+            "override_id": f"override-{target_id}-{created_at}",
+            "target_type": os.environ["INPUT_TARGET_TYPE"],
+            "target_id": target_id,
+            "reason_code": os.environ["INPUT_REASON_CODE"],
+            "failed_invariant": os.environ["INPUT_FAILED_INVARIANT"],
+            "evidence_anchor": os.environ["INPUT_EVIDENCE_ANCHOR"],
+            "target_canon_hash": os.environ["INPUT_TARGET_CANON_HASH"],
+            "supersedes": os.environ["INPUT_SUPERSEDES"],
+            "status": "OVERRIDDEN",
+            "validator_version": os.environ.get("VALIDATOR_VERSION", "v0.1"),
+            "created_at": created_at,
+            "authority": False
+          }
+          correction_bundle = {
+            "artifact_type": "GPK_CORRECTION_BUNDLE",
+            "schema_version": "v0.1",
+            "target_id": target_id,
+            "target_type": os.environ["INPUT_TARGET_TYPE"],
+            "target_canon_hash": os.environ["INPUT_TARGET_CANON_HASH"],
+            "supersedes": os.environ["INPUT_SUPERSEDES"],
+            "override_artifact": override,
+            "lineage_rule": "append_only_no_silent_mutation",
+            "created_at": created_at
+          }
+          encoded = json.dumps(correction_bundle, sort_keys=True, separators=(",", ":")).encode()
+          correction_hash = hashlib.sha256(encoded).hexdigest()
+          correction_bundle["correction_hash"] = correction_hash
+
+          out_dir = os.environ["OVERRIDE_DIR"]
+          with open(os.path.join(out_dir, "override.json"), "w", encoding="utf-8") as f:
+            json.dump(override, f, indent=2, sort_keys=True)
+            f.write("\n")
+          with open(os.path.join(out_dir, "correction_bundle.json"), "w", encoding="utf-8") as f:
+            json.dump(correction_bundle, f, indent=2, sort_keys=True)
+            f.write("\n")
+          with open(os.path.join(out_dir, "correction_hash.txt"), "w", encoding="utf-8") as f:
+            f.write(correction_hash + "\n")
+          PY
+        env:
+          INPUT_TARGET_ID: ${{ inputs.target_id }}
+          INPUT_TARGET_TYPE: ${{ inputs.target_type }}
+          INPUT_REASON_CODE: ${{ inputs.reason_code }}
+          INPUT_EVIDENCE_ANCHOR: ${{ inputs.evidence_anchor }}
+          INPUT_TARGET_CANON_HASH: ${{ inputs.target_canon_hash }}
+          INPUT_FAILED_INVARIANT: ${{ inputs.failed_invariant }}
+          INPUT_SUPERSEDES: ${{ inputs.supersedes }}
+          OVERRIDE_DIR: ${{ steps.paths.outputs.canon_dir }}/OVERRIDE
+
+      - name: Run lineage check
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash .github/workflows/gpk-lineage-check.sh main HEAD
+
+      - name: Commit correction artifacts
+        if: ${{ inputs.mode != 'lineage_check' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add quarantine canon receipts .github/workflows/gpk-lineage-check.sh .github/workflows/gpk-canon-correct.yml || true
+          if git diff --cached --quiet; then
+            echo "No correction artifacts to commit."
+            exit 0
+          fi
+          git commit -m "GPK canon correction: ${{ inputs.mode }} ${{ inputs.target_id }}"
+          git push
+
+      - name: Tag correction state
+        if: ${{ inputs.mode != 'lineage_check' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.mode }}" = "quarantine" ]; then
+            TAG="${{ steps.paths.outputs.tag_prefix }}-quarantine"
+          else
+            TAG="${{ steps.paths.outputs.tag_prefix }}-overridden"
+          fi
+          git tag -f "$TAG"
+          git push -f origin "$TAG"
+
+      - name: Create override release
+        if: ${{ inputs.mode == 'override' }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="${{ steps.paths.outputs.tag_prefix }}-overridden"
+          BODY="SUPERSEDES: ${{ inputs.supersedes }}
+          TARGET_CANON_HASH: ${{ inputs.target_canon_hash }}
+          REASON_CODE: ${{ inputs.reason_code }}
+          EVIDENCE_ANCHOR: ${{ inputs.evidence_anchor }}
+          AUTHORITY: false
+          NO_SILENT_DRIFT: true"
+          gh release create "$TAG" --title "$TAG" --notes "$BODY" || gh release edit "$TAG" --notes "$BODY"
