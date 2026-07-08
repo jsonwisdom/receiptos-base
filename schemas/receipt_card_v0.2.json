@@ -13,6 +13,8 @@
     "ticker",
     "description",
     "evidence",
+    "birth_witness",
+    "custody",
     "classifications",
     "identity_anchor",
     "authority",
@@ -30,14 +32,68 @@
     "evidence": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["eas_uid", "ipfs_cid"],
+      "required": ["eas_uid", "ipfs_cid", "anchor_chain", "observed_at", "pinned_at"],
       "properties": {
         "eas_uid": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
         "ipfs_cid": { "type": "string", "pattern": "^(Qm[1-9A-HJ-NP-Za-km-z]{44}|b[a-z2-7]{20,})$" },
-        "anchor_chain": { "type": "string" },
+        "anchor_chain": { "type": "string", "minLength": 1 },
         "raw_sources": { "type": "array", "items": { "type": "string" } },
         "observed_at": { "type": "string", "format": "date-time" },
         "pinned_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "birth_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["witness_hash", "method", "created_at"],
+      "properties": {
+        "witness_hash": { "type": "string", "pattern": "^[0-9a-fA-F]{64}$" },
+        "method": { "enum": ["manual", "github_issue", "eas", "ipfs", "agent_intake"] },
+        "created_at": { "type": "string", "format": "date-time" },
+        "source_ref": { "type": "string" }
+      }
+    },
+    "custody": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_state", "previous_receipt", "chain_head", "operator"],
+      "properties": {
+        "current_state": {
+          "enum": [
+            "OBSERVED",
+            "CAPTURED",
+            "CLASSIFIED",
+            "PACKAGED",
+            "HASHED",
+            "PINNED",
+            "ATTESTED",
+            "APPROVED",
+            "VARIANT_GENERATED",
+            "PUBLISHED",
+            "REPLAYED",
+            "ARCHIVED",
+            "REJECTED",
+            "DISPUTED",
+            "EVIDENCE_REVIEW"
+          ]
+        },
+        "previous_receipt": { "type": ["string", "null"] },
+        "chain_head": { "type": "string", "pattern": "^(keccak256:)?[0-9a-fA-F]{64}$" },
+        "operator": { "type": "string", "minLength": 1 },
+        "transition_receipts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["from", "to", "at"],
+            "properties": {
+              "from": { "type": ["string", "null"] },
+              "to": { "type": "string" },
+              "at": { "type": "string", "format": "date-time" },
+              "reason": { "type": "string" }
+            }
+          }
+        }
       }
     },
     "classifications": { "type": "array", "items": { "type": "string" } },
