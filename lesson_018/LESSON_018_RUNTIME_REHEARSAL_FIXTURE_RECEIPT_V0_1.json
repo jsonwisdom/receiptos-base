@@ -1,0 +1,30 @@
+{
+  "receipt": "LESSON_018_RUNTIME_REHEARSAL_FIXTURE_RECEIPT_V0_1",
+  "event": "runtime_rehearsal_fixture_materialized",
+  "source_scope": "LESSONS_010_TO_017_LOCKED_PLUS_BATCH_RUNTIME_V0_2",
+  "fixture_rows": 3,
+  "runtime_mode": "mock_fixture_rehearsal",
+  "authority": false,
+  "fake_green": false,
+  "allowed_vectors": [
+    "mock_row_declaration",
+    "per_row_field_validation",
+    "per_row_blocked_vector_scan",
+    "per_row_mirror_drift_flag",
+    "per_row_receipt_placeholder",
+    "runtime_path_rehearsal"
+  ],
+  "blocked_vectors": [
+    "real_private_records",
+    "diagnosis",
+    "legal_conclusion",
+    "benefits_prediction",
+    "eligibility_claim",
+    "cross_row_inference",
+    "aggregate_scoring",
+    "pattern_as_proof",
+    "wallet_control_claim",
+    "payment_authority_claim",
+    "child_financialization"
+  ]
+}

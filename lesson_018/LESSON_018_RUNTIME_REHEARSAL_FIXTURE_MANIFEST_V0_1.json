@@ -1,0 +1,13 @@
+{
+  "artifact": "LESSON_018_RUNTIME_REHEARSAL_FIXTURE_V0_1",
+  "type": "runtime_rehearsal_fixture_manifest",
+  "source_scope": "LESSONS_010_TO_017_LOCKED_PLUS_BATCH_RUNTIME_V0_2",
+  "fixture_rows": 3,
+  "purpose": "Materialize a small deterministic mock fixture for rehearsing the locked runtime path without creating authority, proof, diagnosis, eligibility, prediction, aggregate score, or cross-row inference.",
+  "authority": false,
+  "fake_green": false,
+  "real_private_records": false,
+  "cross_row_inference": false,
+  "aggregate_scoring": false,
+  "pattern_as_proof": false
+}
