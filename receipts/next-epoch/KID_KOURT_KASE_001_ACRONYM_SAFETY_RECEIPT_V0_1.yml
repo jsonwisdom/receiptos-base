@@ -1,0 +1,39 @@
+receipt: KID_KOURT_KASE_001_ACRONYM_SAFETY_RECEIPT_V0_1
+repo: jsonwisdom/receiptos-base
+pr: 130
+lane: K3-JAY / Kid Kourt
+artifact: Kid Kourt Kase 001 — Acronym Safety
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+
+question:
+  kid_safe_summary: why_repeated_letter_patterns_can_be_blocked_online
+  raw_hate_acronym_replay: false
+
+ruling:
+  block_reason: symbols_connected_to_real_world_harm_can_trigger_safety_boundaries
+  not_merely_offense: true
+  child_learning_exception_needed: true
+  safe_replay_name: K3-JAY
+
+lesson:
+  - safety_systems_may_pause_symbols_connected_to_harm
+  - children_should_get_explanation_not_shame
+  - safe_alternative_names_preserve_learning
+  - receipt_before_narrative
+
+boundaries:
+  no_hate_symbols: true
+  no_hate_recruitment: true
+  no_harassment: true
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_private_data: true
+  no_canonical_merge_claim: true
+
+ruling_text: >
+  Kid Kourt Kase 001 records that blocking a repeated-letter pattern can be reasonable
+  when the pattern is strongly associated with real-world intimidation, racism, and violence.
+  The kid-safe remedy is explanation plus a safe replay name: K3-JAY. Authority remains false.
