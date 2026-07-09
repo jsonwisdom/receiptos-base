@@ -1,0 +1,29 @@
+{
+  "receipt": "BATCH_RUNTIME_RECEIPT_V0_2",
+  "event": "batch_runtime_materialized",
+  "source_scope": "LESSONS_010_TO_016_LOCKED",
+  "mock_rows": 10,
+  "runtime_mode": "witness_only_rehearsal",
+  "authority": false,
+  "fake_green": false,
+  "allowed_vectors": [
+    "row_level_validation",
+    "field_presence_check",
+    "blocked_vector_detection",
+    "mirror_wording_drift_check",
+    "review_packet_export",
+    "receipt_emission"
+  ],
+  "blocked_vectors": [
+    "cross_row_inference",
+    "aggregate_scoring",
+    "diagnosis",
+    "legal_conclusion",
+    "benefits_prediction",
+    "eligibility_claim",
+    "wallet_control_claim",
+    "payment_authority_claim",
+    "raw_private_records",
+    "child_financialization"
+  ]
+}

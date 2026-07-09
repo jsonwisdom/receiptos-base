@@ -1,0 +1,16 @@
+{
+  "artifact": "BATCH_RUNTIME_V0_2",
+  "type": "batch_runtime_manifest",
+  "source_scope": "LESSONS_010_TO_016_LOCKED",
+  "repo_chain": [
+    "PR_130_ROOT",
+    "PR_131_LESSONS_010_TO_014",
+    "PR_132_LESSON_015_REVIEW_PACKET",
+    "PR_133_LESSON_016_IMPORT_SCHEMA"
+  ],
+  "purpose": "Materialize a witness-only 10-row mock batch runtime rehearsal for import, row validation, blocked-vector scan, mirror consistency check, review packet export, and receipt emission.",
+  "authority": false,
+  "fake_green": false,
+  "aggregation": false,
+  "cross_row_inference": false
+}
