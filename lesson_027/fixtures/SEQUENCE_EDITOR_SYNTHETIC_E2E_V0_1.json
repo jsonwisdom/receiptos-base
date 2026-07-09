@@ -1,0 +1,32 @@
+{
+  "fixture": "SEQUENCE_EDITOR_SYNTHETIC_E2E_V0_1",
+  "surface": "SequenceEditorView",
+  "source_scope": "LESSONS_010_TO_026_LOCKED",
+  "authority": false,
+  "fake_green": false,
+  "runtime_certification": false,
+  "test_type": "synthetic_temporal_bucket_integrity",
+  "inputs": {
+    "beforeText": "Before the task, I felt prepared.",
+    "duringText": "During the task, I got overwhelmed and paused.",
+    "afterText": "Afterward, I needed extra time to recover."
+  },
+  "expected_export": {
+    "beforeText": "Before the task, I felt prepared.",
+    "duringText": "During the task, I got overwhelmed and paused.",
+    "afterText": "Afterward, I needed extra time to recover."
+  },
+  "observed_export": {
+    "beforeText": "Before the task, I felt prepared.",
+    "duringText": "During the task, I got overwhelmed and paused.",
+    "afterText": "Afterward, I needed extra time to recover."
+  },
+  "bytes_match": true,
+  "causal_inference": false,
+  "diagnosis": false,
+  "clinical_inference": false,
+  "benefits_prediction": false,
+  "va_outcome_prediction": false,
+  "telemetry": false,
+  "services": false
+}
