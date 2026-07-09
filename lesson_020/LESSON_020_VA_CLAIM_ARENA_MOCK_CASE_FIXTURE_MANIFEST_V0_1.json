@@ -1,0 +1,23 @@
+{
+  "artifact": "LESSON_020_VA_CLAIM_ARENA_MOCK_CASE_FIXTURE_V0_1",
+  "type": "va_claim_arena_mock_case_fixture_manifest",
+  "source_scope": "LESSONS_010_TO_019_LOCKED",
+  "arena": "VA_CLAIM_TRAINING",
+  "fixture_type": "MOCK_CASE_ONLY",
+  "mock_case_id": "MOCK-VA-CASE-001",
+  "purpose": "Create a single fictional VA claim arena mock case fixture for rehearsing the locked witness-only replay spine without creating legal advice, medical advice, benefits prediction, entitlement claims, adjudication authority, or VA outcome prediction.",
+  "authority": false,
+  "fake_green": false,
+  "real_private_records": false,
+  "legal_advice": false,
+  "medical_advice": false,
+  "diagnosis": false,
+  "benefits_prediction": false,
+  "eligibility_claim": false,
+  "rating_estimate": false,
+  "service_connection_conclusion": false,
+  "va_outcome_prediction": false,
+  "cross_row_inference": false,
+  "aggregate_scoring": false,
+  "pattern_as_proof": false
+}
