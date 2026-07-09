@@ -1,0 +1,19 @@
+{
+  "fixture": "IMPACT_NOTE_EDITOR_SYNTHETIC_E2E_V0_1",
+  "surface": "ImpactNoteEditorView",
+  "source_scope": "LESSONS_010_TO_024_LOCKED",
+  "authority": false,
+  "fake_green": false,
+  "runtime_verification": false,
+  "test_type": "synthetic_binding_integrity",
+  "input": "Had to leave early and could not finish the task.",
+  "expected_mirror": "Had to leave early and could not finish the task.",
+  "observed_mirror": "Had to leave early and could not finish the task.",
+  "bytes_match": true,
+  "transforms": false,
+  "services": false,
+  "telemetry": false,
+  "diagnosis": false,
+  "benefits_prediction": false,
+  "va_outcome_prediction": false
+}

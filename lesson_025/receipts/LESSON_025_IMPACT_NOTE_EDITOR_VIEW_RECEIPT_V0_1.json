@@ -1,0 +1,26 @@
+{
+  "receipt": "LESSON_025_IMPACT_NOTE_EDITOR_VIEW_RECEIPT_V0_1",
+  "event": "impact_note_editor_view_materialized",
+  "source_scope": "LESSONS_010_TO_024_LOCKED",
+  "surface": "ImpactNoteEditorView",
+  "authority": false,
+  "fake_green": false,
+  "runtime_verification": false,
+  "binding_pass_through_only": true,
+  "transforms": false,
+  "services": false,
+  "telemetry": false,
+  "network": false,
+  "diagnosis": false,
+  "benefits_prediction": false,
+  "va_outcome_prediction": false,
+  "core_invariants": [
+    "dumb_view_only",
+    "binding_pass_through_only",
+    "user_text_remains_user_text",
+    "no_hidden_transform",
+    "no_service_call",
+    "no_telemetry",
+    "no_authority_language"
+  ]
+}
