@@ -1,0 +1,46 @@
+{
+  "version": "v0.4",
+  "project": "receiptos-base",
+  "rail": "outbox-hardening",
+  "status": "blocked_pending_chaos_injection",
+  "advancement_locked": true,
+  "parent_canon": {
+    "version": "v0.3",
+    "eas_uid": "0x78bae5680e1fe12eb36d82d4e2b9db7dd7b6848473ebcc052aaf3ba1cea1f468",
+    "commit": "e0fda9d042f619017fef5ea1abb4bd2b0626cfb0"
+  },
+  "outbox_reference": {
+    "replay_board_entry": "ReplayBoard/entries/REPLAY-BOARD-0004.json",
+    "outbox_uid": "0x1224e124ab3a4c8f9b0948138d7686c787cdd95e41332168a856369abe1816dd",
+    "outbox_tx": "0x5cd720f235fa87688b1a562b086d996ee7222504f0d0661e321e198cef79f9e1"
+  },
+  "requirements": {
+    "OUTBOX_CHAOS_INJECTION": {
+      "status": "BLOCKING",
+      "description": "Chaos-injection must pass on the final outbox membrane before any rail, including Scale Gate, Shard Proofs, or Replay Board automation, may advance.",
+      "criteria": [
+        "Partial lineage rejection enforced",
+        "Storm-batch abort semantics verified",
+        "Write-lock enforcement confirmed",
+        "Pre-outbox hook non-bypassable",
+        "Completeness-gate invariants hold under stress"
+      ],
+      "failure_action": "HARD_HALT",
+      "required_witness": "v0.4-CHAOS-PASS",
+      "current_witness_status": "missing",
+      "promotion_allowed": false
+    }
+  },
+  "halted_rails_until_pass": [
+    "scale_gate",
+    "shard_proofs",
+    "replay_board_automation",
+    "dynamic_batch_promotion",
+    "downstream_determinism_claims"
+  ],
+  "doctrine": {
+    "NO_FAKE_GREEN": true,
+    "WITNESS_ONLY": true,
+    "AUTHORITY": false
+  }
+}
