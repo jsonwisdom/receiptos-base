@@ -1,0 +1,59 @@
+receipt: KID_KOURT_KASE_003_KLOWN_KOURT_EXHIBIT_A_RECEIPT_V0_1
+repo: jsonwisdom/receiptos-base
+pr: 130
+lane: K3-JAY / Klown Kourt
+artifact: Kid Kourt Kase 003 — Klown Kourt Live Exhibit A
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+exhibit:
+  id: EXHIBIT_A
+  label: Prime Suspect Number One
+  type: fictional_learning_role
+  real_person_accused: false
+  guilt_claimed: false
+  law_enforcement_claim: false
+  canonical_finding: false
+
+meaning:
+  prime_suspect_number_one: first_silly_idea_broken_rule_confusing_claim_or_fake_serious_pattern_to_inspect
+
+klown_kourt_rules:
+  - inspect_the_claim_not_the_child
+  - laugh_at_confusion_not_people
+  - ask_for_receipts_before_judgment
+  - do_not_accuse_real_people_without_evidence
+  - do_not_claim_guilt
+  - offer_a_repair_path
+  - keep_authority_false
+
+inspection_checklist:
+  - unsupported_by_evidence
+  - too_dramatic
+  - confusing_to_children
+  - pretending_to_be_authority
+  - hiding_missing_receipts
+  - blocking_repair
+  - funny_becoming_cruel
+
+boundaries:
+  no_real_accusation: true
+  no_guilt_claim: true
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_private_data: true
+  no_birthdates: true
+  no_school_locations: true
+  no_phone_numbers: true
+  no_addresses: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_canonical_merge_claim: true
+
+ruling_text: >
+  Klown Kourt Live Exhibit A is open. Prime Suspect Number One is a fictional inspection role
+  for ideas, claims, and rules. It is not a real accusation, not a guilt claim, not a law-enforcement
+  label, and not a canonical finding. Authority remains false.
