@@ -1,0 +1,60 @@
+receipt: KID_KINETIC_REPLAY_RECEIPT_V0_1
+repo: jsonwisdom/receiptos-base
+pr: 130
+lane: ReceiptOS Base / Next Epoch Kids-Safe
+artifact: Kid Kinetic Replay
+status: R_AND_D_SAFE_CORRIDOR_EXPANSION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+classification:
+  - KID_KINETIC
+  - CHILD_SAFE
+  - AUTHORITY_FALSE
+  - WATCHER_MODE
+
+claim:
+  purpose: record_corridor_safe_motion_logic_without_transition
+  motion_allowed: true
+  transition_allowed: false
+  pr_state_change_claimed: false
+  docket_movement_claimed: false
+  canonical_promotion_claimed: false
+  authority_claimed: false
+
+kinetic_diff:
+  corridor: stable
+  membrane: firm
+  door: closed
+  mode: WATCHER
+  gate: REVIEW_RECEIPT_REQUIRED
+  motion: observed_not_transitioned
+
+kid_kuorum:
+  required: true
+  child_question_or_activity_prompt: Can motion be noticed without opening the door?
+  evidence_or_observation_note: Kid Kinetic names corridor motion while keeping PR state unchanged.
+  safety_boundary_check: No merge, transition, docket movement, authority, child finance, wallets, private data, bullying, or humiliation.
+  repair_or_learning_path: If motion starts to look like transition, stop and name it as observed_not_transitioned.
+  kuorum_present: true
+
+boundaries:
+  no_merge: true
+  no_transition: true
+  no_docket_movement: true
+  no_canonical_promotion: true
+  no_authority_claim: true
+  no_fake_green: true
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_private_data: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_family_approval_claim: true
+
+ruling_text: >
+  Kid Kinetic is replayed as corridor-safe motion logic. Motion occurred, but state did not change.
+  Motion is allowed. Transition is not. This receipt does not authorize merge, canon, child wallets,
+  child finance, private data collection, or authority.
