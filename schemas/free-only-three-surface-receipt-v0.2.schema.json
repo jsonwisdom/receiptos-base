@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos-base.local/schemas/free-only-three-surface-receipt-v0.2.schema.json",
+  "title": "FREE_ONLY_THREE_SURFACE_RECEIPT_V0_2",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "receipt_type",
+    "authority",
+    "free_only",
+    "no_fake_green",
+    "source_tx",
+    "surfaces",
+    "trace",
+    "boundary"
+  ],
+  "properties": {
+    "receipt_type": {
+      "const": "FREE_ONLY_THREE_SURFACE_RECEIPT_V0_2"
+    },
+    "adapter_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority": {
+      "const": false
+    },
+    "free_only": {
+      "const": true
+    },
+    "no_fake_green": {
+      "const": true
+    },
+    "chain": {
+      "type": "string"
+    },
+    "chain_id": {
+      "type": "integer"
+    },
+    "source_tx": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{64}$"
+    },
+    "surfaces": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "tx_receipt",
+        "log_surface",
+        "state_read"
+      ],
+      "properties": {
+        "tx_receipt": {
+          "const": "observed"
+        },
+        "log_surface": {
+          "const": "observed"
+        },
+        "state_read": {
+          "const": "observed"
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "debug_traceTransaction",
+        "internal_calls_observed"
+      ],
+      "properties": {
+        "debug_traceTransaction": {
+          "const": "not_used"
+        },
+        "internal_calls_observed": {
+          "const": false
+        }
+      }
+    },
+    "calls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "method": {
+            "type": "string"
+          },
+          "result": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "proves_internal_trace",
+        "proves_wallet_control",
+        "proves_creator_identity",
+        "proves_token_authenticity",
+        "proves_payment_or_sale"
+      ],
+      "properties": {
+        "proves_internal_trace": {
+          "const": false
+        },
+        "proves_wallet_control": {
+          "const": false
+        },
+        "proves_creator_identity": {
+          "const": false
+        },
+        "proves_token_authenticity": {
+          "const": false
+        },
+        "proves_payment_or_sale": {
+          "const": false
+        },
+        "proves_legal_ownership": {
+          "const": false
+        }
+      }
+    }
+  }
+}
