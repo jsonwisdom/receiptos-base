@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Evidence Pointer v1",
+  "description": "Mock-only evidence pointer schema for VA claim arena training. Pointers only. No raw record ingestion.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "pointer",
+    "case_ref",
+    "timestamp"
+  ],
+  "properties": {
+    "pointer": {
+      "type": "string",
+      "pattern": "^mock://[a-zA-Z0-9/_-]+$",
+      "description": "Mock URI only. No real content, records, URLs, file paths, VA system paths, PII, or PHI."
+    },
+    "case_ref": {
+      "type": "string",
+      "pattern": "^MOCK-VA-CASE-[0-9]{3}$",
+      "description": "Mock case reference only."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Fixture timestamp for mock rehearsal only."
+    }
+  }
+}
