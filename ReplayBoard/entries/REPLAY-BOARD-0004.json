@@ -35,17 +35,21 @@
       "reason": "lineage_receipt_hash value was not visibly confirmed in decoded pasted output"
     },
     "corrected_attestation": {
-      "status": "observed_uid_and_tx",
+      "status": "confirmed",
       "schema": "OutboxArtifactAttestation",
       "schema_number": 1676,
       "schema_uid": null,
       "uid": "0x1224e124ab3a4c8f9b0948138d7686c787cdd95e41332168a856369abe1816dd",
       "tx_hash": "0x5cd720f235fa87688b1a562b086d996ee7222504f0d0661e321e198cef79f9e1",
       "network": "base",
-      "recipient": null,
-      "decoded_lineage_receipt_hash_confirmed": false
+      "recipient": "0xA380552a27b0a5a2874Ea7AA52CAC09f542002E8",
+      "recipient_name": "jaywisdom.base.eth",
+      "decoded_lineage_receipt_hash_confirmed": true,
+      "decoded_outbox_hash_confirmed": true,
+      "decoded_artifact_payload_hash_confirmed": true
     }
   },
-  "status": "outbox_attestation_observed_pending_decoded_lineage_confirmation",
-  "no_fake_green": true
+  "status": "outbox_attestation_confirmed",
+  "no_fake_green": true,
+  "human_confirmation_source": "EASScan screenshot showing decoded outbox_hash, artifact_payload_hash, and lineage_receipt_hash"
 }
