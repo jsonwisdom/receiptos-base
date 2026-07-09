@@ -1,0 +1,33 @@
+receipt: NEXT_EPOCH_KIDS_SAFE_BASE_RECEIPT_V0_1
+repo: jsonwisdom/receiptos-base
+artifact: Imagination Station / KID_REALITY_STUDIO
+lane: ReceiptOS Base
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+
+operator:
+  basename: jaywisdom.base.eth
+  role: builder_creator_operator
+  wallet_control_claimed: false
+
+claim:
+  jay_work: protected_as_operator_research
+  jay_impact: kids_can_create_learning_worlds_safely
+  jay_integrity: no_financialization_of_child_lane
+  replay: receipts_before_narrative
+
+boundaries:
+  no_kid_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_private_data: true
+  no_location_leaks: true
+  no_birthdates: true
+  no_family_authority_claim: true
+  no_mrs_wisdom_approval_claim: true
+  no_canonical_merge_claim: true
+
+ruling: >
+  Seeded as a kids-safe Base learning receipt lane. No child finance, no wallet requirement,
+  no speculative PEPE, no family approval claim, and no wallet-control claim from basename alone.
