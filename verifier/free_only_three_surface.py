@@ -6,6 +6,8 @@ This verifier is intentionally narrow:
 - validates all three required surfaces are observed
 - rejects trace/internal-call, wallet-control, creator-identity, authenticity,
   payment/sale, and legal-ownership elevation
+- skips other receipt types by default so legacy receipt families are not
+  mutated into fake three-surface receipts
 - does not call RPC
 - does not prove ownership, identity, authenticity, payment, sale, or legal truth
 """
@@ -14,7 +16,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 from pathlib import Path
 from typing import Any
 
@@ -139,10 +140,16 @@ def validate_receipt(data: dict[str, Any], file_path: Path) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate free-only three-surface receipts")
     parser.add_argument("paths", nargs="+", help="Receipt JSON files or directories to validate")
+    parser.add_argument(
+        "--strict-type",
+        action="store_true",
+        help="Fail when a JSON receipt has a different receipt_type. Default is to skip out-of-scope receipt families.",
+    )
     args = parser.parse_args()
 
     errors: list[str] = []
     checked = 0
+    skipped = 0
 
     for raw_path in args.paths:
         path = Path(raw_path)
@@ -158,6 +165,16 @@ def main() -> int:
             if not isinstance(data, dict):
                 errors.append(f"{file_path}: top-level JSON must be an object")
                 continue
+
+            if data.get("receipt_type") != RECEIPT_TYPE:
+                if args.strict_type:
+                    errors.append(
+                        f"{file_path}: receipt_type must be {RECEIPT_TYPE!r} for this verifier"
+                    )
+                else:
+                    skipped += 1
+                continue
+
             checked += 1
             errors.extend(validate_receipt(data, file_path))
 
@@ -167,7 +184,10 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print(f"FREE_ONLY_THREE_SURFACE_RECEIPT_V0_2 validation passed: {checked} file(s)")
+    print(
+        "FREE_ONLY_THREE_SURFACE_RECEIPT_V0_2 validation passed: "
+        f"{checked} checked, {skipped} skipped out-of-scope"
+    )
     return 0
 
 
