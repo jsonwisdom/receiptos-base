@@ -1,0 +1,84 @@
+manifest: FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_V0_1
+repo: jsonwisdom/receiptos-base
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+surface:
+  name: Flirting Between Wisdoms
+  parent_surface: KID_KINDERGARTEN_2026_AI_ENABLED_SYSTEMS_V0_1
+  mode: gentle_friendship_feelings_sharing_consent_and_repair_game
+
+meaning:
+  flirting_in_this_lane: playful_kindness_between_learning_characters
+  romance: false
+  sexuality: false
+  adult_behavior: false
+  pressure: false
+  hidden_harm: false
+
+core_rule: kindness_is_only_kind_when_the_other_person_can_say_yes_no_or_not_now
+
+game_loop:
+  - notice
+  - ask
+  - share
+  - listen
+  - respect
+  - repair
+  - receipt
+
+safe_phrases:
+  - can_i_play_too
+  - do_you_want_a_turn
+  - it_is_okay_to_say_no
+  - i_can_wait
+  - i_am_sorry_i_can_fix_one_thing
+  - thank_you_for_telling_me
+  - your_feeling_matters
+
+forbidden_patterns:
+  - pressure_after_no
+  - teasing_feelings
+  - secrets_that_hide_harm
+  - touching_without_permission
+  - child_owes_affection
+  - romance_or_adult_behavior
+  - shame_dares_or_exclusion
+
+kid_kuorum:
+  required: true
+  required_surfaces:
+    - child_question_or_activity_prompt
+    - evidence_or_observation_note
+    - safety_boundary_check
+    - repair_or_learning_path
+  missing_kuorum_status: KUORUM_INCOMPLETE_DO_NOT_RULE
+
+hard_boundaries:
+  no_sexual_content: true
+  no_romantic_pressure: true
+  no_adult_behavior: true
+  no_child_owes_affection: true
+  no_forced_hugs_touch_secrets_or_dares: true
+  no_private_data: true
+  no_sibling_identity_exposure: true
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_authority_claim: true
+  no_canonical_promotion_claim: true
+
+promotion:
+  canonical: false
+  merge_authorized: false
+  family_approval_claimed: false
+  child_financialization_allowed: false
+
+ruling: >
+  Flirting Between Wisdoms is opened only as a child-safe friendship, feelings, sharing, consent,
+  and repair game. Friendly kindness must always leave room for yes, no, maybe, and not now.
+  Authority remains false.
