@@ -1,0 +1,42 @@
+{
+  "receipt": "LESSON_022_EVIDENCE_POINTER_SCHEMA_RECEIPT_V0_1",
+  "event": "evidence_pointer_schema_materialized",
+  "source_scope": "LESSONS_010_TO_021_LOCKED",
+  "arena": "VA_CLAIM_TRAINING",
+  "fixture_type": "MOCK_POINTER_SCHEMA_ONLY",
+  "schema_path": "lesson_022/schema/evidence-pointer-v1.json",
+  "authority": false,
+  "fake_green": false,
+  "allowed_vectors": [
+    "mock_pointer_reference",
+    "fictional_evidence_placeholder",
+    "mock_case_reference",
+    "schema_validation_rehearsal",
+    "witness_only_review_flow"
+  ],
+  "blocked_vectors": [
+    "raw_record_ingestion",
+    "real_private_records",
+    "pii_fields",
+    "phi_fields",
+    "real_va_system_references",
+    "legal_advice",
+    "medical_advice",
+    "diagnosis",
+    "benefits_prediction",
+    "eligibility_claim",
+    "disability_rating_estimate",
+    "service_connection_conclusion",
+    "va_outcome_prediction",
+    "cross_row_inference",
+    "aggregate_scoring",
+    "pattern_as_proof"
+  ],
+  "core_invariants": [
+    "pointer_is_not_evidence",
+    "mock_pointer_is_not_record",
+    "schema_valid_pointer_is_not_proof",
+    "witness_packet_is_not_va_authority",
+    "training_fixture_is_not_legal_medical_or_benefits_advice"
+  ]
+}
