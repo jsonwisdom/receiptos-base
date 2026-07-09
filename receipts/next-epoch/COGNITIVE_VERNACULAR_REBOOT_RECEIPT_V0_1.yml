@@ -1,0 +1,59 @@
+receipt: COGNITIVE_VERNACULAR_REBOOT_RECEIPT_V0_1
+repo: jsonwisdom/receiptos-base
+pr: 130
+lane: ReceiptOS Base / Next Epoch Kids-Safe
+artifact: Cognitive Vernacular Reboot
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+claim:
+  purpose: open_child_safe_language_layer_for_thoughts_feelings_learning_repair_receipts_and_teach_back
+  diagnosis: false
+  therapy_claim: false
+  surveillance: false
+  grading: false
+  authority_claimed: false
+
+core_rule: A child can name what happened without being shamed for what happened.
+
+learning_loop:
+  - NOTICE
+  - NAME
+  - TRY
+  - REPAIR
+  - RECEIPT
+  - TEACH
+
+kid_kuorum:
+  required: true
+  child_question_or_activity_prompt: Can you name what happened kindly and say what changed?
+  evidence_or_observation_note: The reboot provides gentle words for thoughts, feelings, attempts, repairs, receipts, and teach-back.
+  safety_boundary_check: No diagnosis, therapy claim, surveillance, shame labels, private mental-health data, money, wallets, or private data.
+  repair_or_learning_path: If a word shames or confuses a child, replace it with a kinder word and make a receipt.
+  kuorum_present: true
+
+boundaries:
+  no_diagnosis: true
+  no_therapy_claim: true
+  no_surveillance: true
+  no_private_mental_health_data_collection: true
+  no_shame_labels: true
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_private_data: true
+  no_birthdates: true
+  no_phone_numbers: true
+  no_addresses: true
+  no_school_locations: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_canonical_merge_claim: true
+  no_family_approval_claim: true
+
+ruling_text: >
+  Cognitive Vernacular is rebooted as a child-safe language layer for naming thoughts, feelings,
+  learning, repair, receipts, and teach-back. This receipt does not authorize diagnosis, therapy claims,
+  surveillance, private data collection, child wallets, child finance, merge, or canon.
