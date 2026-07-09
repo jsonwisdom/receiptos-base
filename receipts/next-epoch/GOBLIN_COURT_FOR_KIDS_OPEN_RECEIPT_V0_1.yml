@@ -1,0 +1,46 @@
+receipt: GOBLIN_COURT_FOR_KIDS_OPEN_RECEIPT_V0_1
+repo: jsonwisdom/receiptos-base
+pr: 130
+lane: ReceiptOS Base / Next Epoch Kids-Safe
+artifact: GOBLIN Court for Kids
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+
+opened_by:
+  operator_context: Jason / Mr Wisdom
+  basename_context: jaywisdom.base.eth
+  wallet_control_claimed: false
+
+claim:
+  goblins_mean: Goofy Original Builder Learning Imagination Nodes
+  goblins_are: original_learning_helpers
+  court_purpose: kids_turn_mistakes_into_receipts
+  official_garbage_pail_kids_ip_used: false
+  official_brand_affiliation_claimed: false
+
+boundaries:
+  no_kid_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  pepe_meaning: Playful Educational Proof Economy
+  no_private_data: true
+  no_birthdates: true
+  no_location_leaks: true
+  no_school_locations: true
+  no_phone_numbers: true
+  no_canonical_merge_claim: true
+  no_family_approval_claim: true
+
+allowed_symbolic_badges:
+  - curiosity
+  - kindness
+  - repair
+  - evidence
+  - imagination
+  - helper
+
+ruling: >
+  GOBLIN Court for Kids is open as a safe R&D learning surface. It is original, non-financial,
+  kid-safe, receipt-first, and authority:false. This receipt does not authorize merge, canon,
+  child wallets, financial PEPE, or official brand/IP claims.
