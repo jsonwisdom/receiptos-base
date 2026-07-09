@@ -1,0 +1,21 @@
+{
+  "entry_id": "REPLAY-BOARD-0003",
+  "project": "receiptos-base",
+  "canon_version": "v0.3",
+  "entry_type": "canon_state_commitment",
+  "chain": "base",
+  "authority": false,
+  "witness_only": true,
+  "claim_scope": "canon-state commitment only",
+  "secret_material": "excluded",
+  "raw_artifact_payloads": "excluded",
+  "proof_file": "batch_proof.txt",
+  "summary_hash": "0x3bf681569b7d72e21adc0d94f89bf3c9fc14bad8a5cad0a307f8bd732c91442e",
+  "git_commit": "6780c28e01595d73424b9ad15c1ec14e8b3237ed",
+  "status": "observed_local_hash",
+  "eas_attestation": {
+    "status": "not_submitted",
+    "schema": "CanonStateAttestation",
+    "network": "base"
+  }
+}

@@ -1,0 +1,11 @@
+6780c28e01595d73424b9ad15c1ec14e8b3237ed
+157a89f4c46ef09a1151c37cea96c0a6d1abfee9ea05abed4381129b4fe9aa71  ./deployment/tntr-v1-production-manifest.json
+cd65d40990012cec9e2ca5e37cf5dafff5bc319a608060bda0db53d78333b6c2  ./.github/workflows/canonical-build.yml
+e5d46575239c369aa77b4e90446d08128065187a24b40695b26cc5c25ba1fcea  ./.github/workflows/receiptos-anchor-verify.yml
+558a02e5ab082f7a34aaeddd5c4e29b1ff29431d04458d280ec396a6f1c8583b  ./.github/workflows/receiptos-ci.yml
+02dbbc8146539d500eab57b12578b8037a9553a45fab4718bf941fedfc9f4622  ./.github/workflows/replay-witness.yml
+d5c71e5170b7c1be5c61ceb9300f884777ed58cd1c8a3045d9761a39687f3ed7  ./releases/grp004-release-2026-07-04/INTAKE-MANIFEST.json
+39989377d0152794e9b67eff75476c1cb764a674e0428b9182874c6449f86354  ./releases/grp004-release-2026-07-04/TV-073-EXECUTION-RECEIPT.final.json
+4aa38946f65c104bc52f47fc3f35da32fd6d452b327e9f0f2d6fbff0193cc64a  ./schemas/manifest.schema.json
+6991b6e43f725ec5a6bc9f046cd85d9f5a50383bf355a074da90b9b3b29e22b9  ./schemas/receipt.schema.json
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./schemas/ROUND_017_verification_receipt.schema.json
