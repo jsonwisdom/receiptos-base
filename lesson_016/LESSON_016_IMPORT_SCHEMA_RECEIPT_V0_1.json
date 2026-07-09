@@ -1,0 +1,20 @@
+{
+  "receipt": "LESSON_016_IMPORT_SCHEMA_RECEIPT_V0_1",
+  "event": "import_schema_materialized",
+  "source_scope": "LESSONS_010_TO_015_ONLY",
+  "authority": false,
+  "fake_green": false,
+  "blocked_vectors": [
+    "diagnosis",
+    "legal_conclusion",
+    "benefits_prediction",
+    "medical_authority",
+    "wallet_address_as_proof",
+    "payment_link",
+    "raw_private_record",
+    "child_financialization_signal",
+    "cross_row_inference",
+    "aggregate_score",
+    "eligibility_claim"
+  ]
+}
