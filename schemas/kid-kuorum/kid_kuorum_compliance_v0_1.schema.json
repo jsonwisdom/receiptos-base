@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kid_kuorum_compliance_v0_1.schema.json",
+  "title": "Kid Kuorum Compliance v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "surface",
+    "status",
+    "authority",
+    "no_fake_green",
+    "for_the_children",
+    "kid_question",
+    "evidence_or_missing_evidence_note",
+    "safety_boundary_check",
+    "repair_or_learning_path",
+    "boundaries"
+  ],
+  "properties": {
+    "surface": {
+      "const": "Kid Kuorum"
+    },
+    "status": {
+      "enum": [
+        "KUORUM_INCOMPLETE",
+        "KUORUM_PRESENT",
+        "READY_FOR_KID_KOURT_REVIEW",
+        "RULING_RECORDED_R_AND_D_ONLY"
+      ]
+    },
+    "authority": {
+      "const": false
+    },
+    "no_fake_green": {
+      "const": true
+    },
+    "for_the_children": {
+      "const": true
+    },
+    "kid_question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_or_missing_evidence_note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "safety_boundary_check": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repair_or_learning_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "no_child_wallets",
+        "no_real_money_for_kids",
+        "no_financial_pepe",
+        "no_private_data",
+        "no_bullying",
+        "no_humiliation_games",
+        "no_canonical_authority_claim"
+      ],
+      "properties": {
+        "no_child_wallets": { "const": true },
+        "no_real_money_for_kids": { "const": true },
+        "no_financial_pepe": { "const": true },
+        "no_private_data": { "const": true },
+        "no_bullying": { "const": true },
+        "no_humiliation_games": { "const": true },
+        "no_canonical_authority_claim": { "const": true }
+      }
+    }
+  }
+}
