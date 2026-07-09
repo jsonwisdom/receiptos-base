@@ -1,0 +1,86 @@
+manifest: KID_KINDERGARTEN_RHYTHM_AND_SOUL_PROTOCOLS_V0_1
+repo: jsonwisdom/receiptos-base
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+surface:
+  name: Kid Kindergarten Rhythm & Soul Protocols
+  parent_surface: KID_KINDERGARTEN_2026_AI_ENABLED_SYSTEMS_V0_1
+  mode: creative_pattern_feeling_and_repair_learning
+
+protocols:
+  rhythm_protocol:
+    purpose: clapping_tapping_counting_stepping_call_and_response_patterns
+  soul_protocol:
+    purpose: feelings_listening_repair_and_care_without_shame
+  movement_protocol:
+    purpose: safe_body_movement_for_letters_numbers_shapes_timing_and_calm
+  call_and_response_protocol:
+    purpose: turn_taking_group_repeat_and_kind_repair
+  storybeat_protocol:
+    steps:
+      - beginning
+      - problem
+      - feeling
+      - helper
+      - repair
+      - receipt
+  quiet_beat_protocol:
+    purpose: rest_silence_breath_and_calm_are_part_of_the_song
+
+ai_enabled:
+  enabled: true
+  allowed_actions:
+    - suggest_simple_rhythm_games
+    - explain_patterns_gently
+    - create_original_non_copyrighted_chants
+    - help_name_feelings_safely
+    - help_build_repair_scripts
+    - help_record_public_safe_learning_receipts
+  forbidden_actions:
+    - collect_voiceprints_or_biometric_identity
+    - require_microphones_or_cameras
+    - shame_child_for_rhythm_speech_movement_or_feeling
+    - imitate_living_artists_as_required_style
+    - create_child_wallet_flows
+    - create_real_money_participation_for_children
+    - become_authority
+
+kid_kuorum:
+  required: true
+  required_surfaces:
+    - child_question_or_activity_prompt
+    - evidence_or_observation_note
+    - safety_boundary_check
+    - repair_or_learning_path
+  missing_kuorum_status: KUORUM_INCOMPLETE_DO_NOT_RULE
+
+hard_boundaries:
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  pepe_meaning: Playful Educational Proof Economy
+  no_private_data: true
+  no_biometric_capture_requirement: true
+  no_voiceprint_storage: true
+  no_required_camera_use: true
+  no_birthdates: true
+  no_phone_numbers: true
+  no_addresses: true
+  no_school_locations: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_official_ip_claims: true
+  no_canonical_authority_claim: true
+
+promotion:
+  canonical: false
+  merge_authorized: false
+  family_approval_claimed: false
+  child_financialization_allowed: false
+
+ruling: >
+  Kid Kindergarten Rhythm & Soul Protocols are opened as an R&D-safe creative learning surface.
+  Rhythm teaches patterns. Soul teaches feeling, repair, and care. AI may assist, but cannot become authority.
