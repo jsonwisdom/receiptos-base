@@ -1,0 +1,62 @@
+manifest: GOBLIN_COURT_FOR_KIDS_V0_1
+repo: jsonwisdom/receiptos-base
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+
+court:
+  name: GOBLIN Court for Kids
+  goblin_meaning: Goofy Original Builder Learning Imagination Nodes
+  purpose: original_kid_safe_learning_court
+  official_garbage_pail_kids_ip: false
+  official_trading_card_affiliation: false
+
+system:
+  parent_lane: NEXT_EPOCH_KIDS_SAFE_BASE_V0_1
+  linked_artifact: Imagination Station / KID_REALITY_STUDIO
+  economy: PEPE_PLAY_ECONOMY
+  economy_meaning: Playful Educational Proof Economy
+
+roles:
+  goblin_builder: creates_original_character_or_learning_world
+  goblin_judge: asks_what_lesson_was_learned
+  goblin_archivist: records_public_safe_receipts
+  goblin_helper: helps_another_kid_improve
+  goblin_guardian: checks_safety_boundaries
+
+safety:
+  kid_safe: true
+  no_real_money_for_kids: true
+  no_wallet_required_for_kids: true
+  no_financial_pepe: true
+  no_private_data: true
+  no_birthdates: true
+  no_location_leaks: true
+  no_school_locations: true
+  no_phone_numbers: true
+  no_adult_humiliation_games: true
+  original_characters_only: true
+
+rewards:
+  symbolic_only: true
+  wallet_assets_for_children: false
+  money: false
+  tokens_for_children: false
+  allowed_badges:
+    - curiosity
+    - kindness
+    - repair
+    - evidence
+    - imagination
+    - helper
+
+promotion:
+  canonical: false
+  merge_authorized: false
+  family_approval_claimed: false
+  child_financialization_allowed: false
+
+ruling: >
+  GOBLIN Court for Kids is opened as an R&D-safe, original, non-financial learning court.
+  It does not use official Garbage Pail Kids IP, does not require child wallets, does not create
+  real-money participation for children, and does not promote canonical authority.
