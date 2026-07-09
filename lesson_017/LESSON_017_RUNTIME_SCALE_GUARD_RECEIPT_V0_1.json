@@ -1,0 +1,27 @@
+{
+  "receipt": "LESSON_017_RUNTIME_SCALE_GUARD_RECEIPT_V0_1",
+  "event": "runtime_scale_guard_materialized",
+  "source_scope": "LESSONS_010_TO_016_PLUS_BATCH_RUNTIME_V0_2",
+  "authority": false,
+  "fake_green": false,
+  "guard_rules": [
+    "volume_does_not_create_authority",
+    "more_rows_do_not_create_proof",
+    "repeated_patterns_do_not_create_diagnosis",
+    "repeated_patterns_do_not_create_eligibility",
+    "no_induction_from_row_count",
+    "no_cross_row_inference",
+    "no_aggregate_scoring"
+  ],
+  "blocked_vectors": [
+    "pattern_as_proof",
+    "frequency_as_diagnosis",
+    "multi_row_eligibility_inference",
+    "legal_conclusion",
+    "benefits_prediction",
+    "wallet_control_claim",
+    "payment_authority_claim",
+    "child_financialization",
+    "raw_private_records"
+  ]
+}
