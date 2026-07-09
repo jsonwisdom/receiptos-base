@@ -12,10 +12,21 @@
   "proof_file": "batch_proof.txt",
   "summary_hash": "0x3bf681569b7d72e21adc0d94f89bf3c9fc14bad8a5cad0a307f8bd732c91442e",
   "git_commit": "6780c28e01595d73424b9ad15c1ec14e8b3237ed",
-  "status": "observed_local_hash",
+  "canon_commit": "e0fda9d042f619017fef5ea1abb4bd2b0626cfb0",
+  "status": "eas_confirmed",
   "eas_attestation": {
-    "status": "not_submitted",
+    "status": "confirmed",
     "schema": "CanonStateAttestation",
-    "network": "base"
+    "schema_number": 1675,
+    "schema_uid": "0xc64e3d4ba158b92f1eeb6985a4205654efe2159d5f0add23e94f8a67df11784b",
+    "uid": "0x78bae5680e1fe12eb36d82d4e2b9db7dd7b6848473ebcc052aaf3ba1cea1f468",
+    "tx_hash": "0x8fac7b16589532e29b9c82748f1f77067e44d03b527a98b0b23b8acf1c9f1139",
+    "network": "base",
+    "created_at": "2026-07-09T00:03:25",
+    "expiration": "never",
+    "revoked": false,
+    "revocable": true,
+    "from": "0xC345B26094c63C69222Ee775189a3d3eaead5a84",
+    "recipient": null
   }
 }
