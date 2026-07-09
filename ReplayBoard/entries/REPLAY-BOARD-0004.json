@@ -1,0 +1,51 @@
+{
+  "entry_id": "REPLAY-BOARD-0004",
+  "project": "receiptos-base",
+  "canon_version": "v0.4",
+  "entry_type": "outbox_artifact_lineage_commitment",
+  "chain": "base",
+  "authority": false,
+  "witness_only": true,
+  "claim_scope": "outbox artifact lineage commitment only",
+  "parent_canon": {
+    "canon_version": "v0.3",
+    "parent_canon_uid": "0x78bae5680e1fe12eb36d82d4e2b9db7dd7b6848473ebcc052aaf3ba1cea1f468",
+    "parent_canon_commit": "e0fda9d042f619017fef5ea1abb4bd2b0626cfb0"
+  },
+  "artifact": {
+    "artifact_id": "NEXT-ZORA-COIN",
+    "artifact_type": "zora_creator_coin",
+    "zora_contract": "0xd0c736467e0d496cc56209a36f28264b86c49582",
+    "media_cid": "ipfs://bafybeihljbr27qv7obmuz4vzfcvtz6grevvvzj44uz76jh3adxyuooyp2i",
+    "artifact_payload_hash": "0x32a0da666a7605e4dbea9287f411bd352c257e648b402fb47af4e0a4ee155234",
+    "lineage_receipt_hash": "0xb7db31628c8e2ab694615e35eee31586b1c280f2d49a050aa9830043e368d183",
+    "outbox_hash": "0x071e541975fa613f5911fcdbf46656077b7d5fde8de498072a7652ed7084d442",
+    "artifact_file": "evidence/NEXT-ZORA-COIN/metadata.json",
+    "lineage_file": "evidence/NEXT-ZORA-COIN/receiptos-packet.json"
+  },
+  "gates": {
+    "completeness_gate_passed": true,
+    "lineage_verified": true
+  },
+  "outbox_attestations": {
+    "superseded_incomplete_attestation": {
+      "uid": "0x39ae1a5e8a52af8fbadafd8731d7e466c97cec8ae2d36200f40d1382590f9c35",
+      "tx_hash": "0x5d86409691b2747d8d6bc273430f7fc47c0779a091c70b0acf914a2715bfe754",
+      "status": "superseded_incomplete",
+      "reason": "lineage_receipt_hash value was not visibly confirmed in decoded pasted output"
+    },
+    "corrected_attestation": {
+      "status": "observed_uid_and_tx",
+      "schema": "OutboxArtifactAttestation",
+      "schema_number": 1676,
+      "schema_uid": null,
+      "uid": "0x1224e124ab3a4c8f9b0948138d7686c787cdd95e41332168a856369abe1816dd",
+      "tx_hash": "0x5cd720f235fa87688b1a562b086d996ee7222504f0d0661e321e198cef79f9e1",
+      "network": "base",
+      "recipient": null,
+      "decoded_lineage_receipt_hash_confirmed": false
+    }
+  },
+  "status": "outbox_attestation_observed_pending_decoded_lineage_confirmation",
+  "no_fake_green": true
+}
