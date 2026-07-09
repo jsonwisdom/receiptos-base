@@ -1,0 +1,116 @@
+manifest: COGNITIVE_VERNACULAR_REBOOT_V0_1
+repo: jsonwisdom/receiptos-base
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+surface:
+  name: Cognitive Vernacular Reboot
+  parent_surface: KID_KINDERGARTEN_2026_AI_ENABLED_SYSTEMS_V0_1
+  mode: child_safe_language_for_thoughts_feelings_learning_repair_receipts_and_teach_back
+
+meaning:
+  cognitive_vernacular: gentle_words_for_naming_what_happened
+  diagnosis: false
+  therapy_claim: false
+  surveillance: false
+  grading: false
+  authority: false
+
+core_rule: a_child_can_name_what_happened_without_being_shamed_for_what_happened
+
+vocabulary_groups:
+  thought_words:
+    - i_noticed
+    - i_wondered
+    - i_guessed
+    - i_changed_my_mind
+    - i_need_help
+  feeling_words:
+    - i_feel_happy
+    - i_feel_unsure
+    - i_feel_frustrated
+    - i_feel_proud
+    - i_need_a_quiet_beat
+  learning_words:
+    - i_tried
+    - i_practiced
+    - i_made_one_mistake
+    - i_fixed_one_thing
+    - i_can_say_it_my_way
+  repair_words:
+    - i_can_try_again
+    - i_can_wait
+    - i_can_say_sorry
+    - i_can_ask_first
+    - i_can_make_it_kinder
+  receipt_words:
+    - here_is_what_changed
+    - before_i_thought_this
+    - after_i_learned_this
+    - my_receipt_is_a_drawing
+    - my_receipt_is_one_sentence
+
+learning_loop:
+  - notice
+  - name
+  - try
+  - repair
+  - receipt
+  - teach
+
+ai_enabled:
+  enabled: true
+  allowed_actions:
+    - suggest_gentle_words
+    - explain_feelings_at_kindergarten_level
+    - turn_mistake_into_repair_sentence
+    - create_public_safe_learning_receipt
+    - help_child_say_idea_in_own_words
+  forbidden_actions:
+    - diagnose_children
+    - label_child_as_broken_bad_lazy_or_wrong
+    - collect_private_mental_health_data
+    - pressure_child_to_reveal_secrets
+    - replace_adult_care_or_guardian_judgment
+    - become_authority
+
+kid_kuorum:
+  required: true
+  required_surfaces:
+    - child_question_or_activity_prompt
+    - evidence_or_observation_note
+    - safety_boundary_check
+    - repair_or_learning_path
+  missing_kuorum_status: KUORUM_INCOMPLETE_DO_NOT_RULE
+
+hard_boundaries:
+  no_diagnosis: true
+  no_therapy_claim: true
+  no_surveillance: true
+  no_private_mental_health_data_collection: true
+  no_shame_labels: true
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_private_data: true
+  no_birthdates: true
+  no_phone_numbers: true
+  no_addresses: true
+  no_school_locations: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_authority_claim: true
+  no_canonical_promotion_claim: true
+
+promotion:
+  canonical: false
+  merge_authorized: false
+  family_approval_claimed: false
+  child_financialization_allowed: false
+
+ruling: >
+  Cognitive Vernacular is rebooted as a child-safe language layer for naming thoughts,
+  feelings, learning, repair, receipts, and teach-back. Children may name what happened without shame.
+  Authority remains false.
