@@ -1,0 +1,56 @@
+receipt: RECEIPT_FIRST_LEARNING_CHARTER_BINDING_RECEIPT_V0_1
+repo: jsonwisdom/receiptos-base
+pr: 130
+lane: ReceiptOS Base / Next Epoch Kids-Safe
+artifact: Receipt-First Learning Charter binding to Kid Kindergarten Teach-Back Protocols
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+binding:
+  parent_charter: RECEIPT_FIRST_LEARNING_CHARTER_V0_1
+  child_protocol: KID_KINDERGARTEN_TEACH_BACK_PROTOCOLS_V0_1
+  hierarchy:
+    - Receipt-First Learning Charter
+    - Kid Kindergarten Teach-Back Protocols
+    - Teach-Back Cards
+    - Kid Kourt Replay Rules
+    - Explain-Repair Curriculum
+
+core_ruling:
+  learning_is_not_obedience: true
+  learning_is_participation_expression_repair_and_receipt: true
+  authority_based_correctness: false
+
+loop:
+  - study
+  - learn
+  - practice
+  - explain
+  - repair
+  - receipt
+  - teach
+
+kid_kuorum:
+  required: true
+  no_kuorum_means_do_not_rule: true
+
+boundaries:
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_private_data: true
+  no_birthdates: true
+  no_phone_numbers: true
+  no_addresses: true
+  no_school_locations: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_canonical_merge_claim: true
+  no_family_approval_claim: true
+
+ruling_text: >
+  Receipt-First Learning Charter is seated and Kid Kindergarten Teach-Back Protocols are bound beneath it.
+  Learning is legitimate only when a child can try, explain, repair, receipt, and teach safely.
+  This receipt does not authorize merge, canon, child wallets, child finance, or private data collection.

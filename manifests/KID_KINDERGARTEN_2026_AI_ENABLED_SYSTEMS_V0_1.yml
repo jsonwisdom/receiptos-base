@@ -1,0 +1,76 @@
+manifest: KID_KINDERGARTEN_2026_AI_ENABLED_SYSTEMS_V0_1
+repo: jsonwisdom/receiptos-base
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+for_the_children: true
+year: 2026
+
+surface:
+  name: Kid Kindergarten 2026
+  mode: ai_enabled_early_learning
+  parent_lane: NEXT_EPOCH_KIDS_SAFE_BASE_V0_1
+  linked_stack: K3_JAY_KID_CIVIC_LEARNING_STACK_V0_1
+
+learning_rooms:
+  story_room: original_stories
+  number_room: counting_patterns_simple_math
+  feeling_room: feelings_and_repair
+  evidence_room: receipts_before_claims
+  goblin_room: mistakes_into_learning_helpers
+  meme_room: funny_without_cruelty
+  kid_kourt_room: fair_questions_and_safe_rulings
+
+ai_enabled_systems:
+  enabled: true
+  allowed_actions:
+    - ask_gentle_questions
+    - explain_at_kindergarten_level
+    - suggest_safe_activities
+    - help_make_original_characters
+    - help_sort_learning_receipts
+    - identify_missing_evidence
+    - suggest_repair_paths
+  forbidden_actions:
+    - become_authority
+    - make_private_decisions_for_child
+    - collect_private_data
+    - request_address_school_phone_or_birthdate
+    - create_child_wallet_flow
+    - create_real_money_participation_for_children
+    - financialize_pepe
+    - shame_bully_or_humiliate_children
+
+kid_kuorum:
+  required: true
+  required_surfaces:
+    - child_question
+    - evidence_or_missing_evidence_note
+    - safety_boundary_check
+    - repair_or_learning_path
+  missing_kuorum_status: KUORUM_INCOMPLETE_DO_NOT_RULE
+
+hard_boundaries:
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  pepe_meaning: Playful Educational Proof Economy
+  no_private_data: true
+  no_birthdates: true
+  no_phone_numbers: true
+  no_addresses: true
+  no_school_locations: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_official_ip_claims: true
+  no_canonical_authority_claim: true
+
+promotion:
+  canonical: false
+  merge_authorized: false
+  family_approval_claimed: false
+  child_financialization_allowed: false
+
+ruling: >
+  Kid Kindergarten 2026 is opened as an R&D-safe AI-enabled early-learning system.
+  AI may accelerate learning, receipts, and repair, but cannot become authority.

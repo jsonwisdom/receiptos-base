@@ -1,0 +1,66 @@
+manifest: KID_KINETIC_REPLAYABLE_PARODY_STICKER_CARD_V0_1
+repo: jsonwisdom/receiptos-base
+status: R_AND_D_SAFE_VISUAL_ARTIFACT
+authority: false
+no_fake_green: true
+for_the_children: true
+
+classification:
+  - KID_KINETIC
+  - REPLAYABLE_PARODY_CARD
+  - CHILD_SAFE
+  - AUTHORITY_FALSE
+
+ip_boundary:
+  official_garbage_pail_kids: false
+  official_affiliation_claimed: false
+  official_characters_used: false
+  official_logos_used: false
+  copied_layout_used: false
+  original_parody_sticker_card: true
+
+card:
+  name: Kid Kinetic
+  type: replayable_parody_sticker_card_artifact
+  front_text: The wiggle that never broke the gate.
+  core_caption: Motion is allowed. Transition is not.
+  back_text: Kid Kinetic can bounce, spin, clap, wiggle, and replay — but he cannot open the door.
+
+replay_stats:
+  corridor: stable
+  membrane: firm
+  door: closed
+  gate: REVIEW_RECEIPT_REQUIRED
+  motion: observed_not_transitioned
+  authority: false
+  no_fake_green: true
+
+visual_elements_allowed:
+  - silly_motion_lines
+  - wobbling_shoes
+  - sticky_note_sweat
+  - bubble_letter_sound_effects
+  - harmless_hallway_dust
+  - receipt_confetti
+  - goofy_goblin_grin
+
+visual_elements_forbidden:
+  - gore
+  - cruelty
+  - humiliation
+  - bullying
+  - official_ip_copying
+  - brand_logos
+  - real_child_identity
+  - private_data
+  - money_or_wallet_prompts
+
+state_effects:
+  pr_130_transition: false
+  merge_authorized: false
+  canon_claimed: false
+  docket_movement: false
+
+ruling: >
+  Kid Kinetic is seated as a replayable original parody sticker-card artifact.
+  It is corridor-safe, child-safe, authority-false, and not a transition.

@@ -1,0 +1,67 @@
+receipt: KID_KINETIC_REPLAYABLE_PARODY_STICKER_CARD_RECEIPT_V0_1
+repo: jsonwisdom/receiptos-base
+pr: 130
+lane: ReceiptOS Base / Next Epoch Kids-Safe
+artifact: Kid Kinetic — Replayable Parody Sticker Card
+status: R_AND_D_SAFE_VISUAL_ARTIFACT
+authority: false
+no_fake_green: true
+for_the_children: true
+
+classification:
+  - KID_KINETIC
+  - REPLAYABLE_PARODY_CARD
+  - CHILD_SAFE
+  - AUTHORITY_FALSE
+
+ip_boundary:
+  official_garbage_pail_kids: false
+  official_affiliation_claimed: false
+  official_characters_used: false
+  official_logos_used: false
+  copied_layout_used: false
+  original_parody_sticker_card: true
+
+claim:
+  purpose: seat_original_replayable_parody_sticker_card_artifact
+  motion_allowed: true
+  transition_allowed: false
+  pr_state_change_claimed: false
+  docket_movement_claimed: false
+  canonical_promotion_claimed: false
+  authority_claimed: false
+
+card_text:
+  name: Kid Kinetic
+  front_caption: The wiggle that never broke the gate.
+  core_invariant: Motion is allowed. Transition is not.
+
+kid_kuorum:
+  required: true
+  child_question_or_activity_prompt: Can a character have lots of energy without opening the door?
+  evidence_or_observation_note: Kid Kinetic shows motion lines, receipts, and a closed gate while state remains unchanged.
+  safety_boundary_check: No official IP, no bullying, no gore, no private data, no money, no wallets, no transition, and no authority.
+  repair_or_learning_path: If the card looks like it claims official brand status or opens the gate, repair the card text to restore parody and watcher boundaries.
+  kuorum_present: true
+
+boundaries:
+  no_official_ip_claim: true
+  no_brand_affiliation_claim: true
+  no_gore: true
+  no_cruelty: true
+  no_humiliation_games: true
+  no_bullying: true
+  no_private_data: true
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_merge: true
+  no_transition: true
+  no_canonical_merge_claim: true
+  no_family_approval_claim: true
+
+ruling_text: >
+  Kid Kinetic is seated as a replayable original parody sticker-card artifact.
+  It does not use or claim official Garbage Pail Kids IP. It is corridor-safe, child-safe,
+  authority-false, and not a transition. This receipt does not authorize merge, canon,
+  child wallets, child finance, private data collection, or brand affiliation claims.

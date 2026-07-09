@@ -1,0 +1,67 @@
+manifest: K3_JAY_KID_CIVIC_LEARNING_STACK_V0_1
+repo: jsonwisdom/receiptos-base
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+
+clean_replay_name: K3-JAY
+meaning:
+  k1: Kid Kourt
+  k2: Kid Konstitution
+  k3: Kid Kongress
+  jay: Jay receipt-first learning lane
+
+safety_position:
+  children_surface: true
+  hate_symbol_lane: false
+  hate_group_acronym_used: false
+  anti_hate: true
+  original_learning_surface: true
+
+linked_surfaces:
+  parent_lane: NEXT_EPOCH_KIDS_SAFE_BASE_V0_1
+  goblin_court: GOBLIN_COURT_FOR_KIDS_V0_1
+  school: MEME_COURT_AUDITING_SCHOOL_FOR_CHILDREN_V0_1
+
+components:
+  kid_kourt:
+    purpose: fair_questions_evidence_kindness_repair
+  kid_konstitution:
+    purpose: simple_rules_for_privacy_originality_safety_and_receipts
+  kid_kongress:
+    purpose: propose_rules_badges_stories_and_repairs_public_safely
+
+hard_boundaries:
+  no_hate_symbols: true
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  pepe_meaning: Playful Educational Proof Economy
+  no_private_data: true
+  no_birthdates: true
+  no_phone_numbers: true
+  no_school_locations: true
+  no_addresses: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_official_brand_claims: true
+  no_canonical_authority_claim: true
+
+lessons:
+  - receipt_before_narrative
+  - funny_without_cruelty
+  - claims_need_evidence
+  - missing_evidence_means_pause
+  - privacy_beats_virality
+  - repair_beats_dunking
+
+promotion:
+  canonical: false
+  merge_authorized: false
+  family_approval_claimed: false
+  child_financialization_allowed: false
+
+ruling: >
+  K3-JAY is opened as a kid-safe civic learning stack for Kid Kourt,
+  Kid Konstitution, and Kid Kongress. It is anti-hate, non-financial,
+  original, receipt-first, and authority:false.

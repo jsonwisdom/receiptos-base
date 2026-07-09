@@ -1,0 +1,58 @@
+receipt: FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_RECEIPT_V0_1
+repo: jsonwisdom/receiptos-base
+pr: 130
+lane: ReceiptOS Base / Next Epoch Kids-Safe
+artifact: Flirting Between Wisdoms — Gentle Feelings Game
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+claim:
+  purpose: open_child_safe_friendship_feelings_sharing_consent_and_repair_game
+  romance: false
+  sexuality: false
+  adult_behavior: false
+  pressure_allowed: false
+  hidden_harm_allowed: false
+  authority_claimed: false
+
+core_rule: Kindness is only kind when the other person is safe to say yes, no, or not now.
+
+game_loop:
+  - NOTICE
+  - ASK
+  - SHARE
+  - LISTEN
+  - RESPECT
+  - REPAIR
+  - RECEIPT
+
+kid_kuorum:
+  required: true
+  child_question_or_activity_prompt: Can you share kindly and listen if someone says no or not now?
+  evidence_or_observation_note: The game teaches sharing, feelings, consent, respect, repair, and receipts.
+  safety_boundary_check: No romance, sexuality, adult behavior, forced touch, secrets, dares, pressure, money, wallets, or private data.
+  repair_or_learning_path: If someone feels bad or says no, stop, listen, fix one thing kindly, and make a receipt.
+  kuorum_present: true
+
+boundaries:
+  no_sexual_content: true
+  no_romantic_pressure: true
+  no_adult_behavior: true
+  no_child_owes_affection: true
+  no_forced_hugs_touch_secrets_or_dares: true
+  no_private_data: true
+  no_sibling_identity_exposure: true
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_canonical_merge_claim: true
+  no_family_approval_claim: true
+
+ruling_text: >
+  Flirting Between Wisdoms is applied only as a child-safe friendship, feelings, sharing,
+  consent, and repair game. It does not authorize romance, sexuality, adult behavior,
+  pressure, private data collection, child wallets, child finance, merge, or canon.

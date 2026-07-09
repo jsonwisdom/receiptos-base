@@ -1,0 +1,76 @@
+manifest: KID_KOURT_RULING_ENGINE_V0_1
+repo: jsonwisdom/receiptos-base
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+court_stack:
+  clown_court:
+    open: true
+    purpose: detect_silly_confusing_inflated_or_fake_serious_rules
+  goblin_court:
+    open: true
+    purpose: turn_mistakes_into_receipts_and_welcome_weird_builders
+  meme_court:
+    open: true
+    purpose: test_funny_without_cruelty_hate_or_privacy_leaks
+  kid_kourt:
+    open: true
+    purpose: make_rulings_children_can_understand
+  kid_kongress:
+    replay: true
+    purpose: propose_safer_clearer_kinder_rules_with_public_safe_receipts
+
+ruling_engine:
+  enabled: true
+  questions:
+    - what_is_the_claim
+    - what_is_the_evidence
+    - who_could_be_harmed
+    - what_private_data_must_be_protected
+    - is_this_funny_without_cruelty
+    - is_there_a_repair_path
+    - does_authority_remain_false
+
+alms_machine_speed:
+  enabled: true
+  allowed_actions:
+    - sort_receipts
+    - label_receipts
+    - compare_receipts
+    - replay_receipts
+    - surface_missing_evidence
+  forbidden_actions:
+    - become_authority
+    - claim_truth_without_receipt
+    - promote_to_canon_without_review
+    - activate_child_finance
+    - infer_wallet_control_from_basename
+
+hard_boundaries:
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  pepe_meaning: Playful Educational Proof Economy
+  no_hate_symbols: true
+  no_private_data: true
+  no_birthdates: true
+  no_phone_numbers: true
+  no_addresses: true
+  no_school_locations: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_official_ip_claims: true
+  no_canonical_authority_claim: true
+
+promotion:
+  canonical: false
+  merge_authorized: false
+  family_approval_claimed: false
+  child_financialization_allowed: false
+
+ruling: >
+  Kid Kourt Ruling Engine is enabled for R&D-safe learning. ALMS Machine Speed may accelerate
+  receipt sorting and replay, but cannot become authority. The Konstitution may be audited by children
+  through Clown Court, Goblin Court, Meme Court, Kid Kourt, and Kid Kongress while authority remains false.

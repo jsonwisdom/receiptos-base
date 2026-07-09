@@ -1,0 +1,43 @@
+manifest: NEXT_EPOCH_KIDS_SAFE_BASE_V0_1
+repo: jsonwisdom/receiptos-base
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+
+operator_identity:
+  basename: jaywisdom.base.eth
+  scope: operator_context_only
+  wallet_control_claimed: false
+
+system:
+  name: KID_REALITY_STUDIO
+  public_name: Imagination Station
+  economy: PEPE_PLAY_ECONOMY
+  economy_meaning: Playful Educational Proof Economy
+  ai_enabled: true
+  advanced_learning: true
+
+safety:
+  no_real_money_for_kids: true
+  no_wallet_required_for_kids: true
+  no_financial_pepe: true
+  no_private_data: true
+  no_birthdates: true
+  no_location_leaks: true
+  parent_guardian_review: true
+
+base_receipts:
+  allowed_for_operator_artifacts: true
+  allowed_for_child_financialization: false
+  allowed_for_price_claims: false
+  allowed_for_wallet_control_claims_without_signature: false
+
+promotion:
+  canonical: false
+  render_allowed: false
+  family_approval_claimed: false
+
+ruling: >
+  ReceiptOS Base Next Epoch is seeded as an R&D-safe education lane for Imagination Station.
+  Base identity may witness operator artifacts through jaywisdom.base.eth context, but this manifest
+  does not attest wallet control, family approval, child wallet access, real-money participation, or canonical promotion.
