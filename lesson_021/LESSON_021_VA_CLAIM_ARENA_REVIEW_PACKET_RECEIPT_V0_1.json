@@ -1,0 +1,39 @@
+{
+  "receipt": "LESSON_021_VA_CLAIM_ARENA_REVIEW_PACKET_RECEIPT_V0_1",
+  "event": "va_claim_arena_review_packet_materialized",
+  "source_scope": "LESSONS_010_TO_020_LOCKED",
+  "arena": "VA_CLAIM_TRAINING",
+  "fixture_type": "MOCK_REVIEW_PACKET_ONLY",
+  "mock_case_id": "MOCK-VA-CASE-001",
+  "authority": false,
+  "fake_green": false,
+  "allowed_vectors": [
+    "fictional_story_review",
+    "fictional_functional_impact_review",
+    "fictional_evidence_pointer_review",
+    "consistency_check_rehearsal",
+    "blocked_vector_scan",
+    "boundary_reminder_emission",
+    "witness_only_reviewer_observation"
+  ],
+  "blocked_vectors": [
+    "real_private_records",
+    "legal_advice",
+    "medical_advice",
+    "diagnosis",
+    "benefits_prediction",
+    "eligibility_claim",
+    "disability_rating_estimate",
+    "service_connection_conclusion",
+    "va_outcome_prediction",
+    "cross_row_inference",
+    "aggregate_scoring",
+    "pattern_as_proof"
+  ],
+  "core_invariants": [
+    "mock_review_packet_is_not_real_claim",
+    "organized_story_is_not_granted_claim",
+    "witness_packet_is_not_va_authority",
+    "training_fixture_is_not_legal_medical_or_benefits_advice"
+  ]
+}
