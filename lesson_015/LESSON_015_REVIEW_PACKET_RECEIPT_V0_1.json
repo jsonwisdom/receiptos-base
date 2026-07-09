@@ -1,0 +1,14 @@
+{
+  "receipt": "LESSON_015_REVIEW_PACKET_RECEIPT_V0_1",
+  "event": "review_packet_materialized",
+  "authority": false,
+  "fake_green": false,
+  "blocked_vectors": [
+    "diagnosis",
+    "legal_conclusion",
+    "benefits_prediction",
+    "wallet_payment_claim",
+    "child_financialization",
+    "raw_private_records"
+  ]
+}
