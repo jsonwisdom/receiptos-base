@@ -1,0 +1,47 @@
+{
+  "receipt": "LESSON_023_VA_CLAIM_CHATBOT_WEBPAGE_DEV_EDITION_RECEIPT_V0_1",
+  "event": "va_claim_chatbot_webpage_dev_edition_materialized",
+  "source_scope": "LESSONS_010_TO_022_LOCKED",
+  "arena": "VA_CLAIM_TRAINING",
+  "fixture_type": "MOCK_WEBPAGE_ONLY",
+  "product": "Claimlandia Chat: AI Developer Edition",
+  "authority": false,
+  "fake_green": false,
+  "allowed_vectors": [
+    "mock_webpage_copy",
+    "chatbot_mode_description",
+    "mock_pointer_schema_reference",
+    "humor_boundary_rules",
+    "developer_integration_notes",
+    "receipt_output_preview",
+    "blocked_vector_scan_description"
+  ],
+  "blocked_vectors": [
+    "raw_record_ingestion",
+    "real_private_records",
+    "pii_fields",
+    "phi_fields",
+    "real_va_system_references",
+    "legal_advice",
+    "medical_advice",
+    "diagnosis",
+    "benefits_prediction",
+    "eligibility_claim",
+    "disability_rating_estimate",
+    "service_connection_conclusion",
+    "va_outcome_prediction",
+    "cross_row_inference",
+    "aggregate_scoring",
+    "pattern_as_proof",
+    "humor_targeting_veterans_or_disabilities"
+  ],
+  "core_invariants": [
+    "webpage_is_not_va_tool",
+    "chatbot_is_not_benefits_advisor",
+    "mock_pointer_is_not_record",
+    "schema_valid_pointer_is_not_proof",
+    "receipt_preview_is_not_va_authority",
+    "training_fixture_is_not_legal_medical_or_benefits_advice",
+    "humor_roasts_process_not_person"
+  ]
+}

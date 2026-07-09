@@ -1,0 +1,87 @@
+{
+  "artifact": "CHATBOT_MODE_SPEC_V0_1",
+  "product": "Claimlandia Chat: AI Developer Edition",
+  "source_scope": "LESSONS_010_TO_022_LOCKED",
+  "authority": false,
+  "fake_green": false,
+  "modes": [
+    {
+      "id": "STORY_TAVERN",
+      "purpose": "Rehearse a consistent fictional story summary.",
+      "allowed": [
+        "fictional_story_summary",
+        "consistency_rehearsal",
+        "witness_only_observation"
+      ],
+      "blocked": [
+        "legal_conclusion",
+        "medical_diagnosis",
+        "benefits_prediction",
+        "va_outcome_prediction"
+      ]
+    },
+    {
+      "id": "IMPACT_GRID_FORGE",
+      "purpose": "Organize fictional functional impact notes into clean rows.",
+      "allowed": [
+        "functional_impact_language",
+        "mock_row_organization",
+        "review_packet_preparation"
+      ],
+      "blocked": [
+        "rating_estimate",
+        "eligibility_claim",
+        "service_connection_conclusion"
+      ]
+    },
+    {
+      "id": "POINTER_SCROLL_LIBRARY",
+      "purpose": "Create mock:// evidence pointers using the Lesson 022 schema.",
+      "allowed": [
+        "mock_pointer_reference",
+        "schema_validation_rehearsal",
+        "fictional_evidence_placeholder"
+      ],
+      "blocked": [
+        "raw_record_ingestion",
+        "real_private_records",
+        "pii_fields",
+        "phi_fields",
+        "real_va_system_references",
+        "http_links",
+        "https_links",
+        "file_links",
+        "ipfs_links"
+      ]
+    },
+    {
+      "id": "DRIFT_MIRROR",
+      "purpose": "Flag story drift between mock entries without proving claims.",
+      "allowed": [
+        "consistency_flag",
+        "story_drift_warning",
+        "boundary_reminder"
+      ],
+      "blocked": [
+        "pattern_as_proof",
+        "cross_row_inference",
+        "aggregate_scoring"
+      ]
+    },
+    {
+      "id": "BUREAUCRACY_DRAGON_BOSS_FIGHT",
+      "purpose": "Run a mock review packet using the Lesson 021 review packet surface.",
+      "allowed": [
+        "mock_review_packet",
+        "blocked_vector_scan",
+        "receipt_output_preview"
+      ],
+      "blocked": [
+        "adjudication",
+        "entitlement_prediction",
+        "real_claim_decision",
+        "va_authority_claim"
+      ]
+    }
+  ]
+}
