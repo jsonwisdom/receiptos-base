@@ -1,0 +1,32 @@
+name: Free-only three-surface receipt validation
+
+on:
+  pull_request:
+    paths:
+      - 'receipts/**/*.json'
+      - 'schemas/free-only-three-surface-receipt-v0.2.schema.json'
+      - 'verifier/free_only_three_surface.py'
+      - 'docs/FREE_ONLY_THREE_SURFACE_RECEIPTS.md'
+      - '.github/workflows/free-only-three-surface.yml'
+  push:
+    branches:
+      - main
+
+jobs:
+  validate-free-only-three-surface:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Validate free-only three-surface receipts if present
+        run: |
+          set -euo pipefail
+          if find receipts -type f -name '*.json' 2>/dev/null | grep -q .; then
+            python3 verifier/free_only_three_surface.py receipts/
+          else
+            echo "No receipt JSON files present; verifier available for future receipts."
+          fi
