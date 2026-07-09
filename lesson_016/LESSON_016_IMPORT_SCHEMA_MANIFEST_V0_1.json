@@ -1,0 +1,9 @@
+{
+  "artifact": "LESSON_016_IMPORT_SCHEMA_V0_1",
+  "type": "import_schema_manifest",
+  "source_scope": "LESSONS_010_TO_015_ONLY",
+  "repo_anchor": "receiptos-base PR_132",
+  "purpose": "Define a witness-only import surface for re-ingesting exported review rows without inference, aggregation, diagnosis, legal conclusion, benefits prediction, wallet/payment claim, child financialization, or raw private records.",
+  "authority": false,
+  "fake_green": false
+}
