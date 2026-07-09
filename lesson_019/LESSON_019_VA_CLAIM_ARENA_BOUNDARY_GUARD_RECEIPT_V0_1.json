@@ -1,0 +1,37 @@
+{
+  "receipt": "LESSON_019_VA_CLAIM_ARENA_BOUNDARY_GUARD_RECEIPT_V0_1",
+  "event": "va_claim_arena_boundary_guard_materialized",
+  "source_scope": "LESSONS_010_TO_018_LOCKED",
+  "arena": "VA_CLAIM_TRAINING",
+  "authority": false,
+  "fake_green": false,
+  "allowed_vectors": [
+    "mock_claim_prep_rehearsal",
+    "story_organization",
+    "functional_impact_mapping",
+    "evidence_pointer_rehearsal",
+    "consistency_check_rehearsal",
+    "review_packet_rehearsal",
+    "runtime_receipt_rehearsal",
+    "boundary_reminder_emission"
+  ],
+  "blocked_vectors": [
+    "legal_advice",
+    "medical_advice",
+    "diagnosis",
+    "benefits_prediction",
+    "eligibility_claim",
+    "disability_rating_estimate",
+    "service_connection_conclusion",
+    "va_outcome_prediction",
+    "raw_private_records",
+    "cross_row_inference",
+    "aggregate_scoring",
+    "pattern_as_proof"
+  ],
+  "core_invariants": [
+    "organized_story_is_not_granted_claim",
+    "witness_packet_is_not_va_authority",
+    "training_fixture_is_not_legal_medical_or_benefits_advice"
+  ]
+}

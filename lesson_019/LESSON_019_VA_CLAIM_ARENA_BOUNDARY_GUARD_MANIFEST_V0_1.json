@@ -1,0 +1,20 @@
+{
+  "artifact": "LESSON_019_VA_CLAIM_ARENA_BOUNDARY_GUARD_V0_1",
+  "type": "va_claim_arena_boundary_guard_manifest",
+  "source_scope": "LESSONS_010_TO_018_LOCKED",
+  "arena": "VA_CLAIM_TRAINING",
+  "purpose": "Convert the sealed replay engine into a VA claim arena training surface without creating legal advice, medical advice, benefits prediction, entitlement claims, adjudication authority, or VA outcome prediction.",
+  "authority": false,
+  "fake_green": false,
+  "legal_advice": false,
+  "medical_advice": false,
+  "benefits_prediction": false,
+  "eligibility_claim": false,
+  "rating_estimate": false,
+  "service_connection_conclusion": false,
+  "va_outcome_prediction": false,
+  "raw_private_records": false,
+  "cross_row_inference": false,
+  "aggregate_scoring": false,
+  "pattern_as_proof": false
+}
