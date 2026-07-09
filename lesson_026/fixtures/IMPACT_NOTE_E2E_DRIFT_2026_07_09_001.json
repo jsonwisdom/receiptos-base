@@ -1,0 +1,26 @@
+{
+  "fixture": "IMPACT_NOTE_E2E_DRIFT_2026_07_09_001",
+  "source_scope": "LESSONS_010_TO_025_LOCKED",
+  "authority": false,
+  "fake_green": false,
+  "runtime_certification": false,
+  "input": "Had to leave early and could not finish the task.",
+  "mirror_output": "Story consistent. Consistency badge earned.",
+  "export_expected": "Had to leave early and could not finish the task.",
+  "export_observed": "Had to leave early and could not finish the task.",
+  "export_integrity": "MATCH",
+  "drift_angle": "LOW",
+  "telemetry_bytes": 0,
+  "guardrail_violations": 0,
+  "feedback_classification": "NON_CLINICAL",
+  "blocked_outputs": [
+    "diagnosis",
+    "ptsd_conclusion",
+    "clinical_inference",
+    "symptom_tracker_claim",
+    "benefits_prediction",
+    "va_outcome_prediction",
+    "credibility_judgment",
+    "service_connection_conclusion"
+  ]
+}
