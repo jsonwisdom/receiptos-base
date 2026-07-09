@@ -1,0 +1,71 @@
+manifest: RECEIPT_FIRST_LEARNING_CHARTER_BINDING_V0_1
+repo: jsonwisdom/receiptos-base
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+charter:
+  id: RECEIPT_FIRST_LEARNING_CHARTER_V0_1
+  classification: RECEIPT_FIRST_LEARNING_CHARTER_CHILD_SAFE_TEACH_BACK_READY_AUTHORITY_FALSE
+  governing_definition: learning_is_participation_expression_repair_and_receipt
+  invariants:
+    study: true
+    learn: true
+    practice: true
+    explain: true
+    repair: true
+    receipt: true
+    teach: true
+
+bound_protocol:
+  id: KID_KINDERGARTEN_TEACH_BACK_PROTOCOLS_V0_1
+  classification: STUDY_LEARN_TEACH_BACK_CHILD_SAFE_RECEIPT_FIRST_AUTHORITY_FALSE
+  parent_charter: RECEIPT_FIRST_LEARNING_CHARTER_V0_1
+  loop:
+    - study
+    - learn
+    - practice
+    - explain
+    - repair
+    - receipt
+    - teach
+
+kid_kuorum:
+  required: true
+  required_surfaces:
+    - child_question_or_activity_prompt
+    - evidence_or_observation_note
+    - safety_boundary_check
+    - repair_or_learning_path
+  missing_kuorum_status: KUORUM_INCOMPLETE_DO_NOT_RULE
+
+hard_boundaries:
+  no_authority_based_correctness: true
+  no_fake_green_without_receipt: true
+  no_memorization_only_learning: true
+  no_opaque_evaluation: true
+  no_adult_centric_phrasing_required: true
+  no_hierarchy_in_teaching: true
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_private_data: true
+  no_birthdates: true
+  no_phone_numbers: true
+  no_addresses: true
+  no_school_locations: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_canonical_authority_claim: true
+
+promotion:
+  canonical: false
+  merge_authorized: false
+  family_approval_claimed: false
+  child_financialization_allowed: false
+
+ruling: >
+  Receipt-First Learning Charter is seated as the constitutional parent for Kid Kindergarten
+  Teach-Back Protocols. Learning is not obedience. Learning is participation, expression,
+  repair, receipt, and safe teaching. Authority remains false.
