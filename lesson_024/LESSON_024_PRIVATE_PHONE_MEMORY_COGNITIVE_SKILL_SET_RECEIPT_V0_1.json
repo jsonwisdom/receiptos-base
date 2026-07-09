@@ -1,0 +1,49 @@
+{
+  "receipt": "LESSON_024_PRIVATE_PHONE_MEMORY_COGNITIVE_SKILL_SET_RECEIPT_V0_1",
+  "event": "private_phone_memory_cognitive_skill_set_materialized",
+  "source_scope": "LESSONS_010_TO_023_LOCKED",
+  "product": "Claimlandia Voice: Private Phone Edition",
+  "mode": "FULL_COGNITIVE_SKILL_SET",
+  "authority": false,
+  "fake_green": false,
+  "runtime_verification": false,
+  "allowed_vectors": [
+    "memory_capture",
+    "sequence_discipline",
+    "attention_support",
+    "drift_mirror",
+    "functional_impact_mapping",
+    "emotional_load_labeling",
+    "safe_pointer_creation",
+    "local_receipt_locking"
+  ],
+  "blocked_vectors": [
+    "diagnosis",
+    "ptsd_conclusion",
+    "cognitive_impairment_label",
+    "medical_assessment",
+    "legal_conclusion",
+    "benefits_prediction",
+    "eligibility_claim",
+    "rating_estimate",
+    "service_connection_conclusion",
+    "va_outcome_prediction",
+    "credibility_judgment",
+    "intent_interpretation",
+    "cross_row_inference",
+    "aggregate_scoring",
+    "pattern_as_proof",
+    "raw_record_ingestion",
+    "cloud_upload_by_default"
+  ],
+  "core_invariants": [
+    "the_veteran_owns_the_memory",
+    "the_phone_holds_the_witness",
+    "the_bot_organizes",
+    "the_system_does_not_diagnose",
+    "the_system_does_not_predict",
+    "the_system_does_not_upload_by_default",
+    "skill_language_not_clinical_language",
+    "receipt_is_local_boundary_not_va_authority"
+  ]
+}

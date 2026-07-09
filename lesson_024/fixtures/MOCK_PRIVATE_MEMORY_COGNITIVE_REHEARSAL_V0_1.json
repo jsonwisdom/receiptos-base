@@ -1,0 +1,58 @@
+{
+  "fixture": "MOCK_PRIVATE_MEMORY_COGNITIVE_REHEARSAL_V0_1",
+  "mock_case_id": "MOCK-VA-CASE-001",
+  "source_scope": "LESSONS_010_TO_023_LOCKED",
+  "mode": "FULL_COGNITIVE_SKILL_SET",
+  "authority": false,
+  "fake_green": false,
+  "cloud_upload": false,
+  "raw_record_ingestion": false,
+  "diagnosis": false,
+  "ptsd_conclusion": false,
+  "cognitive_impairment_label": false,
+  "legal_advice": false,
+  "medical_advice": false,
+  "benefits_prediction": false,
+  "eligibility_claim": false,
+  "rating_estimate": false,
+  "service_connection_conclusion": false,
+  "va_outcome_prediction": false,
+  "entries": [
+    {
+      "entry_id": "MOCK-MEMORY-001",
+      "type": "Life Lesson",
+      "user_stated_memory": "A hard day taught me to slow down and write one thing at a time.",
+      "skill_used": "attention_support",
+      "safe_output": "This note can be organized into a timeline.",
+      "blocked_outputs": [
+        "diagnosis",
+        "benefits_prediction",
+        "va_outcome_prediction"
+      ]
+    },
+    {
+      "entry_id": "MOCK-MEMORY-002",
+      "type": "Stressful Moment",
+      "user_stated_memory": "Noise and crowd pressure made the errand difficult.",
+      "skill_used": "functional_impact_mapping",
+      "safe_output": "You described a stressful moment and its impact.",
+      "blocked_outputs": [
+        "ptsd_conclusion",
+        "service_connection_conclusion",
+        "rating_estimate"
+      ]
+    },
+    {
+      "entry_id": "MOCK-MEMORY-003",
+      "type": "War Story",
+      "user_stated_memory": "The sequence feels out of order, so I want to read it back.",
+      "skill_used": "drift_mirror",
+      "safe_output": "I found a possible story drift.",
+      "blocked_outputs": [
+        "credibility_judgment",
+        "intent_interpretation",
+        "pattern_as_proof"
+      ]
+    }
+  ]
+}
