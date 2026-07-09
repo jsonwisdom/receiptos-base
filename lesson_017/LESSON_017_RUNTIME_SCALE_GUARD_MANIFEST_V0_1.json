@@ -1,0 +1,12 @@
+{
+  "artifact": "LESSON_017_RUNTIME_SCALE_GUARD_V0_1",
+  "type": "runtime_scale_guard_manifest",
+  "source_scope": "LESSONS_010_TO_016_PLUS_BATCH_RUNTIME_V0_2",
+  "purpose": "Prevent runtime volume from silently promoting witness-only rows into proof, diagnosis, legal conclusion, eligibility claim, benefits prediction, aggregate score, or cross-row inference.",
+  "authority": false,
+  "fake_green": false,
+  "volume_creates_authority": false,
+  "pattern_as_proof": false,
+  "cross_row_inference": false,
+  "aggregate_scoring": false
+}
