@@ -1,0 +1,60 @@
+receipt: KID_KOURT_KASE_002_KONSTITUTION_ON_TRIAL_RECEIPT_V0_1
+repo: jsonwisdom/receiptos-base
+pr: 130
+lane: K3-JAY / Kid Kourt
+artifact: Kid Kourt Kase 002 — Konstitution on Trial
+status: R_AND_D_SAFE_EDUCATION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+opened_surfaces:
+  clown_court: true
+  goblin_court: true
+  meme_court: true
+  kid_kourt: true
+  kid_kongress_replay: true
+  kid_kourt_ruling_engine_replay: true
+  alms_machine_speed_enabled: true
+
+question:
+  summary: can_the_kid_konstitution_itself_be_questioned_audited_improved_and_repaired
+
+ruling:
+  answer: true
+  explanation: >
+    The Kid Konstitution is not a magic boss. It is a promise that must survive questions.
+    Children may audit it when a rule seems unclear, unfair, unsafe, too harsh, or not repairable.
+  authority_remains_false: true
+
+engine_questions:
+  - what_is_the_claim
+  - what_is_the_evidence
+  - who_could_be_harmed
+  - what_private_data_must_be_protected
+  - is_this_funny_without_cruelty
+  - is_there_a_repair_path
+  - does_authority_remain_false
+
+boundaries:
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  pepe_meaning: Playful Educational Proof Economy
+  no_hate_symbols: true
+  no_private_data: true
+  no_birthdates: true
+  no_phone_numbers: true
+  no_addresses: true
+  no_school_locations: true
+  no_bullying: true
+  no_humiliation_games: true
+  no_official_ip_claims: true
+  no_canonical_merge_claim: true
+  no_family_approval_claim: true
+
+ruling_text: >
+  Kid Kourt Kase 002 opens the Konstitution itself to trial. Clown Court, Goblin Court,
+  Meme Court, Kid Kourt, and Kid Kongress may inspect whether rules protect children,
+  explain boundaries, allow repair, and keep authority false. ALMS Machine Speed may help replay receipts,
+  but may not become authority.
