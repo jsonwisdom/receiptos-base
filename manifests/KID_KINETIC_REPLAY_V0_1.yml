@@ -1,0 +1,92 @@
+manifest: KID_KINETIC_REPLAY_V0_1
+repo: jsonwisdom/receiptos-base
+status: R_AND_D_SAFE_CORRIDOR_EXPANSION
+authority: false
+no_fake_green: true
+for_the_children: true
+
+surface:
+  name: Kid Kinetic
+  parent_surface: KID_KINDERGARTEN_2026_AI_ENABLED_SYSTEMS_V0_1
+  mode: state_safe_movement_metaphor_under_watcher_mode
+
+classification:
+  - KID_KINETIC
+  - CHILD_SAFE
+  - AUTHORITY_FALSE
+  - WATCHER_MODE
+
+core_invariant: motion_is_allowed_transition_is_not
+
+kinetic_layers:
+  notice:
+    purpose: register_energy_without_transition
+    examples:
+      - shift_in_tone
+      - new_signal
+      - reboot_pulse
+      - watcher_acknowledgment
+  name:
+    purpose: name_motion_without_shame_interpretation_diagnosis_or_grade
+    examples:
+      - corridor_breathed
+      - membrane_flexed
+      - signal_pulsed
+  try:
+    purpose: micro_motion_without_pr_state_change
+    examples:
+      - small_step
+      - tiny_adjustment
+      - replay_echo
+  repair:
+    purpose: gentle_correction_of_motion
+    rules:
+      - one_fix_only
+      - no_authority
+      - no_shame
+  receipt:
+    purpose: record_motion_observed_not_transitioned
+  teach:
+    phrase: Motion is allowed. Transition is not.
+
+motion_receipt:
+  corridor: stable
+  membrane: firm
+  door: closed
+  mode: WATCHER
+  gate: REVIEW_RECEIPT_REQUIRED
+  motion: observed_not_transitioned
+  authority: false
+  no_fake_green: true
+
+state_effects:
+  pr_130_advanced: false
+  hierarchy_mutated: false
+  gate_softened: false
+  membrane_broken: false
+  docket_movement: false
+  canonical_promotion: false
+
+hard_boundaries:
+  no_merge: true
+  no_transition: true
+  no_docket_movement: true
+  no_canonical_promotion: true
+  no_authority_claim: true
+  no_fake_green: true
+  no_child_wallets: true
+  no_real_money_for_kids: true
+  no_financial_pepe: true
+  no_private_data: true
+  no_bullying: true
+  no_humiliation_games: true
+
+promotion:
+  canonical: false
+  merge_authorized: false
+  family_approval_claimed: false
+  child_financialization_allowed: false
+
+ruling: >
+  Kid Kinetic is replayed as corridor-safe motion logic. Motion may be observed,
+  named, repaired, receipted, and taught without changing PR state. Authority remains false.
