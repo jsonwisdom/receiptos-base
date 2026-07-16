@@ -1,0 +1,16 @@
+{
+  "$schema": "../../schemas/release-history.schema.json",
+  "schema_version": "1.0.0",
+  "events": [
+    {
+      "event_id": "structure_initialized_001",
+      "phase": "structure_initialized",
+      "commit": "9886756453290d477adf69023d0242c21d9189eb",
+      "timestamp": "2026-07-16T10:12:21-05:00",
+      "note": "Lesson 027 structure merged into main.",
+      "artifacts": [
+        "lesson_027/release/release-gate.json"
+      ]
+    }
+  ]
+}

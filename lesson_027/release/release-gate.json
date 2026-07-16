@@ -1,5 +1,13 @@
 {
+  "$schema": "../../schemas/release-gate.schema.json",
+  "schema_version": "1.0.0",
   "version": "1.0.0",
-  "status": "draft",
-  "release": null
+  "phase": "structure_initialized",
+  "gates": {
+    "structure": true,
+    "metadata_scaffold": true,
+    "evidence": false,
+    "witnesses": false,
+    "release": false
+  }
 }
