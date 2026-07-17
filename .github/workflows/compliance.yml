@@ -21,6 +21,16 @@ jobs:
       - name: Cargo build
         run: cargo build --verbose --all-targets
 
-      # Step 2+: tests and fixtures (add incrementally)
-      # - name: Cargo test
-      #   run: cargo test --verbose
+      - name: Cargo test
+        run: cargo test --verbose
+
+      # Minimal fixture smoke test stub (Step 2)
+      - name: Fixture smoke test
+        run: |
+          echo "Fixture smoke test stub - implementation pending"
+          if [ -f "tests/fixtures/basic.json" ]; then
+            echo "Fixture path verified"
+          else
+            echo "No fixtures yet - stub passed"
+          fi
+          exit 0
