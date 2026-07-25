@@ -26,7 +26,7 @@ class ManifestLoader:
             source: Path to a JSON file, or an already-parsed dict.
 
         Returns:
-            Fully constructed ReleaseManifest (with _raw preserved).
+            Fully constructed ReleaseManifest (with raw preserved).
 
         Raises:
             FileNotFoundError: if a path is given and does not exist.
