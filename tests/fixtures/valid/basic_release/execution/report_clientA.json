@@ -1,0 +1,11 @@
+{
+  "client": "clientA-rust",
+  "version": "0.1.0",
+  "fixture": "fixture_001.json",
+  "passed": true,
+  "actual_output": {
+    "state": {"counter": 10},
+    "digest": "abc123"
+  },
+  "timestamp": "2026-07-25T06:00:00Z"
+}

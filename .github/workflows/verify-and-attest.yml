@@ -1,0 +1,69 @@
+# ReplayOS — full verification, attestation, and transparency-log pipeline.
+# Uses OIDC (id-token: write) so a future real Sigstore/Fulcio integration
+# can obtain an ephemeral identity without long-lived secrets.
+
+name: ReplayOS Verification, Attestation & Transparency Log
+
+on:
+  push:
+    branches: ["main", "master"]
+    paths:
+      - "tools/manifest_verify/**"
+      - "tests/fixtures/**"
+      - ".github/workflows/verify-and-attest.yml"
+  pull_request:
+    paths:
+      - "tools/manifest_verify/**"
+      - "tests/fixtures/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  verify-and-attest:
+    name: Complete Conformance Lifecycle
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/manifest_verify
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify Manifest
+        env:
+          PYTHONPATH: ${{ github.workspace }}/tools/manifest_verify
+        run: |
+          mkdir -p ${{ github.workspace }}/build/output
+          python3 replayos_cli.py verify \
+            --manifest ${{ github.workspace }}/tests/fixtures/valid/basic_release/manifest.json \
+            --artifacts-root ${{ github.workspace }}/tests/fixtures/valid/basic_release \
+            --json > ${{ github.workspace }}/build/output/verification.json
+
+      - name: Generate Attestations (DSSE + Sigstore) & Anchor to Rekor
+        env:
+          PYTHONPATH: ${{ github.workspace }}/tools/manifest_verify
+        run: |
+          python3 replayos_cli.py attest \
+            --manifest ${{ github.workspace }}/tests/fixtures/valid/basic_release/manifest.json \
+            --artifacts-root ${{ github.workspace }}/tests/fixtures/valid/basic_release \
+            --output-dir ${{ github.workspace }}/build/output/attestations \
+            --adapter dsse \
+            --adapter sigstore \
+            --anchor rekor \
+            --json > ${{ github.workspace }}/build/output/attestation-summary.json
+
+      - name: Upload Verification & Transparency Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: replayos-verification-bundle
+          path: build/output/
+          retention-days: 14

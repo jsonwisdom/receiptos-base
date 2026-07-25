@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "release": "replayos-0.1.0",
+  "normative": {
+    "specification": {
+      "uri": "file://normative/spec.md",
+      "digest": "599f34a8d54e6c83d8f6bf21eb6b11d8a54e96d43693b5f3043eff46909890d4",
+      "media_type": "text/markdown"
+    },
+    "schemas": [
+      {
+        "uri": "file://normative/schema.json",
+        "digest": "3f3d6e7ad72ff621ef4f4d6bc4b74dca9144985e0475d7e44f2d199b96b6780f",
+        "media_type": "application/schema+json"
+      }
+    ],
+    "fixtures": [
+      {
+        "uri": "file://normative/fixture_001.json",
+        "digest": "8b85d4cb9cb5675a37b5b01c126537307d8b467d064fd5d0053a6119da83081b",
+        "media_type": "application/json"
+      }
+    ],
+    "generator_contract": {
+      "uri": "file://normative/generator_contract.json",
+      "digest": "1addbc42bbb1372e24422c4a8b0300059e2fa2ef9a8e901f644287f2236c16db",
+      "media_type": "application/json"
+    }
+  },
+  "execution": {
+    "reports": [
+      {
+        "uri": "file://execution/report_clientA.json",
+        "digest": "b24255da575e764d17b9f22547b22780d4fc79dfaf02a589b7f2ec6dcc98e122",
+        "client": "clientA-rust"
+      }
+    ],
+    "evidence_bundles": [
+      {
+        "uri": "file://evidence/evidence_clientA.json",
+        "digest": "6e85c069eeab7b31ea9bf03ab71d7c3055c77758dac0cec8fa2c95ffecef67e8",
+        "client": "clientA-rust"
+      }
+    ]
+  },
+  "attestations": [],
+  "integrity": {
+    "algorithm": "sha256",
+    "root_digest": "edf635a9c4b524403b04ae001efabf7fd4bd58e41780632560db0a6df49de0df"
+  }
+}

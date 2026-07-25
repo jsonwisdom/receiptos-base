@@ -1,0 +1,11 @@
+{
+  "name": "basic_sequence",
+  "events": [
+    {"id": "e1", "type": "init", "payload": {"seed": 42}},
+    {"id": "e2", "type": "action", "payload": {"value": 10}}
+  ],
+  "expected_output": {
+    "state": {"counter": 10},
+    "digest": "placeholder"
+  }
+}

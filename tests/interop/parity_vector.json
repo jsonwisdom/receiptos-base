@@ -1,0 +1,76 @@
+{
+  "cases": [
+    {
+      "artifact_statuses": [
+        {
+          "status": "PASS",
+          "uri": "file://normative/spec.md"
+        },
+        {
+          "status": "PASS",
+          "uri": "file://normative/schema.json"
+        },
+        {
+          "status": "PASS",
+          "uri": "file://normative/fixture_001.json"
+        },
+        {
+          "status": "PASS",
+          "uri": "file://normative/generator_contract.json"
+        },
+        {
+          "status": "PASS",
+          "uri": "file://execution/report_clientA.json"
+        },
+        {
+          "status": "PASS",
+          "uri": "file://evidence/evidence_clientA.json"
+        }
+      ],
+      "artifacts_ok": true,
+      "case": "basic_release",
+      "error_count": 0,
+      "integrity_ok": true,
+      "kind": "valid",
+      "root_digest": "edf635a9c4b524403b04ae001efabf7fd4bd58e41780632560db0a6df49de0df",
+      "valid": true
+    },
+    {
+      "artifact_statuses": [
+        {
+          "status": "PASS",
+          "uri": "file://normative/spec.md"
+        },
+        {
+          "status": "PASS",
+          "uri": "file://normative/schema.json"
+        },
+        {
+          "status": "FAIL",
+          "uri": "file://normative/fixture_001.json"
+        },
+        {
+          "status": "PASS",
+          "uri": "file://normative/generator_contract.json"
+        },
+        {
+          "status": "PASS",
+          "uri": "file://execution/report_clientA.json"
+        },
+        {
+          "status": "PASS",
+          "uri": "file://evidence/evidence_clientA.json"
+        }
+      ],
+      "artifacts_ok": false,
+      "case": "digest_mismatch",
+      "error_count": 1,
+      "integrity_ok": true,
+      "kind": "corrupted",
+      "root_digest": "edf635a9c4b524403b04ae001efabf7fd4bd58e41780632560db0a6df49de0df",
+      "valid": false
+    }
+  ],
+  "generator": "replayos-cli/interop",
+  "schema_version": "1.0.0"
+}

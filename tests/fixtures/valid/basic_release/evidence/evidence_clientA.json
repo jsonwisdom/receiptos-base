@@ -1,0 +1,6 @@
+{
+  "client": "clientA-rust",
+  "fixture_digest": "8b85d4cb9cb5675a37b5b01c126537307d8b467d064fd5d0053a6119da83081b",
+  "output_digest": "def456...",
+  "logs": ["Initialized with seed 42", "Applied action value 10"]
+}

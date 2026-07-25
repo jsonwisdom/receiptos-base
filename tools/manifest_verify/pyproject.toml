@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "replayos-manifest-verify"
+version = "0.1.0"
+description = "Verify ReplayOS release manifests and their bound artifacts"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "ReplayOS Contributors" }
+]
+dependencies = []
+
+[project.scripts]
+replayos-manifest-verify = "replayos_manifest_verify:main"
+
+[tool.setuptools]
+py-modules = [
+    "manifest_schema",
+    "manifest_loader",
+    "integrity",
+    "uri_resolvers",
+    "manifest_verifier",
+    "gatekeeper",
+    "attestation_schema",
+    "attestation_adapter",
+    "attestation_manager",
+    "replayos_cli",
+    "replayos_attest",
+    "replayos_manifest_verify",
+]

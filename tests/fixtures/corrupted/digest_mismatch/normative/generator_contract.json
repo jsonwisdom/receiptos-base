@@ -1,0 +1,6 @@
+{
+  "version": "1.0",
+  "description": "Expected results generator contract",
+  "fixtures": ["fixture_001.json"],
+  "hash_algorithm": "sha256"
+}
