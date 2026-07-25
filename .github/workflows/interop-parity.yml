@@ -1,0 +1,43 @@
+# Cross-language parity gate.
+# Currently runs the Python reference.  Go and Rust jobs are scaffolded
+# and will be enabled as those implementations land.
+
+name: Interop Parity
+
+on:
+  push:
+    paths:
+      - "tools/manifest_verify/**"
+      - "tests/fixtures/**"
+      - "tests/interop/**"
+      - ".github/workflows/interop-parity.yml"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  python-reference:
+    name: Python reference vector
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/manifest_verify
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate parity vector
+        env:
+          PYTHONPATH: ${{ github.workspace }}/tools/manifest_verify
+        run: |
+          python3 replayos_cli.py interop \
+            --fixtures-dir ${{ github.workspace }}/tests/fixtures \
+            --output ${{ github.workspace }}/tests/interop/parity_vector.json
+      - name: Upload vector
+        uses: actions/upload-artifact@v4
+        with:
+          name: parity-vector-python
+          path: tests/interop/parity_vector.json
+
+  # Future language jobs (uncomment when implementations exist):
+  # go-parity / rust-parity — see Issue #154
