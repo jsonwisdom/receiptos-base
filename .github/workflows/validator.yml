@@ -1,0 +1,59 @@
+name: ReceiptOS Validator CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run lint checks
+        run: ci/scripts/run_lint.sh
+
+  schema:
+    name: Schema Validation
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate fixture schemas
+        run: ci/scripts/run_schema.sh
+
+  unit:
+    name: Unit Tests
+    needs: schema
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run unit tests
+        run: ci/scripts/run_unit.sh
+
+  integration:
+    name: Integration Tests
+    needs: unit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run integration tests
+        run: ci/scripts/run_integration.sh
+
+  fixtures:
+    name: Fixture Conformance
+    needs: integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute fixture suite
+        run: ci/scripts/run_fixtures.sh
+
+  summary:
+    name: CI Summary
+    needs: fixtures
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Summarize CI results
+        run: ci/scripts/summarize.sh
