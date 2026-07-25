@@ -1,0 +1,6 @@
+{
+  "control": "hello\nworld\t!",
+  "quotes": "say \"hello\"",
+  "backslash": "path\\to\\file",
+  "solidus": "/usr/bin"
+}

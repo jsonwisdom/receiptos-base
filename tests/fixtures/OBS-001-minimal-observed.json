@@ -1,0 +1,10 @@
+{
+  "id": "obs-001",
+  "timestamp": 1700000000,
+  "type": "observation",
+  "data": {
+    "value": 42,
+    "unit": "celsius",
+    "tags": ["experiment", "baseline"]
+  }
+}
