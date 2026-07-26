@@ -1,0 +1,13 @@
+{
+  "canonical_file": null,
+  "exit_code": 65,
+  "failed_field": null,
+  "family": "edge",
+  "reason": "empty_payload",
+  "sha256": null,
+  "spec": "RP-005",
+  "spec_revision": "1.0.0",
+  "valid": false,
+  "vector": "edge-empty-object",
+  "vector_revision": "1.0.0"
+}

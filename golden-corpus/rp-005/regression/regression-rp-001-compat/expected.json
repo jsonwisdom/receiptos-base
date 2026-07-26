@@ -1,0 +1,12 @@
+{
+  "canonical_file": "input.json",
+  "exit_code": 0,
+  "family": "regression",
+  "reason": "ok",
+  "sha256": null,
+  "spec": "RP-005",
+  "spec_revision": "1.0.0",
+  "valid": true,
+  "vector": "regression-rp-001-compat",
+  "vector_revision": "1.0.0"
+}

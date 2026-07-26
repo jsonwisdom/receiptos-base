@@ -1,0 +1,12 @@
+{
+  "canonical_file": "input.json",
+  "exit_code": 0,
+  "family": "valid",
+  "reason": "ok",
+  "sha256": null,
+  "spec": "RP-005",
+  "spec_revision": "1.0.0",
+  "valid": true,
+  "vector": "valid-minimal",
+  "vector_revision": "1.0.0"
+}

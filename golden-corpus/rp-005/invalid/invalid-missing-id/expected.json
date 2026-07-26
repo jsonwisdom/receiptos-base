@@ -1,0 +1,13 @@
+{
+  "canonical_file": null,
+  "exit_code": 65,
+  "failed_field": "id",
+  "family": "invalid",
+  "reason": "missing_required_field",
+  "sha256": null,
+  "spec": "RP-005",
+  "spec_revision": "1.0.0",
+  "valid": false,
+  "vector": "invalid-missing-id",
+  "vector_revision": "1.0.0"
+}

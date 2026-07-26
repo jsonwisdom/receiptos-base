@@ -1,10 +1,19 @@
 {
+  "families": [
+    "valid",
+    "invalid",
+    "edge",
+    "regression"
+  ],
   "id": "rp-005",
   "profile": "A",
-  "root_hash": "a4f8c29b1e7d3f6a8b2c4e9f1a3d5c7e8b6a4f2c1e3d5b7a9f2c4e6d8b1a3f5c",
+  "root_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "standard": "RP-005/v1.0",
   "vectors": [
-    "vectors/rp-005-0001.json",
-    "vectors/rp-005-0002.json"
+    "valid/valid-minimal/expected.json",
+    "invalid/invalid-missing-id/expected.json",
+    "edge/edge-empty-object/expected.json",
+    "regression/regression-rp-001-compat/expected.json"
   ],
-  "version": "0.1.0"
+  "version": "1.0.0"
 }
