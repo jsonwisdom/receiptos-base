@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Execute fixture suite
-        run: ci/scripts/run_fixtures.sh
+        run: bash ci/scripts/run_fixtures.sh
         # NOTE: run_fixtures.sh requires REF_VALIDATOR and CAND_VALIDATOR
         # environment variables. These must be supplied by the calling
         # context or by a follow-on configuration change if the job is
