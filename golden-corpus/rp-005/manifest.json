@@ -7,13 +7,13 @@
   ],
   "id": "rp-005",
   "profile": "A",
-  "root_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "root_hash": "3811d6961928668b7b780ab3c248e66dd318b23c66c2ba4b1d2dc7d037de722b",
   "standard": "RP-005/v1.0",
   "vectors": [
-    "valid/valid-minimal/expected.json",
-    "invalid/invalid-missing-id/expected.json",
     "edge/edge-empty-object/expected.json",
-    "regression/regression-rp-001-compat/expected.json"
+    "invalid/invalid-missing-id/expected.json",
+    "regression/regression-rp-001-compat/expected.json",
+    "valid/valid-minimal/expected.json"
   ],
   "version": "1.0.0"
 }

@@ -1,0 +1,15 @@
+{
+  "algorithm": "SHA-256",
+  "files": {
+    "golden-corpus/rp-005/edge/edge-empty-object/expected.json": "096bf00ad3b9852781d73f2a460540a4488a45604f1436d65aeb7e936fe0639c",
+    "golden-corpus/rp-005/edge/edge-empty-object/input.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "golden-corpus/rp-005/invalid/invalid-missing-id/expected.json": "defae2e1183882a07e845d39abb2f8d62a30f701f928e29f25cf71943b4536b5",
+    "golden-corpus/rp-005/invalid/invalid-missing-id/input.json": "cd54695bd2121ed4dd45896881ad0b4b8a024b29b27748fa4c461e81d0251c9e",
+    "golden-corpus/rp-005/regression/regression-rp-001-compat/expected.json": "5d328b359d03368288197f69f1d5a262696833a94ff6e2224f1a9528973077df",
+    "golden-corpus/rp-005/regression/regression-rp-001-compat/input.json": "7c0cc3f9dc14e5b710f398cacc4eeaa93ec224c1efb5a9b04b4559f2eb3a2283",
+    "golden-corpus/rp-005/valid/valid-minimal/expected.json": "65b1ddf8e155f09610fe2fa7234bfd249325789cf06a6793486b02ad5a1a0e7f",
+    "golden-corpus/rp-005/valid/valid-minimal/input.json": "1c436e9f6f8e0ef7da8a8a0f269901bf326e94e28b1878ada8f255a1074fcfb9"
+  },
+  "root_hash": "3811d6961928668b7b780ab3c248e66dd318b23c66c2ba4b1d2dc7d037de722b",
+  "root_hash_method": "sorted path||NUL||sha256_hex||LF over sealed vector files only"
+}

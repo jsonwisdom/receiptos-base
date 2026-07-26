@@ -1,9 +1,10 @@
 # RP-005 Notes
 
-- Initialized under golden-corpus/rp-005/
 - Profile A (RFC 8785 JCS)
 - Classified families: valid/, invalid/, edge/, regression/
 - Rejection diagnostics use exit code 65
 - replay_id fields use deterministic UUIDv7 placeholders
-- root_hash is zeroed pending harness SHA-256 recompute over sealed vectors
-- Prior skeleton vectors/ entries superseded by family layout
+- Conformance contract frozen in metadata/CONFORMANCE.md (v1.0.0)
+- root_hash bound: 3811d6961928668b7b780ab3c248e66dd318b23c66c2ba4b1d2dc7d037de722b
+- digests.json records per-file SHA-256 used for root computation
+- Legacy vectors/ placeholders are outside the sealed set and ignored by root_hash
