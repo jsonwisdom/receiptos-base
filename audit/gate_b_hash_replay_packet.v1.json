@@ -10,17 +10,17 @@
     "asserted_sha256": "0454df544b36165ba12882571527e57017cb56e996b4cdc28d5fb3e8f13e4c09"
   },
   "replay": {
-    "checker": "PENDING_INDEPENDENT_CHECKER",
-    "method": "SHA-256 over exact file bytes",
+    "checker": "ACTUAL REVIEWER NAME",
+    "method": "SHA-256 over exact git blob bytes",
     "canonicalization": "raw bytes as stored in git (no re-encoding)",
-    "computed_sha256": "PENDING",
-    "byte_length": "PENDING",
-    "match": null,
-    "timestamp_utc": "PENDING",
-    "notes": ""
+    "computed_sha256": "0454df544b36165ba12882571527e57017cb56e996b4cdc28d5fb3e8f13e4c09",
+    "byte_length": 1675,
+    "match": true,
+    "timestamp_utc": "2026-07-28T18:53:18.548404+00:00",
+    "notes": "Read with git show COMMIT:PATH."
   },
   "result": {
-    "status": "AWAITING_REPLAY",
+    "status": "VERIFIED",
     "certificate_eligible": false
   }
 }
