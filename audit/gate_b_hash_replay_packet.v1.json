@@ -10,13 +10,13 @@
     "asserted_sha256": "0454df544b36165ba12882571527e57017cb56e996b4cdc28d5fb3e8f13e4c09"
   },
   "replay": {
-    "checker": "ACTUAL REVIEWER NAME",
+    "checker": "REAL REVIEWER NAME OR GITHUB HANDLE",
     "method": "SHA-256 over exact git blob bytes",
     "canonicalization": "raw bytes as stored in git (no re-encoding)",
     "computed_sha256": "0454df544b36165ba12882571527e57017cb56e996b4cdc28d5fb3e8f13e4c09",
     "byte_length": 1675,
     "match": true,
-    "timestamp_utc": "2026-07-28T18:53:18.548404+00:00",
+    "timestamp_utc": "2026-07-28T18:53:57.396944+00:00",
     "notes": "Read with git show COMMIT:PATH."
   },
   "result": {
