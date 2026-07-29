@@ -1,0 +1,21 @@
+{
+  "hook": "0x0469a4bd3724dc86c9542f4694c976da13c450c0",
+  "raw_bits_hex": "0x10c0",
+  "permissions": {
+    "beforeInitialize": false,
+    "afterInitialize": true,
+    "beforeAddLiquidity": false,
+    "afterAddLiquidity": false,
+    "beforeRemoveLiquidity": false,
+    "afterRemoveLiquidity": false,
+    "beforeSwap": true,
+    "afterSwap": true,
+    "beforeDonate": false,
+    "afterDonate": false,
+    "beforeSwapReturnsDelta": false,
+    "afterSwapReturnsDelta": false,
+    "afterAddLiquidityReturnsDelta": false,
+    "afterRemoveLiquidityReturnsDelta": false
+  },
+  "scope": "Address-encoded callback permissions only; bytecode behavior not yet classified."
+}
