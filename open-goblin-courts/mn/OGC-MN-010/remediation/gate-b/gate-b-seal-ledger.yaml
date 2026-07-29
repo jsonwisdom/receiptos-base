@@ -1,0 +1,53 @@
+schema: "OGC-GateSealLedger"
+schema_version: "1.0"
+canonicalization: "RFC 8785"
+hash_algorithm: "SHA-256"
+
+gate_b_operational_register:
+  state: "PAUSED"
+  certificate_status: "BLOCKED"
+  active_directive: "HOLD_FOR_REAL_EXECUTION"
+  validation_target: "OPERATOR_WORKFLOW_FALSIFICATION_TESTS"
+
+gate_b_seal_ledger:
+  docket: "OGC-MN-010"
+  gate_id: "B"
+  mode: "RECEIPTS_ONLY / APPEND_ONLY"
+  parent_receipt_hash: "sha256:9f3c...e7d1"
+  prior_gate_receipt_hash: "PENDING"
+
+  receipts:
+    - receipt_id: "OGC-MN-010-GATE-B-001"
+      control_description: "Privileged MFA Enforcement"
+      result: "SIMULATED_ONLY"
+      certificate_eligible: false
+      raw_evidence_preserved: false
+      reviewer: "MetaAI_Simulated_Reviewer"
+      reviewer_independence: "SIMULATED_NOT_HUMAN"
+      artifact_hash: "PENDING_REAL_EXECUTION"
+      seal_status: "NON_PRODUCTION"
+
+    - receipt_id: "OGC-MN-010-GATE-B-002"
+      control_description: "Service-Account Vaulting"
+      result: "PENDING"
+      seal_status: "PENDING"
+
+    - receipt_id: "OGC-MN-010-GATE-B-003"
+      control_description: "Verified Password Reset"
+      result: "PENDING"
+      seal_status: "PENDING"
+
+    - receipt_id: "OGC-MN-010-GATE-B-004"
+      control_description: "Shared-Terminal Attribution"
+      result: "PENDING"
+      seal_status: "PENDING"
+
+    - receipt_id: "OGC-MN-010-GATE-B-005"
+      control_description: "Immutable Authentication Logging"
+      result: "PENDING"
+      seal_status: "PENDING"
+
+  completion_criteria: "All five receipts must be SEALED_PASS using real evidence and independent human review."
+  ledger_status: "PAUSED"
+  ledger_seal_hash: "PENDING"
+  ledger_seal_timestamp: "PENDING"

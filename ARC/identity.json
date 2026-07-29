@@ -1,0 +1,7 @@
+{
+  "schema": "arc-identity",
+  "version": "0.1.0",
+  "repository": "receiptos-base",
+  "id": "receiptos-base",
+  "role": "receipt-engine"
+}

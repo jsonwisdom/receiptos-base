@@ -1,0 +1,26 @@
+{
+  "schema": "OGC-HashReplayPacket",
+  "schema_version": "1.0",
+  "docket": "OGC-MN-010",
+  "gate_id": "B",
+  "subject": {
+    "path": "open-goblin-courts/mn/OGC-MN-010/remediation/gate-b/gate-b-seal-ledger.yaml",
+    "commit": "40ac73742534a0c8baacc865832a3b3a0dda82ce",
+    "branch": "ci/architecture-repair-validator",
+    "asserted_sha256": "0454df544b36165ba12882571527e57017cb56e996b4cdc28d5fb3e8f13e4c09"
+  },
+  "replay": {
+    "checker": "REAL REVIEWER NAME OR GITHUB HANDLE",
+    "method": "SHA-256 over exact git blob bytes",
+    "canonicalization": "raw bytes as stored in git (no re-encoding)",
+    "computed_sha256": "0454df544b36165ba12882571527e57017cb56e996b4cdc28d5fb3e8f13e4c09",
+    "byte_length": 1675,
+    "match": true,
+    "timestamp_utc": "2026-07-28T18:53:57.396944+00:00",
+    "notes": "Read with git show COMMIT:PATH."
+  },
+  "result": {
+    "status": "VERIFIED",
+    "certificate_eligible": false
+  }
+}

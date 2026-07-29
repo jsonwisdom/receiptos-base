@@ -1,0 +1,11 @@
+{
+  "schema": "arc-dependencies",
+  "version": "0.1.0",
+  "repository": "receiptos-base",
+  "dependencies": [
+    {
+      "repository": "AL",
+      "relationship": "consumes-intelligence"
+    }
+  ]
+}

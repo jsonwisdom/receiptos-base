@@ -1,0 +1,16 @@
+{
+  "schema": "PoolDiscoveryReceipt",
+  "version": "1.0",
+  "status": "PARTIAL",
+  "mode": "EVIDENCE_ONLY",
+  "inference": "DISABLED",
+  "chain": "Base",
+  "chain_id": 8453,
+  "pool_manager": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+  "anchor_token": "0x8894e88310d46fb19ad3e309455248aeeab81800",
+  "scan_start_block": 49250000,
+  "scan_end_block": 49254300,
+  "end_block_hash": "0x50be81568c4a31a817167f2798b0556b51e7a71712c6a3036b52dd929f75473b",
+  "query_timestamp_utc": "2026-07-29T04:06:20Z",
+  "next_gate": "POOLKEY_IDENTIFIED"
+}

@@ -1,0 +1,2417 @@
+===== RECEIPTOS RECON =====
+Mon Jul 27 12:49:35 AM UTC 2026
+
+## Working Directory
+/home/jaywisdom44/receiptos-base
+
+## Git
+/home/jaywisdom44/receiptos-base
+ci/architecture-repair-validator
+11add18a5ca75406549c6a7b6ade88b697780feb
+?? receiptos_recon.txt
+
+## Repository Tree (depth 3)
+./ACTIVE_LANES.md
+./adapters/openmontage/README.md
+./adapters/page-agent/hash.js
+./adapters/page-agent/index.js
+./adapters/page-agent/README.md
+./adapters/page-agent/verifier.js
+./adapters/page-agent/wire-event.js
+./adapters/page-agent/WIRE_EVENT_SCHEMA.md
+./agents/cloud_shell_intake_spec.md
+./agents/gpk-factory/canon-carrie.md
+./agents/gpk-factory/functional_primitives.v0.1.json
+./agents/gpk-factory/FUNCTIONAL_PRIMITIVES_V0_1.md
+./agents/gpk-factory/lore-larry.md
+./agents/gpk-factory/manifest.json
+./agents/gpk-factory/override-ollie.md
+./agents/gpk-factory/press-patty.md
+./agents/gpk-factory/PROCESS_V0_1.md
+./agents/gpk-factory/PURPOSE_V0_1.md
+./agents/gpk-factory/README.md
+./agents/gpk-factory/receipt-ricky.md
+./agents/gpk-factory/tools_manifest.v0.3.json
+./api/spec/AL-to-receiptos.yaml
+./api/spec/JOY-to-receiptos.yaml
+./app/layout.tsx
+./app/page.tsx
+./app/sign/page.tsx
+./app/stream/route.ts
+./artifact-proofs/evidence_KARENN11_attest-receiptos.sh.json
+./artifact-proofs/evidence_KARENN11_contract.txt.json
+./artifact-proofs/evidence_KARENN11_creation-tx.txt.json
+./artifact-proofs/evidence_KARENN11_creator-index.json.json
+./artifact-proofs/evidence_KARENN11_eas.env.json
+./artifact-proofs/evidence_KARENN11_git-head.txt.json
+./artifact-proofs/evidence_KARENN11_media_karenn11.png.json
+./artifact-proofs/evidence_KARENN11_metadata.json.json
+./artifact-proofs/evidence_KARENN11_register-eas-schema.sh.json
+./artifact-proofs/evidence_KARENN11.tar.json
+./artifact-proofs/evidence_KARENN11_verify-eas.sh.json
+./artifact-proofs/evidence_MUDSKIPPER_contract.txt.json
+./artifact-proofs/evidence_MUDSKIPPER_contractURI.txt.json
+./artifact-proofs/evidence_MUDSKIPPER_media.cid.json
+./artifact-proofs/evidence_MUDSKIPPER_media_mudskipper.json
+./artifact-proofs/evidence_MUDSKIPPER_media.uri.json
+./artifact-proofs/evidence_MUDSKIPPER_metadata.cid.json
+./artifact-proofs/evidence_MUDSKIPPER_metadata.json.json
+./artifact-proofs/evidence_NEXT-ZORA-COIN_contract.txt.json
+./artifact-proofs/evidence_NEXT-ZORA-COIN_contractURI.txt.json
+./artifact-proofs/evidence_NEXT-ZORA-COIN_eas-seal.json.json
+./artifact-proofs/evidence_NEXT-ZORA-COIN_extract-metadata.sh.json
+./artifact-proofs/evidence_NEXT-ZORA-COIN_media_artifact.json
+./artifact-proofs/evidence_NEXT-ZORA-COIN_media.cid.json
+./artifact-proofs/evidence_NEXT-ZORA-COIN_media.uri.json
+./artifact-proofs/evidence_NEXT-ZORA-COIN_metadata.cid.json
+./artifact-proofs/evidence_NEXT-ZORA-COIN_metadata.json.json
+./artifact-proofs/evidence_NEXT-ZORA-COIN_pin-record.json.json
+./artifact-proofs/evidence_ROS-0004-runtime-config-core.tar.json
+./artifacts/receipt_inventory.json
+./artifacts/ROS-0001-cover.jpg
+./artifacts/round15_evidence_bundle.tar.gz.b64
+./artifacts/round15_evidence_bundle.tar.gz.sha256
+./attestations/ROUND_018/eas-receipt-anchor.txt
+./attestations/ROUND_018/sha256sums.txt
+./audit/anchor_conformance_matrix.py
+./audit/append_batch_root.py
+./audit/conformance_gate_storage_view.py
+./audit/consume_storage_anchors.py
+./audit/event_time_comparison_conformance_matrix.py
+./audit/event_time_conformance_gate.py
+./audit/event_time_feature_conformance_matrix.py
+./audit/event_time_record_conformance_matrix.py
+./audit/export_storage_time_view.py
+./audit/export_verified_roots.py
+./audit/external_subscriber_conformance_matrix.py
+./audit/external_subscriber_validator.py
+./audit/fixtures/anchor-conformance-matrix.example.json
+./audit/fixtures/batch-root-audit-entry-001.example.json
+./audit/fixtures/batch-root-audit-verify-001.example.json
+./audit/fixtures/batch-root-audit-verify-002.example.json
+./audit/fixtures/event-time-boundary-negative-storage-import.example.json
+./audit/fixtures/event-time-boundary-proposal.example.json
+./audit/fixtures/event-time-conformance-pass.example.json
+./audit/fixtures/event-time-feature-conformance-matrix.example.json
+./audit/fixtures/event-time-parser-negative-storage-import.example.json
+./audit/fixtures/external-subscriber-validate.example.json
+./audit/fixtures/negative-anchor-expected-failures.example.json
+./audit/fixtures/negative-anchor-extra-field.example.json
+./audit/fixtures/negative-anchor-wrong-format.example.json
+./audit/fixtures/negative-anchor-wrong-semantics.example.json
+./audit/fixtures/root-subscription-anchor-readiness.example.json
+./audit/fixtures/root-subscription-anchor-validate.example.json
+./audit/fixtures/root-subscription-manifest-002.example.json
+./audit/fixtures/root-subscription-validate-002.example.json
+./audit/fixtures/storage-anchor-consume-001.example.json
+./audit/fixtures/storage-view-conformance-gate.example.json
+./audit/fixtures/storage-view-subscription-validate.example.json
+./audit/fixtures/subscriber-contract-negative-ordering.example.json
+./audit/fixtures/subscriber-contract-negative-write.example.json
+./audit/fixtures/subscriber-contract-valid.example.json
+./audit/fixtures/verified-root-export-001.example.json
+./audit/fixtures/verified-root-export-002.example.json
+./audit/generate_storage_view_fixture.py
+./audit/logs/batch-roots.jsonl
+./audit/normalized_event_time_conformance_matrix.py
+./audits/PRC-JRN-v1.1/runtime-audit-001.json
+./audits/ROS-0045/git-head.txt
+./audits/ROS-0045/git-status.txt
+./audits/ROS-0045/quickstart.log
+./audits/ROS-0045/tags.txt
+./audits/ROS-0046/git-head.txt
+./audits/ROS-0046/git-status.txt
+./audits/ROS-0046/quickstart.log
+./audits/ROS-0046/tags.txt
+./audits-round-014-evidence-scan.txt
+./audit/storage_time_view.py
+./audit/storage_view_conformance_matrix.py
+./audit/storage_view_subscription_feed.py
+./audit/subscription_manifest.py
+./audit/validate_event_time_comparison.py
+./audit/validate_event_time_record.py
+./audit/validate_normalized_event_time_record.py
+./audit/validate_storage_view_subscription.py
+./audit/validate_subscription_feed.py
+./audit/verify_log_continuity.py
+./batch_proof.txt
+./batch_runtime/BATCH_RUNTIME_MANIFEST_V0_2.json
+./batch_runtime/BATCH_RUNTIME_RECEIPT_V0_2.json
+./batch_runtime/BATCH_RUNTIME_V0_2.md
+./CANONICAL_DEPLOY.md
+./canon-v0.3-manifest.json
+./cards/GPK-001.json
+./cards/schema.json
+./Cargo.lock
+./Cargo.toml
+./checksums.sha256
+./ci/local-runner.js
+./ci/scripts/compare_reports.py
+./ci/scripts/run_fixtures.sh
+./cloudbuild-test-matrix.yaml
+./components/ClaimBadge.tsx
+./config/.gitkeep
+./constitution/CLAIM_PROMOTION_GUARD_V0_1.json
+./constitution/.gitkeep
+./constitution/RECEIPTOS_PROVENANCE_BOUNDARY_V0_1.md
+./contracts/mock/EXT060MockWitnessBadge.sol
+./contracts/reference/EXT065ReferenceWitnessBadge.sol
+./creator-index.json
+./creator-manifest.json
+./curriculum/prc-jrn-v1.1.1-patch.md
+./curriculum/prc-jrn-v1.1.md
+./deployment/freeze-guard-stack-hash.py
+./deployment/stack-hash-rule-v1.json
+./deployment/tntr-v1-production-manifest.json
+./deployment/v0.4-deployment-manifest.json
+./docs/agent-receipts/architecture.md
+./docs/agent-receipts/receipt-spec.md
+./docs/agent-receipts/receipt-spec-v0.2-delta.md
+./docs/agent-receipts/threat-model.md
+./docs/AL-INTERFACE-v0.1.md
+./docs/ANCHOR_CONFORMANCE_MATRIX.md
+./docs/ANCHOR_NEGATIVE_FIXTURES.md
+./docs/ar-001-receipt-lifecycle.md
+./docs/AUDIT_LOG_CONTINUITY_VERIFIER.md
+./docs/audits/ROS-0046-quarantine-note.md
+./docs/authorized-signer-registry.md
+./docs/BATCH_ROOT_AUDIT_LOG.md
+./docs/canonicalization.md
+./docs/CONFORMANCE.md
+./docs/court-clerk-case-console.md
+./docs/CROSS_PROFILE_TESTS.md
+./docs/daily-briefing-smtp-app-password.md
+./docs/docket-58-receipt-verification-api.md
+./docs/docket-60-claim-firewall.md
+./docs/docket-61-user-space-interpretation.md
+./docs/eas-attest-lock-v1.md
+./docs/EAS_RAIL_NEXT.md
+./docs/ESG-001-Core.md
+./docs/ESG-001_ReceiptOS_Boundary_Review.md
+./docs/EVENT_TIME_CLAIMED_TIME_PARSER.md
+./docs/EVENT_TIME_COMPARISON.md
+./docs/EVENT_TIME_CONFORMANCE_GATE.md
+./docs/EVENT_TIME_FEATURE_CONFORMANCE_MATRIX.md
+./docs/EVENT_TIME_NORMALIZER.md
+./docs/EVENT_TIME_RECORD_VALIDATOR.md
+./docs/EVENT_TIME_SEMANTICS_BOUNDARY.md
+./docs/EXTERNAL_SUBSCRIBER_VALIDATOR.md
+./docs/farcaster-frame-extension-layer.md
+./docs/farcaster-lock-rotation.md
+./docs/farcaster-public-witness-surface.md
+./docs/farcaster-signature-association-layer.md
+./docs/farcaster-signer-verification-layer.md
+./docs/farcaster-transparency-log.md
+./docs/frame-readonly-endpoint-contract.md
+./docs/FREE_ONLY_THREE_SURFACE_RECEIPTS.md
+./docs/generate-cid-helper.md
+./docs/gitfix-erc1271-ci-notes.md
+./docs/gitfix-erc1271-commit-log.md
+./docs/.gitkeep
+./docs/governance/deerflow-weld-brief.md
+./docs/GUARDED_LATTICE_INGESTION.md
+./docs/identity-binding-verifier-v2.md
+./docs/identity-binding-verifier-v2-status.md
+./docs/JOY-CLIENT-v0.1.md
+./docs/kids-safe/GOBLIN_COURT_FOR_KIDS_V0_1.md
+./docs/kids-safe/LESSON_010_SURFACE_V0_1.md
+./docs/kids-safe/LESSON_011_FUNCTIONAL_IMPACT_GRID.md
+./docs/kids-safe/LESSON_012_EVIDENCE_POINTERS.md
+./docs/kids-safe/LESSON_013_CONSISTENCY_CHECK.md
+./docs/kids-safe/LESSON_014_BATCH_TEMPLATE.md
+./docs/kids-safe/MEME_COURT_AUDITING_SCHOOL_FOR_CHILDREN_V0_1.md
+./docs/kids-safe/NEXT_EPOCH_KIDS_SAFE_BASE_V0_1.md
+./docs/LATTICE_BATCH_MERKLE_CATALOG.md
+./docs/LATTICE_BATCH_ROOT_MANIFEST.md
+./docs/LATTICE_HASH_ONLY_CATALOG.md
+./docs/LATTICE_LIGHT_VERIFIER_HOOK.md
+./docs/LATTICE_MERKLE_CATALOG.md
+./docs/LOAD_VERIFICATION_WITNESS_V0_1.md
+./docs/mathematical-model.md
+./docs/MULTI_BATCH_APPEND.md
+./docs/npm-package.md
+./docs/observation-protocol/OBSERVATION_PROTOCOL_V1.md
+./docs/observation-protocol/REPLAY_EVIDENCE_PACKET_V1.md
+./docs/observation-protocol/ROUND3_REPLAY_PROTECTION.md
+./docs/open-mn-court-receipts.md
+./docs/protocol.md
+./docs/public-audit-surface.md
+./docs/REAL_LOAD_RUNNER_V0_1.md
+./docs/RECEIPTOS_CLI_CONTRACT_V0_1.md
+./docs/receiptos-cli-json-contract.md
+./docs/receiptos-spec/ROS-0006.md
+./docs/receiptos-wire-workflow.md
+./docs/registry-canonization-ext-105.md
+./docs/releases/v0.1.0.md
+./docs/releases/v0.1.1.md
+./docs/REPLAY_ENGINE_AUDIT_V0_1.md
+./docs/REPLAY_ENGINE_V0_1.md
+./docs/REPLAY_INVARIANTS_V0_1.md
+./docs/ROOT_SUBSCRIPTION_MANIFEST.md
+./docs/ROS-0002-release-witness.md
+./docs/ROS-0002-release-witness-pr-notes.md
+./docs/SERIALIZATION_DELTA_GUARD.md
+./docs/signature-verification-surface-ext-106.md
+./docs/SIGNED_RECEIPT_VERIFIER_V0_1.md
+./docs/sql-review/0001_mcp_call_receipt_v0.review.sql
+./docs/sql-review/PR_47_ADDITIVE_CORE.md
+./docs/status.html
+./docs/STORAGE_ANCHOR_CONSUMER.md
+./docs/STORAGE_TIME_VIEW_EXPORTER.md
+./docs/STORAGE_VIEW_CONFORMANCE.md
+./docs/STORAGE_VIEW_EXTERNAL_CONFORMANCE_GATE.md
+./docs/STORAGE_VIEW_SUBSCRIPTION_FEED_V0.md
+./docs/stream-ros0006-metadata.md
+./docs/SUBSCRIPTION_FEED_VALIDATOR.md
+./docs/SUPABASE_NEXTJS_CLIENT_SETUP.md
+./docs/SUPABASE_SERVER_SDK_SETUP.md
+./docs/TIMELINE_READINESS_GATE.md
+./docs/TIMELINE_SEMANTICS_V0_STORAGE_VIEW.md
+./docs/v0.2.0.md
+./docs/v0.3.0.md
+./docs/VERIFIED_ROOT_EXPORTER.md
+./docs/WITNESS_REPLAY_INTEGRATION.md
+./eas/constants.ts
+./engine/.gitkeep
+./engine/replay.py
+./.env.example
+./ep/canonical.py
+./ep/__init__.py
+./ep/parser.py
+./ep/__pycache__/canonical.cpython-312.pyc
+./ep/__pycache__/__init__.cpython-312.pyc
+./event_time/compare_claimed_times.py
+./event_time/fixtures/claimed-time-comparison-negative-claims.example.json
+./event_time/fixtures/claimed-time-comparison-negative-storage-compare.example.json
+./event_time/fixtures/claimed-time-input.example.json
+./event_time/fixtures/claimed-time-normalized-record.example.json
+./event_time/fixtures/claimed-time-normalized-records.example.json
+./event_time/fixtures/claimed-time-normalize-negative-malformed.example.json
+./event_time/fixtures/claimed-time-record.example.json
+./event_time/fixtures/event-time-record-negative-source.example.json
+./event_time/fixtures/event-time-record-negative-sticky-expected.json
+./event_time/fixtures/event-time-record-negative-storage-field.example.json
+./event_time/normalize_claimed_time.py
+./event_time/parse_claimed_time.py
+./evidence/anchors.json
+./evidence/KARENN11/attest-receiptos.sh
+./evidence/KARENN11/contract.txt
+./evidence/KARENN11/creation-tx.txt
+./evidence/KARENN11/creator-index.json
+./evidence/KARENN11/eas.env
+./evidence/KARENN11/evidence-bundle.json
+./evidence/KARENN11/git-head.txt
+./evidence/KARENN11/metadata.json
+./evidence/KARENN11/receiptos-packet.json
+./evidence/KARENN11/register-eas-schema.sh
+./evidence/KARENN11/sha256sums.txt
+./evidence/KARENN11.tar
+./evidence/KARENN11/verify-eas.sh
+./evidence-ledger.json
+./evidence-ledger.schema.json
+./evidence/MUDSKIPPER/contract.txt
+./evidence/MUDSKIPPER/contractURI.txt
+./evidence/MUDSKIPPER/media.cid
+./evidence/MUDSKIPPER/media.uri
+./evidence/MUDSKIPPER/metadata.cid
+./evidence/MUDSKIPPER/metadata.json
+./evidence/MUDSKIPPER/receiptos-packet.json
+./evidence/MUDSKIPPER/sha256sums.txt
+./evidence/NEXT-ZORA-COIN/contract.txt
+./evidence/NEXT-ZORA-COIN/contractURI.txt
+./evidence/NEXT-ZORA-COIN/eas-seal.json
+./evidence/NEXT-ZORA-COIN/extract-metadata.sh
+./evidence/NEXT-ZORA-COIN/media.cid
+./evidence/NEXT-ZORA-COIN/media.uri
+./evidence/NEXT-ZORA-COIN/metadata.cid
+./evidence/NEXT-ZORA-COIN/metadata.json
+./evidence/NEXT-ZORA-COIN/pin-record.json
+./evidence/NEXT-ZORA-COIN/receiptos-packet.json
+./evidence-payloads/README.md
+./evidence-payloads/TEST-NEGATIVE-001/manifest.env
+./evidence-payloads/TEST-NEGATIVE-001/metadata.json
+./evidence-payloads/TEST-POSITIVE-001/manifest.env
+./evidence-payloads/TEST-POSITIVE-001/metadata.json
+./evidence/receipts/eas-global-forest-anchor.json
+./evidence/receipts/global-forest-verification.json
+./evidence-reports/TEST-NEGATIVE-001.report.json
+./evidence-reports/TEST-POSITIVE-001.report.json
+./evidence-reports/ZORA-e423ae19fffcee95919dde96a31e828bc060e36f.report.json
+./evidence/ROS-0001/evidence-bundle.json
+./evidence/ROS-0001/evidence-bundle.template.json
+./evidence/ROS-0004-runtime-config-core.tar
+./examples/agent-receipts/canonical.js
+./examples/agent-receipts/evaluate-policy.js
+./examples/agent-receipts/README.md
+./examples/agent-receipts/replay-bundle.json
+./examples/agent-receipts/run-demo.js
+./examples/agent-receipts/tool-call.input.json
+./examples/agent-receipts/tool-call.output.json
+./examples/supabase-server-handler.mjs
+./examples/trust-score-adapter.ts
+./examples/verify-60-second/receipt.sample.json
+./expected-results.json
+./FEEDBACK.md
+./fixtures/load_verification/incomplete_claimed_status.invalid.json
+./fixtures/load_verification/pass_strings.invalid.json
+./fixtures/load_verification/sentinel_hashes.invalid.json
+./fixtures/receipts/manifest_verify.valid.json
+./fixtures/receipts/schema_validate.valid.json
+./fixtures/rp-001-receiptos-frame.example.json
+./fixtures/rp-002-eas-frame.example.json
+./frame/ext-099-frame-capability-surface.js
+./frame/ext-103-public-audit-surface.js
+./frame/ext-104-authorized-signer-registry.js
+./frame/ext-106-signature-verification-surface.js
+./front-door/.gitignore
+./front-door/index.html
+./front-door/README.md
+./front-door/RECEIPT-001.replay.json
+./front-door/vercel.json
+./gal/analysis/wallet3_behavioral_dossier.md
+./gal/analysis/wallet3_oaw_instance.md
+./gal/ledger_manifest.pending.json
+./gal/manifests/docket-742-publication.json
+./gal/registry/wallet_registry.csv
+./gal/scripts/replay-docket-742.sh
+./gal/specs/GAL-SPEC-003.md
+./gal/specs/OAW-PATTERN-SCHEMA.md
+./game_state.json
+./.git/COMMIT_EDITMSG
+./.git/config
+./.git/description
+./.git/FETCH_HEAD
+./.git/HEAD
+./.git/hooks/applypatch-msg.sample
+./.git/hooks/commit-msg.sample
+./.git/hooks/fsmonitor-watchman.sample
+./.git/hooks/post-update.sample
+./.git/hooks/pre-applypatch.sample
+./.git/hooks/pre-commit.sample
+./.git/hooks/pre-merge-commit.sample
+./.git/hooks/prepare-commit-msg.sample
+./.git/hooks/pre-push.sample
+./.git/hooks/pre-rebase.sample
+./.git/hooks/pre-receive.sample
+./.git/hooks/push-to-checkout.sample
+./.git/hooks/sendemail-validate.sample
+./.git/hooks/update.sample
+./.github/workflows/active-lanes-validator.yml
+./.github/workflows/authorized-signer-registry.yml
+./.github/workflows/canonical-build.yml
+./.github/workflows/ci.yml
+./.github/workflows/compliance.yml
+./.github/workflows/daily-briefing.yml
+./.github/workflows/deterministic-verify.yml
+./.github/workflows/evidence-verify.yml
+./.github/workflows/farcaster-manifest.yml
+./.github/workflows/farcaster-verify-reusable.yml
+./.github/workflows/frame-conformance-suite.yml
+./.github/workflows/frame-openapi-contract.yml
+./.github/workflows/frame-zero-mutation.yml
+./.github/workflows/free-only-three-surface.yml
+./.github/workflows/gpk-canon-correct.yml
+./.github/workflows/gpk-factory-test.yml
+./.github/workflows/gpk-lineage-check.sh
+./.github/workflows/gpp-render-wave.yml
+./.github/workflows/grp004-verify.yml
+./.github/workflows/identity-binding-matrix.yml
+./.github/workflows/interop-parity.yml
+./.github/workflows/llm-radar-intake.yml
+./.github/workflows/load-verification-witness.yml
+./.github/workflows/npm-publish.yml
+./.github/workflows/observation-protocol.yml
+./.github/workflows/page-agent-adapter-test.yml
+./.github/workflows/pre-publish-audit.yml
+./.github/workflows/production-lock-gate.yml
+./.github/workflows/provenance-dry-run.yml
+./.github/workflows/public-audit-surface.yml
+./.github/workflows/receiptos-anchor-verify.yml
+./.github/workflows/receiptos-ci.yml
+./.github/workflows/receiptos-wire.yml
+./.github/workflows/release-gate-receiptos.yml
+./.github/workflows/release-gate.yml
+./.github/workflows/release-witness.yml
+./.github/workflows/release.yml
+./.github/workflows/replayboard-settle-probe.yml
+./.github/workflows/replay-witness.yml
+./.github/workflows/revocation-monitor.yml
+./.github/workflows/signature-verify.yml
+./.github/workflows/slsa-attestation.yml
+./.github/workflows/validator.yml
+./.github/workflows/verify-anchor.yml
+./.github/workflows/verify-and-attest.yml
+./.gitignore
+./.git/index
+./.git/info/exclude
+./.git/logs/HEAD
+./.git/ORIG_HEAD
+./.git/packed-refs
+./.git/shallow
+./global-leaves/jaywisdom.json
+./global-manifest.json
+./governance/dockets/57-authorized-identity.md
+./governance/OUTBOX_CHAOS_INJECTION_POLICY_V0_4.md
+./index.d.ts
+./index.js
+./lattice/batch_merkle_catalog.py
+./lattice/batch_root_manifest.py
+./lattice/catalog_accepted_report.py
+./lattice/fixtures/batch-root-manifest-rp001-only.example.json
+./lattice/fixtures/batch-root-manifest-rp001-rp002.example.json
+./lattice/fixtures/rp-001-lattice-catalog.example.json
+./lattice/fixtures/rp-001-lattice-ingest.example.json
+./lattice/fixtures/rp-001-lattice-merkle.example.json
+./lattice/fixtures/rp-001-rp-002-batch-merkle.example.json
+./lattice/fixtures/rp-002-eas-lattice-catalog.example.json
+./lattice/fixtures/rp-002-eas-lattice-ingest.example.json
+./lattice/fixtures/rp-002-eas-lattice-merkle.example.json
+./lattice/ingest_guarded_report.py
+./lattice/light_verify_inclusion.py
+./lattice/merkle_catalog.py
+./lesson_015/LESSON_015_REVIEW_PACKET_MANIFEST_V0_1.json
+./lesson_015/LESSON_015_REVIEW_PACKET_RECEIPT_V0_1.json
+./lesson_015/LESSON_015_REVIEW_PACKET_V0_1.md
+./lesson_016/LESSON_016_IMPORT_SCHEMA_MANIFEST_V0_1.json
+./lesson_016/LESSON_016_IMPORT_SCHEMA_RECEIPT_V0_1.json
+./lesson_016/LESSON_016_IMPORT_SCHEMA_V0_1.md
+./lesson_017/LESSON_017_RUNTIME_SCALE_GUARD_MANIFEST_V0_1.json
+./lesson_017/LESSON_017_RUNTIME_SCALE_GUARD_RECEIPT_V0_1.json
+./lesson_017/LESSON_017_RUNTIME_SCALE_GUARD_V0_1.md
+./lesson_018/LESSON_018_RUNTIME_REHEARSAL_FIXTURE_MANIFEST_V0_1.json
+./lesson_018/LESSON_018_RUNTIME_REHEARSAL_FIXTURE_RECEIPT_V0_1.json
+./lesson_018/LESSON_018_RUNTIME_REHEARSAL_FIXTURE_V0_1.md
+./lesson_019/LESSON_019_VA_CLAIM_ARENA_BOUNDARY_GUARD_MANIFEST_V0_1.json
+./lesson_019/LESSON_019_VA_CLAIM_ARENA_BOUNDARY_GUARD_RECEIPT_V0_1.json
+./lesson_019/LESSON_019_VA_CLAIM_ARENA_BOUNDARY_GUARD_V0_1.md
+./lesson_020/LESSON_020_VA_CLAIM_ARENA_MOCK_CASE_FIXTURE_MANIFEST_V0_1.json
+./lesson_020/LESSON_020_VA_CLAIM_ARENA_MOCK_CASE_FIXTURE_RECEIPT_V0_1.json
+./lesson_020/LESSON_020_VA_CLAIM_ARENA_MOCK_CASE_FIXTURE_V0_1.md
+./lesson_021/LESSON_021_VA_CLAIM_ARENA_REVIEW_PACKET_MANIFEST_V0_1.json
+./lesson_021/LESSON_021_VA_CLAIM_ARENA_REVIEW_PACKET_RECEIPT_V0_1.json
+./lesson_021/LESSON_021_VA_CLAIM_ARENA_REVIEW_PACKET_V0_1.md
+./lesson_022/LESSON_022_EVIDENCE_POINTER_SCHEMA_MANIFEST_V0_1.json
+./lesson_022/LESSON_022_EVIDENCE_POINTER_SCHEMA_RECEIPT_V0_1.json
+./lesson_022/LESSON_022_EVIDENCE_POINTER_SCHEMA_V0_1.md
+./lesson_022/MIGRATION_GUIDE_V0_1.md
+./lesson_022/schema/evidence-pointer-v1.json
+./lesson_022/tests/VALIDATION_TEST_SUITE_V0_1.md
+./lesson_023/LESSON_023_VA_CLAIM_CHATBOT_WEBPAGE_DEV_EDITION_MANIFEST_V0_1.json
+./lesson_023/LESSON_023_VA_CLAIM_CHATBOT_WEBPAGE_DEV_EDITION_RECEIPT_V0_1.json
+./lesson_023/LESSON_023_VA_CLAIM_CHATBOT_WEBPAGE_DEV_EDITION_V0_1.md
+./lesson_023/spec/CHATBOT_MODE_SPEC_V0_1.json
+./lesson_023/spec/DEV_INTEGRATION_NOTES_V0_1.md
+./lesson_023/spec/HUMOR_BOUNDARY_RULES_V0_1.md
+./lesson_023/webpage/CLAIMLANDIA_CHAT_WEBPAGE_COPY_V0_1.md
+./lesson_024/drills/PRIVATE_MEMORY_DRILLS_V0_1.md
+./lesson_024/fixtures/MOCK_PRIVATE_MEMORY_COGNITIVE_REHEARSAL_V0_1.json
+./lesson_024/LESSON_024_PRIVATE_PHONE_MEMORY_COGNITIVE_SKILL_SET_MANIFEST_V0_1.json
+./lesson_024/LESSON_024_PRIVATE_PHONE_MEMORY_COGNITIVE_SKILL_SET_RECEIPT_V0_1.json
+./lesson_024/LESSON_024_PRIVATE_PHONE_MEMORY_COGNITIVE_SKILL_SET_V0_1.md
+./lesson_024/rules/COGNITIVE_LANGUAGE_BOUNDARY_RULES_V0_1.md
+./lesson_025/fixtures/IMPACT_NOTE_EDITOR_SYNTHETIC_E2E_V0_1.json
+./lesson_025/LESSON_025_IMPACT_NOTE_EDITOR_VIEW_V0_1.md
+./lesson_025/receipts/LESSON_025_IMPACT_NOTE_EDITOR_VIEW_RECEIPT_V0_1.json
+./lesson_026/fixtures/IMPACT_NOTE_E2E_DRIFT_2026_07_09_001.json
+./lesson_026/LESSON_026_IMPACT_NOTE_E2E_DRIFT_TEST_RECEIPT_V0_1.md
+./lesson_026/receipts/IMPACT_NOTE_E2E_DRIFT_RECEIPT_V0_1.json
+./lesson_026/tests/DRIFT_MIRROR_STABLE_CHECK_V0_1.md
+./lesson_027/fixtures/SEQUENCE_EDITOR_SYNTHETIC_E2E_V0_1.json
+./lesson_027/LESSON_027_SEQUENCE_EDITOR_VIEW_V0_1.md
+./lesson_027/receipts/LESSON_027_SEQUENCE_EDITOR_VIEW_RECEIPT_V0_1.json
+./lesson_027/release/post-release-verification.json
+./lesson_027/release/release-gate.json
+./lesson_027/release/release-history.json
+./lesson_027/witnesses/farcaster.json
+./lesson_027/witnesses/github-release.json
+./lesson_027/witnesses/witness-index.json
+./lib/interpretation/policies.ts
+./LICENSE
+./manifest.json
+./manifests/COGNITIVE_VERNACULAR_REBOOT_V0_1.yml
+./manifests/COMMIT_MANIFEST_A164C62_V0_1.json
+./manifests/FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_V0_1.yml
+./manifests/GOBLIN_COURT_FOR_KIDS_V0_1.yml
+./manifests/invalid/commit_unresolvable.json
+./manifests/invalid/missing_surface.json
+./manifests/invalid/tree_hash_mismatch.json
+./manifests/K3_JAY_KID_CIVIC_LEARNING_STACK_V0_1.yml
+./manifests/KID_KINDERGARTEN_2026_AI_ENABLED_SYSTEMS_V0_1.yml
+./manifests/KID_KINDERGARTEN_RHYTHM_AND_SOUL_PROTOCOLS_V0_1.yml
+./manifests/KID_KINETIC_REPLAYABLE_PARODY_STICKER_CARD_V0_1.yml
+./manifests/KID_KINETIC_REPLAY_V0_1.yml
+./manifests/KID_KOURT_RULING_ENGINE_V0_1.yml
+./manifests/NEXT_EPOCH_KIDS_SAFE_BASE_V0_1.yml
+./manifests/PR130_TEACH_BACK_VALIDATION_RESULT_V0_1.yml
+./manifests/RECEIPT_FIRST_LEARNING_CHARTER_BINDING_V0_1.yml
+./manifests/SUPER_SECRET_SISTER_SYNTAX_WISDOM_GRADE_1_V0_1.yml
+./manifests/valid/manifest.valid.json
+./market/ext-033-monitoring-adjustment.json
+./market/ext-034-full-stack-validation.json
+./market/ext-038-operational-alerts.json
+./market/instruments/tntr-instrument-deployment-v0.json
+./market/tntr-cro-001-instruments.json
+./market/tntr-cro-001-market-map.json
+./market/tntr-instrument-layer-v0.json
+./market/tntr-instrument.schema.json
+./market/tntr-market-primitives.schema.json
+./market/tntr-market-substrate-v0.json
+./mesh/tntr-cro-001-witnesses.example.json
+./mesh/tntr-cro-001-witness-mesh-spec.json
+./MIGRATION_STATUS.md
+./models/free_llm_watchlist.json
+./models/model_registry.json
+./models/provider_schema.json
+./modules/prc-jrn/engine.js
+./modules/prc-jrn/receipt.schema.json
+./modules/prc-jrn/validation-index.json
+./move2/README.md
+./next.config.js
+./next-env.d.ts
+./observations/stability-report-2026-07-08.md
+./observations/sweeps/2026-07-08-move2-manual-sweep.md
+./observations/witness-move2.log
+./openapi/ext-101-frame-readonly-openapi.json
+./ops/manifest_replay.py
+./ops/merkle.py
+./package.json
+./packages/receiptos-core/adapter.d.ts
+./packages/receiptos-core/canonical.js
+./packages/receiptos-core/canonical.ts
+./packages/receiptos-core/types.d.ts
+./packages/receiptos-core/verifier.js
+./packages/receiptos-core/verifier.ts
+./policy/agent-receipts/default-policy.json
+./pr1_audit.txt
+./prc-jrn/v1.1.1/PRC-JRN-FIELD-EXT-001.intake.md
+./prc-jrn/v1.1.1/PRC-JRN-FIELD-EXT-001.intake.schema.json
+./profiles/eas-v1.schema.json
+./proofs/ROUND_009/expected-root.txt
+./proofs/ROUND_009/merkle-proof.json
+./proofs/ROUND_009/verify-index-root.py
+./protocols/PROTOCOL_V1_HASH_MANIFEST.json
+./protocols/PROTOCOL_V1.json
+./protocols/REPLAY_PROTOCOL_V1_FREEZE_RECEIPT.json
+./provenance/dni-gross-intel-crew-finality-first-v1.json
+./provenance/dni-gross-intel-crew-genesis-verify-v1.json
+./provenance/identity-binding/jaywisdom-identity-binding.sig
+./provenance/identity-binding/jaywisdom-identity-binding.txt
+./provenance/public-provenance-dni-gross-intel-crew-v1.md
+./provenance/zora-metadata-bridge-v1.json
+./public/og/court-room.png
+./public/og/court-room.txt
+./public/og/verified-blocked.svg
+./public/og/witness-only.svg
+./public/.well-known/agent-card.json
+./pyproject.toml
+./.pytest_cache/CACHEDIR.TAG
+./.pytest_cache/.gitignore
+./.pytest_cache/README.md
+./README-FREE-DEPLOY.md
+./README.md
+./README_ROUND_017.md
+./RECEIPT-001.md
+./receiptos-cli
+./receiptos/cli.py
+./receiptos/core/authority.py
+./receiptos/core/cloud_commands.py
+./receiptos/core/gcp_validator.py
+./receiptos/core/hash.py
+./receiptos/core/__init__.py
+./receiptos/core/transitions.py
+./receiptos/gcp/allowlist.py
+./receiptos/gcp/errors.py
+./receiptos/gcp/validator.py
+./receiptos/__init__.py
+./receiptos_recon.txt
+./receiptos/weld.py
+./receipt-schema/v0.1/schema.json
+./receipt-schema/v0.1/schema.test.ts
+./receipts/ci-triggers/ext-042-trigger.txt
+./receipts/examples/README.md
+./receipts/ext-042-ci-production-lock-gate.json
+./receipts/ext-043-ci-finalizer.json
+./receipts/ext-044-eas-anchor-payload.json
+./receipts/ext-047-eas-submit-plan.json
+./receipts/ext-048-live-attestation.json
+./receipts/ext-051-governance-membrane.json
+./receipts/ext-056-badge-minting-membrane.json
+./receipts/ext-057-erc1155-badge-mint-plan.json
+./receipts/ext-058-mock-erc1155-badge-contract-semantics.json
+./receipts/ext-059-mock-mint-flow-test-vectors.json
+./receipts/ext-060-solidity-mock-badge-skeleton.json
+./receipts/ext-061-solidity-static-policy-guard.json
+./receipts/ext-063-local-compile-validation-gate.json
+./receipts/ext-064-production-policy-freeze.json
+./receipts/ext-065-reference-erc1155-implementation.json
+./receipts/ext-066-local-compile-unit-test-gate.json
+./receipts/ext-067-testnet-readiness-review.json
+./receipts/ext-094-signer-evidence-bundle.pending.json
+./receipts/ext-096-signature-receipt-intake.md
+./receipts/ext-096-signer-payload.jcs
+./receipts/ext-104-authorized-signer-registry.seed.json
+./receipts/.gitkeep
+./receipts/goblin-court-docket-clear.json
+./receipts/goblin-court-oversight-initialized.json
+./receipts/goblin-court-recess-secure.json
+./receipts/goblin-court-session-open.json
+./receipts/goblin-court-standby-contained.json
+./receipts/july4-2026/environment.lock.json
+./receipts/model_alerts.jsonl
+./receipts/mru-001-minimal-replay-unit.json
+./receipts/mru-002-composition-closure-gitfix-observed.json
+./receipts/mru-002-state-reconciliation.json
+./receipts/mru-003-identity-law-gitfix-observed.json
+./receipts/mru-004-validation-law-canonical.json
+./receipts/mru-004-validation-law-observed.json
+./receipts/mru-005-rebound-chain-audit-observed.json
+./receipts/mru-005-self-application-observed.json
+./receipts/mru-006-canonical-resolution-law-observed.json
+./receipts/mru-007-resolution-event-observed.json
+./receipts/mru-008-recommit-law-observed.json
+./receipts/mru-009-first-digest-reconciliation.json
+./receipts/mru-010-variance-audit-event.json
+./receipts/mru-011-exact-byte-fixture.json
+./receipts/mru-012-jsonwisdom-byte-blob-fixture.json
+./receipts/mru-013-digest-selection-replay.json
+./receipts/mru-014a-gitfix-payload-attempt-observed.json
+./receipts/mru-014-gitfix-recommit-fixture-required.json
+./receipts/mru-015-dependency-guard.json
+./receipts/mru-016-dependency-rejection.json
+./receipts/next-epoch/COGNITIVE_VERNACULAR_REBOOT_RECEIPT_V0_1.yml
+./receipts/next-epoch/FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_RECEIPT_V0_1.yml
+./receipts/next-epoch/GOBLIN_COURT_FOR_KIDS_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/K3_JAY_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINDERGARTEN_2026_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINDERGARTEN_RHYTHM_AND_SOUL_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINETIC_REPLAYABLE_PARODY_STICKER_CARD_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINETIC_REPLAY_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_001_ACRONYM_SAFETY_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_002_KONSTITUTION_ON_TRIAL_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_003_KLOWN_KOURT_EXHIBIT_A_RECEIPT_V0_1.yml
+./receipts/next-epoch/NEXT_EPOCH_KIDS_SAFE_BASE_RECEIPT_V0_1.yml
+./receipts/next-epoch/PR130_BINDING_RECEIPT_TEACH_BACK_DIFF_RECEIPT_V0_1.yml
+./receipts/next-epoch/RECEIPT_FIRST_LEARNING_CHARTER_BINDING_RECEIPT_V0_1.yml
+./receipts/next-epoch/SUPER_SECRET_SISTER_SYNTAX_WISDOM_GRADE_1_RECEIPT_V0_1.yml
+./receipts/rcpt-ext-gov-003.json
+./receipts/rcpt-ext-meta-004-scaffold.json
+./receipts/rcpt-ext-zora-goblin-mismatch.json
+./receipts/README.md
+./receipts/RECEIPT-001.json
+./receipts/RECEIPT-003.7-PROMOTION.json
+./receipts/receiptos/JOY_ROOT_CANDIDATE_001_VERDICT_TEMPLATE.json
+./receipts/receiptos/JOY_ROOT_CANDIDATE_001_VERIFICATION_TRANSCRIPT.json
+./receipts/RECEIPT-ZORA-e423ae19fffcee95919dde96a31e828bc060e36f-VERIFIED.json
+./receipts/rp-001-evidence-expansion-court-filing-arrest-citation-2025.json
+./receipts/rp-001-evidence-expansion-nps-damage-assessment-photos-2025.json
+./receipts/rp-001-evidence-expansion-request-photos-pending-2026-06-30.json
+./receipts/rp-001-evidence-expansion-tier-1-contract-record.json
+./receipts/rp-001-evidence-expansion-tier-2-reporting.json
+./receipts/rp-001-gitdirect-next-verb-surface-fix-2026-06-30.json
+./receipts/rp-001-gitfix-canonical-hash-gate-correction-2026-06-30.json
+./receipts/rp-001-hash-bind-attempt-lands-declaration-2026-06-25-digest-unverified.json
+./receipts/rp-001-operational-note-courtlistener-dns-not-doj-blocking-2026-06-30.json
+./receipts/rp-001-public-record-extraction-lands-declaration-2026-06-30.json
+./receipts/rp-001-replay-source-text-external-corroboration-2026-06-30.json
+./receipts/rp-001-source-payload-mismatch-usda-handbook-lands-declaration-2026-06-25.json
+./receipts/rp-001-source-url-verified-lands-declaration-2026-06-25-hash-pending.json
+./receipts/rp-001-source-verification-gate-1-court-filing-arrest-citation-2025.json
+./receipts/rp-001-source-verification-lands-declaration-2026-06-25-source-identified-hash-pending.json
+./receipts/rp-001-source-verification-request-lands-declaration-2026-06-25.json
+./receipts/rp-001-user-supplied-sha-lands-declaration-2026-06-25.json
+./receipts/rp-001-v2-diff-confidence-medium-high-source-corroboration-2026-06-30.json
+./receipts/SCHEMA_REPLAY_EXECUTION_REPORT_V1_RECEIPT.json
+./receipts/tntr-007-multi-hub-unreachable.md
+./receipts/tntr-013-multichain-witness-mesh.json
+./receipts/tntr-014-market-substrate-gate.json
+./receipts/tntr-015-instrument-layer-gate.json
+./receipts/tntr-016-instrument-deployment-gate.json
+./receipts/tntr-017-monitoring-gate.json
+./receipts/tntr-018-full-stack-validation.json
+./receipts/tntr-019-production-lock.json
+./receipts/tntr-020-operational-alerts.json
+./receipts/trump-vulcan-005-v2-diff-statement-refinement-open-question-resolved.json
+./receipts/trump-vulcan-reflecting-pool-v2-diff-rp-001.json
+./receipts/trump-vulcan-reflecting-pool-v2-diff-trump-vulcan-005.json
+./registry/creator-0x829adfedbe565f9885a7ea6bc78912acaef055e2.json
+./releases/grp004-release-2026-07-04/AUDIT-LOG.json
+./releases/grp004-release-2026-07-04/INTAKE-MANIFEST.json
+./releases/grp004-release-2026-07-04/RELEASE-PACKET.json
+./releases/grp004-release-2026-07-04/TV-073-EXECUTION-RECEIPT.final.json
+./releases/grp004-release-2026-07-04/VERIFICATION-REPORT.json
+./releases/LATEST
+./releases/ROS-0043/file-hashes.sha256
+./releases/ROS-0043/head.txt
+./releases/ROS-0043/release-root.sha256
+./releases/ROS-0043/tags-at-head.txt
+./.render-redeploy
+./ReplayBoard/eas_payload.py
+./ReplayBoard/entries/REPLAY-BOARD-0003.json
+./ReplayBoard/entries/REPLAY-BOARD-0004.json
+./ReplayBoard/sanitize_for_llm.py
+./ReplayBoard/settle.py
+./ReplayBoard/verify_settle_ledger.py
+./replay-bundle/attestations/eas-receipt-anchor.txt
+./replay-bundle/bundle-sha256.txt
+./replay-bundle/Dockerfile
+./replay-bundle/docker-image-id.txt
+./replay-bundle/docker-replay.log
+./replay-bundle/docker-replay.sh
+./replay-bundle/manifest.json
+./replay-bundle/proofs/proof.json
+./replay-bundle/README.md
+./replay-bundle/receipt_anchor.py
+./replay-bundle/receipts/replayed-anchor.json
+./replay-bundle/receipts/replayed-receipt.json
+./replay-bundle/receipts/selftest-anchor.json
+./replay-bundle/receipts/selftest-receipt.json
+./replay-bundle/receipts/source-receipt.json
+./replay-bundle/replay-manifest.json
+./replay-bundle/replay.sh
+./replay-bundle/round-021-sha256.txt
+./replay-bundle/round-022-docker-sha256.txt
+./replay-bundle/self_test.py
+./replay-bundle/verify.py
+./replay-cli/Cargo.toml
+./replay-cli/src/errors.rs
+./replay-cli/src/lib.rs
+./replay-cli/src/main.rs
+./replay-cli/src/signing.rs
+./replay-cli/src/wasm_runner.rs
+./replay-cli/tests/tv050_success_path.rs
+./replay-cli/tests/tv051_mutated_hash_rejection.rs
+./replay-cli/tests/tv054_wrong_wasm_module.rs
+./replay-cli/tests/tv063_fuel_accounting.rs
+./replay-cli/tests/tv064_fuel_exhaustion.rs
+./replay-cli/tests/tv069_signed_packets.rs
+./replay_court/cases/.gitkeep
+./replay_court/exports/.gitkeep
+./replay_court/graphs/.gitkeep
+./replay_court/merged/.gitkeep
+./replay_court/process.py
+./replay_court/receipts/.gitkeep
+./replay/engine.ts
+./replay/.gitkeep
+./replay/types.ts
+./repo/keys/deployer.pub
+./requirements.txt
+./results/replay_summary.json
+./ROUND_019_replay-bundle.tar.gz
+./ROUND_019_replay-bundle.tar.gz.sha256
+./ruleset.md
+./run_round_016.sh
+./schemas/archive_record_v1.schema.json
+./schemas/claim-v1.json
+./schemas/docket_v1.schema.json
+./schemas/evidence-bundle.schema.json
+./schemas/free-only-three-surface-receipt-v0.2.schema.json
+./schemas/gcp_readonly_audit_packet_v0.1.json
+./schemas/.gitkeep
+./schemas/GPK_FACTORY_TOOLS_MANIFEST_V0_3.schema.json
+./schemas/interpretation-v1.json
+./schemas/kid-kuorum/kid_kuorum_compliance_v0_1.schema.json
+./schemas/LOAD_VERIFICATION_WITNESS_V0_1.schema.json
+./schemas/manifest.schema.json
+./schemas/observation/ANNOTATION_SCHEMA_V1.json
+./schemas/observation/CAPTURE_SCHEMA_V1.json
+./schemas/REAL_LOAD_RESULT_V0_1.schema.json
+./schemas/receipt_card_v0.2.json
+./schemas/receiptos-frame.schema.json
+./schemas/receipt.schema.json
+./schemas/replay_execution_report_v1.schema.json
+./schemas/ROUND_017_verification_receipt.schema.json
+./schemas/SIGNED_LOAD_RECEIPT_VERIFIER_V0_1.schema.json
+./schemas/witness_profile_v1.schema.json
+./scripts/check-eas-revocation.sh
+./scripts/fuzz-manifest-vectors.js
+./scripts/grp003/canonical-validator.js
+./scripts/invalid-vectors.js
+./scripts/inventory_receipts.py
+./scripts/jay-bootstrap-prc-jrn-v1.1.1.sh
+./scripts/llm_radar_intake.py
+./scripts/receiptos.js
+./scripts/regenerate-tv073.py
+./scripts/rfc8785-test-vectors.js
+./scripts/semantic-verify.js
+./scripts/send-daily-briefing.ts
+./scripts/test-identity-binding-matrix.mjs
+./scripts/test-release-gate-negative.py
+./scripts/validate_round16_artifacts.py
+./scripts/vercel-prod-deploy.sh
+./scripts/verify-60-second.js
+./scripts/verify-all-anchors.sh
+./scripts/verify-authorized-signer-empty-state.js
+./scripts/verify-authorized-signer-registry.js
+./scripts/verify-eas-anchor-onchain.sh
+./scripts/verify-eas-anchor.sh
+./scripts/verify-empty-registry-denial-fixture.js
+./scripts/verify-evidence-bundle.py
+./scripts/verify-frame-capability-surface.js
+./scripts/verify-frame-conformance-suite.js
+./scripts/verify-frame-openapi-contract.js
+./scripts/verify-identity-binding.mjs
+./scripts/verify-manifest-lock.js
+./scripts/verify-public-audit-surface.js
+./scripts/verify-signature-surface.js
+./SHA256SUMS
+./snapshot/dni-gross-intel-crew/eligible-holders.json
+./snapshot/dni-gross-intel-crew/export-erc20-holders-snapshot.mjs
+./snapshot/dni-gross-intel-crew/merkle-root.txt
+./snapshot/dni-gross-intel-crew/snapshot-checkpoint-48037949.pending.json
+./snapshot/dni-gross-intel-crew/snapshot.json
+./snapshot/dni-gross-intel-crew/snapshot-spec-v1.1.md
+./spec/EVIDENCE_GRAPH.md
+./src/lib/fetchReceipt.ts
+./src/lib/verifyReceipt.ts
+./state_machine/transitions.yaml
+./templates/kid-kourt/KID_KOURT_RULING_TEMPLATE_V0_1.md
+./tests/check-clean-test.sh
+./tests/claim-firewall.sh
+./tests/conftest.py
+./tests/fixtures/card_001_seed.json
+./tests/fixtures/gcp_readonly_audit_seed.json
+./tests/fixtures/missing-field.json
+./tests/fixtures/modified-path.json
+./tests/fixtures/OBS-001-minimal-observed.json
+./tests/fixtures/tampered-leaf.json
+./tests/fixtures/wrong-root.json
+./tests/.gitkeep
+./tests/grp003/tv035.duplicate_key.test.js
+./tests/grp003/tv037.float_rejection.test.js
+./tests/interop/parity_vector.json
+./tests/interop/README.md
+./tests/interpretation-boundary.sh
+./tests/l1-determinism.test.js
+./tests/latest-pointer-test.sh
+./tests/observation/test_negative_fixtures.py
+./tests/observation/test_replay_validator.py
+./tests/observation/validate_packet.py
+./tests/observation/VALIDATION_LOG.md
+./tests/__pycache__/conftest.cpython-312-pytest-9.1.1.pyc
+./tests/tamper-test.sh
+./tests/test_authority_enforcement.py
+./tests/test_canonical_hash.py
+./tests/test_canonical.py
+./tests/test_cloud_command_allowlist.py
+./tests/test_forbidden_transitions.py
+./tests/test_gcp_module_split_hardening.py
+./tests/test_gcp_readonly_audit_packet_schema.py
+./tests/test_gcp_readonly_packet_validator.py
+./tests/test_load_witness_audit.py
+./tests/test_manifest_integrity.py
+./tests/test_parser.py
+./tests/test_placeholder_witness_bundle.py
+./tests/test_real_load_runner_fail_closed.py
+./tests/test_receipt_determinism.py
+./tests/test_receipt_integrity.py
+./tests/test_schema_validation.py
+./tests/test_signed_load_harness.py
+./tests/test_verify_load_witness.py
+./tests/test_weld_deerflow.py
+./test-vectors/manifest.json
+./test-vectors/SPEC-V1/manifest.json
+./test-vectors/SPEC-V2/manifest.json
+./tools/audit_load_witness.py
+./tools/evidence_verify.py
+./tools/generate_artifact_proofs.py
+./tools/generate_cid_helper.py
+./tools/load_harness.py
+./tools/manifest_verify/attestation_adapter.py
+./tools/manifest_verify/attestation_manager.py
+./tools/manifest_verify/attestation_schema.py
+./tools/manifest_verify/gatekeeper.py
+./tools/manifest_verify/__init__.py
+./tools/manifest_verify/integrity.py
+./tools/manifest_verify/manifest_loader.py
+./tools/manifest_verify/manifest_schema.py
+./tools/manifest_verify/manifest_verifier.py
+./tools/manifest_verify/orchestrator.py
+./tools/manifest_verify/pyproject.toml
+./tools/manifest_verify/replayos_cli.py
+./tools/manifest_verify/uri_resolvers.py
+./tools/real_load_runner.py
+./tools/receiptos/check-clean
+./tools/receiptos/lint-citations
+./tools/receiptos/quickstart
+./tools/receiptos/rotate-snapshot
+./tools/receiptos/verify
+./tools/receiptos/verify-latest
+./tools/replay_why.py
+./tools/run_gpk_factory_test.py
+./tools/validate_eas_profile_frame.py
+./tools/validate_receiptos_frame.py
+./tools/verify_global_forest.py
+./tools/verify_load_witness.py
+./tools/verify_ros.sh
+./transparency/README.md
+./tsconfig.json
+./validation/teach-back/PR130_BINDING_RECEIPT_TEACH_BACK_VALIDATION_PACKET_V0_1.md
+./.vercel-redeploy
+./.vercel-redeploy-viem
+./verifier/free_only_three_surface.py
+./verify_ext-033.py
+./verify_ext-034.py
+./verify_ext-038.py
+./verify_ext_048_live_attestation.py
+./verify_ext_051_governance_membrane.py
+./verify_ext_056_badge_minting_membrane.py
+./verify_ext_057_erc1155_badge_mint_plan.py
+./verify_ext_058_mock_erc1155_badge_contract_semantics.py
+./verify_ext_059_mock_mint_flow_test_vectors.py
+./verify_ext_060_solidity_mock_badge_skeleton.py
+./verify_ext_061_solidity_static_policy_guard.py
+./verify_ext_063_local_compile_validation_gate.py
+./verify_ext_064_production_policy_freeze.py
+./verify_ext_065_reference_erc1155_implementation.py
+./verify_ext_066_local_compile_unit_test_gate.py
+./verify_ext_067_testnet_readiness_review.py
+./verify_production_lock.py
+./verify.py
+./verify.sh
+./verify_tntr_instrument_deployment.py
+./verify_tntr_instrument_layer.py
+./verify_tntr_market_substrate.py
+./verify_tntr_witness_mesh.py
+./.well-known/farcaster/manifest.jcs
+./.well-known/farcaster/manifest.json
+./.well-known/farcaster/manifest.lock.json
+./witness/guard_replay_report.py
+./witness/replay_receiptos_frame.py
+./witness/reports/rp-001-witness-replay.example.json
+./witness/reports/rp-001-witness-replay.hash
+./witness/reports/rp-002-eas-witness-replay.example.json
+./witness/reports/rp-002-eas-witness-replay.hash.json
+./ztvs/ACTIVE_LANES_V2.md
+./ztvs/ACTIVE_LANES_VALIDATOR_DRY_RUN.md
+./ztvs/active_lanes_validator.py
+./ztvs/EXT001_MUTATION_RULES.md
+./ztvs/mutate_ext001.sh
+
+## Candidate Python Files
+./audit/anchor_conformance_matrix.py
+./audit/append_batch_root.py
+./audit/conformance_gate_storage_view.py
+./audit/consume_storage_anchors.py
+./audit/event_time_comparison_conformance_matrix.py
+./audit/event_time_conformance_gate.py
+./audit/event_time_feature_conformance_matrix.py
+./audit/event_time_record_conformance_matrix.py
+./audit/export_storage_time_view.py
+./audit/export_verified_roots.py
+./audit/external_subscriber_conformance_matrix.py
+./audit/external_subscriber_validator.py
+./audit/generate_storage_view_fixture.py
+./audit/normalized_event_time_conformance_matrix.py
+./audit/storage_time_view.py
+./audit/storage_view_conformance_matrix.py
+./audit/storage_view_subscription_feed.py
+./audit/subscription_manifest.py
+./audit/validate_event_time_comparison.py
+./audit/validate_event_time_record.py
+./audit/validate_normalized_event_time_record.py
+./audit/validate_storage_view_subscription.py
+./audit/validate_subscription_feed.py
+./audit/verify_log_continuity.py
+./ci/scripts/compare_reports.py
+./deployment/freeze-guard-stack-hash.py
+./engine/replay.py
+./ep/canonical.py
+./ep/__init__.py
+./ep/parser.py
+./event_time/compare_claimed_times.py
+./event_time/normalize_claimed_time.py
+./event_time/parse_claimed_time.py
+./lattice/batch_merkle_catalog.py
+./lattice/batch_root_manifest.py
+./lattice/catalog_accepted_report.py
+./lattice/ingest_guarded_report.py
+./lattice/light_verify_inclusion.py
+./lattice/merkle_catalog.py
+./ops/manifest_replay.py
+./ops/merkle.py
+./proofs/ROUND_009/verify-index-root.py
+./receiptos/cli.py
+./receiptos/core/authority.py
+./receiptos/core/cloud_commands.py
+./receiptos/core/gcp_validator.py
+./receiptos/core/hash.py
+./receiptos/core/__init__.py
+./receiptos/core/transitions.py
+./receiptos/gcp/allowlist.py
+./receiptos/gcp/errors.py
+./receiptos/gcp/validator.py
+./receiptos/__init__.py
+./receiptos/weld.py
+./ReplayBoard/eas_payload.py
+./ReplayBoard/sanitize_for_llm.py
+./ReplayBoard/settle.py
+./ReplayBoard/verify_settle_ledger.py
+./replay-bundle/receipt_anchor.py
+./replay-bundle/self_test.py
+./replay-bundle/verify.py
+./replay_court/process.py
+./scripts/inventory_receipts.py
+./scripts/llm_radar_intake.py
+./scripts/regenerate-tv073.py
+./scripts/test-release-gate-negative.py
+./scripts/validate_round16_artifacts.py
+./scripts/verify-evidence-bundle.py
+./tests/conftest.py
+./tests/observation/replay/validate_replay_packet_v1.py
+./tests/observation/test_negative_fixtures.py
+./tests/observation/test_replay_validator.py
+./tests/observation/validate_packet.py
+./tests/test_authority_enforcement.py
+./tests/test_canonical_hash.py
+./tests/test_canonical.py
+./tests/test_cloud_command_allowlist.py
+./tests/test_forbidden_transitions.py
+./tests/test_gcp_module_split_hardening.py
+./tests/test_gcp_readonly_audit_packet_schema.py
+./tests/test_gcp_readonly_packet_validator.py
+./tests/test_load_witness_audit.py
+./tests/test_manifest_integrity.py
+./tests/test_parser.py
+./tests/test_placeholder_witness_bundle.py
+./tests/test_real_load_runner_fail_closed.py
+./tests/test_receipt_determinism.py
+./tests/test_receipt_integrity.py
+./tests/test_schema_validation.py
+./tests/test_signed_load_harness.py
+./tests/test_verify_load_witness.py
+./tests/test_weld_deerflow.py
+./tools/audit_load_witness.py
+./tools/evidence_verify.py
+./tools/generate_artifact_proofs.py
+./tools/generate_cid_helper.py
+./tools/load_harness.py
+./tools/manifest_verify/adapters/dsse.py
+./tools/manifest_verify/adapters/__init__.py
+./tools/manifest_verify/adapters/sigstore.py
+./tools/manifest_verify/anchors/base.py
+./tools/manifest_verify/anchors/__init__.py
+./tools/manifest_verify/anchors/rekor.py
+./tools/manifest_verify/attestation_adapter.py
+./tools/manifest_verify/attestation_manager.py
+./tools/manifest_verify/attestation_schema.py
+./tools/manifest_verify/gatekeeper.py
+./tools/manifest_verify/__init__.py
+./tools/manifest_verify/integrity.py
+./tools/manifest_verify/manifest_loader.py
+./tools/manifest_verify/manifest_schema.py
+./tools/manifest_verify/manifest_verifier.py
+./tools/manifest_verify/orchestrator.py
+./tools/manifest_verify/publishers/base.py
+./tools/manifest_verify/publishers/__init__.py
+./tools/manifest_verify/replayos_cli.py
+./tools/manifest_verify/uri_resolvers.py
+./tools/real_load_runner.py
+./tools/replay_why.py
+./tools/run_gpk_factory_test.py
+./tools/validate_eas_profile_frame.py
+./tools/validate_receiptos_frame.py
+./tools/verify_global_forest.py
+./tools/verify_load_witness.py
+./verifier/free_only_three_surface.py
+./verify_ext-033.py
+./verify_ext-034.py
+./verify_ext-038.py
+./verify_ext_048_live_attestation.py
+./verify_ext_051_governance_membrane.py
+./verify_ext_056_badge_minting_membrane.py
+./verify_ext_057_erc1155_badge_mint_plan.py
+./verify_ext_058_mock_erc1155_badge_contract_semantics.py
+./verify_ext_059_mock_mint_flow_test_vectors.py
+./verify_ext_060_solidity_mock_badge_skeleton.py
+./verify_ext_061_solidity_static_policy_guard.py
+./verify_ext_063_local_compile_validation_gate.py
+./verify_ext_064_production_policy_freeze.py
+./verify_ext_065_reference_erc1155_implementation.py
+./verify_ext_066_local_compile_unit_test_gate.py
+./verify_ext_067_testnet_readiness_review.py
+./verify_production_lock.py
+./verify.py
+./verify_tntr_instrument_deployment.py
+./verify_tntr_instrument_layer.py
+./verify_tntr_market_substrate.py
+./verify_tntr_witness_mesh.py
+./witness/guard_replay_report.py
+./witness/replay_receiptos_frame.py
+./ztvs/active_lanes_validator.py
+
+## Candidate Workflows
+./api/spec/AL-to-receiptos.yaml
+./api/spec/JOY-to-receiptos.yaml
+./cloudbuild-test-matrix.yaml
+./.github/workflows/active-lanes-validator.yml
+./.github/workflows/authorized-signer-registry.yml
+./.github/workflows/canonical-build.yml
+./.github/workflows/ci.yml
+./.github/workflows/compliance.yml
+./.github/workflows/daily-briefing.yml
+./.github/workflows/deterministic-verify.yml
+./.github/workflows/evidence-verify.yml
+./.github/workflows/farcaster-manifest.yml
+./.github/workflows/farcaster-verify-reusable.yml
+./.github/workflows/frame-conformance-suite.yml
+./.github/workflows/frame-openapi-contract.yml
+./.github/workflows/frame-zero-mutation.yml
+./.github/workflows/free-only-three-surface.yml
+./.github/workflows/gpk-canon-correct.yml
+./.github/workflows/gpk-factory-test.yml
+./.github/workflows/gpp-render-wave.yml
+./.github/workflows/grp004-verify.yml
+./.github/workflows/identity-binding-matrix.yml
+./.github/workflows/interop-parity.yml
+./.github/workflows/llm-radar-intake.yml
+./.github/workflows/load-verification-witness.yml
+./.github/workflows/npm-publish.yml
+./.github/workflows/observation-protocol.yml
+./.github/workflows/page-agent-adapter-test.yml
+./.github/workflows/pre-publish-audit.yml
+./.github/workflows/production-lock-gate.yml
+./.github/workflows/provenance-dry-run.yml
+./.github/workflows/public-audit-surface.yml
+./.github/workflows/receiptos-anchor-verify.yml
+./.github/workflows/receiptos-ci.yml
+./.github/workflows/receiptos-wire.yml
+./.github/workflows/release-gate-receiptos.yml
+./.github/workflows/release-gate.yml
+./.github/workflows/release-witness.yml
+./.github/workflows/release.yml
+./.github/workflows/replayboard-settle-probe.yml
+./.github/workflows/replay-witness.yml
+./.github/workflows/revocation-monitor.yml
+./.github/workflows/signature-verify.yml
+./.github/workflows/slsa-attestation.yml
+./.github/workflows/validator.yml
+./.github/workflows/verify-anchor.yml
+./.github/workflows/verify-and-attest.yml
+./manifests/COGNITIVE_VERNACULAR_REBOOT_V0_1.yml
+./manifests/FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_V0_1.yml
+./manifests/GOBLIN_COURT_FOR_KIDS_V0_1.yml
+./manifests/K3_JAY_KID_CIVIC_LEARNING_STACK_V0_1.yml
+./manifests/KID_KINDERGARTEN_2026_AI_ENABLED_SYSTEMS_V0_1.yml
+./manifests/KID_KINDERGARTEN_RHYTHM_AND_SOUL_PROTOCOLS_V0_1.yml
+./manifests/KID_KINETIC_REPLAYABLE_PARODY_STICKER_CARD_V0_1.yml
+./manifests/KID_KINETIC_REPLAY_V0_1.yml
+./manifests/KID_KOURT_RULING_ENGINE_V0_1.yml
+./manifests/NEXT_EPOCH_KIDS_SAFE_BASE_V0_1.yml
+./manifests/PR130_TEACH_BACK_VALIDATION_RESULT_V0_1.yml
+./manifests/RECEIPT_FIRST_LEARNING_CHARTER_BINDING_V0_1.yml
+./manifests/SUPER_SECRET_SISTER_SYNTAX_WISDOM_GRADE_1_V0_1.yml
+./receipts/next-epoch/COGNITIVE_VERNACULAR_REBOOT_RECEIPT_V0_1.yml
+./receipts/next-epoch/FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_RECEIPT_V0_1.yml
+./receipts/next-epoch/GOBLIN_COURT_FOR_KIDS_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/K3_JAY_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINDERGARTEN_2026_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINDERGARTEN_RHYTHM_AND_SOUL_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINETIC_REPLAYABLE_PARODY_STICKER_CARD_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINETIC_REPLAY_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_001_ACRONYM_SAFETY_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_002_KONSTITUTION_ON_TRIAL_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_003_KLOWN_KOURT_EXHIBIT_A_RECEIPT_V0_1.yml
+./receipts/next-epoch/NEXT_EPOCH_KIDS_SAFE_BASE_RECEIPT_V0_1.yml
+./receipts/next-epoch/PR130_BINDING_RECEIPT_TEACH_BACK_DIFF_RECEIPT_V0_1.yml
+./receipts/next-epoch/RECEIPT_FIRST_LEARNING_CHARTER_BINDING_RECEIPT_V0_1.yml
+./receipts/next-epoch/SUPER_SECRET_SISTER_SYNTAX_WISDOM_GRADE_1_RECEIPT_V0_1.yml
+./state_machine/transitions.yaml
+
+## Files mentioning canonical
+./artifacts/receipt_inventory.json
+./package.json
+./front-door/index.html
+./front-door/README.md
+./evidence-reports/TEST-POSITIVE-001.report.json
+./evidence-reports/ZORA-e423ae19fffcee95919dde96a31e828bc060e36f.report.json
+./evidence-reports/TEST-NEGATIVE-001.report.json
+./CANONICAL_DEPLOY.md
+./test-vectors/SPEC-V1/passing/valid-full/expected.json
+./test-vectors/SPEC-V1/passing/valid-full/manifest.lock.json
+./test-vectors/SPEC-V1/passing/valid-minimal/expected.json
+./test-vectors/SPEC-V1/passing/valid-minimal/manifest.lock.json
+./test-vectors/SPEC-V1/passing/valid-screenshots/expected.json
+./test-vectors/SPEC-V1/passing/valid-screenshots/manifest.lock.json
+./test-vectors/SPEC-V1/passing/valid-permissions/expected.json
+./test-vectors/SPEC-V1/passing/valid-permissions/manifest.lock.json
+./test-vectors/SPEC-V1/passing/valid-deterministic/expected.json
+./test-vectors/SPEC-V1/passing/valid-deterministic/manifest.lock.json
+./test-vectors/SPEC-V1/failing/fail-digest/expected.json
+./test-vectors/SPEC-V1/failing/fail-digest/manifest.lock.json
+./test-vectors/SPEC-V1/failing/fail-semantic/expected.json
+./test-vectors/SPEC-V1/failing/fail-invalid-url/expected.json
+./test-vectors/SPEC-V1/failing/fail-unexpected-field/expected.json
+./test-vectors/SPEC-V1/failing/fail-canonicalization/expected.json
+./test-vectors/SPEC-V1/failing/fail-canonicalization/manifest.lock.json
+./test-vectors/SPEC-V1/manifest.json
+./test-vectors/SPEC-V2/passing/valid-v2-permissions/expected.json
+./test-vectors/SPEC-V2/passing/valid-v2-permissions/manifest.lock.json
+./test-vectors/SPEC-V2/passing/valid-v2-minimal/expected.json
+./test-vectors/SPEC-V2/passing/valid-v2-minimal/manifest.lock.json
+./test-vectors/SPEC-V2/passing/valid-v2-url-fields/expected.json
+./test-vectors/SPEC-V2/passing/valid-v2-version-semver/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-homepage-http/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-permissions-not-array/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-permissions-empty-string/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-version-invalid-prerelease/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-version-2.0.0.0/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-version-v2.0/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-permissions-whitespace-only/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-version-02.0.0/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-permissions-duplicates/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-repository-http/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-developer-url-http/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-version-empty/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-permissions-not-string-elements/expected.json
+./test-vectors/SPEC-V2/failing/fail-v2-malformed-url/expected.json
+./test-vectors/SPEC-V2/manifest.json
+./templates/kid-kourt/KID_KOURT_RULING_TEMPLATE_V0_1.md
+./tools/generate_cid_helper.py
+./tools/audit_load_witness.py
+./tools/verify_load_witness.py
+./tools/manifest_verify/orchestrator.py
+./tools/manifest_verify/manifest_verifier.py
+./tools/manifest_verify/integrity.py
+./tools/manifest_verify/replayos_cli.py
+./tools/manifest_verify/manifest_schema.py
+./tools/verify_global_forest.py
+./tools/load_harness.py
+./tools/real_load_runner.py
+./tools/validate_receiptos_frame.py
+./tools/evidence_verify.py
+./replay/engine.ts
+./RECEIPT-001.md
+./verify_tntr_witness_mesh.py
+./gal/specs/GAL-SPEC-003.md
+./.well-known/farcaster/manifest.lock.json
+./packages/receiptos-core/canonical.ts
+./packages/receiptos-core/canonical.js
+./packages/receiptos-core/verifier.js
+./tests/test_signed_load_harness.py
+./tests/test_load_witness_audit.py
+./tests/test_receipt_determinism.py
+./tests/test_verify_load_witness.py
+./tests/test_canonical_hash.py
+./tests/test_forbidden_transitions.py
+./tests/test_canonical.py
+./tests/test_receipt_integrity.py
+./tests/interop/README.md
+./tests/grp003/tv035.duplicate_key.test.js
+./tests/grp003/tv037.float_rejection.test.js
+./tests/l1-determinism.test.js
+./batch_proof.txt
+./profiles/eas-v1.schema.json
+./ci/local-runner.js
+./spec/EVIDENCE_GRAPH.md
+./evidence-ledger.json
+./index.d.ts
+./receiptos_recon.txt
+./manifests/COGNITIVE_VERNACULAR_REBOOT_V0_1.yml
+./manifests/KID_KOURT_RULING_ENGINE_V0_1.yml
+./manifests/invalid/missing_surface.json
+./manifests/invalid/tree_hash_mismatch.json
+./manifests/invalid/commit_unresolvable.json
+./manifests/NEXT_EPOCH_KIDS_SAFE_BASE_V0_1.yml
+./manifests/K3_JAY_KID_CIVIC_LEARNING_STACK_V0_1.yml
+./manifests/COMMIT_MANIFEST_A164C62_V0_1.json
+./manifests/SUPER_SECRET_SISTER_SYNTAX_WISDOM_GRADE_1_V0_1.yml
+./manifests/KID_KINDERGARTEN_RHYTHM_AND_SOUL_PROTOCOLS_V0_1.yml
+./manifests/KID_KINETIC_REPLAY_V0_1.yml
+./manifests/FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_V0_1.yml
+./manifests/KID_KINDERGARTEN_2026_AI_ENABLED_SYSTEMS_V0_1.yml
+./manifests/valid/manifest.valid.json
+./manifests/GOBLIN_COURT_FOR_KIDS_V0_1.yml
+./manifests/RECEIPT_FIRST_LEARNING_CHARTER_BINDING_V0_1.yml
+./manifests/PR130_TEACH_BACK_VALIDATION_RESULT_V0_1.yml
+./openapi/ext-101-frame-readonly-openapi.json
+./witness/guard_replay_report.py
+./witness/reports/rp-002-eas-witness-replay.hash.json
+./ep/canonical.py
+./src/lib/verifyReceipt.ts
+./app/sign/page.tsx
+./protocols/PROTOCOL_V1.json
+./adapters/page-agent/hash.js
+./adapters/page-agent/tests/wire-event.test.js
+./adapters/page-agent/WIRE_EVENT_SCHEMA.md
+./adapters/page-agent/wire-event.js
+./modules/prc-jrn/engine.js
+./receiptos/weld.py
+./receiptos/core/hash.py
+./receiptos/cli.py
+./ReplayBoard/settle.py
+./ReplayBoard/sanitize_for_llm.py
+./ReplayBoard/eas_payload.py
+./ReplayBoard/verify_settle_ledger.py
+./governance/dockets/57-authorized-identity.md
+./evidence-ledger.schema.json
+./docs/farcaster-signature-association-layer.md
+./docs/LOAD_VERIFICATION_WITNESS_V0_1.md
+./docs/frame-readonly-endpoint-contract.md
+./docs/ar-001-receipt-lifecycle.md
+./docs/REPLAY_ENGINE_AUDIT_V0_1.md
+./docs/farcaster-public-witness-surface.md
+./docs/farcaster-transparency-log.md
+./docs/registry-canonization-ext-105.md
+./docs/eas-attest-lock-v1.md
+./docs/signature-verification-surface-ext-106.md
+./docs/ESG-001_ReceiptOS_Boundary_Review.md
+./docs/observation-protocol/ROUND3_REPLAY_PROTECTION.md
+./docs/kids-safe/kid-kourt/KID_KOURT_KASE_002_KONSTITUTION_ON_TRIAL_V0_1.md
+./docs/kids-safe/kid-kourt/KID_KUORUM_LEDGER_SPECIFICATION_V0_1.md
+./docs/kids-safe/kid-kourt/KID_KOURT_KASE_003_KLOWN_KOURT_EXHIBIT_A_V0_1.md
+./docs/kids-safe/MEME_COURT_AUDITING_SCHOOL_FOR_CHILDREN_V0_1.md
+./docs/kids-safe/kid-kindergarten/KID_KINDERGARTEN_2026_AI_ENABLED_SYSTEMS_V0_1.md
+./docs/kids-safe/kid-kindergarten/SUPER_SECRET_SISTER_SYNTAX_WISDOM_GRADE_1_V0_1.md
+./docs/kids-safe/kid-kindergarten/COGNITIVE_VERNACULAR_REBOOT_V0_1.md
+./docs/kids-safe/kid-kindergarten/KID_KINDERGARTEN_TEACH_BACK_PROTOCOLS_V0_1.md
+./docs/kids-safe/kid-kindergarten/KID_KINDERGARTEN_RHYTHM_AND_SOUL_PROTOCOLS_V0_1.md
+./docs/kids-safe/kid-kindergarten/KID_KINETIC_REPLAY_V0_1.md
+./docs/kids-safe/kid-kindergarten/FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_V0_1.md
+./docs/kids-safe/GOBLIN_COURT_FOR_KIDS_V0_1.md
+./docs/agent-receipts/threat-model.md
+./docs/agent-receipts/receipt-spec.md
+./docs/agent-receipts/receipt-spec-v0.2-delta.md
+./docs/agent-receipts/architecture.md
+./docs/gitfix-erc1271-commit-log.md
+./docs/SERIALIZATION_DELTA_GUARD.md
+./docs/receiptos-spec/ROS-0006.md
+./docs/EAS_RAIL_NEXT.md
+./docs/farcaster-lock-rotation.md
+./docs/REPLAY_ENGINE_V0_1.md
+./docs/protocol.md
+./docs/CONFORMANCE.md
+./docs/farcaster-frame-extension-layer.md
+./docs/CROSS_PROFILE_TESTS.md
+./docs/SIGNED_RECEIPT_VERIFIER_V0_1.md
+./docs/governance/deerflow-weld-brief.md
+./docs/docket-61-user-space-interpretation.md
+./docs/generate-cid-helper.md
+./docs/npm-package.md
+./docs/farcaster-signer-verification-layer.md
+./docs/public-audit-surface.md
+./docs/releases/v0.1.1.md
+./docs/releases/v0.1.0.md
+./docs/mathematical-model.md
+./docs/REPLAY_INVARIANTS_V0_1.md
+./docs/canonicalization.md
+./docs/authorized-signer-registry.md
+./docs/v0.2.0.md
+./agents/gpk-factory/override-ollie.md
+./observations/sweeps/2026-07-08-move2-manual-sweep.md
+./fixtures/load_verification/sentinel_hashes.invalid.json
+./ACTIVE_LANES.md
+./audit/append_batch_root.py
+./audit/verify_log_continuity.py
+./cards/schema.json
+./index.js
+./mesh/tntr-cro-001-witness-mesh-spec.json
+./scripts/fuzz-manifest-vectors.js
+./scripts/llm_radar_intake.py
+./scripts/verify-authorized-signer-registry.js
+./scripts/test-release-gate-negative.py
+./scripts/vercel-prod-deploy.sh
+./scripts/verify-60-second.js
+./scripts/send-daily-briefing.ts
+./scripts/verify-evidence-bundle.py
+./scripts/invalid-vectors.js
+./scripts/verify-manifest-lock.js
+./scripts/semantic-verify.js
+./scripts/verify-eas-anchor-onchain.sh
+./scripts/rfc8785-test-vectors.js
+./scripts/verify-eas-anchor.sh
+./verify_ext_064_production_policy_freeze.py
+./examples/agent-receipts/evaluate-policy.js
+./examples/agent-receipts/README.md
+./examples/agent-receipts/run-demo.js
+./examples/agent-receipts/canonical.js
+./examples/agent-receipts/replay-bundle.json
+./deployment/stack-hash-rule-v1.json
+./deployment/tntr-v1-production-manifest.json
+./receipts/rp-001-gitdirect-next-verb-surface-fix-2026-06-30.json
+./receipts/RECEIPT-003.7-PROMOTION.json
+./receipts/mru-012-jsonwisdom-byte-blob-fixture.json
+./receipts/SCHEMA_REPLAY_EXECUTION_REPORT_V1_RECEIPT.json
+./receipts/rcpt-ext-meta-004-scaffold.json
+./receipts/ext-104-authorized-signer-registry.seed.json
+./receipts/rp-001-evidence-expansion-request-photos-pending-2026-06-30.json
+./receipts/RECEIPT-ZORA-e423ae19fffcee95919dde96a31e828bc060e36f-VERIFIED.json
+./receipts/prc-jrn/ext/EXT-001-intake-template.json
+./receipts/mru-005-self-application-observed.json
+./receipts/rp-001-evidence-expansion-court-filing-arrest-citation-2025.json
+./receipts/ext-094-signer-evidence-bundle.pending.json
+./receipts/ext-096-signer-payload.jcs
+./receipts/goblin-court-session-open.json
+./receipts/rp-001-source-verification-request-lands-declaration-2026-06-25.json
+./receipts/goblin-court-recess-secure.json
+./receipts/goblin-court-docket-clear.json
+./receipts/rp-001-user-supplied-sha-lands-declaration-2026-06-25.json
+./receipts/tntr-007-multi-hub-unreachable.md
+./receipts/trump-vulcan-005-v2-diff-statement-refinement-open-question-resolved.json
+./receipts/rp-001-source-payload-mismatch-usda-handbook-lands-declaration-2026-06-25.json
+./receipts/rcpt-ext-gov-003.json
+./receipts/july4-2026/environment.lock.json
+./receipts/rp-001-public-record-extraction-lands-declaration-2026-06-30.json
+./receipts/rp-001-replay-source-text-external-corroboration-2026-06-30.json
+./receipts/mru-009-first-digest-reconciliation.json
+./receipts/tntr-013-multichain-witness-mesh.json
+./receipts/mru-007-resolution-event-observed.json
+./receipts/rcpt-ext-zora-goblin-mismatch.json
+./receipts/trump-vulcan-reflecting-pool-v2-diff-trump-vulcan-005.json
+./receipts/mru-008-recommit-law-observed.json
+./receipts/mru-001-minimal-replay-unit.json
+./receipts/trump-vulcan-reflecting-pool-v2-diff-rp-001.json
+./receipts/rp-001-hash-bind-attempt-lands-declaration-2026-06-25-digest-unverified.json
+./receipts/rp-001-evidence-expansion-nps-damage-assessment-photos-2025.json
+./receipts/mru-006-canonical-resolution-law-observed.json
+./receipts/rp-001-source-verification-gate-1-court-filing-arrest-citation-2025.json
+./receipts/rp-001-source-url-verified-lands-declaration-2026-06-25-hash-pending.json
+./receipts/mru-003-identity-law-gitfix-observed.json
+./receipts/mru-010-variance-audit-event.json
+./receipts/mru-002-state-reconciliation.json
+./receipts/rp-001-gitfix-canonical-hash-gate-correction-2026-06-30.json
+./receipts/goblin-court-oversight-initialized.json
+./receipts/rp-001-operational-note-courtlistener-dns-not-doj-blocking-2026-06-30.json
+./receipts/next-epoch/KID_KINETIC_REPLAY_RECEIPT_V0_1.yml
+./receipts/next-epoch/GOBLIN_COURT_FOR_KIDS_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_003_KLOWN_KOURT_EXHIBIT_A_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_002_KONSTITUTION_ON_TRIAL_RECEIPT_V0_1.yml
+./receipts/next-epoch/NEXT_EPOCH_KIDS_SAFE_BASE_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINDERGARTEN_RHYTHM_AND_SOUL_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINDERGARTEN_2026_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/SUPER_SECRET_SISTER_SYNTAX_WISDOM_GRADE_1_RECEIPT_V0_1.yml
+./receipts/next-epoch/RECEIPT_FIRST_LEARNING_CHARTER_BINDING_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINETIC_REPLAYABLE_PARODY_STICKER_CARD_RECEIPT_V0_1.yml
+./receipts/next-epoch/COGNITIVE_VERNACULAR_REBOOT_RECEIPT_V0_1.yml
+./receipts/next-epoch/FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_RECEIPT_V0_1.yml
+./receipts/next-epoch/PR130_BINDING_RECEIPT_TEACH_BACK_DIFF_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_001_ACRONYM_SAFETY_RECEIPT_V0_1.yml
+./receipts/next-epoch/K3_JAY_OPEN_RECEIPT_V0_1.yml
+./receipts/goblin-court-standby-contained.json
+./receipts/rp-001-v2-diff-confidence-medium-high-source-corroboration-2026-06-30.json
+./receipts/mru-005-rebound-chain-audit-observed.json
+./receipts/rp-001-source-verification-lands-declaration-2026-06-25-source-identified-hash-pending.json
+./receipts/mru-011-exact-byte-fixture.json
+./replay_court/process.py
+./evidence-payloads/README.md
+./.github/workflows/gpk-lineage-check.sh
+./.github/workflows/canonical-build.yml
+./.github/workflows/receiptos-wire.yml
+./.github/workflows/farcaster-manifest.yml
+./.github/workflows/authorized-signer-registry.yml
+./ruleset.md
+./frame/ext-103-public-audit-surface.js
+./frame/ext-099-frame-capability-surface.js
+./schemas/LOAD_VERIFICATION_WITNESS_V0_1.schema.json
+./schemas/manifest.schema.json
+./schemas/receiptos-frame.schema.json
+./schemas/evidence-bundle.schema.json
+./schemas/kid-kuorum/kid_kuorum_compliance_v0_1.schema.json
+./schemas/SIGNED_LOAD_RECEIPT_VERIFIER_V0_1.schema.json
+
+## Files mentioning crosscheck
+./receiptos_recon.txt
+
+## Files mentioning receipt
+./artifacts/receipt_inventory.json
+./receiptos-cli
+./constitution/RECEIPTOS_PROVENANCE_BOUNDARY_V0_1.md
+./lesson_022/LESSON_022_EVIDENCE_POINTER_SCHEMA_RECEIPT_V0_1.json
+./lesson_025/receipts/LESSON_025_IMPACT_NOTE_EDITOR_VIEW_RECEIPT_V0_1.json
+./package.json
+./front-door/index.html
+./evidence-reports/TEST-POSITIVE-001.report.json
+./evidence-reports/ZORA-e423ae19fffcee95919dde96a31e828bc060e36f.report.json
+./evidence-reports/TEST-NEGATIVE-001.report.json
+./verify_ext_051_governance_membrane.py
+./lesson_023/LESSON_023_VA_CLAIM_CHATBOT_WEBPAGE_DEV_EDITION_V0_1.md
+./lesson_023/spec/HUMOR_BOUNDARY_RULES_V0_1.md
+./lesson_023/spec/DEV_INTEGRATION_NOTES_V0_1.md
+./lesson_023/spec/CHATBOT_MODE_SPEC_V0_1.json
+./lesson_023/LESSON_023_VA_CLAIM_CHATBOT_WEBPAGE_DEV_EDITION_RECEIPT_V0_1.json
+./lesson_023/webpage/CLAIMLANDIA_CHAT_WEBPAGE_COPY_V0_1.md
+./lesson_027/LESSON_027_SEQUENCE_EDITOR_VIEW_V0_1.md
+./lesson_027/receipts/LESSON_027_SEQUENCE_EDITOR_VIEW_RECEIPT_V0_1.json
+./test/fixtures/identity-binding/valid/provenance/identity-binding/jaywisdom-identity-binding.txt
+./state_machine/transitions.yaml
+./CANONICAL_DEPLOY.md
+./test-vectors/manifest.json
+./prc-jrn/v1.1.1/PRC-JRN-FIELD-EXT-001.intake.schema.json
+./prc-jrn/v1.1.1/PRC-JRN-FIELD-EXT-001.intake.md
+./verify_ext_056_badge_minting_membrane.py
+./lesson_021/LESSON_021_VA_CLAIM_ARENA_REVIEW_PACKET_V0_1.md
+./lesson_021/LESSON_021_VA_CLAIM_ARENA_REVIEW_PACKET_RECEIPT_V0_1.json
+./tools/audit_load_witness.py
+./tools/verify_load_witness.py
+./tools/manifest_verify/orchestrator.py
+./tools/manifest_verify/anchors/rekor.py
+./tools/verify_global_forest.py
+./tools/load_harness.py
+./tools/run_gpk_factory_test.py
+./tools/replay_why.py
+./tools/real_load_runner.py
+./tools/receiptos/quickstart
+./tools/receiptos/verify
+./tools/receiptos/rotate-snapshot
+./tools/evidence_verify.py
+./tools/validate_eas_profile_frame.py
+./verify_ext_063_local_compile_validation_gate.py
+./registry/creator-0x829adfedbe565f9885a7ea6bc78912acaef055e2.json
+./RECEIPT-001.md
+./verify_ext-034.py
+./verify_tntr_witness_mesh.py
+./batch_runtime/BATCH_RUNTIME_MANIFEST_V0_2.json
+./batch_runtime/BATCH_RUNTIME_RECEIPT_V0_2.json
+./batch_runtime/BATCH_RUNTIME_V0_2.md
+./gal/manifests/docket-742-publication.json
+./gal/scripts/replay-docket-742.sh
+./.well-known/farcaster/manifest.json
+./.well-known/farcaster/manifest.jcs
+./packages/receiptos-core/canonical.ts
+./packages/receiptos-core/types.d.ts
+./packages/receiptos-core/canonical.js
+./packages/receiptos-core/verifier.js
+./tests/interpretation-boundary.sh
+./tests/test_signed_load_harness.py
+./tests/test_load_witness_audit.py
+./tests/test_gcp_module_split_hardening.py
+./tests/test_receipt_determinism.py
+./tests/test_schema_validation.py
+./tests/test_placeholder_witness_bundle.py
+./tests/test_verify_load_witness.py
+./tests/test_weld_deerflow.py
+./tests/test_canonical_hash.py
+./tests/test_forbidden_transitions.py
+./tests/observation/VALIDATION_LOG.md
+./tests/test_manifest_integrity.py
+./tests/test_gcp_readonly_audit_packet_schema.py
+./tests/test_receipt_integrity.py
+./tests/fixtures/weld/deerflow-valid.json
+./tests/fixtures/weld/deerflow-invalid.json
+./tests/fixtures/gpk-factory/gpk-card-test-001.json
+./tests/fixtures/card_001_seed.json
+./tests/test_cloud_command_allowlist.py
+./tests/test_authority_enforcement.py
+./tests/test_gcp_readonly_packet_validator.py
+./tests/l1-determinism.test.js
+./batch_proof.txt
+./verify_tntr_instrument_deployment.py
+./profiles/eas-v1.schema.json
+./verify_tntr_market_substrate.py
+./artifact-proofs/evidence_KARENN11_attest-receiptos.sh.json
+./evidence/anchors.json
+./evidence/ROS-0001/evidence-bundle.template.json
+./evidence/ROS-0001/evidence-bundle.json
+./evidence/NEXT-ZORA-COIN/receiptos-packet.json
+./evidence/NEXT-ZORA-COIN/pin-record.json
+./evidence/NEXT-ZORA-COIN/metadata.json
+./evidence/KARENN11/creator-index.json
+./evidence/KARENN11/sha256sums.txt
+./evidence/receipts/eas-global-forest-anchor.json
+./contracts/reference/EXT065ReferenceWitnessBadge.sol
+./contracts/mock/EXT060MockWitnessBadge.sol
+./creator-manifest.json
+./lesson_019/LESSON_019_VA_CLAIM_ARENA_BOUNDARY_GUARD_RECEIPT_V0_1.json
+./lesson_019/LESSON_019_VA_CLAIM_ARENA_BOUNDARY_GUARD_V0_1.md
+./evidence-ledger.json
+./attestations/ROUND_018/eas-receipt-anchor.txt
+./attestations/ROUND_018/sha256sums.txt
+./ztvs/mutate_ext001.sh
+./ztvs/active_lanes_validator.py
+./ztvs/EXT001_MUTATION_RULES.md
+./ztvs/ACTIVE_LANES_V2.md
+./ztvs/ACTIVE_LANES_VALIDATOR_DRY_RUN.md
+./public/.well-known/agent-card.json
+./README-FREE-DEPLOY.md
+./receiptos_recon.txt
+./verify_ext-033.py
+./manifests/COGNITIVE_VERNACULAR_REBOOT_V0_1.yml
+./manifests/KID_KOURT_RULING_ENGINE_V0_1.yml
+./manifests/invalid/missing_surface.json
+./manifests/invalid/tree_hash_mismatch.json
+./manifests/invalid/commit_unresolvable.json
+./manifests/NEXT_EPOCH_KIDS_SAFE_BASE_V0_1.yml
+./manifests/K3_JAY_KID_CIVIC_LEARNING_STACK_V0_1.yml
+./manifests/COMMIT_MANIFEST_A164C62_V0_1.json
+./manifests/SUPER_SECRET_SISTER_SYNTAX_WISDOM_GRADE_1_V0_1.yml
+./manifests/KID_KINDERGARTEN_RHYTHM_AND_SOUL_PROTOCOLS_V0_1.yml
+./manifests/KID_KINETIC_REPLAY_V0_1.yml
+./manifests/FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_V0_1.yml
+./manifests/KID_KINDERGARTEN_2026_AI_ENABLED_SYSTEMS_V0_1.yml
+./manifests/KID_KINETIC_REPLAYABLE_PARODY_STICKER_CARD_V0_1.yml
+./manifests/valid/manifest.valid.json
+./manifests/GOBLIN_COURT_FOR_KIDS_V0_1.yml
+./manifests/RECEIPT_FIRST_LEARNING_CHARTER_BINDING_V0_1.yml
+./manifests/PR130_TEACH_BACK_VALIDATION_RESULT_V0_1.yml
+./models/provider_schema.json
+./models/free_llm_watchlist.json
+./models/model_registry.json
+./openapi/ext-101-frame-readonly-openapi.json
+./curriculum/prc-jrn-v1.1.md
+./curriculum/prc-jrn-v1.1.1-patch.md
+./verify_ext_061_solidity_static_policy_guard.py
+./witness/replay_receiptos_frame.py
+./witness/reports/rp-002-eas-witness-replay.example.json
+./replay-cli/src/bin/receipts.rs
+./verify_ext_060_solidity_mock_badge_skeleton.py
+./lesson_020/LESSON_020_VA_CLAIM_ARENA_MOCK_CASE_FIXTURE_V0_1.md
+./lesson_020/LESSON_020_VA_CLAIM_ARENA_MOCK_CASE_FIXTURE_RECEIPT_V0_1.json
+./src/lib/verifyReceipt.ts
+./app/page.tsx
+./app/api/interpret/route.ts
+./app/api/health/route.ts
+./app/api/verify/route.ts
+./app/api/frame/route.ts
+./app/sign/page.tsx
+./app/stream/route.ts
+./validation/teach-back/PR130_BINDING_RECEIPT_TEACH_BACK_VALIDATION_PACKET_V0_1.md
+./provenance/zora-metadata-bridge-v1.json
+./provenance/identity-binding/jaywisdom-identity-binding.sig
+./provenance/identity-binding/jaywisdom-identity-binding.txt
+./protocols/REPLAY_PROTOCOL_V1_FREEZE_RECEIPT.json
+./protocols/PROTOCOL_V1.json
+./policy/agent-receipts/default-policy.json
+./adapters/page-agent/tests/page-agent-adapter.test.js
+./adapters/page-agent/tests/wire-event.test.js
+./adapters/page-agent/WIRE_EVENT_SCHEMA.md
+./adapters/page-agent/README.md
+./adapters/page-agent/wire-event.js
+./adapters/page-agent/index.js
+./adapters/page-agent/verifier.js
+./replay-bundle/replay.sh
+./replay-bundle/receipt_anchor.py
+./replay-bundle/attestations/eas-receipt-anchor.txt
+./replay-bundle/bundle-sha256.txt
+./replay-bundle/README.md
+./replay-bundle/Dockerfile
+./replay-bundle/self_test.py
+./replay-bundle/docker-replay.log
+./replay-bundle/replay-manifest.json
+./replay-bundle/docker-replay.sh
+./replay-bundle/receipts/selftest-anchor.json
+./replay-bundle/receipts/replayed-anchor.json
+./modules/prc-jrn/validation-index.json
+./modules/prc-jrn/engine.js
+./modules/prc-jrn/receipt.schema.json
+./README.md
+./receiptos/weld.py
+./receiptos/gcp/validator.py
+./receiptos/core/transitions.py
+./receiptos/core/hash.py
+./receiptos/core/gcp_validator.py
+./receiptos/core/cloud_commands.py
+./receiptos/cli.py
+./ReplayBoard/settle.py
+./ReplayBoard/sanitize_for_llm.py
+./ReplayBoard/eas_payload.py
+./ReplayBoard/entries/REPLAY-BOARD-0004.json
+./ReplayBoard/entries/REPLAY-BOARD-0003.json
+./ReplayBoard/verify_settle_ledger.py
+./engine/replay.py
+./verify_production_lock.py
+./governance/OUTBOX_CHAOS_INJECTION_POLICY_V0_4.md
+./api/spec/AL-to-receiptos.yaml
+./api/spec/JOY-to-receiptos.yaml
+./evidence-ledger.schema.json
+./docs/RECEIPTOS_CLI_CONTRACT_V0_1.md
+./docs/LOAD_VERIFICATION_WITNESS_V0_1.md
+./docs/frame-readonly-endpoint-contract.md
+./docs/court-clerk-case-console.md
+./docs/ar-001-receipt-lifecycle.md
+./docs/v0.3.0.md
+./docs/FREE_ONLY_THREE_SURFACE_RECEIPTS.md
+./docs/ROS-0002-release-witness.md
+./docs/REPLAY_ENGINE_AUDIT_V0_1.md
+./docs/farcaster-public-witness-surface.md
+./docs/farcaster-transparency-log.md
+./docs/docket-60-claim-firewall.md
+./docs/ESG-001_ReceiptOS_Boundary_Review.md
+./docs/observation-protocol/REPLAY_EVIDENCE_PACKET_V1.md
+./docs/status.html
+./docs/JOY-CLIENT-v0.1.md
+./docs/kids-safe/kid-kourt/KID_KOURT_KASE_001_ACRONYM_SAFETY_V0_1.md
+./docs/kids-safe/kid-kourt/KID_KOURT_KASE_002_KONSTITUTION_ON_TRIAL_V0_1.md
+./docs/kids-safe/kid-kourt/KID_KUORUM_LEDGER_SPECIFICATION_V0_1.md
+./docs/kids-safe/kid-kourt/KID_KOURT_KASE_003_KLOWN_KOURT_EXHIBIT_A_V0_1.md
+./docs/kids-safe/MEME_COURT_AUDITING_SCHOOL_FOR_CHILDREN_V0_1.md
+./docs/kids-safe/NEXT_EPOCH_KIDS_SAFE_BASE_V0_1.md
+./docs/kids-safe/kid-kindergarten/KID_KINDERGARTEN_2026_AI_ENABLED_SYSTEMS_V0_1.md
+./docs/kids-safe/kid-kindergarten/SUPER_SECRET_SISTER_SYNTAX_WISDOM_GRADE_1_V0_1.md
+./docs/kids-safe/kid-kindergarten/RECEIPT_FIRST_LEARNING_CHARTER_V0_1.md
+./docs/kids-safe/kid-kindergarten/COGNITIVE_VERNACULAR_REBOOT_V0_1.md
+./docs/kids-safe/kid-kindergarten/KID_KINDERGARTEN_TEACH_BACK_PROTOCOLS_V0_1.md
+./docs/kids-safe/kid-kindergarten/KID_KINDERGARTEN_RHYTHM_AND_SOUL_PROTOCOLS_V0_1.md
+./docs/kids-safe/kid-kindergarten/KID_KINETIC_REPLAY_V0_1.md
+./docs/kids-safe/kid-kindergarten/FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_V0_1.md
+./docs/kids-safe/cards/KID_KINETIC_REPLAYABLE_PARODY_STICKER_CARD_V0_1.md
+./docs/kids-safe/GOBLIN_COURT_FOR_KIDS_V0_1.md
+./docs/agent-receipts/threat-model.md
+./docs/agent-receipts/receipt-spec.md
+./docs/agent-receipts/receipt-spec-v0.2-delta.md
+./docs/agent-receipts/architecture.md
+./docs/gitfix-erc1271-commit-log.md
+./docs/receiptos-spec/ROS-0006.md
+./docs/receiptos-cli-json-contract.md
+./docs/EAS_RAIL_NEXT.md
+./docs/sql-review/0001_mcp_call_receipt_v0.review.sql
+./docs/sql-review/PR_47_ADDITIVE_CORE.md
+./docs/REPLAY_ENGINE_V0_1.md
+./docs/protocol.md
+./docs/CONFORMANCE.md
+./docs/farcaster-frame-extension-layer.md
+./docs/CROSS_PROFILE_TESTS.md
+./docs/SIGNED_RECEIPT_VERIFIER_V0_1.md
+./docs/governance/deerflow-weld-brief.md
+./docs/docket-61-user-space-interpretation.md
+./docs/WITNESS_REPLAY_INTEGRATION.md
+./docs/farcaster-signer-verification-layer.md
+./docs/public-audit-surface.md
+./docs/SUPABASE_NEXTJS_CLIENT_SETUP.md
+./docs/releases/v0.1.0.md
+./docs/mathematical-model.md
+./docs/daily-briefing-smtp-app-password.md
+./docs/docket-58-receipt-verification-api.md
+./docs/REPLAY_INVARIANTS_V0_1.md
+./docs/audits/ROS-0046-quarantine-note.md
+./docs/stream-ros0006-metadata.md
+./docs/canonicalization.md
+./docs/receiptos-wire-workflow.md
+./docs/AL-INTERFACE-v0.1.md
+./docs/open-mn-court-receipts.md
+./docs/v0.2.0.md
+./lesson_015/LESSON_015_REVIEW_PACKET_RECEIPT_V0_1.json
+./lesson_015/LESSON_015_REVIEW_PACKET_MANIFEST_V0_1.json
+./agents/gpk-factory/canon-carrie.md
+./agents/gpk-factory/tools_manifest.v0.3.json
+./agents/gpk-factory/lore-larry.md
+./agents/gpk-factory/prompts/EXTERNAL_REVIEW_ASSISTANCE_PROMPT_V0_1.md
+./agents/gpk-factory/PURPOSE_V0_1.md
+./agents/gpk-factory/FUNCTIONAL_PRIMITIVES_V0_1.md
+./agents/gpk-factory/PROCESS_V0_1.md
+./agents/gpk-factory/functional_primitives.v0.1.json
+./agents/gpk-factory/README.md
+./agents/gpk-factory/manifest.json
+./agents/gpk-factory/receipt-ricky.md
+./agents/gpk-factory/runs/gpk-card-test-001-first-controlled-test.md
+./observations/stability-report-2026-07-08.md
+./lesson_017/LESSON_017_RUNTIME_SCALE_GUARD_RECEIPT_V0_1.json
+./lesson_017/LESSON_017_RUNTIME_SCALE_GUARD_V0_1.md
+./ops/manifest_replay.py
+./verify_ext_065_reference_erc1155_implementation.py
+./manifest.json
+./fixtures/rp-002-eas-frame.example.json
+./fixtures/load_verification/sentinel_hashes.invalid.json
+./fixtures/load_verification/incomplete_claimed_status.invalid.json
+./fixtures/load_verification/pass_strings.invalid.json
+./fixtures/load_verification/placeholder_bundle/receipt.invalid.json
+./fixtures/load_verification/placeholder_bundle/test-log.invalid.json
+./fixtures/rp-001-receiptos-frame.example.json
+./fixtures/receipts/invalid/authority_true.json
+./fixtures/receipts/invalid/replay_tree_hash_mismatch.json
+./fixtures/receipts/invalid/version_mismatch.json
+./fixtures/receipts/invalid/replay_missing_surface.json
+./fixtures/receipts/invalid/bad_invariant.json
+./fixtures/receipts/invalid/hash_mismatch.json
+./fixtures/receipts/invalid/replay_commit_unresolvable.json
+./fixtures/receipts/manifest_verify.valid.json
+./fixtures/receipts/schema_validate.valid.json
+./fixtures/receipts/valid/replay_run.valid.json
+./fixtures/receipts/valid/schema_validate.valid.json
+./game_state.json
+./verify_ext-038.py
+./ACTIVE_LANES.md
+./market/ext-038-operational-alerts.json
+./market/instruments/tntr-instrument-deployment-v0.json
+./market/tntr-instrument-layer-v0.json
+./market/ext-034-full-stack-validation.json
+./market/tntr-cro-001-instruments.json
+./market/tntr-instrument.schema.json
+./verify_ext_066_local_compile_unit_test_gate.py
+./verify_ext_059_mock_mint_flow_test_vectors.py
+./verify_ext_067_testnet_readiness_review.py
+./MIGRATION_STATUS.md
+./verify_tntr_instrument_layer.py
+./audits-round-014-evidence-scan.txt
+./cards/schema.json
+./cards/GPK-001.json
+./lesson_016/LESSON_016_IMPORT_SCHEMA_RECEIPT_V0_1.json
+./lesson_016/LESSON_016_IMPORT_SCHEMA_MANIFEST_V0_1.json
+./lesson_016/LESSON_016_IMPORT_SCHEMA_V0_1.md
+./releases/ROS-0043/file-hashes.sha256
+./scripts/fuzz-manifest-vectors.js
+./scripts/llm_radar_intake.py
+./scripts/verify-public-audit-surface.js
+./scripts/verify-frame-conformance-suite.js
+./scripts/test-release-gate-negative.py
+./scripts/inventory_receipts.py
+./scripts/jay-bootstrap-prc-jrn-v1.1.1.sh
+./scripts/vercel-prod-deploy.sh
+./scripts/verify-60-second.js
+./scripts/regenerate-tv073.py
+./scripts/send-daily-briefing.ts
+./scripts/verify-all-anchors.sh
+./scripts/check-eas-revocation.sh
+./scripts/verify-frame-openapi-contract.js
+./scripts/invalid-vectors.js
+./scripts/receiptos.js
+./scripts/verify-frame-capability-surface.js
+./scripts/validate_round16_artifacts.py
+./scripts/verify-eas-anchor-onchain.sh
+./scripts/verify-eas-anchor.sh
+./scripts/test-identity-binding-matrix.mjs
+./verify_ext_057_erc1155_badge_mint_plan.py
+./lib/interpretation/policies.ts
+./verify_ext_064_production_policy_freeze.py
+./examples/agent-receipts/tool-call.input.json
+./examples/agent-receipts/evaluate-policy.js
+./examples/agent-receipts/README.md
+./examples/agent-receipts/run-demo.js
+./examples/agent-receipts/tool-call.output.json
+./examples/agent-receipts/replay-bundle.json
+./examples/trust-score-adapter.ts
+./examples/verify-60-second/receipt.sample.json
+./verify_ext_048_live_attestation.py
+./lesson_026/LESSON_026_IMPACT_NOTE_E2E_DRIFT_TEST_RECEIPT_V0_1.md
+./lesson_026/receipts/IMPACT_NOTE_E2E_DRIFT_RECEIPT_V0_1.json
+./verifier/free_only_three_surface.py
+./move2/README.md
+./audits/ROS-0045/quickstart.log
+./audits/ROS-0046/quickstart.log
+./audits/PRC-JRN-v1.1/runtime-audit-001.json
+./verify_ext_058_mock_erc1155_badge_contract_semantics.py
+./deployment/stack-hash-rule-v1.json
+./deployment/v0.4-deployment-manifest.json
+./deployment/tntr-v1-production-manifest.json
+./receipts/rp-001-gitdirect-next-verb-surface-fix-2026-06-30.json
+./receipts/RECEIPT-003.7-PROMOTION.json
+./receipts/ext-047-eas-submit-plan.json
+./receipts/mru-012-jsonwisdom-byte-blob-fixture.json
+./receipts/RECEIPT-001.json
+./receipts/SCHEMA_REPLAY_EXECUTION_REPORT_V1_RECEIPT.json
+./receipts/mru-013-digest-selection-replay.json
+./receipts/tntr-018-full-stack-validation.json
+./receipts/RECEIPT-ZORA-e423ae19fffcee95919dde96a31e828bc060e36f-VERIFIED.json
+./receipts/prc-jrn/ext/PRC-JRN-FIELD-EXT-002.json
+./receipts/prc-jrn/ext/PRC-JRN-FIELD-EXT-004.json
+./receipts/prc-jrn/ext/PRC-JRN-FIELD-EXT-005.json
+./receipts/prc-jrn/ext/raw/PRC-JRN-FIELD-EXT-002.raw.json
+./receipts/prc-jrn/ext/EXT-001-intake-template.json
+./receipts/prc-jrn/ext/PRC-JRN-FIELD-EXT-003.json
+./receipts/tntr-020-operational-alerts.json
+./receipts/mru-005-self-application-observed.json
+./receipts/mru-015-dependency-guard.json
+./receipts/rp-001-evidence-expansion-court-filing-arrest-citation-2025.json
+./receipts/ext-057-erc1155-badge-mint-plan.json
+./receipts/mru-014-gitfix-recommit-fixture-required.json
+./receipts/ext-096-signature-receipt-intake.md
+./receipts/ext-061-solidity-static-policy-guard.json
+./receipts/goblin-court-session-open.json
+./receipts/rp-001-source-verification-request-lands-declaration-2026-06-25.json
+./receipts/goblin-court-recess-secure.json
+./receipts/goblin-court-docket-clear.json
+./receipts/rp-001-user-supplied-sha-lands-declaration-2026-06-25.json
+./receipts/rp-001-source-payload-mismatch-usda-handbook-lands-declaration-2026-06-25.json
+./receipts/rcpt-ext-gov-003.json
+./receipts/july4-2026/environment.lock.json
+./receipts/mru-004-validation-law-canonical.json
+./receipts/rp-001-public-record-extraction-lands-declaration-2026-06-30.json
+./receipts/rp-001-replay-source-text-external-corroboration-2026-06-30.json
+./receipts/mru-009-first-digest-reconciliation.json
+./receipts/tntr-016-instrument-deployment-gate.json
+./receipts/tntr-013-multichain-witness-mesh.json
+./receipts/mru-007-resolution-event-observed.json
+./receipts/rcpt-ext-zora-goblin-mismatch.json
+./receipts/trump-vulcan-reflecting-pool-v2-diff-trump-vulcan-005.json
+./receipts/mru-008-recommit-law-observed.json
+./receipts/README.md
+./receipts/ext-051-governance-membrane.json
+./receipts/receiptos/JOY_ROOT_CANDIDATE_001_VERIFICATION_TRANSCRIPT.json
+./receipts/receiptos/JOY_ROOT_CANDIDATE_001_VERDICT_TEMPLATE.json
+./receipts/rp-001-hash-bind-attempt-lands-declaration-2026-06-25-digest-unverified.json
+./receipts/mru-006-canonical-resolution-law-observed.json
+./receipts/ext-064-production-policy-freeze.json
+./receipts/tntr-019-production-lock.json
+./receipts/rp-001-source-verification-gate-1-court-filing-arrest-citation-2025.json
+./receipts/rp-001-source-url-verified-lands-declaration-2026-06-25-hash-pending.json
+./receipts/mru-003-identity-law-gitfix-observed.json
+./receipts/mru-002-composition-closure-gitfix-observed.json
+./receipts/mru-010-variance-audit-event.json
+./receipts/tntr-014-market-substrate-gate.json
+./receipts/mru-002-state-reconciliation.json
+./receipts/ext-044-eas-anchor-payload.json
+./receipts/ext-065-reference-erc1155-implementation.json
+./receipts/ext-059-mock-mint-flow-test-vectors.json
+./receipts/tntr-015-instrument-layer-gate.json
+./receipts/rp-001-gitfix-canonical-hash-gate-correction-2026-06-30.json
+./receipts/examples/README.md
+./receipts/rp-001-operational-note-courtlistener-dns-not-doj-blocking-2026-06-30.json
+./receipts/mru-016-dependency-rejection.json
+./receipts/next-epoch/KID_KINETIC_REPLAY_RECEIPT_V0_1.yml
+./receipts/next-epoch/GOBLIN_COURT_FOR_KIDS_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_003_KLOWN_KOURT_EXHIBIT_A_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_002_KONSTITUTION_ON_TRIAL_RECEIPT_V0_1.yml
+./receipts/next-epoch/NEXT_EPOCH_KIDS_SAFE_BASE_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINDERGARTEN_RHYTHM_AND_SOUL_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINDERGARTEN_2026_OPEN_RECEIPT_V0_1.yml
+./receipts/next-epoch/SUPER_SECRET_SISTER_SYNTAX_WISDOM_GRADE_1_RECEIPT_V0_1.yml
+./receipts/next-epoch/RECEIPT_FIRST_LEARNING_CHARTER_BINDING_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KINETIC_REPLAYABLE_PARODY_STICKER_CARD_RECEIPT_V0_1.yml
+./receipts/next-epoch/COGNITIVE_VERNACULAR_REBOOT_RECEIPT_V0_1.yml
+./receipts/next-epoch/FLIRTING_BETWEEN_WISDOMS_GENTLE_FEELINGS_GAME_RECEIPT_V0_1.yml
+./receipts/next-epoch/PR130_BINDING_RECEIPT_TEACH_BACK_DIFF_RECEIPT_V0_1.yml
+./receipts/next-epoch/KID_KOURT_KASE_001_ACRONYM_SAFETY_RECEIPT_V0_1.yml
+./receipts/next-epoch/K3_JAY_OPEN_RECEIPT_V0_1.yml
+./receipts/ext-063-local-compile-validation-gate.json
+./receipts/goblin-court-standby-contained.json
+./receipts/tntr-017-monitoring-gate.json
+./receipts/mru-004-validation-law-observed.json
+./receipts/rp-001-v2-diff-confidence-medium-high-source-corroboration-2026-06-30.json
+./receipts/ext-048-live-attestation.json
+./receipts/mru-005-rebound-chain-audit-observed.json
+./receipts/mru-014a-gitfix-payload-attempt-observed.json
+./receipts/rp-001-source-verification-lands-declaration-2026-06-25-source-identified-hash-pending.json
+./receipts/ext-058-mock-erc1155-badge-contract-semantics.json
+./receipts/mru-011-exact-byte-fixture.json
+./replay_court/process.py
+./receipt-schema/v0.1/schema.test.ts
+./receipt-schema/v0.1/schema.json
+./.git/FETCH_HEAD
+./.git/logs/refs/heads/materialize-lesson-026-impact-note-e2e-drift-test-receipt
+./.git/logs/refs/heads/main
+./.git/logs/refs/remotes/origin/HEAD
+./.git/logs/HEAD
+./.git/config
+./evidence-payloads/README.md
+./.github/workflows/release-witness.yml
+./.github/workflows/provenance-dry-run.yml
+./.github/workflows/release.yml
+./.github/workflows/gpk-lineage-check.sh
+./.github/workflows/receiptos-ci.yml
+./.github/workflows/signature-verify.yml
+./.github/workflows/npm-publish.yml
+./.github/workflows/llm-radar-intake.yml
+./.github/workflows/receiptos-wire.yml
+./.github/workflows/ci.yml
+./.github/workflows/free-only-three-surface.yml
+./.github/workflows/gpk-factory-test.yml
+./.github/workflows/slsa-attestation.yml
+./.github/workflows/load-verification-witness.yml
+./.github/workflows/evidence-verify.yml
+./.github/workflows/receiptos-anchor-verify.yml
+./.github/workflows/gpp-render-wave.yml
+./.github/workflows/farcaster-manifest.yml
+./.github/workflows/replayboard-settle-probe.yml
+./.github/workflows/authorized-signer-registry.yml
+./.github/workflows/gpk-canon-correct.yml
+./.github/workflows/grp004-verify.yml
+./.github/workflows/pre-publish-audit.yml
+./lesson_024/rules/COGNITIVE_LANGUAGE_BOUNDARY_RULES_V0_1.md
+./lesson_024/LESSON_024_PRIVATE_PHONE_MEMORY_COGNITIVE_SKILL_SET_RECEIPT_V0_1.json
+./lesson_024/drills/PRIVATE_MEMORY_DRILLS_V0_1.md
+./lesson_024/LESSON_024_PRIVATE_PHONE_MEMORY_COGNITIVE_SKILL_SET_V0_1.md
+./canon-v0.3-manifest.json
+./ruleset.md
+./lesson_018/LESSON_018_RUNTIME_REHEARSAL_FIXTURE_V0_1.md
+./lesson_018/LESSON_018_RUNTIME_REHEARSAL_FIXTURE_RECEIPT_V0_1.json
+./frame/ext-103-public-audit-surface.js
+./frame/ext-099-frame-capability-surface.js
+./frame/ext-104-authorized-signer-registry.js
+./schemas/gcp_readonly_audit_packet_v0.1.json
+./schemas/GPK_FACTORY_TOOLS_MANIFEST_V0_3.schema.json
+./schemas/witness_profile_v1.schema.json
+./schemas/receipt_card_v0.2.json
+./schemas/free-only-three-surface-receipt-v0.2.schema.json
+./schemas/replay_execution_report_v1.schema.json
+./schemas/LOAD_VERIFICATION_WITNESS_V0_1.schema.json
+./schemas/manifest.schema.json
+./schemas/receiptos-frame.schema.json
+./schemas/docket_v1.schema.json
+./schemas/evidence-bundle.schema.json
+./schemas/interpretation-v1.json
+./schemas/receipt.schema.json
+./schemas/REAL_LOAD_RESULT_V0_1.schema.json
+./schemas/claim-v1.json
+./schemas/archive_record_v1.schema.json
+./schemas/SIGNED_LOAD_RECEIPT_VERIFIER_V0_1.schema.json
+
+## Python CLIs
+
+### ./tools/generate_cid_helper.py
+17:import argparse
+79:    parser = argparse.ArgumentParser(description="Generate deterministic CID/hash consistency report.")
+80:    parser.add_argument("--metadata", required=True, help="Local metadata JSON path")
+81:    parser.add_argument("--expected-cid", help="Expected CID, e.g. bafk...")
+82:    parser.add_argument("--expected-metadata-hash", help="Expected sha256 hex or 0x-prefixed hex")
+83:    parser.add_argument("--provenance", help="Optional provenance JSON path")
+84:    parser.add_argument("--bridge", help="Optional bridge JSON path")
+85:    parser.add_argument("--artifact-id", help="Optional artifact/collection address")
+
+### ./tools/audit_load_witness.py
+11:import argparse
+105:    parser = argparse.ArgumentParser(description="Audit a load verification witness claim.")
+106:    parser.add_argument("witness")
+107:    parser.add_argument(
+
+### ./tools/verify_load_witness.py
+11:import argparse
+159:    parser = argparse.ArgumentParser(description="Verify load witness, transparency log, and chain head.")
+160:    parser.add_argument("--witness", required=True)
+161:    parser.add_argument("--transparency-log", required=True)
+162:    parser.add_argument("--chain-head", required=True)
+163:    parser.add_argument("--schema", default="schemas/LOAD_VERIFICATION_WITNESS_V0_1.schema.json")
+164:    parser.add_argument("--out", default="artifacts/load-witness-verification.json")
+165:    parser.add_argument("--allow-governance-gap-exit-zero", action="store_true")
+
+### ./tools/manifest_verify/orchestrator.py
+48:    Knows nothing about argparse or stdout formatting.
+
+### ./tools/manifest_verify/replayos_cli.py
+15:import argparse
+25:def cmd_verify(args: argparse.Namespace) -> int:
+62:def cmd_attest(args: argparse.Namespace) -> int:
+116:def cmd_interop(args: argparse.Namespace) -> int:
+138:def cmd_capabilities(args: argparse.Namespace) -> int:
+159:def build_parser() -> argparse.ArgumentParser:
+160:    p = argparse.ArgumentParser(
+167:    v.add_argument("--manifest", required=True)
+168:    v.add_argument("--artifacts-root", default=None)
+169:    v.add_argument("--json", action="store_true")
+173:    a.add_argument("--manifest", required=True)
+174:    a.add_argument("--artifacts-root", default=None)
+175:    a.add_argument("--output-dir", default="attestations")
+176:    a.add_argument("--signer-id", default="cli:default")
+177:    a.add_argument("--adapter", action="append", help="Adapter name (repeatable)")
+178:    a.add_argument("--anchor", action="append", help="Anchor name (repeatable)")
+179:    a.add_argument("--json", action="store_true")
+183:    i.add_argument("--fixtures-dir", default="tests/fixtures")
+184:    i.add_argument("--output", default="tests/interop/parity_vector.json")
+185:    i.add_argument("--quiet", action="store_true")
+189:    c.add_argument("--json", action="store_true")
+
+### ./tools/load_harness.py
+19:import argparse
+60:def build_receipt(args: argparse.Namespace) -> dict[str, Any]:
+123:    parser = argparse.ArgumentParser(description="Run fail-closed load verification harness.")
+124:    parser.add_argument("--transform-version", required=True)
+125:    parser.add_argument("--target-qps", type=int, required=True)
+126:    parser.add_argument("--duration-min", type=int, required=True)
+127:    parser.add_argument("--run-id")
+128:    parser.add_argument("--public-surface-sha", default="1539e812a5784dc0719c5c8b883615c73255d4c3")
+129:    parser.add_argument("--continuous-from", default="1539e812a5784dc0719c5c8b883615c73255d4c3")
+130:    parser.add_argument("--allow-governance-gap-exit-zero", action="store_true")
+
+### ./tools/real_load_runner.py
+11:import argparse
+45:def governance_gap(args: argparse.Namespace, failed_conditions: list[str]) -> RealLoadResult:
+78:def validate_args(args: argparse.Namespace) -> list[str]:
+93:def run_adapter(args: argparse.Namespace) -> RealLoadResult:
+109:    parser = argparse.ArgumentParser(description="Run real load adapter fail-closed surface.")
+110:    parser.add_argument("--transform-version", required=True)
+111:    parser.add_argument("--target-qps", type=int, required=True)
+112:    parser.add_argument("--duration-min", type=int, required=True)
+113:    parser.add_argument("--replay-target")
+114:    parser.add_argument("--telemetry-sink")
+115:    parser.add_argument("--min-qps", type=int, default=200)
+116:    parser.add_argument("--out", default="artifacts/real-load-result.json")
+117:    parser.add_argument("--allow-governance-gap-exit-zero", action="store_true")
+
+### ./tools/validate_receiptos_frame.py
+16:import argparse
+158:    parser = argparse.ArgumentParser(description="Validate a ReceiptOS / ESG-001 frame.")
+159:    parser.add_argument("frame", type=Path)
+160:    parser.add_argument("--max-skew-seconds", type=int, default=300)
+161:    parser.add_argument(
+
+### ./tools/evidence_verify.py
+10:import argparse
+81:    parser = argparse.ArgumentParser(description="Verify a local evidence payload.")
+82:    parser.add_argument("--payload", required=True, help="Local metadata JSON or image/artwork payload path")
+83:    parser.add_argument("--token-uri", required=True, help="Token URI string from contract/RPC/Zora metadata")
+84:    parser.add_argument("--artifact-id", required=True, help="Onchain artifact id / contract address")
+85:    parser.add_argument("--receipt-id", required=True, help="Evidence receipt id, e.g. ZORA-e423...")
+86:    parser.add_argument("--related-receipt", default="RECEIPT-001")
+
+### ./tools/validate_eas_profile_frame.py
+12:import argparse
+74:    parser = argparse.ArgumentParser(description="Validate ReceiptOS + EAS v1 profile shape.")
+75:    parser.add_argument("frame", type=Path)
+76:    parser.add_argument("--max-skew-seconds", type=int, default=300)
+77:    parser.add_argument(
+
+### ./verify.py
+2:import argparse, json, hashlib, sys
+32:    ap = argparse.ArgumentParser()
+33:    ap.add_argument("--proof", required=True)
+34:    ap.add_argument("--pretty", action="store_true")
+
+### ./tests/observation/replay/validate_replay_packet_v1.py
+2:import argparse, base64, hashlib, json, sys
+114:    p = argparse.ArgumentParser()
+115:    p.add_argument("--fixture", required=True)
+116:    p.add_argument("--now", default=None)
+
+### ./tests/observation/test_replay_validator.py
+2:import argparse, json, sys
+15:    ap=argparse.ArgumentParser()
+16:    ap.add_argument("--now", default="2026-07-06T14:30:00Z")
+
+### ./witness/replay_receiptos_frame.py
+14:import argparse
+78:    parser = argparse.ArgumentParser(description="Witness replay a ReceiptOS / ESG-001 frame.")
+79:    parser.add_argument("frame", type=Path)
+80:    parser.add_argument("--profile", choices=["eas-v1"], default=None)
+81:    parser.add_argument("--max-skew-seconds", type=int, default=300)
+82:    parser.add_argument(
+
+### ./witness/guard_replay_report.py
+12:import argparse
+75:    parser = argparse.ArgumentParser(description="Guard Witness replay report serialization fidelity.")
+76:    parser.add_argument("report", type=Path)
+77:    parser.add_argument("--expect-file", type=Path)
+78:    parser.add_argument("--expect-hash")
+
+### ./replay-bundle/verify.py
+2:import argparse, json, hashlib, sys
+32:    ap = argparse.ArgumentParser()
+33:    ap.add_argument("--proof", required=True)
+34:    ap.add_argument("--pretty", action="store_true")
+
+### ./lattice/light_verify_inclusion.py
+13:import argparse
+43:    parser = argparse.ArgumentParser(description="Verify one-step inclusion against a batch Merkle root.")
+44:    parser.add_argument("--leaf", required=True)
+45:    parser.add_argument("--sibling", required=True)
+46:    parser.add_argument("--sibling-position", required=True, choices=["left", "right"])
+47:    parser.add_argument("--root", required=True)
+
+### ./lattice/catalog_accepted_report.py
+9:import argparse
+68:    parser = argparse.ArgumentParser(description="Catalog an accepted lattice ingestion artifact by hash.")
+69:    parser.add_argument("artifact", type=Path)
+
+### ./lattice/ingest_guarded_report.py
+13:import argparse
+69:    parser = argparse.ArgumentParser(description="Ingest a guarded Witness replay report into lattice boundary.")
+70:    parser.add_argument("report", type=Path)
+71:    parser.add_argument("--expect-file", type=Path)
+72:    parser.add_argument("--expect-hash")
+
+### ./lattice/batch_root_manifest.py
+16:import argparse
+160:    parser = argparse.ArgumentParser(description="Build or verify a batch-root manifest.")
+164:    build.add_argument("catalogs", type=Path, nargs="+")
+167:    verify.add_argument("manifest", type=Path)
+168:    verify.add_argument("leaf_hash")
+
+### ./lattice/merkle_catalog.py
+20:import argparse
+101:    parser = argparse.ArgumentParser(description="Build a Merkle catalog from a flat lattice catalog.")
+102:    parser.add_argument("catalog", type=Path)
+
+### ./lattice/batch_merkle_catalog.py
+16:import argparse
+118:    parser = argparse.ArgumentParser(description="Build a combined Merkle catalog from flat lattice catalogs.")
+119:    parser.add_argument("catalogs", type=Path, nargs="+")
+
+### ./proofs/ROUND_009/verify-index-root.py
+2:import argparse, hashlib, json, sys
+18:p = argparse.ArgumentParser()
+19:p.add_argument("--write-proof", action="store_true")
+20:p.add_argument("--write-expected-root", action="store_true")
+21:p.add_argument("--strict", action="store_true")
+
+### ./ReplayBoard/settle.py
+14:import argparse
+263:    parser = argparse.ArgumentParser(description="ReplayBoard settle receipt runner")
+264:    parser.add_argument("--manifest", required=True, type=pathlib.Path)
+265:    parser.add_argument("--ledger", required=True, type=pathlib.Path)
+266:    parser.add_argument("--raw-output", default="/tmp/replayboard-evidence/evidence.bin", type=pathlib.Path)
+267:    parser.add_argument("--print", action="store_true")
+
+### ./ReplayBoard/sanitize_for_llm.py
+15:import argparse
+204:    parser = argparse.ArgumentParser(description="Sanitize ReplayBoard artifacts for LLM review")
+205:    parser.add_argument("--input", required=True, type=pathlib.Path)
+206:    parser.add_argument("--out", required=True, type=pathlib.Path)
+
+### ./ReplayBoard/eas_payload.py
+11:import argparse
+194:    parser = argparse.ArgumentParser(description="Build canonical EAS payload from ReplayBoard settle ledger")
+195:    parser.add_argument("--ledger", required=True, type=pathlib.Path)
+196:    parser.add_argument("--raw-evidence", type=pathlib.Path)
+197:    parser.add_argument("--out", type=pathlib.Path)
+198:    parser.add_argument("--chain-id", default=DEFAULT_CHAIN_ID, type=int)
+199:    parser.add_argument("--source-repo", default=DEFAULT_SOURCE_REPO)
+200:    parser.add_argument("--source-ref", default=DEFAULT_SOURCE_REF)
+201:    parser.add_argument("--schema-uid")
+
+### ./ReplayBoard/verify_settle_ledger.py
+14:import argparse
+130:    parser = argparse.ArgumentParser(description="Verify ReplayBoard settlement JSONL ledger")
+131:    parser.add_argument("--ledger", required=True, type=pathlib.Path)
+132:    parser.add_argument("--raw-evidence", type=pathlib.Path)
+
+### ./event_time/normalize_claimed_time.py
+10:import argparse
+65:    parser = argparse.ArgumentParser(description="Normalize one claimed EventTimeRecord timestamp to UTC.")
+66:    parser.add_argument("record", type=Path)
+
+### ./event_time/compare_claimed_times.py
+10:import argparse
+84:    parser = argparse.ArgumentParser(description="Compare normalized claimed event-time records.")
+85:    parser.add_argument("records", type=Path)
+
+### ./event_time/parse_claimed_time.py
+4:import argparse
+43:    cli = argparse.ArgumentParser()
+44:    cli.add_argument("payload", type=Path)
+
+### ./audit/validate_event_time_record.py
+10:import argparse
+99:    parser = argparse.ArgumentParser(description="Validate EventTimeRecord v0.")
+100:    parser.add_argument("record", type=Path)
+
+### ./audit/export_verified_roots.py
+6:import argparse
+73:    parser = argparse.ArgumentParser(description="Export verified batch roots from an audit log.")
+74:    parser.add_argument("--log", type=Path, required=True)
+75:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/external_subscriber_conformance_matrix.py
+6:import argparse
+79:    parser = argparse.ArgumentParser(description="Run external subscriber conformance matrix.")
+80:    parser.add_argument("feed", type=Path)
+81:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/consume_storage_anchors.py
+10:import argparse
+73:    parser = argparse.ArgumentParser(description="Consume storage-time anchors from a validated feed.")
+74:    parser.add_argument("feed", type=Path)
+
+### ./audit/event_time_comparison_conformance_matrix.py
+6:import argparse
+85:    parser = argparse.ArgumentParser(description="Run event-time comparison conformance matrix.")
+86:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/event_time_record_conformance_matrix.py
+6:import argparse
+77:    parser = argparse.ArgumentParser(description="Run EventTimeRecord conformance matrix.")
+78:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/external_subscriber_validator.py
+10:import argparse
+121:    parser = argparse.ArgumentParser(description="Validate an external subscriber contract for the storage-view feed.")
+122:    parser.add_argument("feed", type=Path)
+123:    parser.add_argument("contract", type=Path)
+124:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/generate_storage_view_fixture.py
+6:import argparse
+20:    parser = argparse.ArgumentParser(description="Generate storage view fixture.")
+21:    parser.add_argument("feed", type=Path)
+22:    parser.add_argument("output", type=Path)
+
+### ./audit/conformance_gate_storage_view.py
+14:import argparse
+153:    parser = argparse.ArgumentParser(description="Run storage view external conformance gate.")
+154:    parser.add_argument("feed", type=Path)
+155:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/validate_event_time_comparison.py
+6:import argparse
+106:    parser = argparse.ArgumentParser(description="Validate claimed-time comparison v0.")
+107:    parser.add_argument("comparison", type=Path)
+
+### ./audit/export_storage_time_view.py
+10:import argparse
+92:    parser = argparse.ArgumentParser(description="Export a matrix-gated storage-time view.")
+93:    parser.add_argument("feed", type=Path)
+94:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/append_batch_root.py
+11:import argparse
+132:    parser = argparse.ArgumentParser(description="Append a batch root manifest to an audit JSONL log.")
+133:    parser.add_argument("--log", type=Path, required=True)
+134:    parser.add_argument("--manifest", type=Path, required=True)
+135:    parser.add_argument("--storage-time-utc")
+
+### ./audit/anchor_conformance_matrix.py
+10:import argparse
+97:    parser = argparse.ArgumentParser(description="Run anchor readiness conformance matrix.")
+98:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/validate_normalized_event_time_record.py
+6:import argparse
+87:    parser = argparse.ArgumentParser(description="Validate normalized EventTimeRecord v0.")
+88:    parser.add_argument("record", type=Path)
+
+### ./audit/storage_time_view.py
+6:import argparse
+75:    parser = argparse.ArgumentParser(description="Build storage-time view from a validated feed.")
+76:    parser.add_argument("feed", type=Path)
+
+### ./audit/normalized_event_time_conformance_matrix.py
+6:import argparse
+81:    parser = argparse.ArgumentParser(description="Run normalized EventTimeRecord conformance matrix.")
+82:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/storage_view_conformance_matrix.py
+6:import argparse
+91:    parser = argparse.ArgumentParser(description="Run storage view conformance matrix.")
+92:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/verify_log_continuity.py
+13:import argparse
+108:    parser = argparse.ArgumentParser(description="Verify batch-root audit log continuity.")
+109:    parser.add_argument("--log", type=Path, required=True)
+110:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/event_time_conformance_gate.py
+10:import argparse
+111:    parser = argparse.ArgumentParser(description="Validate event-time boundary proposal.")
+112:    parser.add_argument("manifest", type=Path)
+
+### ./audit/storage_view_subscription_feed.py
+9:import argparse
+70:    parser = argparse.ArgumentParser(description="Build storage-view subscription feed v0.")
+71:    parser.add_argument("feed", type=Path)
+72:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+73:    parser.add_argument("--cursor-after")
+74:    parser.add_argument("--limit", type=int)
+
+### ./audit/validate_subscription_feed.py
+10:import argparse
+160:    parser = argparse.ArgumentParser(description="Validate a root subscription feed fixture.")
+161:    parser.add_argument("feed", type=Path)
+
+### ./audit/subscription_manifest.py
+11:import argparse
+82:    parser = argparse.ArgumentParser(description="Build a read-only subscription manifest for verified roots.")
+83:    parser.add_argument("--log", type=Path, required=True)
+84:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./audit/validate_storage_view_subscription.py
+6:import argparse
+122:    parser = argparse.ArgumentParser(description="Validate storage-view subscription feed v0.")
+123:    parser.add_argument("feed", type=Path)
+124:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+125:    parser.add_argument("--cursor-after")
+126:    parser.add_argument("--limit", type=int)
+
+### ./audit/event_time_feature_conformance_matrix.py
+10:import argparse
+121:    parser = argparse.ArgumentParser(description="Run #42 event-time feature conformance matrix.")
+122:    parser.add_argument("--repo-root", type=Path, default=Path("."))
+
+### ./scripts/llm_radar_intake.py
+11:import argparse
+71:    parser = argparse.ArgumentParser(description="LLM Radar intake receipt runner")
+72:    parser.add_argument("--watchlist", default="models/free_llm_watchlist.json", type=pathlib.Path)
+73:    parser.add_argument("--registry", default="models/model_registry.json", type=pathlib.Path)
+74:    parser.add_argument("--ledger", default="receipts/model_alerts.jsonl", type=pathlib.Path)
+75:    parser.add_argument("--print", action="store_true")
+
+### ./verifier/free_only_three_surface.py
+17:import argparse
+141:    parser = argparse.ArgumentParser(description="Validate free-only three-surface receipts")
+142:    parser.add_argument("paths", nargs="+", help="Receipt JSON files or directories to validate")
+143:    parser.add_argument(

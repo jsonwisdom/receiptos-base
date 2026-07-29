@@ -1,0 +1,26 @@
+{
+  "manifest_version": "1.0",
+  "generated_at": "2026-07-27T15:54:52Z",
+  "protocol_version": "2.9",
+  "state_vector": "v2.9_STABLE_RELEASE_PENDING",
+  "bundle_status": "PENDING_BUNDLE_INTEGRATION",
+  "artifacts": [
+    {
+      "name": "governance_receipt.json",
+      "digest_algorithm": "SHA-256",
+      "digest": "41a4b967da018574ec0be6bff0ee21ef23357533a6b04ec5176ac1243efebfb8",
+      "status": "VERIFIED_OK"
+    },
+    {
+      "name": "governance_receipt.sha256",
+      "status": "VERIFIED_OK"
+    }
+  ],
+  "pending": [
+    "oracle.v2.9.bin",
+    "oracle.sha256",
+    "conformance.v2.9.json",
+    "coverage.json",
+    "verification-report.json"
+  ]
+}
