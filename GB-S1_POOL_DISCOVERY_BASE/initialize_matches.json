@@ -1,0 +1,15 @@
+[
+  {
+    "transaction_hash": "0x7ee1f6b78925fe38f358edf4cbc86ccb66687a41a25581fbd2ecdb9c9236c0e2",
+    "block_number": 49253212,
+    "log_index": 440,
+    "pool_id": "0xa68f8b8589c3f0f2287cef175e46bae3cd16c1b097cb39ece54d2067eb28ada6",
+    "currency0": "0x694ce46c64d9d1a5e9376a9febcf85ec05d72e9f",
+    "currency1": "0x8894e88310d46fb19ad3e309455248aeeab81800",
+    "fee": 8388608,
+    "tick_spacing": 200,
+    "hooks": "0x0469a4bd3724dc86c9542f4694c976da13c450c0",
+    "sqrt_price_x96_initial": "640486042725065418547993470313",
+    "initial_tick": 41800
+  }
+]
