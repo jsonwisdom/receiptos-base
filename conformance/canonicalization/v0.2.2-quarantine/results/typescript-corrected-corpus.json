@@ -1,6 +1,8 @@
 {
   "audit_gate": "410_OPEN",
+  "ci_attested": false,
   "corpus_version": "v0.2.2-quarantine",
+  "execution_scope": "LOCAL_NODE_REPLAY_OF_COMMITTED_TYPESCRIPT_HARNESS",
   "promotion": "PROHIBITED",
   "runner": "TYPESCRIPT_CORRECTED_CORPUS_HARNESS",
   "status": "PASS",
