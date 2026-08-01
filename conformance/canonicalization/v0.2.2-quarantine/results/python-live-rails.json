@@ -1,6 +1,8 @@
 {
   "audit_gate": "410_OPEN",
+  "ci_attested": false,
   "corpus_version": "v0.2.2-quarantine",
+  "execution_scope": "LOCAL_REPLAY_OF_EXACT_FETCHED_LIVE_RAIL_CODE",
   "promotion": "PROHIBITED",
   "runner": "PYTHON_LIVE_RAILS",
   "status": "PASS",
