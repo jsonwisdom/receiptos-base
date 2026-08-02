@@ -67,6 +67,59 @@ def append_jsonl(path: pathlib.Path, row: Dict[str, Any]) -> None:
         os.fsync(handle.fileno())
 
 
+
+def notify_discord(receipt: Dict[str, Any]) -> None:
+    # Best-effort notification after durable ledger commit.
+    import json
+    import os
+    import urllib.request
+    import urllib.error
+
+    webhook = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
+    if not webhook:
+        print("DISCORD_NOTIFY_STATUS=SKIPPED_NO_WEBHOOK")
+        return
+
+    content = "\n".join([
+        "\u2699\ufe0f JSONWISDOM RECEIPT COMMITTED",
+        "",
+        "Identity: jaywisdom.eth",
+        f"Action: {receipt.get('action', 'UNKNOWN')}",
+        f"Receipt: {receipt.get('receipt_hash', 'UNKNOWN')}",
+        f"Watchlist: {receipt.get('watchlist_hash', 'UNKNOWN')}",
+        "Authority created: FALSE",
+        "Promotion allowed: FALSE",
+    ])
+
+    payload = json.dumps({
+        "username": "JSONWisdom ReceiptOS",
+        "content": content,
+        "allowed_mentions": {"parse": []},
+    }).encode("utf-8")
+
+    separator = "&" if "?" in webhook else "?"
+    request = urllib.request.Request(
+        webhook + separator + "wait=true",
+        data=payload,
+        headers={
+            "Content-Type": "application/json",
+            "User-Agent": (
+                "DiscordBot "
+                "(https://github.com/jsonwisdom/receiptos-base, 1.0.0)"
+            ),
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(request, timeout=10) as response:
+            status = getattr(response, "status", response.getcode())
+        print(f"DISCORD_NOTIFY_STATUS=PASS_HTTP_{status}")
+    except urllib.error.HTTPError as exc:
+        print(f"DISCORD_NOTIFY_STATUS=FAILED_HTTP_{exc.code}")
+    except Exception as exc:
+        print(f"DISCORD_NOTIFY_STATUS=FAILED_{type(exc).__name__}")
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="LLM Radar intake receipt runner")
     parser.add_argument("--watchlist", default="models/free_llm_watchlist.json", type=pathlib.Path)
@@ -105,6 +158,7 @@ def main() -> int:
     }
     receipt["receipt_hash"] = receipt_hash(receipt)
     append_jsonl(args.ledger, receipt)
+    notify_discord(receipt)
 
     print(f"LLM_RADAR_STATUS=ALERT_MANUAL_REVIEW_REQUIRED")
     print(f"LLM_RADAR_RECEIPT_HASH={receipt['receipt_hash']}")
