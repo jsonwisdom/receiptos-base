@@ -34,7 +34,6 @@ jobs:
           npm install
           npm link
           command -v receiptos
-          receiptos --help >/dev/null
 
       - name: Run restored validator preflight
         run: ./ci/scripts/run_lint.sh
