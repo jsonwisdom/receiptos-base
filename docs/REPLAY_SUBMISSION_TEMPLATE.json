@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jsonwisdom/receiptos-base/docs/REPLAY_SUBMISSION_TEMPLATE.json",
+  "title": "CEG Independent Replay Submission",
+  "description": "Non-normative template for reporting independent replay results. Does not define protocol semantics.",
+  "type": "object",
+  "required": [
+    "implementation_name",
+    "implementation_version",
+    "platform",
+    "runtime",
+    "bundle_version",
+    "replay_status",
+    "divergence_count",
+    "manifest_verification",
+    "timestamp_utc"
+  ],
+  "properties": {
+    "implementation_name": {
+      "type": "string",
+      "description": "Name of the implementation under test"
+    },
+    "implementation_version": {
+      "type": "string",
+      "description": "Version or commit of the implementation"
+    },
+    "platform": {
+      "type": "string",
+      "description": "Operating system and architecture (e.g. Linux x86_64)"
+    },
+    "runtime": {
+      "type": "string",
+      "description": "Language runtime and version (e.g. Python 3.12.3)"
+    },
+    "bundle_version": {
+      "type": "string",
+      "description": "Conformance bundle version, tag, or commit SHA"
+    },
+    "bundle_manifest_hash": {
+      "type": "string",
+      "description": "SHA-256 of the bundle's manifest.json, if computed"
+    },
+    "replay_status": {
+      "type": "string",
+      "enum": ["ALL_MATCH", "DIVERGENCE", "EXECUTION_FAILURE"],
+      "description": "Overall result of the replay"
+    },
+    "divergence_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of recorded divergences"
+    },
+    "divergences": {
+      "type": "array",
+      "description": "Detailed divergence records (optional if count is zero)",
+      "items": {
+        "type": "object",
+        "required": ["class", "layer"],
+        "properties": {
+          "class": {
+            "type": "string",
+            "enum": [
+              "manifest_mismatch",
+              "canonicalization_mismatch",
+              "graph_mismatch",
+              "promotion_mismatch",
+              "replay_execution_failure",
+              "other"
+            ]
+          },
+          "layer": {
+            "type": "string",
+            "description": "Which stage or artifact layer differed"
+          },
+          "expected": {
+            "type": "string",
+            "description": "Expected value or hash (truncated if sensitive)"
+          },
+          "actual": {
+            "type": "string",
+            "description": "Actual value or hash (truncated if sensitive)"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "manifest_verification": {
+      "type": "string",
+      "enum": ["PASS", "FAIL", "SKIP"],
+      "description": "Result of verifying manifest.json / SHA256SUMS"
+    },
+    "timestamp_utc": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp of the replay run"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional free-form notes from the reviewer"
+    }
+  },
+  "additionalProperties": false
+}
