@@ -1,0 +1,26 @@
+{
+  "audit_gate": "410_OPEN",
+  "ci_attested": false,
+  "corpus_version": "v0.2.2-quarantine",
+  "execution_scope": "LOCAL_NODE_REPLAY_OF_COMMITTED_TYPESCRIPT_HARNESS",
+  "promotion": "PROHIBITED",
+  "runner": "TYPESCRIPT_CORRECTED_CORPUS_HARNESS",
+  "status": "PASS",
+  "vectors": [
+    {
+      "id": "CNF-001",
+      "profile": "JAYWISDOM_NFC_RECEIPT_V1",
+      "actual_result": "FAIL",
+      "actual_error_code": "UNPAIRED_SURROGATE",
+      "matched": true
+    },
+    {
+      "id": "CBF-001",
+      "profile": "JAYWISDOM_BYTE_STRICT_EVIDENCE_V1",
+      "actual_result": "PASS",
+      "actual_output_json": "{}",
+      "actual_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "matched": true
+    }
+  ]
+}

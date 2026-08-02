@@ -1,0 +1,27 @@
+{
+  "audit_gate": "410_OPEN",
+  "ci_attested": false,
+  "corpus_version": "v0.2.2-quarantine",
+  "execution_scope": "LOCAL_REPLAY_OF_EXACT_FETCHED_LIVE_RAIL_CODE",
+  "promotion": "PROHIBITED",
+  "runner": "PYTHON_LIVE_RAILS",
+  "status": "PASS",
+  "vectors": [
+    {
+      "actual_error_code": "UNPAIRED_SURROGATE",
+      "actual_result": "FAIL",
+      "exception_type": "UnicodeEncodeError",
+      "id": "CNF-001",
+      "matched": true,
+      "profile": "JAYWISDOM_NFC_RECEIPT_V1"
+    },
+    {
+      "actual_output_json": "{}",
+      "actual_result": "PASS",
+      "actual_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "id": "CBF-001",
+      "matched": true,
+      "profile": "JAYWISDOM_BYTE_STRICT_EVIDENCE_V1"
+    }
+  ]
+}
