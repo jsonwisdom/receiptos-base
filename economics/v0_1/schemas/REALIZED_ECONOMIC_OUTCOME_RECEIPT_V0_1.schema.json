@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/jsonwisdom/AL/blob/master/agents/economics/REALIZED_ECONOMIC_OUTCOME_RECEIPT_V0_1.schema.json",
+  "title": "Realized Economic Outcome Receipt V0.1",
+  "description": "Immutable post-execution actuals bound to a prior Economic Decision Receipt and Action Receipt. Profit and variance are recomputed; authority remains false.",
+  "type": "object",
+  "required": [
+    "receipt_id",
+    "timestamp",
+    "decision_receipt_id",
+    "action_receipt_id",
+    "opportunity_id",
+    "agent_id",
+    "realized_revenue_usd",
+    "realized_costs",
+    "realized_slippage_bps",
+    "realized_total_cost_usd",
+    "realized_net_profit_usd",
+    "realized_margin_pct",
+    "forecast_variance",
+    "execution_status",
+    "settlement_status",
+    "semantic_validation",
+    "authority",
+    "no_fake_green"
+  ],
+  "properties": {
+    "receipt_id": {"type": "string", "minLength": 1},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "decision_receipt_id": {"type": "string", "minLength": 1},
+    "action_receipt_id": {"type": "string", "minLength": 1},
+    "opportunity_id": {"type": "string", "minLength": 1},
+    "agent_id": {"type": "string", "minLength": 1},
+    "realized_revenue_usd": {"type": "number", "minimum": 0},
+    "realized_costs": {
+      "type": "object",
+      "required": [
+        "realized_model_usd",
+        "realized_data_usd",
+        "realized_gas_usd",
+        "realized_bridge_usd",
+        "realized_slippage_usd",
+        "realized_failure_loss_usd",
+        "realized_other_usd"
+      ],
+      "properties": {
+        "realized_model_usd": {"type": "number", "minimum": 0},
+        "realized_data_usd": {"type": "number", "minimum": 0},
+        "realized_gas_usd": {"type": "number", "minimum": 0},
+        "realized_bridge_usd": {"type": "number", "minimum": 0},
+        "realized_slippage_usd": {"type": "number", "minimum": 0},
+        "realized_failure_loss_usd": {"type": "number", "minimum": 0},
+        "realized_other_usd": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "realized_slippage_bps": {"type": "number", "minimum": 0},
+    "realized_total_cost_usd": {"type": "number", "minimum": 0},
+    "realized_net_profit_usd": {"type": "number"},
+    "realized_margin_pct": {"type": "number"},
+    "forecast_variance": {
+      "type": "object",
+      "required": ["revenue_variance_usd", "cost_variance_usd", "profit_variance_usd", "margin_variance_pct"],
+      "properties": {
+        "revenue_variance_usd": {"type": "number"},
+        "cost_variance_usd": {"type": "number"},
+        "profit_variance_usd": {"type": "number"},
+        "margin_variance_pct": {"type": "number"}
+      },
+      "additionalProperties": false
+    },
+    "execution_status": {"type": "string", "enum": ["not_attempted", "pending", "executed", "partial", "failed", "reverted"]},
+    "settlement_status": {"type": "string", "enum": ["none", "pending", "settled", "failed", "disputed"]},
+    "transaction_witness_refs": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "evidence_refs": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "parent_outcome_id": {"type": "string", "minLength": 1},
+    "semantic_validation": {"type": "string", "enum": ["PENDING", "PASS", "FAIL"]},
+    "authority": {"type": "boolean", "const": false},
+    "no_fake_green": {"type": "boolean", "const": true}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"execution_status": {"const": "not_attempted"}}, "required": ["execution_status"]},
+      "then": {"properties": {"realized_revenue_usd": {"const": 0}, "settlement_status": {"const": "none"}}}
+    }
+  ],
+  "additionalProperties": false
+}
