@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/jsonwisdom/AL/blob/master/agents/economics/ECONOMIC_DECISION_RECEIPT_V0_1.schema.json",
+  "title": "Economic Decision Receipt V0.1",
+  "description": "Immutable pre-execution economic forecast and deterministic eligibility decision. ECONOMICALLY_ELIGIBLE does not grant execution authority.",
+  "type": "object",
+  "required": [
+    "receipt_id",
+    "timestamp",
+    "opportunity_id",
+    "agent_id",
+    "authority_grant_ref",
+    "economics_policy_id",
+    "expected_revenue_usd",
+    "expected_costs",
+    "expected_slippage_bps",
+    "expected_total_cost_usd",
+    "expected_net_profit_usd",
+    "expected_margin_pct",
+    "failure_probability_estimate",
+    "limits_evaluated",
+    "route",
+    "decision",
+    "decision_reason",
+    "semantic_validation",
+    "authority",
+    "no_fake_green"
+  ],
+  "properties": {
+    "receipt_id": {"type": "string", "minLength": 1},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "opportunity_id": {"type": "string", "minLength": 1},
+    "agent_id": {"type": "string", "minLength": 1},
+    "authority_grant_ref": {"type": "string", "minLength": 1},
+    "economics_policy_id": {"type": "string", "minLength": 1},
+    "expected_revenue_usd": {"type": "number", "minimum": 0},
+    "expected_costs": {
+      "type": "object",
+      "required": [
+        "expected_model_usd",
+        "expected_data_usd",
+        "expected_gas_usd",
+        "expected_bridge_usd",
+        "expected_slippage_usd",
+        "expected_failure_reserve_usd",
+        "expected_other_usd"
+      ],
+      "properties": {
+        "expected_model_usd": {"type": "number", "minimum": 0},
+        "expected_data_usd": {"type": "number", "minimum": 0},
+        "expected_gas_usd": {"type": "number", "minimum": 0},
+        "expected_bridge_usd": {"type": "number", "minimum": 0},
+        "expected_slippage_usd": {"type": "number", "minimum": 0},
+        "expected_failure_reserve_usd": {"type": "number", "minimum": 0},
+        "expected_other_usd": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "expected_slippage_bps": {"type": "number", "minimum": 0},
+    "expected_total_cost_usd": {"type": "number", "minimum": 0},
+    "expected_net_profit_usd": {"type": "number"},
+    "expected_margin_pct": {"type": "number"},
+    "failure_probability_estimate": {"type": "number", "minimum": 0, "maximum": 1},
+    "limits_evaluated": {
+      "type": "object",
+      "required": [
+        "policy_version",
+        "policy_hash",
+        "max_cost_usd",
+        "min_expected_revenue_usd",
+        "min_expected_profit_usd",
+        "min_margin_pct",
+        "max_gas_usd",
+        "max_bridge_cost_usd",
+        "max_model_cost_usd",
+        "max_slippage_bps",
+        "max_failure_probability"
+      ],
+      "properties": {
+        "policy_version": {"type": "string", "minLength": 1},
+        "policy_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "max_cost_usd": {"type": "number", "minimum": 0},
+        "min_expected_revenue_usd": {"type": "number", "minimum": 0},
+        "min_expected_profit_usd": {"type": "number"},
+        "min_margin_pct": {"type": "number", "minimum": 0, "maximum": 100},
+        "max_gas_usd": {"type": "number", "minimum": 0},
+        "max_bridge_cost_usd": {"type": "number", "minimum": 0},
+        "max_model_cost_usd": {"type": "number", "minimum": 0},
+        "max_slippage_bps": {"type": "number", "minimum": 0},
+        "max_failure_probability": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": false
+    },
+    "route": {
+      "type": "object",
+      "required": ["execution_chain", "settlement_chain", "attestation_strategy"],
+      "properties": {
+        "execution_chain": {"type": "string", "minLength": 1},
+        "settlement_chain": {"type": "string", "minLength": 1},
+        "attestation_strategy": {"type": "string", "enum": ["none", "batch_root", "milestone", "every_action"]}
+      },
+      "additionalProperties": false
+    },
+    "decision": {"type": "string", "enum": ["ECONOMICALLY_ELIGIBLE", "REJECT", "HUMAN_REVIEW"]},
+    "decision_reason": {"type": "string", "minLength": 1},
+    "semantic_validation": {"type": "string", "enum": ["PENDING", "PASS", "FAIL"]},
+    "parent_decision_id": {"type": "string", "minLength": 1},
+    "authority": {"type": "boolean", "const": false},
+    "no_fake_green": {"type": "boolean", "const": true}
+  },
+  "additionalProperties": false
+}
