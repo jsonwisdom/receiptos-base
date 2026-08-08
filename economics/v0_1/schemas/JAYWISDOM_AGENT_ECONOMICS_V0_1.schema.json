@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/jsonwisdom/AL/blob/master/agents/economics/JAYWISDOM_AGENT_ECONOMICS_V0_1.schema.json",
+  "title": "JayWisdom Agent Economics V0.1",
+  "description": "Durable economic policy binding an agent to verified net-profit maximization under explicit authority and cost ceilings. This policy grants no execution authority.",
+  "type": "object",
+  "required": [
+    "policy_id",
+    "policy_version",
+    "agent_identity",
+    "objective",
+    "limits",
+    "routing_preference",
+    "effective_from",
+    "human_override_required",
+    "authority",
+    "no_fake_green"
+  ],
+  "properties": {
+    "policy_id": {"type": "string", "minLength": 1},
+    "policy_version": {"type": "string", "const": "0.1.0"},
+    "agent_identity": {"type": "string", "minLength": 1},
+    "objective": {"type": "string", "const": "MAXIMIZE_VERIFIED_NET_PROFIT"},
+    "limits": {
+      "type": "object",
+      "required": [
+        "max_cost_usd",
+        "min_expected_revenue_usd",
+        "min_expected_profit_usd",
+        "min_margin_pct",
+        "max_gas_usd",
+        "max_bridge_cost_usd",
+        "max_model_cost_usd",
+        "max_slippage_bps",
+        "max_failure_probability"
+      ],
+      "properties": {
+        "max_cost_usd": {"type": "number", "minimum": 0},
+        "min_expected_revenue_usd": {"type": "number", "minimum": 0},
+        "min_expected_profit_usd": {"type": "number"},
+        "min_margin_pct": {"type": "number", "minimum": 0, "maximum": 100},
+        "max_gas_usd": {"type": "number", "minimum": 0},
+        "max_bridge_cost_usd": {"type": "number", "minimum": 0},
+        "max_model_cost_usd": {"type": "number", "minimum": 0},
+        "max_slippage_bps": {"type": "number", "minimum": 0},
+        "max_failure_probability": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": false
+    },
+    "routing_preference": {
+      "type": "object",
+      "required": ["preferred_execution_chain", "preferred_settlement_chain", "attestation_strategy"],
+      "properties": {
+        "preferred_execution_chain": {"type": "string", "enum": ["optimism", "base", "other"]},
+        "preferred_settlement_chain": {"type": "string", "enum": ["base", "optimism", "other"]},
+        "attestation_strategy": {"type": "string", "enum": ["none", "batch_root", "milestone", "every_action"]}
+      },
+      "additionalProperties": false
+    },
+    "effective_from": {"type": "string", "format": "date-time"},
+    "effective_to": {"type": "string", "format": "date-time"},
+    "human_override_required": {"type": "boolean"},
+    "authority": {"type": "boolean", "const": false},
+    "no_fake_green": {"type": "boolean", "const": true}
+  },
+  "additionalProperties": false
+}
