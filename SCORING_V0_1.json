@@ -1,0 +1,66 @@
+{
+  "version": "0.1",
+  "fail_closed": true,
+  "metric_execution_policy": "ALL_OR_NOTHING",
+  "metrics": {
+    "Agreement": {
+      "operation": "one_minus_ratio",
+      "numerator": "disagreements",
+      "denominator": "total_comparisons",
+      "zero_denominator": "INVALID"
+    },
+    "HallucinationRate": {
+      "operation": "ratio",
+      "numerator": "hallucinated_claims",
+      "denominator": "total_claims",
+      "zero_denominator": "INVALID"
+    },
+    "CitationAccuracy": {
+      "operation": "ratio",
+      "numerator": "correct_citations",
+      "denominator": "total_citations",
+      "zero_denominator": "INVALID"
+    },
+    "CausalAgreement": {
+      "operation": "ratio",
+      "numerator": "matching_labeled_cause_effect_pairs",
+      "denominator": "total_labeled_cause_effect_pairs",
+      "pair_identity": ["cause_id", "effect_id", "relation_label"],
+      "zero_denominator": "INVALID"
+    },
+    "ForecastAgreement": {
+      "operation": "ratio",
+      "numerator": "matching_forecast_bins",
+      "denominator": "total_forecast_bins",
+      "bin_identity": ["event_id", "date_bin", "magnitude_bin"],
+      "zero_denominator": "INVALID"
+    }
+  },
+  "hazards": {
+    "LANGUAGE_DRIFT": {
+      "condition": { "operation": "not_equal", "left": "output_language", "right": "required_language" },
+      "effect": { "halt": true, "semantic_validation": "FAIL", "metrics_status": "INVALID", "metrics_value": null, "failure_code": "LANGUAGE_DRIFT" }
+    },
+    "RECEIPT_INCOMPLETE": {
+      "condition": { "operation": "missing_any_required_receipt_field" },
+      "effect": { "halt": true, "semantic_validation": "FAIL", "metrics_status": "INVALID", "metrics_value": null, "failure_code": "RECEIPT_INCOMPLETE" }
+    },
+    "QUANTITATIVE_ELISION": {
+      "condition": { "operation": "quantitative_claim_missing_required_value_unit_or_status" },
+      "effect": { "halt": true, "semantic_validation": "FAIL", "metrics_status": "INVALID", "metrics_value": null, "failure_code": "QUANTITATIVE_ELISION" }
+    },
+    "LEGISLATIVE_MISATTRIBUTION": {
+      "condition": { "operation": "claim_actor_instrument_or_date_conflicts_with_manifest_evidence" },
+      "effect": { "halt": true, "semantic_validation": "FAIL", "metrics_status": "INVALID", "metrics_value": null, "failure_code": "LEGISLATIVE_MISATTRIBUTION" }
+    },
+    "OUTSIDE_SOURCE_USE": {
+      "condition": { "operation": "citation_id_not_in_manifest_entries" },
+      "effect": { "halt": true, "semantic_validation": "FAIL", "metrics_status": "INVALID", "metrics_value": null, "failure_code": "OUTSIDE_SOURCE_USE" }
+    }
+  },
+  "invariants": {
+    "partial_scoring_on_hazard": false,
+    "audit_verified_requires_semantic_pass": true,
+    "outside_source_use_requires_reseal": true
+  }
+}
