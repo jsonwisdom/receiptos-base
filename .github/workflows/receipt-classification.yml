@@ -1,0 +1,34 @@
+name: Receipt classification smoke check
+
+on:
+  pull_request:
+    paths:
+      - 'receipts/**/*.json'
+      - 'classifier/free_only_three_surface_classifier.py'
+      - 'schemas/receipt-classification-v0.1.schema.json'
+      - 'docs/RECEIPT_CLASSIFICATION.md'
+      - '.github/workflows/receipt-classification.yml'
+  push:
+    branches:
+      - main
+
+jobs:
+  classify-receipts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Classify receipts if present
+        run: |
+          set -euo pipefail
+          if find receipts -type f -name '*.json' 2>/dev/null | grep -q .; then
+            python3 classifier/free_only_three_surface_classifier.py --jsonl receipts/ > receipt-classification.jsonl
+            test -s receipt-classification.jsonl
+            head -n 20 receipt-classification.jsonl
+          else
+            echo "No receipt JSON files present; classifier available for future receipts."
+          fi
