@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {
+      "type": "LockReceipt",
+      "id": "lock-override"
+    }
+  ],
+  "edges": [
+    {
+      "from": "lock-override",
+      "to": "lock-original",
+      "type": "supersedes"
+    }
+  ],
+  "note": "Superseded node is missing — violates append-only / tombstone requirement",
+  "expected_violation": "M7-006"
+}

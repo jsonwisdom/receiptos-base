@@ -1,0 +1,42 @@
+{
+  "nodes": [
+    {
+      "type": "DecisionReceipt",
+      "id": "decision-7f3c9a2b-1e4d-4c8f-9a0b-2d5e6f7a8b9c"
+    },
+    {
+      "type": "AuthorizationReceipt",
+      "id": "550e8400-e29b-41d4-a716-446655440000"
+    },
+    {
+      "type": "LockReceipt",
+      "id": "lock-9c8b7a6d-5e4f-3a2b-1c0d-9e8f7a6b5c4d"
+    },
+    {
+      "type": "EvidenceReceipt",
+      "id": "evidence-f1e2d3c4-b5a6-9788-7766-554433221100"
+    }
+  ],
+  "edges": [
+    {
+      "from": "550e8400-e29b-41d4-a716-446655440000",
+      "to": "decision-7f3c9a2b-1e4d-4c8f-9a0b-2d5e6f7a8b9c",
+      "type": "authorizes"
+    },
+    {
+      "from": "lock-9c8b7a6d-5e4f-3a2b-1c0d-9e8f7a6b5c4d",
+      "to": "decision-7f3c9a2b-1e4d-4c8f-9a0b-2d5e6f7a8b9c",
+      "type": "locks"
+    },
+    {
+      "from": "lock-9c8b7a6d-5e4f-3a2b-1c0d-9e8f7a6b5c4d",
+      "to": "550e8400-e29b-41d4-a716-446655440000",
+      "type": "supported_by"
+    },
+    {
+      "from": "evidence-f1e2d3c4-b5a6-9788-7766-554433221100",
+      "to": "550e8400-e29b-41d4-a716-446655440000",
+      "type": "supports"
+    }
+  ]
+}

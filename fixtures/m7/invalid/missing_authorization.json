@@ -1,0 +1,20 @@
+{
+  "nodes": [
+    {
+      "type": "DecisionReceipt",
+      "id": "decision-7f3c9a2b-1e4d-4c8f-9a0b-2d5e6f7a8b9c"
+    },
+    {
+      "type": "LockReceipt",
+      "id": "lock-9c8b7a6d-5e4f-3a2b-1c0d-9e8f7a6b5c4d"
+    }
+  ],
+  "edges": [
+    {
+      "from": "lock-9c8b7a6d-5e4f-3a2b-1c0d-9e8f7a6b5c4d",
+      "to": "decision-7f3c9a2b-1e4d-4c8f-9a0b-2d5e6f7a8b9c",
+      "type": "locks"
+    }
+  ],
+  "expected_violation": "M7-001"
+}
