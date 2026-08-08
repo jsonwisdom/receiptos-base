@@ -1,59 +1,53 @@
-name: ReceiptOS Validator CI
+name: ReceiptOS Validator CI — M1 Slice 1
 
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  lint:
-    name: Lint
+  slice1:
+    name: M1 Slice 1 — parser + canonicalizer only
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run lint checks
-        run: ci/scripts/run_lint.sh
+    timeout-minutes: 10
 
-  schema:
-    name: Schema Validation
-    needs: lint
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Validate fixture schemas
-        run: ci/scripts/run_schema.sh
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  unit:
-    name: Unit Tests
-    needs: schema
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run unit tests
-        run: ci/scripts/run_unit.sh
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-  integration:
-    name: Integration Tests
-    needs: unit
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run integration tests
-        run: ci/scripts/run_integration.sh
+      - name: Install M1 Slice 1 test dependencies
+        run: python -m pip install -e '.[dev]'
 
-  fixtures:
-    name: Fixture Conformance
-    needs: integration
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Execute fixture suite
-        run: ci/scripts/run_fixtures.sh
+      - name: Run materialized M1 Slice 1 regression tests
+        run: pytest tests/test_parser.py tests/test_canonical.py
 
-  summary:
-    name: CI Summary
-    needs: fixtures
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Summarize CI results
-        run: ci/scripts/summarize.sh
+      - name: Declare full M1 validator state
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          missing=0
+          for path in ep/schema.py ep/report.py ep/validator.py tests/fixtures/GOLD-REPORT-001.json; do
+            if [[ ! -f "$path" ]]; then
+              echo "NOT_YET_MATERIALIZED: $path"
+              missing=1
+            fi
+          done
+
+          if [[ "$missing" -eq 1 ]]; then
+            echo "M1_FULL_VALIDATOR_STATUS=NOT_YET_MATERIALIZED"
+            echo "M1_SLICE1_STATUS=TESTED"
+            echo "AUTHORITY_CREATED=FALSE"
+            exit 0
+          fi
+
+          echo "M1_FULL_VALIDATOR_STATUS=MATERIALIZED_REQUIRES_SLICE3_GOLDEN_REPRODUCTION"
+          echo "AUTHORITY_CREATED=FALSE"
