@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos-base.local/schemas/receipt-classification-v0.1.schema.json",
+  "title": "RECEIPT_CLASSIFICATION_V0_1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "classification_type",
+    "source_receipt_type",
+    "route",
+    "admissibility",
+    "surface_level",
+    "authority",
+    "memory_safe",
+    "claim_scope",
+    "forbidden_scope",
+    "reason"
+  ],
+  "properties": {
+    "classification_type": {
+      "const": "RECEIPT_CLASSIFICATION_V0_1"
+    },
+    "source_receipt_type": {
+      "type": ["string", "null"]
+    },
+    "route": {
+      "enum": [
+        "ALMS_WITNESS_LEDGER",
+        "LEGACY_RECEIPT_ROUTER",
+        "REJECTED_INTAKE"
+      ]
+    },
+    "admissibility": {
+      "enum": [
+        "ADMISSIBLE_WITNESS",
+        "OUT_OF_SCOPE",
+        "INVALID"
+      ]
+    },
+    "surface_level": {
+      "enum": [
+        "THREE_SURFACE_V0_2",
+        "UNKNOWN",
+        "NONE"
+      ]
+    },
+    "authority": {
+      "const": false
+    },
+    "memory_safe": {
+      "type": "boolean"
+    },
+    "claim_scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "forbidden_scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "reason": {
+      "type": "string"
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
