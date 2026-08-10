@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos-base.local/schemas/legacy-receipt-handoff-v0.1.schema.json",
+  "title": "LEGACY_RECEIPT_HANDOFF_V0_1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "handoff_type",
+    "source_path",
+    "source_receipt_type",
+    "source_sha256",
+    "route",
+    "admissibility",
+    "authority",
+    "memory_safe",
+    "mutation_performed",
+    "alms_witness_indexed",
+    "reason",
+    "next_allowed_actions",
+    "forbidden_actions"
+  ],
+  "properties": {
+    "handoff_type": {
+      "const": "LEGACY_RECEIPT_HANDOFF_V0_1"
+    },
+    "source_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_receipt_type": {
+      "type": ["string", "null"]
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "route": {
+      "const": "LEGACY_RECEIPT_ROUTER"
+    },
+    "admissibility": {
+      "const": "OUT_OF_SCOPE"
+    },
+    "authority": {
+      "const": false
+    },
+    "memory_safe": {
+      "const": false
+    },
+    "mutation_performed": {
+      "const": false
+    },
+    "alms_witness_indexed": {
+      "const": false
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "next_allowed_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "forbidden_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  }
+}
