@@ -1,0 +1,69 @@
+{
+  "receipt_type": "ART_OF_WAR_REPLAY_CROSS_REPO_RECEIPT",
+  "version": "0.1.0",
+  "classification": "PUBLIC_EDUCATIONAL_SIMULATION",
+  "subject": "LEEANN_GENERAL_WAR_CIVIL",
+  "display_role": "STRATEGIC_REPLAY_CALLER",
+  "role_is_real_military_rank": false,
+  "real_world_command": false,
+  "authority_created": false,
+  "doctrine": {
+    "strategy_scope": [
+      "state_inspection",
+      "dependency_and_logistics_awareness",
+      "timing_and_sequence",
+      "deception_risk_detection",
+      "contradiction_checks",
+      "hold_and_rollback",
+      "civil_recovery_and_resilience"
+    ],
+    "prohibited_scope": [
+      "real_world_target_selection",
+      "weapon_employment",
+      "sabotage_or_destructive_procedures",
+      "operational_evasion",
+      "commands_to_military_police_government_or_civilians"
+    ],
+    "promotion": "HUMAN_GATE_ONLY",
+    "candidate_is_fact": false,
+    "receipt_is_authority": false,
+    "replay_is_force": false
+  },
+  "rails": {
+    "jsonwisdom/AL": {
+      "role": "DOCTRINE_AND_SIMULATION_THEATER",
+      "artifact": "docs/LEEANN-GENERAL-WAR-CIVIL-ART-OF-WAR-REPLAY-V0.1.md",
+      "commit": "a7c9b0992f91c40d031c473c8c6fe1215b39a1d1",
+      "state": "COMMITTED"
+    },
+    "jsonwisdom/COMPUTERWISDOM": {
+      "role": "BOUNDED_REASONING_STATE_MACHINE",
+      "artifact": "projects/art-of-war-replay/README.md",
+      "branch": "agent/art-of-war-replay-v0-1",
+      "head_commit": "f59162d038c782e2a323db1321f518d013de6702",
+      "pull_request": 472,
+      "state": "PROPOSED_PENDING_REPOSITORY_VERIFY_GATE"
+    },
+    "jsonwisdom/receiptos-base": {
+      "role": "RECEIPT_AND_REPLAY_EVIDENCE_ENVELOPE",
+      "artifact": "receipts/art-of-war-replay/LEEANN_GENERAL_WAR_CIVIL_V0_1.json",
+      "state": "SELF_RECORD"
+    }
+  },
+  "replay_pipeline": [
+    "OBSERVATION",
+    "MAXWELLS_DEMON_CLASSIFICATION",
+    "EVIDENCE_STORY_OR_UNKNOWN_HOLD",
+    "BOXD_PRESERVATION",
+    "COMPUTERWISDOM_STATE_COMPARISON",
+    "TWIN_REARVIEW",
+    "DOUBLE_GEMINI_FORWARD",
+    "CRISSCROSS",
+    "WISHWASH",
+    "GRAY_BABY_GAP",
+    "LEEANN_STRATEGIC_EXPLANATION",
+    "HUMAN_GATE"
+  ],
+  "canonical_statement": "Proper warfare begins by refusing to fight the wrong reality. Replay the evidence, preserve the gaps, and let the human decide.",
+  "status": "CROSS_REPO_INTRODUCTION_RECORDED"
+}
