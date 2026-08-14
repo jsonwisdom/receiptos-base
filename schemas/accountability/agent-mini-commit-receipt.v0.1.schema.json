@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:jsonwisdom:agent-mini-commit-receipt:v0.1",
+  "title": "Agent Mini-Commit Accountability Receipt v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "who",
+    "what",
+    "where",
+    "when",
+    "hashes",
+    "overlay",
+    "authority_created"
+  ],
+  "properties": {
+    "format": {
+      "const": "AGENT_MINI_COMMIT_RECEIPT_V0.1"
+    },
+    "who": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor_type", "agent_id", "operator_binding"],
+      "properties": {
+        "actor_type": {
+          "enum": ["HUMAN", "AI_AGENT", "AUTOMATION", "MIXED"]
+        },
+        "agent_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operator_binding": {
+          "enum": ["VERIFIED", "USER_SUPPLIED", "UNVERIFIED", "NOT_APPLICABLE"]
+        }
+      }
+    },
+    "what": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation", "summary", "paths"],
+      "properties": {
+        "operation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "where": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "branch"],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[^/]+/[^/]+$"
+        },
+        "branch": {
+          "type": "string",
+          "minLength": 1
+        },
+        "external_context": {
+          "type": "array",
+          "items": {
+            "enum": ["GITHUB", "BASESCAN", "EAS", "ENS", "BOXD", "OTHER"]
+          }
+        }
+      }
+    },
+    "when": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observed_at"],
+      "properties": {
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "enum": ["GITHUB_COMMIT_TIMESTAMP", "AGENT_RECORDED_TIMESTAMP", "EXTERNAL_TIMESTAMP"]
+        }
+      }
+    },
+    "hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject_commit_sha"],
+      "properties": {
+        "subject_commit_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "parent_commit_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "canonical_metadata_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "overlay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sources", "agreement", "state"],
+      "properties": {
+        "sources": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": ["MATCH", "DELTA", "MISSING", "UNKNOWN", "NOT_APPLICABLE"]
+          }
+        },
+        "agreement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source_count", "match_count", "conflict_count"],
+          "properties": {
+            "source_count": {"type": "integer", "minimum": 0},
+            "match_count": {"type": "integer", "minimum": 0},
+            "conflict_count": {"type": "integer", "minimum": 0}
+          }
+        },
+        "state": {
+          "enum": ["OBSERVED", "REDUNDANTLY_OBSERVED", "CRYPTOGRAPHICALLY_BOUND", "CONFLICT", "HOLD"]
+        }
+      }
+    },
+    "authority_created": {
+      "const": false
+    }
+  }
+}
