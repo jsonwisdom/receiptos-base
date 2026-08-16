@@ -1,0 +1,26 @@
+name: Money Loop Replay
+
+on:
+  pull_request:
+    paths:
+      - 'agents/money-loop/**'
+      - '.github/workflows/money-loop-replay.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'agents/money-loop/**'
+      - '.github/workflows/money-loop-replay.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Deterministic synthetic replay
+        run: python agents/money-loop/selftest.py
