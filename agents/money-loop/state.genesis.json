@@ -1,0 +1,27 @@
+{
+  "authority": false,
+  "flags": {
+    "cost_verified": false,
+    "profit_verified": false,
+    "revenue_verified": false
+  },
+  "lane": "BASE_AGENTIC_ECONOMY",
+  "production_runtime": false,
+  "real_money_enabled": false,
+  "receipts": [],
+  "round": 0,
+  "schema_version": "MONEY_LOOP_GAME_V0_1",
+  "score": {
+    "assets_created": 0,
+    "cost_verified_cents": 0,
+    "profit_verified_cents": 0,
+    "published": 0,
+    "revenue_verified_cents": 0
+  },
+  "stage": "IDEA",
+  "upstream_producer": {
+    "binary_trust": "HOLD",
+    "integration": "EXTERNAL_SOURCE_OR_CONTAINER",
+    "repository": "harry0703/MoneyPrinterTurbo"
+  }
+}
