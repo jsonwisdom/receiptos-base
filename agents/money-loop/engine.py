@@ -38,6 +38,13 @@ def _require_evidence(event: Dict[str, Any], *, verified: bool) -> Dict[str, Any
         _require(evidence.get("verified") is True, "verified evidence required")
     return evidence
 
+def _enforce_evidence_mode(state: Dict[str, Any], evidence: Dict[str, Any]) -> None:
+    if evidence.get("kind") == "SYNTHETIC_TEST_FIXTURE":
+        _require(
+            state.get("production_runtime") is False and state.get("real_money_enabled") is False,
+            "synthetic evidence forbidden in production or real-money mode",
+        )
+
 def _amount(event: Dict[str, Any]) -> int:
     value = event.get("amount_cents")
     _require(type(value) is int and value >= 0, "amount_cents must be a non-negative integer")
@@ -90,6 +97,7 @@ def apply_event(state: Dict[str, Any], event: Dict[str, Any]) -> Dict[str, Any]:
 
         next_state["stage"] = STAGE_TRANSITIONS[key]
 
+    _enforce_evidence_mode(state, evidence)
     next_state["round"] += 1
     next_state["receipts"].append({
         "event_id": event_id,
