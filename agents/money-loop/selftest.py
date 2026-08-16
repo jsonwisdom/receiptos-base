@@ -35,6 +35,16 @@ def main():
     else:
         raise AssertionError("revenue transition skipped evidence ladder")
 
+    # Synthetic receipts cannot cross into production/real-money mode.
+    production_state = dict(state)
+    production_state["production_runtime"] = True
+    try:
+        apply_event(production_state, ev(99, "ASSET_CREATED"))
+    except GameError:
+        pass
+    else:
+        raise AssertionError("synthetic evidence crossed production membrane")
+
     sequence = [
         ev(1, "ASSET_CREATED"),
         ev(2, "PUBLISHED"),
