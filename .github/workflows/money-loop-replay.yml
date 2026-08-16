@@ -24,3 +24,5 @@ jobs:
           python-version: '3.12'
       - name: Deterministic synthetic replay
         run: python agents/money-loop/selftest.py
+      - name: Harness and experiment replay
+        run: python agents/money-loop/experiments/selftest.py
