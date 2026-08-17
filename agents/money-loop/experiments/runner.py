@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable, Iterable, List
 
-from agents.money_loop.experiments.receipt import ExperimentReceipt, build_receipt
+from experiments.receipt import ExperimentReceipt, build_receipt
 
 
 @dataclass(frozen=True)
