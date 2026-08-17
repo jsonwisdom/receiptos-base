@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
 
-from agents.money_loop.experiments.receipt import build_receipt
-from agents.money_loop.experiments.runner import FrozenMission, canonical_grid, run_matrix, synthetic_executor
-from agents.money_loop.experiments.scoreboard import aggregate_effects, rank
-from agents.money_loop.harnesses.base.adapter import MissionEnvelope
-from agents.money_loop.harnesses.registry import get_harness
+from pathlib import Path
+import sys
+
+MONEY_LOOP_ROOT = Path(__file__).resolve().parents[1]
+if str(MONEY_LOOP_ROOT) not in sys.path:
+    sys.path.insert(0, str(MONEY_LOOP_ROOT))
+
+from experiments.receipt import build_receipt
+from experiments.runner import FrozenMission, canonical_grid, run_matrix, synthetic_executor
+from experiments.scoreboard import aggregate_effects, rank
+from harnesses.base.adapter import MissionEnvelope
+from harnesses.registry import get_harness
 
 
 def main() -> None:
