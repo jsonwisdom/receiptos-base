@@ -26,3 +26,5 @@ jobs:
         run: python agents/money-loop/selftest.py
       - name: Harness and experiment replay
         run: python agents/money-loop/experiments/selftest.py
+      - name: White House characterization delta replay
+        run: python agents/money-loop/white-house/selftest.py
