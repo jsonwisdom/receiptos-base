@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from agents.money_loop.white_house.characterization_delta import build_audit, classify_response
-from agents.money_loop.white_house.semantic_rendering import (
+from characterization_delta import build_audit, classify_response
+from semantic_rendering import (
     ALLOWED_PROVEN_RENDERINGS,
     FORBIDDEN_RENDERINGS,
     SEMANTIC_TYPE,
