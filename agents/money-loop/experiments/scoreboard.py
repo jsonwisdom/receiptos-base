@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import Iterable, List, Dict
 
-from agents.money_loop.experiments.receipt import ExperimentReceipt
+from experiments.receipt import ExperimentReceipt
 
 
 def score(receipt: ExperimentReceipt) -> int:
