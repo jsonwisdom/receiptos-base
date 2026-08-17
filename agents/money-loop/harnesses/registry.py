@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Dict, Type
 
-from agents.money_loop.harnesses.base.adapter import HarnessAdapter
-from agents.money_loop.harnesses.deepseek_dsh.adapter_001 import DeepSeekDSHAdapter001
+from harnesses.base.adapter import HarnessAdapter
+from harnesses.deepseek_dsh.adapter_001 import DeepSeekDSHAdapter001
 
 
 HARNESS_REGISTRY: Dict[str, Type[HarnessAdapter]] = {
