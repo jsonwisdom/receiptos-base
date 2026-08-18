@@ -1,0 +1,43 @@
+{
+  "schema": "receiptos_citizen_blockchain_replay_packet.v0_1",
+  "packet_id": "CITIZEN_BLOCKCHAIN_REPLAY_PACKET_V0_1",
+  "purpose": "Reference the primary COMPUTERWISDOM citizen ledger for independent ReceiptOS replay without copying or promoting its truth state.",
+  "primary_ledger": {
+    "repository": "jsonwisdom/COMPUTERWISDOM",
+    "commit_sha": "389a148dbe7e86f97572fa1c2ddc2198c7acc59f",
+    "path": "citizen/blockchain-reverse-replay/CITIZEN_BLOCKCHAIN_REVERSE_REPLAY_LEDGER_V0_1.json",
+    "github_blob_sha": "d5f1b35b159623aff66aef2c9e412109b736e718",
+    "entry_id": "CITIZEN_LEDGER_ITEM_001"
+  },
+  "expected_primary_state": {
+    "lane": "AMERICAN_CITIZEN_PUBLIC_RECORD",
+    "round_06_executive_state": "READY_NOT_ROLLED",
+    "entry_terminal": "HOLD",
+    "independent_chain_replay": "HOLD",
+    "authority_created": false
+  },
+  "replay_requirements": [
+    "fetch exact primary commit and path",
+    "verify referenced blob identity or stronger byte digest if separately materialized",
+    "parse ledger without modifying semantic fields",
+    "independently retrieve the Base Sepolia transaction receipt",
+    "bind block number and transaction status",
+    "decode relevant EAS receipt or event logs",
+    "bind exact contract and function",
+    "do not equate an address with a natural person",
+    "bind invoice/order/payment source only when an offchain receipt exists",
+    "traverse appropriation/statutory authority only when government money is actually bound"
+  ],
+  "replay_state": "HOLD_EXTERNAL_CHAIN_REPLAY_NOT_PERFORMED",
+  "boundaries": {
+    "primary_ledger_not_replay_copy": true,
+    "tx_hash_not_fact": true,
+    "hash_not_semantic_truth": true,
+    "onchain_event_not_invoice": true,
+    "onchain_event_not_legal_authority": true,
+    "wallet_address_not_natural_person_identity": true,
+    "missing_link_is_hold": true,
+    "family_lane_imported": false,
+    "authority_created": false
+  }
+}
