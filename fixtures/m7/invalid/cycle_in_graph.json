@@ -1,0 +1,39 @@
+{
+  "nodes": [
+    {
+      "type": "AuthorizationReceipt",
+      "id": "auth-1"
+    },
+    {
+      "type": "LockReceipt",
+      "id": "lock-1"
+    },
+    {
+      "type": "DecisionReceipt",
+      "id": "dec-1"
+    }
+  ],
+  "edges": [
+    {
+      "from": "auth-1",
+      "to": "dec-1",
+      "type": "authorizes"
+    },
+    {
+      "from": "lock-1",
+      "to": "dec-1",
+      "type": "locks"
+    },
+    {
+      "from": "lock-1",
+      "to": "auth-1",
+      "type": "supported_by"
+    },
+    {
+      "from": "dec-1",
+      "to": "lock-1",
+      "type": "derives_from"
+    }
+  ],
+  "expected_violation": "M7-004"
+}
