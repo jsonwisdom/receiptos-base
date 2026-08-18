@@ -1,0 +1,27 @@
+name: Citizen Blockchain Replay Packet v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'citizen-replay/**'
+      - '.github/workflows/citizen-blockchain-replay-packet-v0-1.yml'
+  push:
+    branches:
+      - 'agent/citizen-blockchain-replay-packet-v0-1'
+    paths:
+      - 'citizen-replay/**'
+      - '.github/workflows/citizen-blockchain-replay-packet-v0-1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  packet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile packet verifier
+        run: python -m py_compile citizen-replay/verify_citizen_blockchain_replay_packet_v0_1.py
+      - name: Verify packet structure
+        run: python citizen-replay/verify_citizen_blockchain_replay_packet_v0_1.py
