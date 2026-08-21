@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "BoxDee/LadyWar/04_REPLAY/roles/GENERAL_LEE_CIVIC_REPLAY_v0.1.schema.json",
+  "title": "General Lee Civic Replay v0.1",
+  "description": "Synthetic, non-authoritative Alabama civic-history replay role. GENERAL_LEE is not Robert E. Lee and creates no military or legal authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "synthetic_role_label", "identity_membrane", "source", "replay_cards", "hard_locks"],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "synthetic_role_label": {"const": "GENERAL_LEE"},
+    "identity_membrane": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["general_lee_is_synthetic", "general_lee_is_robert_e_lee", "historical_person_to_synthetic_identity"],
+      "properties": {
+        "general_lee_is_synthetic": {"const": true},
+        "general_lee_is_robert_e_lee": {"const": false},
+        "historical_person_to_synthetic_identity": {"const": false}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_object_type", "canonical_schema_version", "ring_evaluator_version"],
+      "properties": {
+        "canonical_object_type": {"const": "civic_claim_canonical"},
+        "canonical_schema_version": {"const": "0.1"},
+        "ring_evaluator_version": {"const": "GENLEEANN187_RING_EVALUATOR_v0.1"}
+      }
+    },
+    "replay_cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["node_id", "node_label", "before", "during", "after", "supporting_receipts", "contradicting_receipts", "missing_edges", "evaluator_disposition", "public_history_note", "authority_created"],
+        "properties": {
+          "node_id": {"enum": [1,2,3,4,5,6,7,8,9,0]},
+          "node_label": {"type": "string"},
+          "before": {"type": ["string", "null"]},
+          "during": {"type": ["string", "null"]},
+          "after": {"type": ["string", "null"]},
+          "supporting_receipts": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "contradicting_receipts": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "missing_edges": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "evaluator_disposition": {"enum": ["PROVEN", "CONFLICT", "HOLD", "REJECT", "STORY", "NOT_APPLICABLE"]},
+          "public_history_note": {"type": "string"},
+          "authority_created": {"const": false}
+        }
+      }
+    },
+    "hard_locks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model_output_is_receipt", "pattern_is_proof", "replay_is_verdict", "story_to_fact", "synthetic_persona_to_real_authority", "historical_person_to_synthetic_identity", "may_change_evaluator_disposition", "may_create_new_receipt", "real_combat_planning", "authority_created", "human_review_required"],
+      "properties": {
+        "model_output_is_receipt": {"const": false},
+        "pattern_is_proof": {"const": false},
+        "replay_is_verdict": {"const": false},
+        "story_to_fact": {"const": false},
+        "synthetic_persona_to_real_authority": {"const": false},
+        "historical_person_to_synthetic_identity": {"const": false},
+        "may_change_evaluator_disposition": {"const": false},
+        "may_create_new_receipt": {"const": false},
+        "real_combat_planning": {"const": false},
+        "authority_created": {"const": false},
+        "human_review_required": {"const": true}
+      }
+    }
+  }
+}
