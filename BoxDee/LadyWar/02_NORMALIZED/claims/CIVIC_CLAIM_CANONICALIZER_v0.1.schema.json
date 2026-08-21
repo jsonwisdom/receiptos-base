@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "BoxDee/LadyWar/02_NORMALIZED/claims/CIVIC_CLAIM_CANONICALIZER_v0.1.schema.json",
+  "title": "Civic Claim Canonicalizer v0.1",
+  "description": "Neutral, non-operational civic-evidence object used before LadyWar or GENLEEANN187 evaluation, scoring, or replay.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "object_type",
+    "original_claim",
+    "speaker_source",
+    "timestamp",
+    "jurisdiction",
+    "referenced_person_system",
+    "receipt_refs",
+    "normalized",
+    "disposition",
+    "hard_locks"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "object_type": { "const": "civic_claim_canonical" },
+    "original_claim": { "type": "string", "minLength": 1 },
+    "speaker_source": { "type": ["string", "null"] },
+    "timestamp": { "type": ["string", "null"], "format": "date-time" },
+    "jurisdiction": {
+      "enum": ["federal", "state", "local", "tribal", "territorial", "multi", "unknown"]
+    },
+    "referenced_person_system": { "type": ["string", "null"] },
+    "receipt_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "normalized": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "who",
+        "said_or_did_what",
+        "when",
+        "where",
+        "under_what_authority",
+        "receipt",
+        "contradicting_receipt",
+        "missing_edge"
+      ],
+      "properties": {
+        "who": { "type": ["string", "null"] },
+        "said_or_did_what": { "type": "string", "minLength": 1 },
+        "when": { "type": ["string", "null"], "format": "date-time" },
+        "where": { "type": ["string", "null"] },
+        "under_what_authority": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["authority_type", "authority_refs"],
+          "properties": {
+            "authority_type": {
+              "enum": [
+                "constitutional",
+                "statute",
+                "regulation",
+                "executive_order",
+                "court_order",
+                "policy",
+                "delegated",
+                "none",
+                "unknown"
+              ]
+            },
+            "authority_refs": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 },
+              "uniqueItems": true
+            }
+          }
+        },
+        "receipt": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "contradicting_receipt": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "missing_edge": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    },
+    "disposition": {
+      "enum": ["PROVEN", "CONFLICT", "HOLD", "REJECT", "STORY"]
+    },
+    "hard_locks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_output_is_receipt",
+        "pattern_is_proof",
+        "replay_is_verdict",
+        "story_to_fact",
+        "synthetic_persona_to_real_authority",
+        "authority_created",
+        "human_review_required"
+      ],
+      "properties": {
+        "model_output_is_receipt": { "const": false },
+        "pattern_is_proof": { "const": false },
+        "replay_is_verdict": { "const": false },
+        "story_to_fact": { "const": false },
+        "synthetic_persona_to_real_authority": { "const": false },
+        "authority_created": { "const": false },
+        "human_review_required": { "const": true }
+      }
+    }
+  }
+}
