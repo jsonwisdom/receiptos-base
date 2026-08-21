@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-08-21T18:28:00-05:00",
+  "card_id": "GENERAL_LEE_CARD_002",
+  "schema_version": "0.1",
+  "synthetic_role_label": "GENERAL_LEE",
+  "identity_membrane": {
+    "general_lee_is_synthetic": true,
+    "general_lee_is_robert_e_lee": false,
+    "historical_person_to_synthetic_identity": false
+  },
+  "source": {
+    "canonical_claim_id": "AL_CIVILWAR_002",
+    "canonical_object_type": "civic_claim_canonical",
+    "canonical_schema_version": "0.1",
+    "ring_evaluator_version": "GENLEEANN187_RING_EVALUATOR_v0.1"
+  },
+  "replay_card": {
+    "node_id": 1,
+    "node_label": "ORIGIN / ALABAMA CIVIC HISTORY",
+    "before": "After the first wave of state secessions, delegates from the seceding states assembled in Montgomery, Alabama, in February 1861 to organize a provisional Confederate political structure. This card does not infer motives beyond sourced records.",
+    "during": "Montgomery became the provisional capital of the Confederate States of America. The provisional government operated there, Jefferson Davis was inaugurated in Montgomery on February 18, 1861, and the Alabama State Capitol served as a central governmental meeting place during the Montgomery period.",
+    "after": "The Confederate government relocated its capital to Richmond in late May 1861. Military campaigns, slavery and economic consequences, Unionism, troop estimates, Reconstruction, and later historical memory remain separate atomic claims and are not imported into this card.",
+    "supporting_receipts": [
+      "https://encyclopediaofalabama.org/article/first-white-house-of-the-confederacy/",
+      "https://npgallery.nps.gov/NRHP/GetAsset/NHLS/66000152_text"
+    ],
+    "contradicting_receipts": [],
+    "missing_edges": [],
+    "evaluator_disposition": "PROVEN",
+    "node_0_boxdee_disposition": "PROVEN",
+    "public_history_note": "Node 1 classifies this claim as an origin/founding civic-history surface on Alabama soil. Historical authority is limited to secession conventions and the provisional Confederate government as historical public-record surfaces; no present-day authority is inferred. The replay does not convert GENERAL_LEE into Robert E. Lee, historical rank, command, endorsement, or authority.",
+    "authority_created": false
+  },
+  "scope_exclusions": [
+    "delegate motive beyond sourced records",
+    "military operations",
+    "troop estimates",
+    "slavery and economic consequences",
+    "Unionism and dissent",
+    "Reconstruction",
+    "Lost Cause and later memory"
+  ],
+  "hard_locks": {
+    "model_output_is_receipt": false,
+    "pattern_is_proof": false,
+    "replay_is_verdict": false,
+    "story_to_fact": false,
+    "synthetic_persona_to_real_authority": false,
+    "historical_person_to_synthetic_identity": false,
+    "may_change_evaluator_disposition": false,
+    "may_create_new_receipt": false,
+    "real_combat_planning": false,
+    "authority_created": false,
+    "human_review_required": true
+  }
+}
