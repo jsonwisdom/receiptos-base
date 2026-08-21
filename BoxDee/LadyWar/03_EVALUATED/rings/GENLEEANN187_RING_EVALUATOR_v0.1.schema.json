@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "BoxDee/LadyWar/03_EVALUATED/rings/GENLEEANN187_RING_EVALUATOR_v0.1.schema.json",
+  "title": "GENLEEANN187 Ring Evaluator v0.1",
+  "description": "Non-operational civic-memory evaluator. Accepts canonical claim objects only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "input", "nodes", "hard_locks"],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "input": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["schema_version", "object_type", "hard_locks"],
+      "properties": {
+        "schema_version": {"const": "0.1"},
+        "object_type": {"const": "civic_claim_canonical"},
+        "hard_locks": {
+          "type": "object",
+          "required": ["authority_created", "human_review_required"],
+          "properties": {
+            "authority_created": {"const": false},
+            "human_review_required": {"const": true}
+          }
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["node_id", "applicable", "disposition", "supporting_receipt_refs", "contradicting_receipt_refs", "missing_edges", "public_civic_note"],
+        "properties": {
+          "node_id": {"enum": [1,2,3,4,5,6,7,8,9,0]},
+          "applicable": {"type": "boolean"},
+          "disposition": {"enum": ["PROVEN", "CONFLICT", "HOLD", "REJECT", "STORY", "NOT_APPLICABLE"]},
+          "supporting_receipt_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "contradicting_receipt_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "missing_edges": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "public_civic_note": {"type": "string"}
+        }
+      }
+    },
+    "hard_locks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw_prose_input_allowed", "model_output_is_receipt", "pattern_is_proof", "replay_is_verdict", "synthetic_persona_to_real_authority", "authority_created", "human_review_required", "real_combat_planning"],
+      "properties": {
+        "raw_prose_input_allowed": {"const": false},
+        "model_output_is_receipt": {"const": false},
+        "pattern_is_proof": {"const": false},
+        "replay_is_verdict": {"const": false},
+        "synthetic_persona_to_real_authority": {"const": false},
+        "authority_created": {"const": false},
+        "human_review_required": {"const": true},
+        "real_combat_planning": {"const": false}
+      }
+    }
+  }
+}
