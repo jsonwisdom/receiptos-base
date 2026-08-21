@@ -1,0 +1,24 @@
+{
+  "packet_version": "0.1",
+  "packet_type": "GENLEEANN187_ring_evaluation_index",
+  "source_packet": "BoxDee/LadyWar/02_NORMALIZED/claims/alabama_civil_war/AL_CIVILWAR_ATOMIC_CLAIMS_v0.1.index.json",
+  "evaluator_schema_ref": "BoxDee/LadyWar/03_EVALUATED/rings/GENLEEANN187_RING_EVALUATOR_v0.1.schema.json",
+  "authority_created": false,
+  "human_review_required": true,
+  "rule": "Each atomic claim applies to its thematic history node plus Node 0 BoxDee disposition; unrelated nodes are NOT_APPLICABLE.",
+  "evaluations": [
+    {"claim_id":"AL_CIVILWAR_001","primary_node":2,"primary_node_label":"SECESSION / STATE CIVIC ACTS","disposition":"PROVEN","node_0_disposition":"PROVEN"},
+    {"claim_id":"AL_CIVILWAR_002","primary_node":3,"primary_node_label":"COMPETING GOVERNMENTS / HISTORICAL AUTHORITY SURFACES","disposition":"PROVEN","node_0_disposition":"PROVEN"},
+    {"claim_id":"AL_CIVILWAR_003","primary_node":4,"primary_node_label":"ENSLAVEMENT / ECONOMY / HUMAN CONSEQUENCE","disposition":"PROVEN","node_0_disposition":"PROVEN"},
+    {"claim_id":"AL_CIVILWAR_004","primary_node":7,"primary_node_label":"WAR EVENTS / PUBLIC HISTORICAL SUMMARY ONLY","disposition":"CONFLICT","node_0_disposition":"CONFLICT","promotion_lock":"NO_SINGLE_TROOP_COUNT_INTEGER"},
+    {"claim_id":"AL_CIVILWAR_005","primary_node":7,"primary_node_label":"WAR EVENTS / PUBLIC HISTORICAL SUMMARY ONLY","disposition":"PROVEN","node_0_disposition":"PROVEN"},
+    {"claim_id":"AL_CIVILWAR_006","primary_node":7,"primary_node_label":"WAR EVENTS / PUBLIC HISTORICAL SUMMARY ONLY","disposition":"PROVEN","node_0_disposition":"PROVEN"},
+    {"claim_id":"AL_CIVILWAR_007","primary_node":7,"primary_node_label":"WAR EVENTS / PUBLIC HISTORICAL SUMMARY ONLY","disposition":"PROVEN","node_0_disposition":"PROVEN"},
+    {"claim_id":"AL_CIVILWAR_008","primary_node":5,"primary_node_label":"UNIONISM / DISSENT / CIVILIAN EXPERIENCE","disposition":"PROVEN","node_0_disposition":"PROVEN","evidence_characterization":"WELL-SUPPORTED"},
+    {"claim_id":"AL_CIVILWAR_009","primary_node":9,"primary_node_label":"ACCOUNTABILITY / RECONSTRUCTION / MEMORY / CORRECTION","disposition":"PROVEN","node_0_disposition":"PROVEN","evidence_characterization":"WELL-SUPPORTED / PROVEN"},
+    {"claim_id":"AL_CIVILWAR_010","primary_node":9,"primary_node_label":"ACCOUNTABILITY / RECONSTRUCTION / MEMORY / CORRECTION","disposition":"PROVEN","node_0_disposition":"PROVEN","evidence_characterization":"WELL-SUPPORTED"}
+  ],
+  "summary": {"PROVEN":9,"CONFLICT":1,"HOLD":0,"REJECT":0,"STORY":0},
+  "next_gate": "GENERAL_LEE_CIVIC_REPLAY_v0.1",
+  "hard_locks": {"raw_prose_input_allowed":false,"model_output_is_receipt":false,"pattern_is_proof":false,"replay_is_verdict":false,"synthetic_persona_to_real_authority":false,"authority_created":false,"human_review_required":true,"real_combat_planning":false}
+}
