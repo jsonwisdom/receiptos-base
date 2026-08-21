@@ -8,7 +8,7 @@
   "rule": "Each atomic claim applies to its thematic history node plus Node 0 BoxDee disposition; unrelated nodes are NOT_APPLICABLE.",
   "evaluations": [
     {"claim_id":"AL_CIVILWAR_001","primary_node":2,"primary_node_label":"SECESSION / STATE CIVIC ACTS","disposition":"PROVEN","node_0_disposition":"PROVEN"},
-    {"claim_id":"AL_CIVILWAR_002","primary_node":3,"primary_node_label":"COMPETING GOVERNMENTS / HISTORICAL AUTHORITY SURFACES","disposition":"PROVEN","node_0_disposition":"PROVEN"},
+    {"claim_id":"AL_CIVILWAR_002","primary_node":1,"primary_node_label":"ORIGIN / ALABAMA CIVIC HISTORY","disposition":"PROVEN","node_0_disposition":"PROVEN","classification_note":"Montgomery provisional-capital claim classified as founding/origin civic-history surface; disposition unchanged."},
     {"claim_id":"AL_CIVILWAR_003","primary_node":4,"primary_node_label":"ENSLAVEMENT / ECONOMY / HUMAN CONSEQUENCE","disposition":"PROVEN","node_0_disposition":"PROVEN"},
     {"claim_id":"AL_CIVILWAR_004","primary_node":7,"primary_node_label":"WAR EVENTS / PUBLIC HISTORICAL SUMMARY ONLY","disposition":"CONFLICT","node_0_disposition":"CONFLICT","promotion_lock":"NO_SINGLE_TROOP_COUNT_INTEGER"},
     {"claim_id":"AL_CIVILWAR_005","primary_node":7,"primary_node_label":"WAR EVENTS / PUBLIC HISTORICAL SUMMARY ONLY","disposition":"PROVEN","node_0_disposition":"PROVEN"},
