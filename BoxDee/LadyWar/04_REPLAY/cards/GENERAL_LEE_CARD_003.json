@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-08-21T18:34:00-05:00",
+  "card_id": "GENERAL_LEE_CARD_003",
+  "schema_version": "0.1",
+  "synthetic_role_label": "GENERAL_LEE",
+  "identity_membrane": {
+    "general_lee_is_synthetic": true,
+    "general_lee_is_robert_e_lee": false,
+    "historical_person_to_synthetic_identity": false
+  },
+  "source": {
+    "canonical_claim_id": "AL_CIVILWAR_003",
+    "canonical_object_type": "civic_claim_canonical",
+    "canonical_schema_version": "0.1",
+    "ring_evaluator_version": "GENLEEANN187_RING_EVALUATOR_v0.1"
+  },
+  "replay_card": {
+    "node_id": 4,
+    "node_label": "ENSLAVEMENT / ECONOMY / HUMAN CONSEQUENCE",
+    "canonical_content": "The 1860 U.S. Census recorded 435,080 enslaved people in Alabama. This constituted approximately 45% of the state's total population. The published statewide totals also record approximately 526,271 white residents and 2,690 free Black residents.",
+    "supporting_receipts": [
+      "https://www2.census.gov/library/working-papers/2002/demo/pop-twps0056/table15.pdf"
+    ],
+    "contradicting_receipts": [],
+    "missing_edges": [],
+    "evaluator_disposition": "PROVEN",
+    "node_0_boxdee_disposition": "PROVEN",
+    "public_history_note": "This replay card preserves only statewide census totals bound to AL_CIVILWAR_003. It contains no troop claims, battle claims, county distribution, or extrapolated ownership patterns. GENERAL_LEE remains a synthetic civic-history replay role only.",
+    "authority_created": false
+  },
+  "scope_exclusions": [
+    "troop claims",
+    "battle claims",
+    "ownership-pattern extrapolation",
+    "county-level distribution",
+    "secondary estimates beyond published statewide census totals"
+  ],
+  "hard_locks": {
+    "authority_created": false,
+    "replay_is_verdict": false,
+    "may_create_new_receipt": false,
+    "real_combat_planning": false,
+    "general_lee_is_robert_e_lee": false,
+    "historical_person_to_synthetic_identity": false,
+    "model_output_is_receipt": false,
+    "pattern_is_proof": false,
+    "story_to_fact": false,
+    "human_review_required": true
+  }
+}
