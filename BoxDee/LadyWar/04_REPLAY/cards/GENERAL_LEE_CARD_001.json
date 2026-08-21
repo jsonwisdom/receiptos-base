@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-08-21T18:25:00-05:00",
+  "card_id": "GENERAL_LEE_CARD_001",
+  "schema_version": "0.1",
+  "synthetic_role_label": "GENERAL_LEE",
+  "identity_membrane": {
+    "general_lee_is_synthetic": true,
+    "general_lee_is_robert_e_lee": false,
+    "historical_person_to_synthetic_identity": false
+  },
+  "source": {
+    "canonical_claim_id": "AL_CIVILWAR_001",
+    "canonical_object_type": "civic_claim_canonical",
+    "canonical_schema_version": "0.1",
+    "ring_evaluator_version": "GENLEEANN187_RING_EVALUATOR_v0.1"
+  },
+  "replay_card": {
+    "node_id": 2,
+    "node_label": "SECESSION / STATE CIVIC ACTS",
+    "before": "Alabama delegates met in Montgomery in January 1861 to consider secession amid the wider U.S. secession crisis. This card does not infer delegate motive beyond sourced records.",
+    "during": "On January 11, 1861, the Alabama Secession Convention adopted the Ordinance of Secession by a recorded vote of 61 ayes to 39 nays.",
+    "after": "Alabama thereafter entered the Confederate political project. Consequences, military events, slavery, Unionism, Reconstruction, and later memory remain separate atomic claims and are not imported into this card.",
+    "supporting_receipts": [
+      "https://digital.archives.alabama.gov/digital/collection/voices/id/3764/",
+      "https://encyclopediaofalabama.org/article/secession/"
+    ],
+    "contradicting_receipts": [],
+    "missing_edges": [],
+    "evaluator_disposition": "PROVEN",
+    "node_0_boxdee_disposition": "PROVEN",
+    "public_history_note": "The replay preserves only the documented civic act, date, and vote. It does not convert the synthetic GENERAL_LEE role into a historical person, rank, command, endorsement, or authority.",
+    "authority_created": false
+  },
+  "scope_exclusions": [
+    "delegate motive beyond sourced records",
+    "military operations",
+    "troop estimates",
+    "slavery and economic consequences",
+    "Unionism and dissent",
+    "Reconstruction",
+    "Lost Cause and later memory"
+  ],
+  "hard_locks": {
+    "model_output_is_receipt": false,
+    "pattern_is_proof": false,
+    "replay_is_verdict": false,
+    "story_to_fact": false,
+    "synthetic_persona_to_real_authority": false,
+    "historical_person_to_synthetic_identity": false,
+    "may_change_evaluator_disposition": false,
+    "may_create_new_receipt": false,
+    "real_combat_planning": false,
+    "authority_created": false,
+    "human_review_required": true
+  }
+}
