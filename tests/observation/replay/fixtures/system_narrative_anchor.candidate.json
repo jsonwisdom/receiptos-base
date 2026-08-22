@@ -1,0 +1,69 @@
+{
+  "header": {
+    "receipt_type": "SYSTEM_NARRATIVE_ANCHOR_CANDIDATE",
+    "timestamp_claim": "2025-06-15T18:42:00Z",
+    "transaction_hash_claim": "0x9a3f1b2c8d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a",
+    "target_chain_claim": "jaywisdom.base.eth",
+    "genesis_anchor_claim": "0x9a3f1b2c8d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a",
+    "content_hash_inputs_claimed": [
+      "cell_definitions.json",
+      "rubric_registry.json"
+    ],
+    "verification_status": "UNVERIFIED",
+    "anchored_immutable": false,
+    "explicit_non_claim": "This candidate fixture does not prove that any transaction, ENS record, hash input, calldata publication, or on-chain anchor exists."
+  },
+  "narrative": {
+    "title": "DEPARTMENT OF JUSTICE — STORY FORM, LIVE FROM THE ARCHIVES",
+    "classification": "NON_OFFICIAL_NARRATIVE_MODEL",
+    "scene": "The auditing library is represented as a glass cube in an evidence vault. The imagery explains evidence hashing and receipt chaining; it is not a factual description of a DOJ system.",
+    "characters": [
+      {
+        "name": "Jay",
+        "role": "Human Operator",
+        "note": "The operator is not the audit subject. The rubric and evidence transitions are the subjects."
+      },
+      {
+        "name": "The Auditor",
+        "role": "SolidStateAuditor instance",
+        "note": "Observes, evaluates supplied evidence, replays bounded functions, and emits non-authoritative receipts."
+      },
+      {
+        "name": "The Grid",
+        "role": "Proposed 100-cell audit matrix",
+        "status": "CONCEPTUAL_NOT_EXECUTED"
+      }
+    ]
+  },
+  "control_crawl_adapter": {
+    "status": "DESIGN_CANDIDATE",
+    "interface_claim": "crawl(bytes32 cell_id, CrawlContext memory context) external returns (bool pass, bytes32 proof_delta, bytes32[] memory next_cells)",
+    "determinism_requirement": "Given identical canonical cell_id and context bytes, an authorized implementation must produce byte-identical outputs.",
+    "dry_run_status": "NOT_EXECUTED",
+    "full_grid_sweep_status": "NOT_EXECUTED",
+    "bidirectional_seal_test": {
+      "proposed_sample_size": 20,
+      "status": "NOT_EXECUTED",
+      "success_condition": "Every sampled reverse replay must reconstruct the exact canonical comparison target defined by the rubric."
+    }
+  },
+  "status_ledger": {
+    "move_008_lean_sweep_claim": "LOCKED_UNVERIFIED_IN_THIS_FIXTURE",
+    "move_009_pilot_claim": "UNVERIFIED",
+    "move_010_control_crawl_adapter": "DESIGN_CANDIDATE"
+  },
+  "magic_ball_output": {
+    "next_best_audit_question": "Which original bytes, transaction receipt, chain identifier, block number, and inclusion proof would establish or falsify the claimed genesis anchor?"
+  },
+  "operator_authorization": {
+    "jay_approval_required": true,
+    "execution_authorized": false,
+    "promotion_authorized": false,
+    "allowed_next_actions": [
+      "PROVIDE_ON_CHAIN_RECEIPT_EVIDENCE",
+      "REPLACE_PLACEHOLDER_HASHES_WITH_COMPUTED_VALUES",
+      "IMPLEMENT_AND_TEST_CONTROL_CRAWL_ADAPTER",
+      "KEEP_AS_NON_NORMATIVE_NARRATIVE"
+    ]
+  }
+}
