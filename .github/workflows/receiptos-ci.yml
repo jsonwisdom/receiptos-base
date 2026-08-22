@@ -34,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Validate ContentCoin READOUT seal
+        run: node scripts/validate-contentcoin-readout.js receipt-schema/contentcoin/v1.1/fixtures/META.candidate.json
+
       - name: NPM audit high+
         run: npm audit --audit-level=high
 
