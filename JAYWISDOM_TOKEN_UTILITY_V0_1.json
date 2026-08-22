@@ -1,0 +1,29 @@
+{
+  "version": "0.1",
+  "network": "Base",
+  "chain_id": 8453,
+  "token": {
+    "display": "$JAYWISDOM",
+    "contract_address": "0x694cE46C64D9D1a5e9376A9feBcF85Ec05D72e9F",
+    "decimals": 18,
+    "observed_contract_type": "CreatorCoin/ERC-20 minimal proxy"
+  },
+  "utility": {
+    "mode": "REPLAY_ACCESS_ELIGIBILITY",
+    "eligibility_rule": "balanceOf(wallet) > 0",
+    "token_transfer_required": false,
+    "burn_required": false,
+    "staking_required": false,
+    "public_verification_permissionless": true,
+    "scoring_weight": 0,
+    "semantic_validation_weight": 0,
+    "authority_weight": 0
+  },
+  "invariants": {
+    "TOKEN_BALANCE_DOES_NOT_PROVE_TRUTH": true,
+    "TOKEN_BALANCE_DOES_NOT_CREATE_AUTHORITY": true,
+    "TOKEN_BALANCE_DOES_NOT_CHANGE_SCORE": true,
+    "ECONOMIC_ELIGIBILITY_IS_NOT_EXECUTION_AUTHORIZATION": true,
+    "AUTHORITY_CREATED": false
+  }
+}
