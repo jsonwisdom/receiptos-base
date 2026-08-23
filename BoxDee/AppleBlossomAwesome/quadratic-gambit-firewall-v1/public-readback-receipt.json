@@ -1,0 +1,23 @@
+{
+  "schema": "APPLEBLOSSOM_PUBLIC_READBACK_RECEIPT_V1",
+  "repository": "jsonwisdom/receiptos-base",
+  "branch": "appleblossom-firewall-seal-v1",
+  "verified_commit": "651ab0f6a1d6708231301aa5fc43704058fbc66b",
+  "verified_tree": "910bab00605c57442a16ee42b0c0c41fac68a214",
+  "artifact_path": "BoxDee/AppleBlossomAwesome/quadratic-gambit-firewall-v1/payload.canonical.json",
+  "payload_sha256": "fbbd98cf804e11d3ac36af60eafb91f5f4fa576472c7db509af7afa646ecadbc",
+  "ed25519_public_key_base64": "HeUCV2hWK2E16n4dgBJsipBp/+rtVlAfdba5OpRxek8=",
+  "detached_signature_base64": "QevoJbsobukt+AR6cisN52gX20g29Ob4iYT6D8oEywxtinRNGVzu7+GxWIMbiUczKvHGiDakxspniDEr7iotCQ==",
+  "canonical_json_valid": true,
+  "sha256_match": true,
+  "ed25519_signature_verified": true,
+  "branch_pointed_to_verified_commit_at_readback": true,
+  "git_commit_signature_verified": false,
+  "git_commit_signature_reason": "unsigned",
+  "signer_identity_bound_to_jay": false,
+  "signer_authority": false,
+  "encryption": false,
+  "promotion": false,
+  "authority_created": false,
+  "fake_green": false
+}
