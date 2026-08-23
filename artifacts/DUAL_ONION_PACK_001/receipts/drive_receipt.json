@@ -1,0 +1,22 @@
+{
+  "schema": "DUAL_ONION_DRIVE_RECEIPT_V0_1",
+  "pack_id": "DUAL_ONION_PACK_001",
+  "authority_created": false,
+  "no_fake_green": true,
+  "drive_folder_id": "1QSHVqqrU5b_anE6mH7DraDswbkH5aIiU",
+  "files": [
+    {"name":"card_001.jpg","drive_file_id":"1_fQmhBET5N4wsDMCra6Sq6UYzq58Xzuk","sha256":"8afc657dfa720c11f30f565e92663e64354859e158187bd2bfe0024feb79d3a8","size_bytes":499726,"status":"HASH_MATCH"},
+    {"name":"card_002.jpg","drive_file_id":"1DxQyzdt0839IVJl03DpfkBPAMveOMERJ","sha256":"b2637feaf812aab94ba7a04d784ab85c09079cef9aa122685bd41445c3e0d2c8","size_bytes":828091,"status":"HASH_MATCH"},
+    {"name":"card_003.jpg","drive_file_id":"1WbGxMQG1AqgV2F-MCAlV1jP11stvwVwL","sha256":"559cc8174e327db96aa7f74818f24a3036bc84990b9578682911d13dcc98304e","size_bytes":917385,"status":"HASH_MATCH"},
+    {"name":"card_004.jpg","drive_file_id":"1LcTkPNTdkuXaLYQ8zb0JoS3UYkgzf_P8","sha256":"7fff6f43682baf0bdc8d9c347a220bae5cfe0398759e2f9a1e280bda82e4318e","size_bytes":1021959,"status":"HASH_MATCH"},
+    {"name":"card_005.jpg","drive_file_id":"1xj73_0zoUsRo-dg_nbKxPtLw3f-0TZb3","sha256":"b44cad6ba179e629174d370649647aa7a4b7818ff76057afeb824c31a0930554","size_bytes":324573,"status":"HASH_MATCH"},
+    {"name":"card_006.jpg","drive_file_id":"1niSl4sGUSxaMe48DokYyPlnntGGHpfz-","sha256":"4ed1c977f3e51069253aed68463e22cbf34ddfffab1aa3b3c9ea3f817883345a","size_bytes":987909,"status":"HASH_MATCH"},
+    {"name":"reference_matrix.jpg","drive_file_id":"1qm_7qjhCPpHMQ94HqawamKfAu3g-3dpu","sha256":"bece208e8ed730f3f073bb88eab8624006d85ef5d7558449883f15f470e8c724","size_bytes":834519,"status":"HASH_MATCH"}
+  ],
+  "verification": {
+    "method": "downloaded exact Drive bytes and computed SHA-256",
+    "matched": 7,
+    "expected": 7,
+    "result": "PASS"
+  }
+}
