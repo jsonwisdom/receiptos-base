@@ -1,0 +1,40 @@
+{
+  "canonicalization": "UTF-8 JSON; lexicographic key ordering; no insignificant whitespace; payload uses strings, booleans, integers, and objects only",
+  "digest": {
+    "algorithm": "SHA-256",
+    "hex": "fbbd98cf804e11d3ac36af60eafb91f5f4fa576472c7db509af7afa646ecadbc"
+  },
+  "payload": {
+    "artifact_id": "APPLEBLOSSOM_AWESOME_QUADRATIC_GAMBIT_FIREWALL_V1",
+    "authority_created": false,
+    "encryption_claimed": false,
+    "fake_green": false,
+    "firewall_status": "DESIGNED",
+    "game": "QUADRATIC_GAMBIT",
+    "generated_at": "2026-08-23T13:25:46Z",
+    "governance_principle": {
+      "evidence_graph": "WITNESS_ONLY",
+      "human_authority": "REQUIRED_FOR_PROMOTION",
+      "machine_authority": false
+    },
+    "physics_result": "GRAVITY_MODELED_AS_SPACETIME_GEOMETRY",
+    "public_repository": "jsonwisdom/receiptos-base",
+    "replay_required": true,
+    "source_audit_issue": 180,
+    "status": "CRYPTOGRAPHIC_WITNESS_PACKET",
+    "witness_scope": "INTEGRITY_AND_READBACK_ONLY"
+  },
+  "signature": {
+    "algorithm": "Ed25519",
+    "detached_signature_base64": "QevoJbsobukt+AR6cisN52gX20g29Ob4iYT6D8oEywxtinRNGVzu7+GxWIMbiUczKvHGiDakxspniDEr7iotCQ==",
+    "public_key_base64_raw32": "HeUCV2hWK2E16n4dgBJsipBp/+rtVlAfdba5OpRxek8=",
+    "signer_authority": false,
+    "signer_identity": "UNBOUND_EPHEMERAL_WORK_MODE_WITNESS"
+  },
+  "verification": {
+    "canonical_payload_sha256_match": true,
+    "ed25519_signature_verified": true,
+    "private_key_persisted": false,
+    "public_commit_readback": "PENDING_GITHUB_COMMIT"
+  }
+}
