@@ -9,7 +9,7 @@
     *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at top,#222c50,var(--bg) 55%);font:16px/1.45 system-ui,sans-serif;color:var(--ink)}
     main{width:min(680px,calc(100% - 28px));padding:28px;border:1px solid #324064;border-radius:22px;background:rgba(21,29,51,.94);box-shadow:0 24px 80px #0008}
     h1{margin:.1em 0;font-size:clamp(1.8rem,6vw,3rem)}p{color:var(--muted)}button{width:100%;padding:14px 18px;margin-top:10px;border:0;border-radius:12px;background:var(--accent);color:#1b0a13;font-weight:800;font-size:1rem;cursor:pointer}
-    button.secondary{background:#2a3659;color:var(--ink)}button:disabled{opacity:.45;cursor:not-allowed}
+    button.secondary{background:#2a3659;color:var(--ink)}button.wallet{display:flex;justify-content:space-between;gap:12px;background:#2a3659;color:var(--ink);text-align:left}button.wallet small{color:var(--muted);font-weight:500}button:disabled{opacity:.45;cursor:not-allowed}
     label{display:block;margin:18px 0 6px;font-weight:700}textarea{width:100%;min-height:185px;padding:14px;border:1px solid #3a496f;border-radius:12px;background:#0d1428;color:var(--ink);resize:vertical}
     code{overflow-wrap:anywhere}.status{padding:12px;margin:16px 0;border-radius:12px;background:#0d1428;color:var(--muted)}.ok{color:var(--ok)}.warning{padding:10px 12px;border-left:4px solid #ffca6a;background:#271f12;color:#ffe4aa}
   </style>
@@ -20,8 +20,9 @@
   <h1>Wallet Witness</h1>
   <p>Sign a plain-text statement and export a verification receipt. This requests a signature only—no transaction, approval, transfer, or gas.</p>
   <div class="warning">Read the message before signing. Your signature may be shared publicly. Never enter a seed phrase here.</div>
-  <button id="connect">Connect wallet</button>
-  <div id="status" class="status">Not connected.</div>
+  <label>Detected wallets</label>
+  <div id="wallets"></div>
+  <div id="status" class="status">Choose the exact wallet you want to prove.</div>
   <label for="message">Message to sign</label>
   <textarea id="message" spellcheck="false"></textarea>
   <button id="sign" disabled>Sign message</button>
@@ -30,7 +31,20 @@
 <script type="module">
   import { BrowserProvider, verifyMessage } from "https://cdn.jsdelivr.net/npm/ethers@6.15.0/+esm";
   const $ = id => document.getElementById(id);
-  const state = { provider:null, address:null, chainId:null, receipt:null };
+  const state = { provider:null, address:null, chainId:null, receipt:null, wallet:null };
+  const discovered = new Map();
+  function addWallet(id,name,rdns,provider){
+    if(discovered.has(id)) return;
+    discovered.set(id,{id,name,rdns,provider});
+    const button=document.createElement("button"); button.className="wallet";
+    button.innerHTML="<span>Connect "+name+"</span><small>"+rdns+"</small>";
+    button.onclick=()=>connect(discovered.get(id)); $("wallets").appendChild(button);
+  }
+  window.addEventListener("eip6963:announceProvider",(event)=>{
+    const {info,provider}=event.detail; addWallet(info.uuid,info.name,info.rdns,provider);
+  });
+  window.dispatchEvent(new Event("eip6963:requestProvider"));
+  setTimeout(()=>{if(!discovered.size&&window.ethereum)addWallet("legacy","Browser wallet","legacy.window.ethereum",window.ethereum)},500);
   const nonce = crypto.getRandomValues(new Uint32Array(4)).join("-");
   $("message").value = [
     "JAYWISDOM Wallet Witness v1",
@@ -42,17 +56,15 @@
     "Nonce: " + nonce
   ].join("\n");
   const show = (text, ok=false) => { $("status").textContent=text; $("status").className="status"+(ok?" ok":""); };
-  $("connect").onclick = async () => {
+  async function connect(wallet) {
     try {
-      if (!window.ethereum) throw new Error("No injected wallet found. Open in Coinbase Wallet or a browser with a wallet extension.");
-      state.provider = new BrowserProvider(window.ethereum);
-      const accounts = await state.provider.send("eth_requestAccounts", []);
-      state.address = accounts[0];
-      state.chainId = Number((await state.provider.getNetwork()).chainId);
-      $("sign").disabled = false;
-      show("Connected: "+state.address+" · Chain ID "+state.chainId, true);
-    } catch (e) { show(e.shortMessage || e.message); }
-  };
+      state.wallet=wallet; state.provider=new BrowserProvider(wallet.provider);
+      const accounts=await state.provider.send("eth_requestAccounts",[]);
+      state.address=accounts[0]; state.chainId=Number((await state.provider.getNetwork()).chainId);
+      $("sign").disabled=false;
+      show("Connected with "+wallet.name+": "+state.address+" · Chain ID "+state.chainId,true);
+    } catch(e){show(e.shortMessage||e.message)}
+  }
   $("sign").onclick = async () => {
     try {
       const message = $("message").value;
@@ -62,6 +74,8 @@
       const verified = recovered.toLowerCase() === state.address.toLowerCase();
       state.receipt = {
         schema:"JAYWISDOM_WALLET_WITNESS_V1",
+        wallet_provider:state.wallet.name,
+        wallet_provider_rdns:state.wallet.rdns,
         signed_message:message,
         signature,
         claimed_address:state.address,
