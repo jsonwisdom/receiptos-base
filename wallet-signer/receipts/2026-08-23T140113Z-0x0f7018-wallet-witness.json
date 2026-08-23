@@ -1,0 +1,15 @@
+{
+  "schema": "JAYWISDOM_WALLET_WITNESS_V1",
+  "wallet_provider": "Coinbase Wallet",
+  "wallet_provider_rdns": "com.coinbase.wallet",
+  "signed_message": "JAYWISDOM Wallet Witness v1\nPurpose: Bind this wallet signature to the public ReceiptOS witness packet.\nRepository: https://github.com/jsonwisdom/receiptos-base\nPayload SHA-256: fbbd98cf804e11d3ac36af60eafb91f5f4fa576472c7db509af7afa646ecadbc\nAuthority created: false\nTransaction requested: false\nNonce: 07f30766-5f2a-45a4-ba1b-4ad4bec7a739",
+  "signature": "0x44b8cb948e39921ea4e1c66fa719111277adbfdd6206cd4d7ed87717ecdff53310f11cdcab3444e01841d507aa204caf5f9e29534092ae2f4ee4946073c0621e1c",
+  "claimed_address": "0x0f7018fea1dc9ba32ae817d896211f72f1197ad8",
+  "recovered_address": "0x0F7018fea1dc9ba32aE817D896211f72f1197AD8",
+  "signature_valid": true,
+  "chain_id_at_signing": 1,
+  "signed_at": "2026-08-23T14:01:13.174Z",
+  "signature_standard": "EIP-191 personal_sign",
+  "transaction_hash": null,
+  "authority_created": false
+}
