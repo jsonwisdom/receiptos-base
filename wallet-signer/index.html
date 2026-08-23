@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JAYWISDOM Wallet Witness</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1020;--card:#151d33;--ink:#f7f8ff;--muted:#9eabc8;--accent:#ff78b5;--ok:#64e6a5}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at top,#222c50,var(--bg) 55%);font:16px/1.45 system-ui,sans-serif;color:var(--ink)}
+    main{width:min(680px,calc(100% - 28px));padding:28px;border:1px solid #324064;border-radius:22px;background:rgba(21,29,51,.94);box-shadow:0 24px 80px #0008}
+    h1{margin:.1em 0;font-size:clamp(1.8rem,6vw,3rem)}p{color:var(--muted)}button{width:100%;padding:14px 18px;margin-top:10px;border:0;border-radius:12px;background:var(--accent);color:#1b0a13;font-weight:800;font-size:1rem;cursor:pointer}
+    button.secondary{background:#2a3659;color:var(--ink)}button:disabled{opacity:.45;cursor:not-allowed}
+    label{display:block;margin:18px 0 6px;font-weight:700}textarea{width:100%;min-height:185px;padding:14px;border:1px solid #3a496f;border-radius:12px;background:#0d1428;color:var(--ink);resize:vertical}
+    code{overflow-wrap:anywhere}.status{padding:12px;margin:16px 0;border-radius:12px;background:#0d1428;color:var(--muted)}.ok{color:var(--ok)}.warning{padding:10px 12px;border-left:4px solid #ffca6a;background:#271f12;color:#ffe4aa}
+  </style>
+</head>
+<body>
+<main>
+  <div>ReceiptOS · Base</div>
+  <h1>Wallet Witness</h1>
+  <p>Sign a plain-text statement and export a verification receipt. This requests a signature only—no transaction, approval, transfer, or gas.</p>
+  <div class="warning">Read the message before signing. Your signature may be shared publicly. Never enter a seed phrase here.</div>
+  <button id="connect">Connect wallet</button>
+  <div id="status" class="status">Not connected.</div>
+  <label for="message">Message to sign</label>
+  <textarea id="message" spellcheck="false"></textarea>
+  <button id="sign" disabled>Sign message</button>
+  <button id="download" class="secondary" disabled>Download JSON receipt</button>
+</main>
+<script type="module">
+  import { BrowserProvider, verifyMessage } from "https://cdn.jsdelivr.net/npm/ethers@6.15.0/+esm";
+  const $ = id => document.getElementById(id);
+  const state = { provider:null, address:null, chainId:null, receipt:null };
+  const nonce = crypto.getRandomValues(new Uint32Array(4)).join("-");
+  $("message").value = [
+    "JAYWISDOM Wallet Witness v1",
+    "Purpose: Bind this wallet signature to the public ReceiptOS witness packet.",
+    "Repository: https://github.com/jsonwisdom/receiptos-base",
+    "Payload SHA-256: fbbd98cf804e11d3ac36af60eafb91f5f4fa576472c7db509af7afa646ecadbc",
+    "Authority created: false",
+    "Transaction requested: false",
+    "Nonce: " + nonce
+  ].join("\n");
+  const show = (text, ok=false) => { $("status").textContent=text; $("status").className="status"+(ok?" ok":""); };
+  $("connect").onclick = async () => {
+    try {
+      if (!window.ethereum) throw new Error("No injected wallet found. Open in Coinbase Wallet or a browser with a wallet extension.");
+      state.provider = new BrowserProvider(window.ethereum);
+      const accounts = await state.provider.send("eth_requestAccounts", []);
+      state.address = accounts[0];
+      state.chainId = Number((await state.provider.getNetwork()).chainId);
+      $("sign").disabled = false;
+      show("Connected: "+state.address+" · Chain ID "+state.chainId, true);
+    } catch (e) { show(e.shortMessage || e.message); }
+  };
+  $("sign").onclick = async () => {
+    try {
+      const message = $("message").value;
+      if (!message.trim()) throw new Error("Message is empty.");
+      const signature = await (await state.provider.getSigner()).signMessage(message);
+      const recovered = verifyMessage(message, signature);
+      const verified = recovered.toLowerCase() === state.address.toLowerCase();
+      state.receipt = {
+        schema:"JAYWISDOM_WALLET_WITNESS_V1",
+        signed_message:message,
+        signature,
+        claimed_address:state.address,
+        recovered_address:recovered,
+        signature_valid:verified,
+        chain_id_at_signing:state.chainId,
+        signed_at:new Date().toISOString(),
+        signature_standard:"EIP-191 personal_sign",
+        transaction_hash:null,
+        authority_created:false
+      };
+      $("download").disabled = !verified;
+      show(verified ? "Signature verified locally for "+recovered : "Signature verification failed.", verified);
+    } catch (e) { show(e.shortMessage || e.message); }
+  };
+  $("download").onclick = () => {
+    const blob = new Blob([JSON.stringify(state.receipt,null,2)+"\n"],{type:"application/json"});
+    const a = Object.assign(document.createElement("a"),{href:URL.createObjectURL(blob),download:"jaywisdom-wallet-witness.json"});
+    a.click(); URL.revokeObjectURL(a.href);
+  };
+</script>
+</body>
+</html>
