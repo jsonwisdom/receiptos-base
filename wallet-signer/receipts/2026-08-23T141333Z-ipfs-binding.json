@@ -1,0 +1,16 @@
+{
+  "schema": "JAYWISDOM_WALLET_WITNESS_IPFS_BINDING_V1",
+  "wallet_receipt_cid": "bafkreibrt2o3ffbopmvtavuigtcl6rbyoygq2xuzdxdwobhxzr2yvs2f64",
+  "wallet_receipt_uri": "ipfs://bafkreibrt2o3ffbopmvtavuigtcl6rbyoygq2xuzdxdwobhxzr2yvs2f64",
+  "wallet_receipt_sha256": "319e9db2942e7b2b30568834c4bf4438760d0d5e991dc76704f7cc758acb45f7",
+  "wallet_receipt_bytes": 997,
+  "ipfs_gateway_readback": true,
+  "exact_byte_match": true,
+  "signature_valid_independent": true,
+  "signing_address": "0x0F7018fea1dc9ba32aE817D896211f72f1197AD8",
+  "github_receipt_commit": "e8499fcd0388d5e743da2d68a7cc34cccdab3121",
+  "github_receipt_path": "wallet-signer/receipts/2026-08-23T140113Z-0x0f7018-wallet-witness.json",
+  "verified_at": "2026-08-23T14:13:33Z",
+  "transaction_hash": null,
+  "authority_created": false
+}
