@@ -1,0 +1,38 @@
+{
+  "artifact_status": "DRAFT_NOT_LOCKED",
+  "canonical_payload_hash": null,
+  "excluded_domains": [
+    "ALL_ADDRESSES_NOT_EXPLICITLY_INCLUDED",
+    "ALL_CHAINS_EXCEPT_BASE_8453",
+    "ALL_METHODS_EXCEPT_BEFORESWAP_AND_AFTERSWAP",
+    "ALL_POOLS_NOT_EXPLICITLY_PINNED",
+    "ALL_TRANSACTIONS_NOT_EXPLICITLY_PINNED"
+  ],
+  "external_controls": [
+    "UNVERIFIED: Hook registry and registration authority",
+    "UNVERIFIED: PoolManager or equivalent pool control",
+    "UNVERIFIED: ProxyAdmin or upgrade authority affecting included contracts",
+    "UNVERIFIED: ZoraFactory implementation and upgrade controls"
+  ],
+  "included_domains": [
+    "chain:eip155:8453",
+    "contract:eip155:8453:0x777777751622c0d3258f214F9DF38E35BF45baF3",
+    "method:afterSwap",
+    "method:beforeSwap"
+  ],
+  "interface_lock": false,
+  "manifest_id": "b49534cb-60e8-4d38-98bd-b8d60e4e3113",
+  "mutable_metadata": {
+    "drafted_at": "2026-07-30T01:02:00Z",
+    "drafted_for": "TARGETED_EXECUTION_INSPECTION",
+    "notes": "Hook address, pool identifier, transaction hash, block number, external-control graph, and canonical hash remain unresolved. This draft grants no authority and clears no execution."
+  },
+  "assumptions": [
+    "UNVERIFIED: 0x777777751622c0d3258f214F9DF38E35BF45baF3 is the intended ZoraFactory target on Base",
+    "UNVERIFIED: A target hook exposes beforeSwap or afterSwap behavior",
+    "UNVERIFIED: A target pool can be deterministically linked to the hook",
+    "UNVERIFIED: A reward-distribution transaction exists and can be pinned to a stable or finalized block",
+    "UNVERIFIED: All upgrade-capable external controls can be traced to valid Authority Manifests"
+  ],
+  "version": "1.0.2"
+}
