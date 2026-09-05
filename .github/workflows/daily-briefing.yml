@@ -2,7 +2,15 @@ name: JayOps Daily Briefing
 
 on:
   schedule:
-    - cron: "0 14 * * 1-5"
+    # 14:00 UTC = 9:00 AM Central Daylight Time / 8:00 AM Central Standard Time.
+    - cron: "0 14 * * *"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/daily-briefing.yml"
+      - "scripts/send-daily-briefing.ts"
+      - "package.json"
+      - "package-lock.json"
   workflow_dispatch:
     inputs:
       prev_witness_hash:
@@ -41,7 +49,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: npm
 
       - name: Install dependencies
         run: npm install
