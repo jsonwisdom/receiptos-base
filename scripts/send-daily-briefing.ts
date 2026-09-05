@@ -156,7 +156,7 @@ function renderCalendarRows(items: CalendarWitness[]): string {
 }
 
 export function renderDailyBriefing(witness: DailyBriefingWitness): string {
-  return `# JayOps Daily Briefing
+  return `# JSONWisdom Daily Intelligence Brief
 
 Generated: ${witness.generated_at}
 Canonicalizer: ${witness.canonicalizer_version}
@@ -289,7 +289,7 @@ async function sendEmail(markdown: string) {
     return;
   }
 
-  const subject = `JayOps Daily Briefing — ${new Date().toISOString().slice(0, 10)}`;
+  const subject = `JSONWisdom Daily Intelligence Brief — ${new Intl.DateTimeFormat("en-US", { timeZone: "America/Chicago", month: "long", day: "numeric", year: "numeric" }).format(new Date())}`;
   const message = buildMimeMessage({ to, from, subject, body: markdown });
 
   await sendViaSmtp({ to, from: smtpUser, password: smtpPass, message });
