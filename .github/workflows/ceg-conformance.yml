@@ -1,0 +1,64 @@
+name: CEG Conformance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'spec/**'
+      - 'conformance/**'
+      - 'ci/validate-spec.sh'
+      - 'ci/validate-conformance.sh'
+      - 'ci/verify-manifest.sh'
+      - 'ci/run-replay.sh'
+      - '.github/workflows/ceg-conformance.yml'
+  pull_request:
+    paths:
+      - 'spec/**'
+      - 'conformance/**'
+      - 'ci/validate-spec.sh'
+      - 'ci/validate-conformance.sh'
+      - 'ci/verify-manifest.sh'
+      - 'ci/run-replay.sh'
+      - '.github/workflows/ceg-conformance.yml'
+  workflow_dispatch:
+
+jobs:
+  ceg-conformance:
+    name: CEG Spec + Layout + Manifest + Replay
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: |
+          chmod +x ci/validate-spec.sh
+          chmod +x ci/validate-conformance.sh
+          chmod +x ci/verify-manifest.sh
+          chmod +x ci/run-replay.sh
+
+      - name: Validate specification presence
+        run: ./ci/validate-spec.sh
+
+      - name: Validate conformance layout
+        run: ./ci/validate-conformance.sh
+
+      - name: Verify manifest integrity
+        run: ./ci/verify-manifest.sh
+
+      - name: Run independent replay (or skip if no frozen bundle)
+        run: ./ci/run-replay.sh
+        env:
+          # Leave unset until a real replay implementation is wired.
+          # Example: CEG_REPLAY_CMD: python -m ceg.replay --bundle conformance/v1.0
+          CEG_REPLAY_CMD: ${{ vars.CEG_REPLAY_CMD }}
+
+      - name: Upload replay artifacts (if any)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ceg-replay-artifacts
+          path: |
+            conformance/v1.0/**
+            **/replay_report.json
+          if-no-files-found: ignore
