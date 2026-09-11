@@ -1,0 +1,58 @@
+{
+  "$id": "https://jsonwisdom.example/schemas/money-loop-event-v0.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "amount_cents": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "authority": {
+      "const": false
+    },
+    "event_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "evidence": {
+      "additionalProperties": true,
+      "properties": {
+        "kind": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "ref": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "ref",
+        "kind",
+        "verified"
+      ],
+      "type": "object"
+    },
+    "type": {
+      "enum": [
+        "ASSET_CREATED",
+        "PUBLISHED",
+        "SETTLEMENT_SEEN",
+        "COST_VERIFIED",
+        "REVENUE_VERIFIED",
+        "PROFIT_VERIFIED"
+      ]
+    }
+  },
+  "required": [
+    "event_id",
+    "type",
+    "evidence",
+    "authority"
+  ],
+  "title": "Money Loop Event v0.1",
+  "type": "object"
+}

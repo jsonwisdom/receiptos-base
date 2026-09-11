@@ -1,0 +1,68 @@
+name: Money Loop Replay
+
+on:
+  pull_request:
+    paths:
+      - 'agents/money-loop/**'
+      - '.github/workflows/money-loop-replay.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'agents/money-loop/**'
+      - '.github/workflows/money-loop-replay.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact event head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Assert exact checkout and emit receipt
+        shell: bash
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          observed_sha="$(git rev-parse HEAD)"
+          echo "EXPECTED_SHA=${EXPECTED_SHA}"
+          echo "OBSERVED_SHA=${observed_sha}"
+          test "${observed_sha}" = "${EXPECTED_SHA}"
+          {
+            echo "expected_sha=${EXPECTED_SHA}"
+            echo "observed_sha=${observed_sha}"
+            echo "exact_head_match=true"
+          } > exact-head-receipt.txt
+          sha256sum exact-head-receipt.txt > exact-head-receipt.sha256
+
+      - name: Upload exact-head receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: money-loop-exact-head-receipt
+          path: |
+            exact-head-receipt.txt
+            exact-head-receipt.sha256
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Deterministic synthetic replay
+        run: python agents/money-loop/selftest.py
+
+      - name: Harness and experiment replay
+        run: python agents/money-loop/experiments/selftest.py
+
+      - name: White House characterization delta replay
+        run: python agents/money-loop/white-house/selftest.py
+
+      - name: T16 presentation-surface bypass gauntlet
+        run: python agents/money-loop/white-house/surface_selftest.py
+
+      - name: White House Replay Arena game self-test
+        run: python agents/money-loop/white-house/game_selftest.py
