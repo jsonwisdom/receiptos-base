@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://receiptos-base.example/receipt-schema/contentcoin/v1.1/readout-seal.schema.json",
+  "title": "READOUT_SEAL_V1_1 ContentCoin",
+  "type": "object",
+  "$defs": {
+    "evmAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "keccak256": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$"
+    },
+    "holdOrAddress": {
+      "oneOf": [
+        { "const": "HOLD" },
+        { "$ref": "#/$defs/evmAddress" }
+      ]
+    },
+    "holdOrKeccak256": {
+      "oneOf": [
+        { "const": "HOLD" },
+        { "$ref": "#/$defs/keccak256" }
+      ]
+    },
+    "holderRef": {
+      "oneOf": [
+        { "$ref": "#/$defs/evmAddress" },
+        { "type": "string", "pattern": "^HOLDER_[1-9][0-9]*$" }
+      ]
+    },
+    "holdOrUri": {
+      "oneOf": [
+        { "const": "HOLD" },
+        { "type": "string", "minLength": 1, "pattern": "^(ipfs|https?|ar):" }
+      ]
+    }
+  },
+  "required": [
+    "seal_version",
+    "network",
+    "contract_address",
+    "token_standard",
+    "token_pattern",
+    "max_total_supply",
+    "deployment",
+    "liquidity",
+    "holders",
+    "economics",
+    "implementation",
+    "metadata",
+    "provenance_chain",
+    "constitutional_gates",
+    "status",
+    "authority"
+  ],
+  "properties": {
+    "seal_version": { "const": "READOUT_SEAL_V1_1" },
+    "network": { "const": "base" },
+    "contract_address": { "$ref": "#/$defs/evmAddress" },
+    "token_standard": { "const": "ERC20_PROXY" },
+    "token_pattern": { "const": "CONTENTCOIN" },
+    "max_total_supply": { "const": "1000000000" },
+    "deployment": {
+      "type": "object",
+      "required": ["tx_sender", "factory_address", "deployed_contract", "deploy_block", "deployed_at"],
+      "properties": {
+        "tx_sender": { "$ref": "#/$defs/holdOrAddress" },
+        "factory_address": { "$ref": "#/$defs/holdOrAddress" },
+        "deployed_contract": { "$ref": "#/$defs/evmAddress" },
+        "deploy_block": {
+          "oneOf": [
+            { "const": "HOLD" },
+            { "type": "integer", "minimum": 0 }
+          ]
+        },
+        "deployed_at": {
+          "oneOf": [
+            { "const": "HOLD" },
+            { "type": "string", "format": "date-time" }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "liquidity": {
+      "type": "object",
+      "required": ["pool_status", "pool_address"],
+      "properties": {
+        "pool_status": { "enum": ["UNKNOWN", "NO_POOL", "POOL_FOUND"] },
+        "pool_address": {
+          "oneOf": [
+            { "const": "HOLD" },
+            { "type": "null" },
+            { "$ref": "#/$defs/evmAddress" }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "holders": {
+      "type": "object",
+      "required": ["snapshot_block", "count_at_snapshot", "addresses"],
+      "properties": {
+        "snapshot_block": {
+          "oneOf": [
+            { "const": "HOLD" },
+            { "type": "integer", "minimum": 0 }
+          ]
+        },
+        "count_at_snapshot": { "type": "integer", "minimum": 0 },
+        "addresses": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/holderRef" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "economics": {
+      "type": "object",
+      "required": ["creator_coin_economics", "fee_model"],
+      "properties": {
+        "creator_coin_economics": { "const": false },
+        "fee_model": { "enum": ["HOLD", "POST_2025_09_15_1PCT"] }
+      },
+      "additionalProperties": false
+    },
+    "implementation": {
+      "type": "object",
+      "required": ["implementation_contract", "runtime_bytecode_keccak256"],
+      "properties": {
+        "implementation_contract": { "$ref": "#/$defs/holdOrAddress" },
+        "runtime_bytecode_keccak256": { "$ref": "#/$defs/holdOrKeccak256" }
+      },
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["metadata_uri", "metadata_json_keccak256"],
+      "properties": {
+        "metadata_uri": { "$ref": "#/$defs/holdOrUri" },
+        "metadata_json_keccak256": { "$ref": "#/$defs/holdOrKeccak256" }
+      },
+      "additionalProperties": false
+    },
+    "provenance_chain": {
+      "type": "object",
+      "required": ["factory", "implementation", "creator_wallet", "metadata_uri", "post_id", "initial_pool", "holders_at_snapshot", "trades", "rewards"],
+      "properties": {
+        "factory": { "$ref": "#/$defs/holdOrAddress" },
+        "implementation": { "$ref": "#/$defs/holdOrAddress" },
+        "creator_wallet": { "$ref": "#/$defs/holdOrAddress" },
+        "metadata_uri": { "$ref": "#/$defs/holdOrUri" },
+        "post_id": { "type": "string", "minLength": 1 },
+        "initial_pool": {
+          "oneOf": [
+            { "const": "HOLD" },
+            { "type": "null" },
+            { "$ref": "#/$defs/evmAddress" }
+          ]
+        },
+        "holders_at_snapshot": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/holderRef" }
+        },
+        "trades": { "type": "array" },
+        "rewards": { "type": "array" }
+      },
+      "additionalProperties": false
+    },
+    "constitutional_gates": {
+      "type": "object",
+      "required": ["caller_anchor_match", "payout_recipient_anchor_match", "platform_referrer_role"],
+      "properties": {
+        "caller_anchor_match": { "enum": ["HOLD", "TRUE", "FALSE"] },
+        "payout_recipient_anchor_match": { "enum": ["HOLD", "TRUE", "FALSE"] },
+        "platform_referrer_role": { "const": "ECONOMIC_ATTRIBUTION_ONLY" }
+      },
+      "additionalProperties": false
+    },
+    "status": {
+      "type": "object",
+      "required": ["event_status", "snapshot_status", "interpretation_status", "correction_status", "provenance_confidence"],
+      "properties": {
+        "event_status": { "const": "IMMUTABLE" },
+        "snapshot_status": { "const": "POINT_IN_TIME" },
+        "interpretation_status": { "const": "ACTIVE" },
+        "correction_status": { "const": "APPEND_ONLY" },
+        "provenance_confidence": { "enum": ["HOLD", "LOW", "MEDIUM", "HIGH"] }
+      },
+      "additionalProperties": false
+    },
+    "authority": { "const": false }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "liquidity": {
+            "properties": { "pool_status": { "const": "UNKNOWN" } },
+            "required": ["pool_status"]
+          }
+        },
+        "required": ["liquidity"]
+      },
+      "then": {
+        "properties": {
+          "liquidity": {
+            "properties": { "pool_address": { "const": "HOLD" } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "liquidity": {
+            "properties": { "pool_status": { "const": "NO_POOL" } },
+            "required": ["pool_status"]
+          }
+        },
+        "required": ["liquidity"]
+      },
+      "then": {
+        "properties": {
+          "liquidity": {
+            "properties": { "pool_address": { "type": "null" } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "liquidity": {
+            "properties": { "pool_status": { "const": "POOL_FOUND" } },
+            "required": ["pool_status"]
+          }
+        },
+        "required": ["liquidity"]
+      },
+      "then": {
+        "properties": {
+          "liquidity": {
+            "properties": { "pool_address": { "$ref": "#/$defs/evmAddress" } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "anyOf": [
+          { "properties": { "deployment": { "properties": { "tx_sender": { "const": "HOLD" } } } } },
+          { "properties": { "deployment": { "properties": { "factory_address": { "const": "HOLD" } } } } },
+          { "properties": { "deployment": { "properties": { "deploy_block": { "const": "HOLD" } } } } },
+          { "properties": { "deployment": { "properties": { "deployed_at": { "const": "HOLD" } } } } },
+          { "properties": { "liquidity": { "properties": { "pool_status": { "const": "UNKNOWN" } } } } },
+          { "properties": { "holders": { "properties": { "snapshot_block": { "const": "HOLD" } } } } },
+          { "properties": { "holders": { "properties": { "addresses": { "contains": { "type": "string", "pattern": "^HOLDER_[1-9][0-9]*$" } } } } } },
+          { "properties": { "economics": { "properties": { "fee_model": { "const": "HOLD" } } } } },
+          { "properties": { "implementation": { "properties": { "implementation_contract": { "const": "HOLD" } } } } },
+          { "properties": { "implementation": { "properties": { "runtime_bytecode_keccak256": { "const": "HOLD" } } } } },
+          { "properties": { "metadata": { "properties": { "metadata_uri": { "const": "HOLD" } } } } },
+          { "properties": { "metadata": { "properties": { "metadata_json_keccak256": { "const": "HOLD" } } } } },
+          { "properties": { "provenance_chain": { "properties": { "factory": { "const": "HOLD" } } } } },
+          { "properties": { "provenance_chain": { "properties": { "implementation": { "const": "HOLD" } } } } },
+          { "properties": { "provenance_chain": { "properties": { "creator_wallet": { "const": "HOLD" } } } } },
+          { "properties": { "provenance_chain": { "properties": { "metadata_uri": { "const": "HOLD" } } } } },
+          { "properties": { "provenance_chain": { "properties": { "post_id": { "const": "HOLD" } } } } },
+          { "properties": { "provenance_chain": { "properties": { "initial_pool": { "const": "HOLD" } } } } },
+          { "properties": { "provenance_chain": { "properties": { "holders_at_snapshot": { "contains": { "type": "string", "pattern": "^HOLDER_[1-9][0-9]*$" } } } } } },
+          { "properties": { "constitutional_gates": { "properties": { "caller_anchor_match": { "const": "HOLD" } } } } },
+          { "properties": { "constitutional_gates": { "properties": { "payout_recipient_anchor_match": { "const": "HOLD" } } } } }
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "properties": {
+              "provenance_confidence": { "const": "HOLD" }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

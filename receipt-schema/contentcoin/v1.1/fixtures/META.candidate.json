@@ -1,0 +1,66 @@
+{
+  "seal_version": "READOUT_SEAL_V1_1",
+  "network": "base",
+  "contract_address": "0xb0e47748143d1cd88a3273f77bf0fbf006a9a477",
+  "token_standard": "ERC20_PROXY",
+  "token_pattern": "CONTENTCOIN",
+  "max_total_supply": "1000000000",
+  "deployment": {
+    "tx_sender": "HOLD",
+    "factory_address": "HOLD",
+    "deployed_contract": "0xb0e47748143d1cd88a3273f77bf0fbf006a9a477",
+    "deploy_block": 37711131,
+    "deployed_at": "HOLD"
+  },
+  "liquidity": {
+    "pool_status": "UNKNOWN",
+    "pool_address": "HOLD"
+  },
+  "holders": {
+    "snapshot_block": "HOLD",
+    "count_at_snapshot": 2,
+    "addresses": [
+      "HOLDER_1",
+      "HOLDER_2"
+    ]
+  },
+  "economics": {
+    "creator_coin_economics": false,
+    "fee_model": "POST_2025_09_15_1PCT"
+  },
+  "implementation": {
+    "implementation_contract": "HOLD",
+    "runtime_bytecode_keccak256": "HOLD"
+  },
+  "metadata": {
+    "metadata_uri": "HOLD",
+    "metadata_json_keccak256": "HOLD"
+  },
+  "provenance_chain": {
+    "factory": "HOLD",
+    "implementation": "HOLD",
+    "creator_wallet": "HOLD",
+    "metadata_uri": "HOLD",
+    "post_id": "HOLD",
+    "initial_pool": "HOLD",
+    "holders_at_snapshot": [
+      "HOLDER_1",
+      "HOLDER_2"
+    ],
+    "trades": [],
+    "rewards": []
+  },
+  "constitutional_gates": {
+    "caller_anchor_match": "HOLD",
+    "payout_recipient_anchor_match": "HOLD",
+    "platform_referrer_role": "ECONOMIC_ATTRIBUTION_ONLY"
+  },
+  "status": {
+    "event_status": "IMMUTABLE",
+    "snapshot_status": "POINT_IN_TIME",
+    "interpretation_status": "ACTIVE",
+    "correction_status": "APPEND_ONLY",
+    "provenance_confidence": "HOLD"
+  },
+  "authority": false
+}
