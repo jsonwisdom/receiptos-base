@@ -1,0 +1,202 @@
+name: Mary13 Divine Suggestion — v0.2 (Replay + Grid + Zora)
+
+on:
+  workflow_dispatch:
+    inputs:
+      suggestion_context:
+        description: "Context for the Divine Suggestion (non-authoritative)"
+        required: false
+        default: "general"
+      replay_target_hash:
+        description: "Optional commit or object hash to replay against"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  mary13_grid:
+    name: "Mary 13 — Sister ${{ matrix.sister_id }} Observation"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sister_id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    steps:
+      - name: Checkout selected source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Observe deterministic lane
+        id: lane_observe
+        shell: bash
+        run: |
+          set -euo pipefail
+          sister_id='${{ matrix.sister_id }}'
+          target='${{ inputs.replay_target_hash }}'
+          [[ -n "$target" ]] || target="$GITHUB_SHA"
+          git cat-file -e "${target}^{commit}"
+
+          observation="mary13-v0.2|sister=${sister_id}|target=${target}|repository=${GITHUB_REPOSITORY}"
+          observation_hash="$(printf '%s' "$observation" | sha256sum | cut -d' ' -f1)"
+
+          {
+            echo "sister_id=${sister_id}"
+            echo "replay_target=${target}"
+            echo "lane_observation_hash=${observation_hash}"
+            echo "lane_status=observed"
+            echo "authority_created=false"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Generate lane receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p receipts
+          cat > "receipts/sister-${{ matrix.sister_id }}.json" <<EOF
+          {
+            "schema": "mary13.lane-receipt.v0.2",
+            "sister_id": ${{ matrix.sister_id }},
+            "replay_target": "${{ steps.lane_observe.outputs.replay_target }}",
+            "observation_hash": "sha256:${{ steps.lane_observe.outputs.lane_observation_hash }}",
+            "status": "observed",
+            "verification_state": "workflow_observed",
+            "authority_created": false
+          }
+          EOF
+          sha256sum "receipts/sister-${{ matrix.sister_id }}.json" > "receipts/sister-${{ matrix.sister_id }}.sha256"
+
+      - name: Upload lane receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: mary13-sister-${{ matrix.sister_id }}
+          path: receipts/
+          if-no-files-found: error
+          retention-days: 14
+
+  mary13_replay:
+    name: "Mary 13 — Replay and Reconciliation"
+    runs-on: ubuntu-latest
+    needs: [mary13_grid]
+    if: ${{ always() }}
+
+    steps:
+      - name: Checkout read-only history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download all available sister receipts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: mary13-sister-*
+          path: harvested
+          merge-multiple: true
+
+      - name: Harvest, validate, and aggregate
+        id: replay
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t receipts < <(find harvested -type f -name 'sister-*.json' | sort -V)
+          count="${#receipts[@]}"
+          expected=12
+          status="complete"
+          [[ "$count" -eq "$expected" ]] || status="partial"
+
+          : > receipt-hashes.txt
+          for receipt in "${receipts[@]}"; do
+            sha256sum "$receipt" | cut -d' ' -f1 >> receipt-hashes.txt
+          done
+
+          aggregate="$(sha256sum receipt-hashes.txt | cut -d' ' -f1)"
+          target='${{ inputs.replay_target_hash }}'
+          [[ -n "$target" ]] || target="$GITHUB_SHA"
+          git cat-file -e "${target}^{commit}"
+          source_commit="$(git rev-parse "$target")"
+
+          cpu_count="$(nproc)"
+          os_release="$(uname -srmo)"
+          generated_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+
+          {
+            echo "receipt_count=${count}"
+            echo "replay_status=${status}"
+            echo "replay_aggregate=${aggregate}"
+            echo "source_commit=${source_commit}"
+            echo "cpu_count=${cpu_count}"
+            echo "generated_at=${generated_at}"
+            echo "os_release=${os_release}"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Generate advisory Zora-compatible manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > zora_manifest.json <<EOF
+          {
+            "schema": "mary13.zora-manifest.v0.2",
+            "suggestion_context": "${{ inputs.suggestion_context }}",
+            "source_commit": "${{ steps.replay.outputs.source_commit }}",
+            "receipt_count": ${{ steps.replay.outputs.receipt_count }},
+            "expected_receipt_count": 12,
+            "replay_status": "${{ steps.replay.outputs.replay_status }}",
+            "replay_aggregate": "sha256:${{ steps.replay.outputs.replay_aggregate }}",
+            "environment": {
+              "logical_processors_reported": ${{ steps.replay.outputs.cpu_count }},
+              "runner_os": "${{ steps.replay.outputs.os_release }}",
+              "observed_at": "${{ steps.replay.outputs.generated_at }}",
+              "physical_cores_verified": false
+            },
+            "invariants": {
+              "schema_ne_evidence": true,
+              "evidence_ne_verification": true,
+              "verification_ne_authorization": true,
+              "receipt_ne_truth": true,
+              "replay_ne_authority": true
+            },
+            "girl_math": {
+              "classification": "humorous_advisory_metadata",
+              "justification": "TheReplayMadeItBasicallyFree"
+            },
+            "divine_suggestion": {
+              "classification": "non_authoritative_suggestion",
+              "value": "YouCouldReplayItFromGenesis"
+            },
+            "emission_policy": "artifact_only_not_published",
+            "authority_created": false,
+            "canonical_state_mutated": false
+          }
+          EOF
+          sha256sum zora_manifest.json > zora_manifest.sha256
+
+      - name: Upload complete Mary13 packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: mary13-v0.2-packet
+          path: |
+            harvested/
+            receipt-hashes.txt
+            zora_manifest.json
+            zora_manifest.sha256
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Write workflow summary
+        shell: bash
+        run: |
+          {
+            echo '# Mary13 Divine Suggestion v0.2'
+            echo
+            echo "- Source commit: \`${{ steps.replay.outputs.source_commit }}\`"
+            echo "- Receipts collected: \`${{ steps.replay.outputs.receipt_count }}/12\`"
+            echo "- Replay status: \`${{ steps.replay.outputs.replay_status }}\`"
+            echo "- Replay aggregate: \`sha256:${{ steps.replay.outputs.replay_aggregate }}\`"
+            echo '- Zora manifest: artifact only; not published'
+            echo '- Authority created: `false`'
+            echo '- Canonical state mutated: `false`'
+          } >> "$GITHUB_STEP_SUMMARY"
