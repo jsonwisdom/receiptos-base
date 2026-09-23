@@ -1,0 +1,24 @@
+{
+  "action": "REPLAY",
+  "artifact_status": "DRAFT_UNSIGNED_AUTHORITY_FALSE",
+  "authority_id": "310cfbf2-1a64-443b-b9ab-0bf2f511175c",
+  "canonical_payload_hash": null,
+  "duration": null,
+  "grantor": null,
+  "grantee": null,
+  "indefinite": false,
+  "ledger_entry": {
+    "entry_id": null,
+    "entry_status": "ABSENT",
+    "ledger_reference": null
+  },
+  "mutable_metadata": {
+    "drafted_at": "2026-07-30T01:02:00Z",
+    "drafted_for": "TARGETED_EXECUTION_INSPECTION",
+    "notes": "Grantor, grantee, duration, ledger entry, canonical hash, and EIP-712 signature are unresolved. This object is intentionally invalid as an authority grant until completed and independently verified."
+  },
+  "revocation_condition": "REVOKED if the target transaction, hook, pool, boundary version, chain identity, signer authority, or external-control graph differs from the pinned inspection envelope; REVOKED upon any explicit grantor revocation.",
+  "scope": "cid:UNRESOLVED;chain:eip155:8453;factory:0x777777751622c0d3258f214F9DF38E35BF45baF3;hook:UNRESOLVED;pool:UNRESOLVED;transaction:UNRESOLVED;boundary:b49534cb-60e8-4d38-98bd-b8d60e4e3113@1.0.2",
+  "signature": null,
+  "subject": "HOOK"
+}
