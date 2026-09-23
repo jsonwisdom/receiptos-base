@@ -1,0 +1,30 @@
+{
+  "corpus_version": "v0.2.2-quarantine",
+  "status": "QUARANTINED_DRAFT",
+  "authority": false,
+  "promotion": "PROHIBITED",
+  "audit_gate": "410_OPEN",
+  "vectors": [
+    {
+      "id": "CNF-001",
+      "set_id": "CORRECTED_NEGATIVE_FIXTURES",
+      "profile": "JAYWISDOM_NFC_RECEIPT_V1",
+      "live_rail": "receiptos/core/hash.py::canonical_json",
+      "description": "Unpaired surrogate must fail closed when canonical text is encoded as UTF-8.",
+      "input_json": "{\"invalid_utf8\":\"\\uD800\"}",
+      "expected_result": "FAIL",
+      "expected_error_code": "UNPAIRED_SURROGATE"
+    },
+    {
+      "id": "CBF-001",
+      "set_id": "CORRECTED_BOUNDARY_FIXTURES",
+      "profile": "JAYWISDOM_BYTE_STRICT_EVIDENCE_V1",
+      "live_rail": "ep/canonical.py::canonicalize",
+      "description": "Empty object remains the exact two-byte canonical JSON object.",
+      "input_json": "{}",
+      "expected_output_json": "{}",
+      "expected_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "expected_result": "PASS"
+    }
+  ]
+}
