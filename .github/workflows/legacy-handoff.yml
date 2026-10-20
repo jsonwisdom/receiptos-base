@@ -1,0 +1,34 @@
+name: Legacy receipt handoff dry run
+
+on:
+  pull_request:
+    paths:
+      - 'receipts/**/*.json'
+      - 'router/legacy_receipt_handoff.py'
+      - 'schemas/legacy-receipt-handoff-v0.1.schema.json'
+      - 'docs/LEGACY_RECEIPT_HANDOFF.md'
+      - '.github/workflows/legacy-handoff.yml'
+  push:
+    branches:
+      - main
+
+jobs:
+  legacy-handoff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Dry-run legacy handoff if receipts are present
+        run: |
+          set -euo pipefail
+          if find receipts -type f -name '*.json' 2>/dev/null | grep -q .; then
+            python3 router/legacy_receipt_handoff.py --dry-run receipts/ > legacy-handoff-preview.json
+            test -s legacy-handoff-preview.json
+            head -n 40 legacy-handoff-preview.json
+          else
+            echo "No receipt JSON files present; legacy handoff router available for future receipts."
+          fi
