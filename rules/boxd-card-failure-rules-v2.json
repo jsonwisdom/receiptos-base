@@ -90,6 +90,18 @@
       "check": "INTER_CARD_AUDIT_BEFORE_NEXT_RENDER",
       "failure": "card N+1 begins before card N passes independent visual inspection and difference check against all prior cards",
       "machine_action": "block advancement; compare card art and distinct title, physical gag, punchline with prior accepted cards; reject reuse and repair; require separate inspector distinct_from_prior_cards=true and receipt for each card"
+    },
+    {
+      "id": "R015",
+      "check": "ONE_RENDERED_CARD_PANEL",
+      "failure": "inspector finds any number of visual card panels other than exactly one, or panel count was not independently established",
+      "machine_action": "reject; repair renderer prompt to create only the current card, never a sheet; retest one-card panel count before advancing"
+    },
+    {
+      "id": "R016",
+      "check": "NO_COVER_ART",
+      "failure": "inspector identifies cover art, promotional display, series overview, or cannot determine if current image is a standalone trading card",
+      "machine_action": "reject and rerender a single standalone numbered card for the locked quote and gag"
     }
   ],
   "release_target": 8,
