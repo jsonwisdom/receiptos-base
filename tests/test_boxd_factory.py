@@ -33,7 +33,6 @@ class FactoryTests(unittest.TestCase):
                    {"card_id":"BBP-001","quote":"quote"}],t,d/"out",max_attempts=1)
             self.assertEqual(r["processed"],1)
             self.assertEqual(r["release_status"],"HOLD")
-            self.assertEqual(r["release_status"],"HOLD")
 
     def test_empty_input_cannot_pass(self):
         with tempfile.TemporaryDirectory() as td:
@@ -171,6 +170,31 @@ class FactoryTests(unittest.TestCase):
                              "IDENTICAL_FAILED_ARTWORK")
             self.assertEqual(report["release_status"],"HOLD")
             self.assertFalse((d/"out"/"candidate_release.zip").exists())
+
+
+    def test_card_number_controls_sequence_and_routine(self):
+        with tempfile.TemporaryDirectory() as td:
+            d=pathlib.Path(td)
+            t=d/"source.txt"
+            t.write_text("quote", encoding="utf-8")
+            result=run([{"card_id":"BBP-20261120-002","quote":"quote"}],
+                       t,d/"out",max_attempts=1)
+            self.assertEqual(result["cards"][0]["reason"],
+                             "INVALID_DUPLICATE_OR_OUT_OF_ORDER_CARD_NUMBER")
+            self.assertEqual(result["cards"][0]["expected_card_number"],1)
+            self.assertFalse((d/"out"/"attempts").exists())
+
+    def test_numbered_routine_is_written_to_renderer_input(self):
+        with tempfile.TemporaryDirectory() as td:
+            d=pathlib.Path(td)
+            t=d/"source.txt"
+            t.write_text("quote",encoding="utf-8")
+            run([{"card_id":"BBP-20261120-001","quote":"quote"}],
+                t,d/"out",max_attempts=1)
+            repair=json.loads((d/"out"/"attempts"/"BBP-20261120-001"/"1"/"repair_input.json").read_text())
+            self.assertEqual(repair["card_number"],1)
+            self.assertEqual(repair["card_id"],"BBP-20261120-001")
+            self.assertEqual(repair["routine"],"RENDER")
 
 if __name__=="__main__":
     unittest.main()
