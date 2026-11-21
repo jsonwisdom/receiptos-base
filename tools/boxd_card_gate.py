@@ -68,6 +68,10 @@ def audit(image, manifest, transcript):
     independent = vi.get("inspector") not in (None, "", "generator")
     checks["COMPLETE_GRUBBY_BORDER"] = "PASS" if independent and vi.get("border_intact") is True else "HOLD"
     checks["LEGIBLE_TEXT"] = "PASS" if independent and vi.get("text_legible") is True else "HOLD"
+    # Geometry alone cannot distinguish a single portrait card from a portrait collage.
+    # Only independent per-image scene inspection can certify exactly one card and no cover.
+    checks["ONE_RENDERED_CARD_PANEL"] = "PASS" if independent and type(vi.get("panel_count")) is int and vi["panel_count"] == 1 else "FAIL" if independent and type(vi.get("panel_count")) is int else "HOLD"
+    checks["NO_COVER_ART"] = "PASS" if independent and vi.get("is_cover_art") is False else "FAIL" if independent and vi.get("is_cover_art") is True else "HOLD"
     checks["AUDIO_CLAIM"] = "PASS" if m.get("audio_status") == "UNVERIFIED" or (m.get("audio_status") == "VERIFIED_WITH_RECEIPT" and m.get("audio_receipt_sha256")) else "FAIL"
     verdict = "FAIL" if "FAIL" in checks.values() else "HOLD" if "HOLD" in checks.values() else "PASS"
     attempts = m.get("attempt", 0)
