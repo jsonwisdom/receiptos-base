@@ -113,6 +113,17 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                   "cards":[]}
         (out/"factory_report.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
         return report
+    # Preflight distinct creative briefs; repeated concepts may not enter production.
+    signatures = []
+    for spec in specs:
+        signature = tuple(str(spec.get(k, "")).strip().casefold() for k in ("title", "physical_gag", "punchline"))
+        if not all(signature) or signature in signatures:
+            report = {"policy":"BOXD_CI_FIRST_CARD_RULES_V2","target":8,"passed":0,
+                      "total":len(specs),"processed":0,"release_status":"HOLD",
+                      "human_qc_required":False,"reason":"MISSING_OR_DUPLICATE_CREATIVE_BRIEF","cards":[]}
+            (out/"factory_report.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
+            return report
+        signatures.append(signature)
     receipts = []
     approved = []
     seen = set()
@@ -164,8 +175,13 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                     "action":"change renderer implementation or repair strategy; do not retry identical bytes"}],
                     "policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
                 break
+            # Independent inspector receives all earlier accepted images for cross-card comparison.
+            prior_catalog = work/"prior_cards.json"
+            prior_catalog.write_text(json.dumps([{"card_id":prior_id,"image":str(prior_img),
+                "sha256":digest(prior_img)} for prior_id,prior_img,*_ in approved],indent=2)+"\n",encoding="utf-8")
             inspected = invoke(inspector,
-                ["--image",str(image),"--spec",str(spec_path),"--report",str(visual)],
+                ["--image",str(image),"--spec",str(spec_path),"--report",str(visual),
+                 "--prior-catalog",str(prior_catalog)],
                 work/"inspector.log")
             if not inspected or not visual.is_file():
                 result["attempts"].append({"attempt":attempt,"verdict":"HOLD","reason":"INSPECTOR_UNAVAILABLE"})
@@ -180,6 +196,10 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                 # Independent inspector must identify itself and return test evidence.
                 if not inspection.get("inspector") or inspection["inspector"] == "generator":
                     raise ValueError("independent inspector identity missing")
+                if position > 1 and inspection.get("distinct_from_prior_cards") is not True:
+                    raise ValueError("independent cross-card visual uniqueness not proven")
+                if any(digest(old_img) == candidate_hash for _,old_img,*_ in approved):
+                    raise ValueError("exact artwork duplicate of previously accepted card")
                 m["independent_visual_inspection"] = inspection
                 m["image_sha256"] = digest(image)
                 m["transcript_sha256"] = digest(transcript)
@@ -217,7 +237,7 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
               "target":8,"passed":passed,"total":len(specs),
               "processed":len(receipts),
               "current_card_number":len(approved)+1 if len(approved)<8 else None,
-              "current_routine":"RENDER_OR_REPAIR" if len(approved)<50 else "AWAIT_FINAL_APPROVAL",
+              "current_routine":"RENDER_OR_REPAIR" if len(approved)<8 else "AWAIT_FINAL_APPROVAL",
               "next_card":specs[len(receipts)].get("card_id") if len(receipts)<len(specs) and receipts and receipts[-1]["status"]=="PASS" else None,
               "release_status":"READY_FOR_CREATIVE_APPROVAL" if complete else "HOLD",
               "human_qc_required":False,"cards":receipts}
