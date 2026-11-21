@@ -3,12 +3,16 @@ on:
   pull_request:
     paths:
       - "tools/boxd_card_gate.py"
+      - "rules/boxd-card-failure-rules-v2.json"
+      - "docs/boxd-card-gate-v1.md"
       - "tests/test_boxd_gate.py"
       - ".github/workflows/boxd-card-gate.yml"
   push:
     branches: ["boxd/ci-first-card-gate-20261121"]
     paths:
       - "tools/boxd_card_gate.py"
+      - "rules/boxd-card-failure-rules-v2.json"
+      - "docs/boxd-card-gate-v1.md"
       - "tests/test_boxd_gate.py"
       - ".github/workflows/boxd-card-gate.yml"
 jobs:
