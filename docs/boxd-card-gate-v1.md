@@ -32,3 +32,38 @@ Rules:
 - This branch is a proposed gate, not proof that a GitHub Actions workflow is deployed or that all fifty cards exist.
 
 **Known sample failure**: user-provided sheet 1536 × 1024, ten panels; gate requires ONE_PORTRAIT_CARD and MIN_750x1050, so it must FAIL.
+
+## Failure-to-rule feedback contract (V2)
+
+This section supersedes the previous practice of delivering a failure spreadsheet to the operator.
+
+Each failed or unknown check must produce an output containing `remediation.policy_id`,
+`remediation.failed_rules[].rule_id`, `remediation.failed_rules[].action`,
+`remediation.machine_action`, and `remediation.human_triage_required=false`.
+
+Rules are version-controlled in `rules/boxd-card-failure-rules-v2.json`.
+Known defects are associated with specific deterministic correction instructions;
+unknown defects must create a **proposed** rule plus a regression in a draft PR
+before code may ever treat them as accepted. Machine-derived proposals require CI
+and provenance; never silently rewrite a released standard.
+
+Factory state machine:
+```
+OBSERVE FAILURE
+  -> PRESERVE ARTIFACT + HASH + RECEIPT
+  -> MAP RULE ID (or DRAFT NEW RULE)
+  -> MACHINE REPAIR/RERENDER (at most 3 attempts)
+  -> AUTOMATED INDEPENDENT REINSPECTION
+  -> PASS if ALL checks PASS
+  -> otherwise HOLD, with failed attempts preserved
+```
+
+**Important implementation boundary**: the current CLI identifies and *emits*
+the machine remediation instructions, and regression tests enforce their
+classification. It does NOT autonomously invoke an image renderer, open new PRs,
+or use a true independent vision inspector yet. These absent execution layers
+must remain HOLD. Do not tell the human to visually certify each card.
+
+The rejected 10-panel sheet now has explicit R001 and R002 rules. The invented
+quotations and false VERIFIED badges have R003 and R004 rules. New occurrences
+must trip the same gates without operator intervention.
