@@ -44,6 +44,21 @@ def atomic_json(path, payload):
         os.fsync(handle.fileno())
     os.replace(temp, path)
 
+
+def write_progress(out, stage, approved, current=None, attempt=None, reason=None):
+    """Publish an inspectable machine status receipt after each production transition."""
+    out.mkdir(parents=True, exist_ok=True)
+    atomic_json(out/"progress.json", {
+        "target": 8,
+        "approved": approved,
+        "stage": stage,
+        "current_card": current,
+        "attempt": attempt,
+        "reason": reason,
+        "release_ready": stage == "READY_FOR_CREATIVE_APPROVAL",
+        "human_action_required": stage == "READY_FOR_CREATIVE_APPROVAL",
+    })
+
 def checkpoint_files(out, cid):
     root = out/"accepted"/cid
     return root, root/"card.png", root/"manifest.json", root/"gate.json", root/"checkpoint.json"
@@ -105,6 +120,7 @@ def card_position(card_id):
 
 def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
     out.mkdir(parents=True, exist_ok=True)
+    write_progress(out, "VALIDATING_RULES", 0)
     # One artifact per card: never accept a sheet, cover, or bonus artifact as a card.
     if len(specs) != 8 or any(not isinstance(spec, dict) or spec.get("artifact_type", "individual_card") != "individual_card" for spec in specs):
         report = {"policy":"BOXD_CI_FIRST_CARD_RULES_V2","target":8,"passed":0,
@@ -112,6 +128,7 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                   "human_qc_required":False,"reason":"EXACTLY_EIGHT_INDIVIDUAL_CARD_SPECS_REQUIRED",
                   "cards":[]}
         (out/"factory_report.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
+        write_progress(out, "HOLD", 0, reason=report["reason"])
         return report
     # Preflight distinct creative briefs; repeated concepts may not enter production.
     signatures = []
@@ -135,9 +152,11 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                 "reason":"INVALID_DUPLICATE_OR_OUT_OF_ORDER_CARD_NUMBER"})
             break
         seen.add(cid)
+        write_progress(out, "VALIDATING_CARD", len(approved), cid)
         cached = restore_checkpoint(out,cid,spec,transcript)
         if cached is not None:
             approved.append((cid,*cached))
+            write_progress(out, "CARD_PASSED", len(approved), cid)
             receipts.append({"card_id":cid,"card_number":position,"status":"PASS","checkpoint":"RESTORED","attempts":[]})
             continue
         # Never overwrite or bypass an existing invalid lock; stop for machine investigation.
@@ -157,6 +176,7 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
             visual = work/"inspection.json"
             repair_path = work/"repair_input.json"
             repair_path.write_text(json.dumps(repair,sort_keys=True,indent=2)+"\n",encoding="utf-8")
+            write_progress(out, "RENDERING", len(approved), cid, attempt)
             rendering = invoke(renderer,
                 ["--spec",str(spec_path),"--image",str(image),"--manifest",str(manifest),
                  "--transcript",str(transcript),"--repair",str(repair_path)],work/"renderer.log")
@@ -179,6 +199,7 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
             prior_catalog = work/"prior_cards.json"
             prior_catalog.write_text(json.dumps([{"card_id":prior_id,"image":str(prior_img),
                 "sha256":digest(prior_img)} for prior_id,prior_img,*_ in approved],indent=2)+"\n",encoding="utf-8")
+            write_progress(out, "INSPECTING", len(approved), cid, attempt)
             inspected = invoke(inspector,
                 ["--image",str(image),"--spec",str(spec_path),"--report",str(visual),
                  "--prior-catalog",str(prior_catalog)],
@@ -214,11 +235,13 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                                            "checks":verdict["checks"],"sha256":digest(image)})
                 repair = verdict["remediation"]
                 if verdict["verdict"] != "PASS":
+                    write_progress(out, "REPAIRING", len(approved), cid, attempt, verdict.get("checks"))
                     prior_failed_hashes.add(candidate_hash)
                 if verdict["verdict"] == "PASS":
                     result["status"] = "PASS"
                     locked=save_checkpoint(out,cid,spec,transcript,image,manifest,work/"gate.json")
                     approved.append((cid,*locked))
+                    write_progress(out, "CARD_PASSED", len(approved), cid, attempt)
                     break
             except (ValueError,KeyError,TypeError, OSError, json.JSONDecodeError) as e:
                 result["attempts"].append({"attempt":attempt,"verdict":"FAIL",
@@ -242,12 +265,15 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
               "release_status":"READY_FOR_CREATIVE_APPROVAL" if complete else "HOLD",
               "human_qc_required":False,"cards":receipts}
     (out/"factory_report.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
+    write_progress(out, "READY_FOR_CREATIVE_APPROVAL" if complete else "HOLD", passed,
+                   reason=None if complete else "INCOMPLETE_OR_FAILED_AUDIT")
     if complete:
         # Structural package invariant: exactly eight separately named card PNGs.
         if len({cid for cid,*_ in approved}) != 8 or len({digest(img) for _,img,*_ in approved}) != 8:
             report["release_status"] = "HOLD"
             report["reason"] = "DUPLICATE_OR_MISSING_INDIVIDUAL_CARD_IMAGE"
             (out/"factory_report.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
+            write_progress(out, "HOLD", passed, reason=report["reason"])
             return report
         with zipfile.ZipFile(out/"candidate_release.zip","w",compression=zipfile.ZIP_DEFLATED) as z:
             for cid,img,manifest,gate in approved:
