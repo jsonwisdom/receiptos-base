@@ -4,6 +4,7 @@ import pathlib
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/"tools"))
 from boxd_factory import run
@@ -41,6 +42,42 @@ class FactoryTests(unittest.TestCase):
             r=run([],t,d/"out")
             self.assertEqual(r["release_status"],"HOLD")
             self.assertEqual(r["passed"],0)
+
+
+    def test_failed_gate_rules_feed_next_machine_render(self):
+        with tempfile.TemporaryDirectory() as td:
+            d=pathlib.Path(td)
+            t=d/"source.txt"
+            t.write_text("real quote",encoding="utf-8")
+            observed=[]
+            def fake_invoke(command,args,log):
+                params=dict(zip(args[::2],args[1::2]))
+                if command=="renderer":
+                    repair=json.loads(pathlib.Path(params["--repair"]).read_text())
+                    observed.append(repair["machine_action"])
+                    pathlib.Path(params["--image"]).write_bytes(b"candidate")
+                    pathlib.Path(params["--manifest"]).write_text(
+                        json.dumps({"card_id":"BBP-001","quote":"real quote"}))
+                else:
+                    pathlib.Path(params["--report"]).write_text(
+                        json.dumps({"inspector":"separate-process","border_intact":True,"text_legible":True}))
+                return True
+            failed={"verdict":"FAIL","checks":{"ONE_PORTRAIT_CARD":"FAIL"},
+                    "remediation":{"policy_id":"BOXD_CI_FIRST_CARD_RULES_V2",
+                                   "machine_action":"AUTO_REPAIR_AND_RERENDER_WITH_BOUNDED_RETRY",
+                                   "failed_rules":[{"rule_id":"R001","check":"ONE_PORTRAIT_CARD","status":"FAIL"}]}}
+            passed={"verdict":"PASS","checks":{"ONE_PORTRAIT_CARD":"PASS"},
+                    "remediation":{"policy_id":"BOXD_CI_FIRST_CARD_RULES_V2",
+                                   "machine_action":"ELIGIBLE_FOR_PROMOTION","failed_rules":[]}}
+            with patch("boxd_factory.invoke",side_effect=fake_invoke), patch(
+                    "boxd_factory.audit",side_effect=[failed,passed]):
+                report=run([{"card_id":"BBP-001","quote":"real quote"}],t,d/"out",
+                           renderer="renderer",inspector="inspector",max_attempts=3)
+            self.assertEqual(observed,["INITIAL_RENDER","AUTO_REPAIR_AND_RERENDER_WITH_BOUNDED_RETRY"])
+            self.assertEqual(report["cards"][0]["status"],"PASS")
+            self.assertEqual(len(report["cards"][0]["attempts"]),2)
+            self.assertEqual(report["release_status"],"HOLD") # Not 50.
+            self.assertFalse((d/"out"/"candidate_release.zip").exists())
 
 if __name__=="__main__":
     unittest.main()
