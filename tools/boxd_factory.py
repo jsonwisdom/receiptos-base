@@ -40,7 +40,7 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
         cid = spec.get("card_id", "")
         if not cid or cid in seen or "/" in cid or "\\" in cid or cid.startswith("."):
             receipts.append({"card_id":cid, "status":"HOLD", "reason":"INVALID_OR_DUPLICATE_ID"})
-            continue
+            break
         seen.add(cid)
         result = {"card_id":cid, "status":"HOLD", "attempts":[]}
         repair = {"machine_action":"INITIAL_RENDER", "failed_rules":[], "policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
@@ -98,10 +98,15 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                 repair = {"machine_action":"REPAIR_INSPECTION_OR_MANIFEST","failed_rules":[{"check":"INVALID_INSPECTION_OR_MANIFEST","status":"FAIL","action":str(e)}],"policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
         result["final_remediation"] = repair if result["status"] != "PASS" else None
         receipts.append(result)
+        # Strict serial production: no card N+1 until card N is independently PASS.
+        if result["status"] != "PASS":
+            break
     passed = len(approved)
     complete = passed == len(specs) and len(specs) == 50 and len(seen) == 50
     report = {"policy":"BOXD_CI_FIRST_CARD_RULES_V2",
               "target":50,"passed":passed,"total":len(specs),
+              "processed":len(receipts),
+              "next_card":specs[len(receipts)].get("card_id") if len(receipts)<len(specs) and receipts[-1]["status"]=="PASS" else None,
               "release_status":"READY_FOR_CREATIVE_APPROVAL" if complete else "HOLD",
               "human_qc_required":False,"cards":receipts}
     (out/"factory_report.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
