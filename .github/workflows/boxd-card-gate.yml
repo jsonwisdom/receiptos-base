@@ -1,0 +1,24 @@
+name: BoxD Card Gate Regression
+on:
+  pull_request:
+    paths:
+      - "tools/boxd_card_gate.py"
+      - "tests/test_boxd_gate.py"
+      - ".github/workflows/boxd-card-gate.yml"
+  push:
+    branches: ["boxd/ci-first-card-gate-20261121"]
+    paths:
+      - "tools/boxd_card_gate.py"
+      - "tests/test_boxd_gate.py"
+      - ".github/workflows/boxd-card-gate.yml"
+jobs:
+  boxd-regressions:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -s tests -p 'test_boxd_gate.py' -v
