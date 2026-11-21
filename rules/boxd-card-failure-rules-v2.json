@@ -1,0 +1,77 @@
+{
+  "policy_id": "BOXD_CI_FIRST_CARD_RULES_V2",
+  "mode": "fail_closed",
+  "owner": "machine",
+  "max_attempts_per_card": 3,
+  "promotion_requires_all_pass": true,
+  "unknown_failure_action": "AUTO_CREATE_RULE_PROPOSAL_WITH_REPRO_TEST_IN_DRAFT_PR_AND_HOLD",
+  "global_process": "failure -> evidence receipt -> classify -> update versioned rule -> add regression test -> CI run -> retry with bounded attempts -> PASS or HOLD; no human triage",
+  "rules": [
+    {
+      "id": "R001",
+      "check": "ONE_PORTRAIT_CARD",
+      "failure": "landscape/ten-card sheet",
+      "machine_action": "reject and rerender EXACTLY ONE full portrait card, not crop the sheet"
+    },
+    {
+      "id": "R002",
+      "check": "MIN_750x1050",
+      "failure": "low resolution",
+      "machine_action": "rerender natively at print resolution, never merely upscale cropped pixels"
+    },
+    {
+      "id": "R003",
+      "check": "EXACT_QUOTE",
+      "failure": "invented quotation",
+      "machine_action": "pull quote from source string; text must match exactly; remove false quote from illustration; rerender"
+    },
+    {
+      "id": "R004",
+      "check": "AUDIO_CLAIM",
+      "failure": "false audio verification",
+      "machine_action": "remove audio verified statements until independent audio receipt exists"
+    },
+    {
+      "id": "R005",
+      "check": "COMPLETE_GRUBBY_BORDER",
+      "failure": "missing automated inspection",
+      "machine_action": "run independent visual border inspection; HOLD if inspector unavailable"
+    },
+    {
+      "id": "R006",
+      "check": "LEGIBLE_TEXT",
+      "failure": "unclear lettering",
+      "machine_action": "verify rendered text independently; rerender if inaccurate; HOLD if inspector unavailable"
+    },
+    {
+      "id": "R007",
+      "check": "UNIQUE_CONCEPT",
+      "failure": "duplicated concept",
+      "machine_action": "compute and compare concepts across catalog; replace duplicates; HOLD until verified"
+    },
+    {
+      "id": "R008",
+      "check": "IMAGE_SHA256",
+      "failure": "hash mismatch",
+      "machine_action": "preserve file and recalculate/reconcile with receipt, no silent normalization"
+    },
+    {
+      "id": "R009",
+      "check": "SOURCE_SHA256",
+      "failure": "unlocked/wrong source",
+      "machine_action": "stop and recover locked source byte-for-byte"
+    },
+    {
+      "id": "R010",
+      "check": "CARD_ID",
+      "failure": "missing ID",
+      "machine_action": "allocate unique stable ID prior to rendering"
+    },
+    {
+      "id": "R011",
+      "check": "PNG_FORMAT",
+      "failure": "not a PNG",
+      "machine_action": "reject and request valid standalone PNG with actual decode"
+    }
+  ]
+}
