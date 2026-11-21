@@ -31,7 +31,8 @@ class FactoryTests(unittest.TestCase):
             t.write_text("quote",encoding="utf-8")
             r=run([{"card_id":"BBP-001","quote":"quote"},
                    {"card_id":"BBP-001","quote":"quote"}],t,d/"out",max_attempts=1)
-            self.assertEqual(r["cards"][1]["reason"],"INVALID_OR_DUPLICATE_ID")
+            self.assertEqual(r["processed"],1)
+            self.assertEqual(r["release_status"],"HOLD")
             self.assertEqual(r["release_status"],"HOLD")
 
     def test_empty_input_cannot_pass(self):
@@ -92,6 +93,51 @@ class FactoryTests(unittest.TestCase):
             self.assertEqual(report["cards"][0]["status"],"HOLD")
             self.assertFalse((d/"out"/"attempts"/"BBP-002").exists())
             self.assertEqual(report["release_status"],"HOLD")
+
+
+    def test_pass_checkpoint_survives_restart_without_rendering_again(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as td:
+            d=pathlib.Path(td)
+            t=d/"source.txt"
+            t.write_text("quote",encoding="utf-8")
+            spec={"card_id":"BBP-001","quote":"quote"}
+            calls=[]
+            def fake_invoke(command,args,log):
+                calls.append(command)
+                p=dict(zip(args[::2],args[1::2]))
+                if command=="renderer":
+                    pathlib.Path(p["--image"]).write_bytes(b"image")
+                    pathlib.Path(p["--manifest"]).write_text(json.dumps({
+                        "card_id":"BBP-001","quote":"quote"}))
+                else:
+                    pathlib.Path(p["--report"]).write_text(json.dumps({
+                        "inspector":"independent-inspector","border_intact":True,"text_legible":True}))
+                return True
+            verdict={"verdict":"PASS","checks":{"PNG_FORMAT":"PASS"},
+                     "remediation":{"machine_action":"ELIGIBLE_FOR_PROMOTION","failed_rules":[]}}
+            with patch("boxd_factory.invoke",side_effect=fake_invoke),patch("boxd_factory.audit",return_value=verdict):
+                first=run([spec],t,d/"out",renderer="renderer",inspector="inspector")
+                again=run([spec],t,d/"out",renderer="renderer",inspector="inspector")
+            self.assertEqual(first["passed"],1)
+            self.assertEqual(again["passed"],1)
+            self.assertEqual(again["cards"][0]["checkpoint"],"RESTORED")
+            self.assertEqual(calls,["renderer","inspector"])
+            self.assertTrue((d/"out"/"accepted"/"BBP-001"/"checkpoint.json").exists())
+
+    def test_tampered_checkpoint_blocks_repair_or_advance(self):
+        with tempfile.TemporaryDirectory() as td:
+            d=pathlib.Path(td)
+            t=d/"source.txt"
+            t.write_text("quote",encoding="utf-8")
+            root=d/"out"/"accepted"/"BBP-001"
+            root.mkdir(parents=True)
+            (root/"checkpoint.json").write_text('{"state":"PASS_LOCKED"}')
+            r=run([{"card_id":"BBP-001","quote":"quote"},
+                   {"card_id":"BBP-002","quote":"quote"}],t,d/"out")
+            self.assertEqual(r["processed"],1)
+            self.assertEqual(r["cards"][0]["reason"],"INVALID_LOCKED_CHECKPOINT")
+            self.assertFalse((d/"out"/"attempts"/"BBP-002").exists())
 
 if __name__=="__main__":
     unittest.main()
