@@ -9,6 +9,7 @@ import hashlib
 import json
 import pathlib
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -92,6 +93,16 @@ def save_checkpoint(out, cid, spec, transcript, image, manifest, gate):
     atomic_json(cp,receipt)
     return target_image,target_manifest,target_gate
 
+def card_position(card_id):
+    """Card number is the immutable ordinal, independent of the render attempt."""
+    if not isinstance(card_id, str):
+        return None
+    match = re.fullmatch(r"BBP-(?:[0-9]{8}-)?([0-9]{3})", card_id)
+    if match is None:
+        return None
+    value = int(match.group(1))
+    return value if 1 <= value <= 50 else None
+
 def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
     out.mkdir(parents=True, exist_ok=True)
     receipts = []
@@ -106,13 +117,13 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
         cached = restore_checkpoint(out,cid,spec,transcript)
         if cached is not None:
             approved.append((cid,*cached))
-            receipts.append({"card_id":cid,"status":"PASS","checkpoint":"RESTORED","attempts":[]})
+            receipts.append({"card_id":cid,"card_number":position,"status":"PASS","checkpoint":"RESTORED","attempts":[]})
             continue
         # Never overwrite or bypass an existing invalid lock; stop for machine investigation.
         if checkpoint_files(out,cid)[-1].exists():
             receipts.append({"card_id":cid,"status":"HOLD","reason":"INVALID_LOCKED_CHECKPOINT"})
             break
-        result = {"card_id":cid, "status":"HOLD", "attempts":[]}
+        result = {"card_id":cid, "card_number":position, "status":"HOLD", "attempts":[]}
         prior_failed_hashes = set()
         repair = {"machine_action":"INITIAL_RENDER", "failed_rules":[], "policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
         for attempt in range(1, max_attempts+1):
@@ -195,6 +206,8 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
     report = {"policy":"BOXD_CI_FIRST_CARD_RULES_V2",
               "target":50,"passed":passed,"total":len(specs),
               "processed":len(receipts),
+              "current_card_number":len(approved)+1 if len(approved)<50 else None,
+              "current_routine":"RENDER_OR_REPAIR" if len(approved)<50 else "AWAIT_FINAL_APPROVAL",
               "next_card":specs[len(receipts)].get("card_id") if len(receipts)<len(specs) and receipts and receipts[-1]["status"]=="PASS" else None,
               "release_status":"READY_FOR_CREATIVE_APPROVAL" if complete else "HOLD",
               "human_qc_required":False,"cards":receipts}
