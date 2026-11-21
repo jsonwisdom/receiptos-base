@@ -8,6 +8,8 @@ import argparse
 import hashlib
 import json
 import pathlib
+import os
+import shutil
 import subprocess
 import sys
 import zipfile
@@ -31,6 +33,65 @@ def invoke(command, args, log):
         log.write_text(type(e).__name__+": "+str(e)+"\n", encoding="utf-8")
         return False
 
+def atomic_json(path, payload):
+    """Atomic checkpoint replacement: crash cannot expose a partially written JSON receipt."""
+    temp = path.with_suffix(".pending")
+    with temp.open("w", encoding="utf-8") as handle:
+        json.dump(payload, handle, indent=2, sort_keys=True)
+        handle.write("\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+    os.replace(temp, path)
+
+def checkpoint_files(out, cid):
+    root = out/"accepted"/cid
+    return root, root/"card.png", root/"manifest.json", root/"gate.json", root/"checkpoint.json"
+
+def restore_checkpoint(out, cid, spec, transcript):
+    root, image, manifest, gate, cp = checkpoint_files(out, cid)
+    if not cp.is_file():
+        return None
+    # Fail closed on missing/corrupt artifacts, changed specs, changed source, or revoked checks.
+    try:
+        receipt = json.loads(cp.read_text(encoding="utf-8"))
+        expected = {"card_id":cid, "spec_sha256":hashlib.sha256(
+            json.dumps(spec,sort_keys=True,separators=(",",":")).encode()).hexdigest(),
+            "transcript_sha256":digest(transcript)}
+        if any(receipt.get(k) != v for k,v in expected.items()):
+            return None
+        if any(not p.is_file() or digest(p) != receipt.get(key) for key,p in
+               [("image_sha256",image),("manifest_sha256",manifest),("gate_sha256",gate)]):
+            return None
+        previous = json.loads(gate.read_text(encoding="utf-8"))
+        if previous.get("verdict") != "PASS":
+            return None
+        checked = audit(image,manifest,transcript)
+        if checked.get("verdict") != "PASS":
+            return None
+        return image,manifest,gate
+    except (ValueError,TypeError,KeyError,OSError,json.JSONDecodeError):
+        return None
+
+def save_checkpoint(out, cid, spec, transcript, image, manifest, gate):
+    root, target_image, target_manifest, target_gate, cp = checkpoint_files(out,cid)
+    root.mkdir(parents=True,exist_ok=True)
+    for source,target in [(image,target_image),(manifest,target_manifest),(gate,target_gate)]:
+        staged = target.with_suffix(target.suffix+".pending")
+        shutil.copyfile(source,staged)
+        os.replace(staged,target)
+    receipt = {
+        "card_id":cid,
+        "spec_sha256":hashlib.sha256(
+            json.dumps(spec,sort_keys=True,separators=(",",":")).encode()).hexdigest(),
+        "transcript_sha256":digest(transcript),
+        "image_sha256":digest(target_image),
+        "manifest_sha256":digest(target_manifest),
+        "gate_sha256":digest(target_gate),
+        "state":"PASS_LOCKED"
+    }
+    atomic_json(cp,receipt)
+    return target_image,target_manifest,target_gate
+
 def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
     out.mkdir(parents=True, exist_ok=True)
     receipts = []
@@ -42,6 +103,15 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
             receipts.append({"card_id":cid, "status":"HOLD", "reason":"INVALID_OR_DUPLICATE_ID"})
             break
         seen.add(cid)
+        cached = restore_checkpoint(out,cid,spec,transcript)
+        if cached is not None:
+            approved.append((cid,*cached))
+            receipts.append({"card_id":cid,"status":"PASS","checkpoint":"RESTORED","attempts":[]})
+            continue
+        # Never overwrite or bypass an existing invalid lock; stop for machine investigation.
+        if checkpoint_files(out,cid)[-1].exists():
+            receipts.append({"card_id":cid,"status":"HOLD","reason":"INVALID_LOCKED_CHECKPOINT"})
+            break
         result = {"card_id":cid, "status":"HOLD", "attempts":[]}
         repair = {"machine_action":"INITIAL_RENDER", "failed_rules":[], "policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
         for attempt in range(1, max_attempts+1):
@@ -89,7 +159,8 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                 repair = verdict["remediation"]
                 if verdict["verdict"] == "PASS":
                     result["status"] = "PASS"
-                    approved.append((cid,image,manifest,work/"gate.json"))
+                    locked=save_checkpoint(out,cid,spec,transcript,image,manifest,work/"gate.json")
+                    approved.append((cid,*locked))
                     break
             except (ValueError,KeyError,TypeError, OSError, json.JSONDecodeError) as e:
                 result["attempts"].append({"attempt":attempt,"verdict":"FAIL",
@@ -106,7 +177,7 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
     report = {"policy":"BOXD_CI_FIRST_CARD_RULES_V2",
               "target":50,"passed":passed,"total":len(specs),
               "processed":len(receipts),
-              "next_card":specs[len(receipts)].get("card_id") if len(receipts)<len(specs) and receipts[-1]["status"]=="PASS" else None,
+              "next_card":specs[len(receipts)].get("card_id") if len(receipts)<len(specs) and receipts and receipts[-1]["status"]=="PASS" else None,
               "release_status":"READY_FOR_CREATIVE_APPROVAL" if complete else "HOLD",
               "human_qc_required":False,"cards":receipts}
     (out/"factory_report.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
