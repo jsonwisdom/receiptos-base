@@ -12,6 +12,8 @@ on:
   push:
     branches: ["boxd/ci-first-card-gate-20261121"]
     paths:
+      - "tests/test_boxd_factory.py"
+      - "tools/boxd_factory.py"
       - "tools/boxd_card_gate.py"
       - "rules/boxd-card-failure-rules-v2.json"
       - "docs/boxd-card-gate-v1.md"
