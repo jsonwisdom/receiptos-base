@@ -1,0 +1,132 @@
+{
+  "policy_id": "BOXD_CI_FIRST_CARD_RULES_V2",
+  "mode": "fail_closed",
+  "owner": "machine",
+  "max_attempts_per_card": 3,
+  "promotion_requires_all_pass": true,
+  "unknown_failure_action": "AUTO_CREATE_RULE_PROPOSAL_WITH_REPRO_TEST_IN_DRAFT_PR_AND_HOLD",
+  "global_process": "failure -> evidence receipt -> classify -> update versioned rule -> add regression test -> CI run -> retry with bounded attempts -> PASS or HOLD; no human triage",
+  "rules": [
+    {
+      "id": "R001",
+      "check": "ONE_PORTRAIT_CARD",
+      "failure": "landscape/ten-card sheet",
+      "machine_action": "reject and rerender EXACTLY ONE full portrait card, not crop the sheet"
+    },
+    {
+      "id": "R002",
+      "check": "MIN_750x1050",
+      "failure": "low resolution",
+      "machine_action": "rerender natively at print resolution, never merely upscale cropped pixels"
+    },
+    {
+      "id": "R003",
+      "check": "EXACT_QUOTE",
+      "failure": "invented quotation",
+      "machine_action": "pull quote from source string; text must match exactly; remove false quote from illustration; rerender"
+    },
+    {
+      "id": "R004",
+      "check": "AUDIO_CLAIM",
+      "failure": "false audio verification",
+      "machine_action": "remove audio verified statements until independent audio receipt exists"
+    },
+    {
+      "id": "R005",
+      "check": "COMPLETE_GRUBBY_BORDER",
+      "failure": "missing automated inspection",
+      "machine_action": "run independent visual border inspection; HOLD if inspector unavailable"
+    },
+    {
+      "id": "R006",
+      "check": "LEGIBLE_TEXT",
+      "failure": "unclear lettering",
+      "machine_action": "verify rendered text independently; rerender if inaccurate; HOLD if inspector unavailable"
+    },
+    {
+      "id": "R007",
+      "check": "UNIQUE_CONCEPT",
+      "failure": "duplicated concept",
+      "machine_action": "compute and compare concepts across catalog; replace duplicates; HOLD until verified"
+    },
+    {
+      "id": "R008",
+      "check": "IMAGE_SHA256",
+      "failure": "hash mismatch",
+      "machine_action": "preserve file and recalculate/reconcile with receipt, no silent normalization"
+    },
+    {
+      "id": "R009",
+      "check": "SOURCE_SHA256",
+      "failure": "unlocked/wrong source",
+      "machine_action": "stop and recover locked source byte-for-byte"
+    },
+    {
+      "id": "R010",
+      "check": "CARD_ID",
+      "failure": "missing ID",
+      "machine_action": "allocate unique stable ID prior to rendering"
+    },
+    {
+      "id": "R011",
+      "check": "PNG_FORMAT",
+      "failure": "not a PNG",
+      "machine_action": "reject and request valid standalone PNG with actual decode"
+    },
+    {
+      "id": "R012",
+      "check": "EXACTLY_EIGHT_INDEPENDENT_CARD_IMAGES",
+      "failure": "one image depicting eight cards, ten-panel sheet, cover art, extra cards or missing cards",
+      "machine_action": "reject entire batch; generate exactly eight separate full-resolution card PNGs, independently inspect each, never crop a contact sheet to claim a valid render"
+    },
+    {
+      "id": "R013",
+      "check": "NO_COVER_OR_BONUS_ART",
+      "failure": "cover, title sheet, factory drawing, or bonus artwork included as collectible",
+      "machine_action": "remove from candidate batch; repair production prompt, restart rulebook and rerender affected card; no substitution or extra art"
+    },
+    {
+      "id": "R014",
+      "check": "INTER_CARD_AUDIT_BEFORE_NEXT_RENDER",
+      "failure": "card N+1 begins before card N passes independent visual inspection and difference check against all prior cards",
+      "machine_action": "block advancement; compare card art and distinct title, physical gag, punchline with prior accepted cards; reject reuse and repair; require separate inspector distinct_from_prior_cards=true and receipt for each card"
+    },
+    {
+      "id": "R015",
+      "check": "ONE_RENDERED_CARD_PANEL",
+      "failure": "inspector finds any number of visual card panels other than exactly one, or panel count was not independently established",
+      "machine_action": "reject; repair renderer prompt to create only the current card, never a sheet; retest one-card panel count before advancing"
+    },
+    {
+      "id": "R016",
+      "check": "NO_COVER_ART",
+      "failure": "inspector identifies cover art, promotional display, series overview, or cannot determine if current image is a standalone trading card",
+      "machine_action": "reject and rerender a single standalone numbered card for the locked quote and gag"
+    }
+  ],
+  "release_target": 8,
+  "artifact_contract": {
+    "count": 8,
+    "each_artifact": "one independently rendered portrait PNG of one parody card",
+    "forbidden": [
+      "contact sheet",
+      "collage",
+      "eight-cards-in-one-image",
+      "cover art",
+      "bonus card",
+      "promotional poster"
+    ],
+    "allowed_card_numbers": [
+      "001",
+      "002",
+      "003",
+      "004",
+      "005",
+      "006",
+      "007",
+      "008"
+    ],
+    "release_if_mismatch": "HOLD_AND_RETURN_TO_FACTORY",
+    "workflow": "For each card: unique brief -> render one card -> independent inspect -> compare with all prior accepted cards -> repair on fail -> lock PASS before starting next card"
+  }
+}
