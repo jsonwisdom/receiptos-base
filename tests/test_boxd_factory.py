@@ -19,10 +19,10 @@ class FactoryTests(unittest.TestCase):
                        transcript,d/"out",max_attempts=3)
             self.assertEqual(report["release_status"],"HOLD")
             self.assertFalse(report["human_qc_required"])
-            self.assertEqual(len(report["cards"][0]["attempts"]),3)
+            self.assertEqual(len(report["cards"][0]["attempts"]),1)
             self.assertFalse((d/"out"/"candidate_release.zip").exists())
             self.assertTrue((d/"out"/"factory_report.json").exists())
-            self.assertTrue((d/"out"/"attempts"/"BBP-001"/"3"/"renderer.log").exists())
+            self.assertTrue((d/"out"/"attempts"/"BBP-001"/"1"/"renderer.log").exists())
 
     def test_duplicate_ids_are_rejected_without_overwriting(self):
         with tempfile.TemporaryDirectory() as td:
@@ -138,6 +138,39 @@ class FactoryTests(unittest.TestCase):
             self.assertEqual(r["processed"],1)
             self.assertEqual(r["cards"][0]["reason"],"INVALID_LOCKED_CHECKPOINT")
             self.assertFalse((d/"out"/"attempts"/"BBP-002").exists())
+
+
+    def test_unchanged_failure_stops_retry_spending(self):
+        with tempfile.TemporaryDirectory() as td:
+            d=pathlib.Path(td)
+            transcript=d/"source.txt"
+            transcript.write_text("quote", encoding="utf-8")
+            rendered=[]
+            def fake_invoke(command,args,log):
+                p=dict(zip(args[::2],args[1::2]))
+                if command=="renderer":
+                    rendered.append(p["--image"])
+                    pathlib.Path(p["--image"]).write_bytes(b"same-defective-artwork")
+                    pathlib.Path(p["--manifest"]).write_text(json.dumps(
+                        {"card_id":"BBP-001","quote":"quote"}))
+                else:
+                    pathlib.Path(p["--report"]).write_text(json.dumps(
+                        {"inspector":"separate-process","border_intact":False,
+                         "text_legible":True}))
+                return True
+            fail={"verdict":"FAIL","checks":{"COMPLETE_GRUBBY_BORDER":"FAIL"},
+                "remediation":{"machine_action":"AUTO_REPAIR_AND_RERENDER_WITH_BOUNDED_RETRY",
+                               "failed_rules":[{"rule_id":"R005"}]}}
+            with patch("boxd_factory.invoke",side_effect=fake_invoke),patch(
+                "boxd_factory.audit",return_value=fail):
+                report=run([{"card_id":"BBP-001","quote":"quote"}],
+                           transcript,d/"out",renderer="renderer",
+                           inspector="inspector",max_attempts=100)
+            self.assertEqual(len(rendered),2)
+            self.assertEqual(report["cards"][0]["attempts"][-1]["reason"],
+                             "IDENTICAL_FAILED_ARTWORK")
+            self.assertEqual(report["release_status"],"HOLD")
+            self.assertFalse((d/"out"/"candidate_release.zip").exists())
 
 if __name__=="__main__":
     unittest.main()
