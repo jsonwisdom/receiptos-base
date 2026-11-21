@@ -113,6 +113,7 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
             receipts.append({"card_id":cid,"status":"HOLD","reason":"INVALID_LOCKED_CHECKPOINT"})
             break
         result = {"card_id":cid, "status":"HOLD", "attempts":[]}
+        prior_failed_hashes = set()
         repair = {"machine_action":"INITIAL_RENDER", "failed_rules":[], "policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
         for attempt in range(1, max_attempts+1):
             work = out/"attempts"/cid/str(attempt)
@@ -130,13 +131,27 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
             if not rendering or not image.is_file() or not manifest.is_file():
                 result["attempts"].append({"attempt":attempt,"verdict":"FAIL","reason":"RENDERER_FAILED"})
                 repair = {"machine_action":"REPAIR_RENDERER_FAILED","failed_rules":[{"check":"RENDERER_EXECUTION","status":"FAIL","action":"repair renderer output or invocation"}],"policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
+                if renderer is None:
+                    break  # Configuration absence is not fixed by identical retries.
                 continue
+            candidate_hash = digest(image)
+            if candidate_hash in prior_failed_hashes:
+                result["attempts"].append({"attempt":attempt,"verdict":"HOLD",
+                    "reason":"IDENTICAL_FAILED_ARTWORK","sha256":candidate_hash})
+                repair = {"machine_action":"REPAIR_RENDERER_REPEATED_UNCHANGED_FAILURE",
+                    "failed_rules":[{"check":"REPEATED_OUTPUT","status":"HOLD",
+                    "action":"change renderer implementation or repair strategy; do not retry identical bytes"}],
+                    "policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
+                break
             inspected = invoke(inspector,
                 ["--image",str(image),"--spec",str(spec_path),"--report",str(visual)],
                 work/"inspector.log")
             if not inspected or not visual.is_file():
                 result["attempts"].append({"attempt":attempt,"verdict":"HOLD","reason":"INSPECTOR_UNAVAILABLE"})
                 repair = {"machine_action":"RESTORE_INDEPENDENT_INSPECTOR","failed_rules":[{"check":"INSPECTION_EXECUTION","status":"HOLD","action":"repair inspector invocation; do not approve without inspection"}],"policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
+                prior_failed_hashes.add(candidate_hash)
+                if inspector is None:
+                    break
                 continue
             try:
                 inspection = json.loads(visual.read_text(encoding="utf-8"))
@@ -157,6 +172,8 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                 result["attempts"].append({"attempt":attempt,"verdict":verdict["verdict"],
                                            "checks":verdict["checks"],"sha256":digest(image)})
                 repair = verdict["remediation"]
+                if verdict["verdict"] != "PASS":
+                    prior_failed_hashes.add(candidate_hash)
                 if verdict["verdict"] == "PASS":
                     result["status"] = "PASS"
                     locked=save_checkpoint(out,cid,spec,transcript,image,manifest,work/"gate.json")
@@ -166,6 +183,7 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                 result["attempts"].append({"attempt":attempt,"verdict":"FAIL",
                                            "reason":"INVALID_INSPECTION_OR_MANIFEST",
                                            "detail":str(e)})
+                prior_failed_hashes.add(candidate_hash)
                 repair = {"machine_action":"REPAIR_INSPECTION_OR_MANIFEST","failed_rules":[{"check":"INVALID_INSPECTION_OR_MANIFEST","status":"FAIL","action":str(e)}],"policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
         result["final_remediation"] = repair if result["status"] != "PASS" else None
         receipts.append(result)
