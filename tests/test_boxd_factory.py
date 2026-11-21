@@ -10,6 +10,33 @@ sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/"tools"))
 from boxd_factory import run
 
 class FactoryTests(unittest.TestCase):
+    def test_eight_cards_are_eight_individual_artifacts_not_one_sheet(self):
+        with tempfile.TemporaryDirectory() as td:
+            d=pathlib.Path(td)
+            source=d/"source.txt"
+            source.write_text("quote", encoding="utf-8")
+            one_sheet=[{"card_id":"BBP-001","quote":"quote","artifact_type":"contact_sheet"}]
+            r=run(one_sheet, source, d/"out")
+            self.assertEqual(r["release_status"],"HOLD")
+            self.assertEqual(r["reason"],"EXACTLY_EIGHT_INDIVIDUAL_CARD_SPECS_REQUIRED")
+            self.assertFalse((d/"out"/"candidate_release.zip").exists())
+
+    def test_extra_covers_and_ten_card_order_fail_before_render(self):
+        with tempfile.TemporaryDirectory() as td:
+            d=pathlib.Path(td)
+            source=d/"source.txt"
+            source.write_text("quote", encoding="utf-8")
+            for count in (7, 9, 10):
+                specs=[{"card_id":f"BBP-{i:03d}","quote":"quote"} for i in range(1,count+1)]
+                r=run(specs,source,d/f"out-{count}")
+                self.assertEqual(r["release_status"],"HOLD")
+                self.assertEqual(r["processed"],0)
+            specs=[{"card_id":f"BBP-{i:03d}","quote":"quote"} for i in range(1,9)]
+            specs[7]["artifact_type"]="cover"
+            r=run(specs,source,d/"out-cover")
+            self.assertEqual(r["release_status"],"HOLD")
+            self.assertFalse((d/"out-cover"/"attempts").exists())
+
     def test_missing_adapters_fail_closed_and_preserve_receipts(self):
         with tempfile.TemporaryDirectory() as td:
             d=pathlib.Path(td)
