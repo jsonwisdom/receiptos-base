@@ -108,10 +108,12 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
     receipts = []
     approved = []
     seen = set()
-    for spec in specs:
+    for position, spec in enumerate(specs, start=1):
         cid = spec.get("card_id", "")
-        if not cid or cid in seen or "/" in cid or "\\" in cid or cid.startswith("."):
-            receipts.append({"card_id":cid, "status":"HOLD", "reason":"INVALID_OR_DUPLICATE_ID"})
+        if cid in seen or card_position(cid) != position:
+            receipts.append({"card_id":cid, "status":"HOLD",
+                "expected_card_number":position,
+                "reason":"INVALID_DUPLICATE_OR_OUT_OF_ORDER_CARD_NUMBER"})
             break
         seen.add(cid)
         cached = restore_checkpoint(out,cid,spec,transcript)
