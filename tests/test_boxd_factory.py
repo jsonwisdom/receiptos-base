@@ -79,5 +79,19 @@ class FactoryTests(unittest.TestCase):
             self.assertEqual(report["release_status"],"HOLD") # Not 50.
             self.assertFalse((d/"out"/"candidate_release.zip").exists())
 
+
+    def test_card_two_never_starts_when_card_one_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            d=pathlib.Path(td)
+            transcript=d/"source.txt"
+            transcript.write_text("quote",encoding="utf-8")
+            report=run([{"card_id":"BBP-001","quote":"quote"},
+                        {"card_id":"BBP-002","quote":"quote"}],
+                       transcript,d/"out",max_attempts=2)
+            self.assertEqual(report["processed"],1)
+            self.assertEqual(report["cards"][0]["status"],"HOLD")
+            self.assertFalse((d/"out"/"attempts"/"BBP-002").exists())
+            self.assertEqual(report["release_status"],"HOLD")
+
 if __name__=="__main__":
     unittest.main()
