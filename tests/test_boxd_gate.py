@@ -22,6 +22,32 @@ class BoxDTests(unittest.TestCase):
              "independent_visual_inspection":inspection}
         self.manifest.write_text(json.dumps(m), encoding="utf-8")
 
+    def test_portrait_eight_panel_collage_fails_even_when_geometry_passes(self):
+        self.make(1086,1448,inspection={"inspector":"independent-vision",
+            "border_intact":True,"text_legible":True,"panel_count":8,
+            "is_cover_art":False})
+        r=audit(self.image,self.manifest,self.transcript)
+        self.assertEqual(r["checks"]["ONE_PORTRAIT_CARD"],"PASS")
+        self.assertEqual(r["checks"]["ONE_RENDERED_CARD_PANEL"],"FAIL")
+        self.assertEqual(r["verdict"],"FAIL")
+        self.assertIn("R015",[x["rule_id"] for x in r["remediation"]["failed_rules"]])
+
+    def test_cover_art_fails_despite_one_panel(self):
+        self.make(1086,1448,inspection={"inspector":"independent-vision",
+            "border_intact":True,"text_legible":True,"panel_count":1,
+            "is_cover_art":True})
+        r=audit(self.image,self.manifest,self.transcript)
+        self.assertEqual(r["checks"]["NO_COVER_ART"],"FAIL")
+        self.assertEqual(r["verdict"],"FAIL")
+        self.assertIn("R016",[x["rule_id"] for x in r["remediation"]["failed_rules"]])
+
+    def test_missing_panel_proof_cannot_pass(self):
+        self.make(1086,1448,inspection={"inspector":"independent-vision",
+            "border_intact":True,"text_legible":True})
+        r=audit(self.image,self.manifest,self.transcript)
+        self.assertEqual(r["checks"]["ONE_RENDERED_CARD_PANEL"],"HOLD")
+        self.assertEqual(r["checks"]["NO_COVER_ART"],"HOLD")
+
     def test_ten_panel_sheet_must_fail(self):
         self.make(1536,1024)
         r=audit(self.image,self.manifest,self.transcript)
