@@ -84,6 +84,12 @@
       "check": "NO_COVER_OR_BONUS_ART",
       "failure": "cover, title sheet, factory drawing, or bonus artwork included as collectible",
       "machine_action": "remove from candidate batch; repair production prompt, restart rulebook and rerender affected card; no substitution or extra art"
+    },
+    {
+      "id": "R014",
+      "check": "INTER_CARD_AUDIT_BEFORE_NEXT_RENDER",
+      "failure": "card N+1 begins before card N passes independent visual inspection and difference check against all prior cards",
+      "machine_action": "block advancement; compare card art and distinct title, physical gag, punchline with prior accepted cards; reject reuse and repair; require separate inspector distinct_from_prior_cards=true and receipt for each card"
     }
   ],
   "release_target": 8,
@@ -108,6 +114,7 @@
       "007",
       "008"
     ],
-    "release_if_mismatch": "HOLD_AND_RETURN_TO_FACTORY"
+    "release_if_mismatch": "HOLD_AND_RETURN_TO_FACTORY",
+    "workflow": "For each card: unique brief -> render one card -> independent inspect -> compare with all prior accepted cards -> repair on fail -> lock PASS before starting next card"
   }
 }
