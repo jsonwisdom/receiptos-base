@@ -43,6 +43,7 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
             continue
         seen.add(cid)
         result = {"card_id":cid, "status":"HOLD", "attempts":[]}
+        repair = {"machine_action":"INITIAL_RENDER", "failed_rules":[], "policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
         for attempt in range(1, max_attempts+1):
             work = out/"attempts"/cid/str(attempt)
             work.mkdir(parents=True, exist_ok=True)
@@ -51,17 +52,21 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
             image = work/"card.png"
             manifest = work/"manifest.json"
             visual = work/"inspection.json"
+            repair_path = work/"repair_input.json"
+            repair_path.write_text(json.dumps(repair,sort_keys=True,indent=2)+"\n",encoding="utf-8")
             rendering = invoke(renderer,
                 ["--spec",str(spec_path),"--image",str(image),"--manifest",str(manifest),
-                 "--transcript",str(transcript)],work/"renderer.log")
+                 "--transcript",str(transcript),"--repair",str(repair_path)],work/"renderer.log")
             if not rendering or not image.is_file() or not manifest.is_file():
                 result["attempts"].append({"attempt":attempt,"verdict":"FAIL","reason":"RENDERER_FAILED"})
+                repair = {"machine_action":"REPAIR_RENDERER_FAILED","failed_rules":[{"check":"RENDERER_EXECUTION","status":"FAIL","action":"repair renderer output or invocation"}],"policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
                 continue
             inspected = invoke(inspector,
                 ["--image",str(image),"--spec",str(spec_path),"--report",str(visual)],
                 work/"inspector.log")
             if not inspected or not visual.is_file():
                 result["attempts"].append({"attempt":attempt,"verdict":"HOLD","reason":"INSPECTOR_UNAVAILABLE"})
+                repair = {"machine_action":"RESTORE_INDEPENDENT_INSPECTOR","failed_rules":[{"check":"INSPECTION_EXECUTION","status":"HOLD","action":"repair inspector invocation; do not approve without inspection"}],"policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
                 continue
             try:
                 inspection = json.loads(visual.read_text(encoding="utf-8"))
@@ -81,6 +86,7 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                 (work/"gate.json").write_text(json.dumps(verdict,indent=2)+"\n",encoding="utf-8")
                 result["attempts"].append({"attempt":attempt,"verdict":verdict["verdict"],
                                            "checks":verdict["checks"],"sha256":digest(image)})
+                repair = verdict["remediation"]
                 if verdict["verdict"] == "PASS":
                     result["status"] = "PASS"
                     approved.append((cid,image,manifest,work/"gate.json"))
@@ -89,6 +95,8 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
                 result["attempts"].append({"attempt":attempt,"verdict":"FAIL",
                                            "reason":"INVALID_INSPECTION_OR_MANIFEST",
                                            "detail":str(e)})
+                repair = {"machine_action":"REPAIR_INSPECTION_OR_MANIFEST","failed_rules":[{"check":"INVALID_INSPECTION_OR_MANIFEST","status":"FAIL","action":str(e)}],"policy_id":"BOXD_CI_FIRST_CARD_RULES_V2"}
+        result["final_remediation"] = repair if result["status"] != "PASS" else None
         receipts.append(result)
     passed = len(approved)
     complete = passed == len(specs) and len(specs) == 50 and len(seen) == 50
@@ -111,7 +119,7 @@ def main():
     p.add_argument("--specs",type=pathlib.Path,required=True)
     p.add_argument("--transcript",type=pathlib.Path,required=True)
     p.add_argument("--out",type=pathlib.Path,required=True)
-    p.add_argument("--renderer",help="Executable implementing --spec --image --manifest --transcript")
+    p.add_argument("--renderer",help="Executable implementing --spec --image --manifest --transcript --repair")
     p.add_argument("--inspector",help="Independent executable implementing --image --spec --report")
     a=p.parse_args()
     specs=json.loads(a.specs.read_text(encoding="utf-8"))
