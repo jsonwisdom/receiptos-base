@@ -10,6 +10,20 @@ sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/"tools"))
 from boxd_factory import run
 
 class FactoryTests(unittest.TestCase):
+    def test_duplicate_creative_briefs_stop_before_any_render(self):
+        with tempfile.TemporaryDirectory() as td:
+            d=pathlib.Path(td)
+            t=d/"source.txt"
+            t.write_text("quote",encoding="utf-8")
+            specs=[{"card_id":f"BBP-{i:03d}","quote":"quote",
+                    "title":f"Title {i}","physical_gag":f"Gag {i}",
+                    "punchline":f"Punch {i}"} for i in range(1,9)]
+            specs[1].update({k:specs[0][k] for k in ("title","physical_gag","punchline")})
+            result=run(specs,t,d/"out")
+            self.assertEqual(result["reason"],"MISSING_OR_DUPLICATE_CREATIVE_BRIEF")
+            self.assertEqual(result["processed"],0)
+            self.assertFalse((d/"out"/"attempts").exists())
+
     def test_eight_cards_are_eight_individual_artifacts_not_one_sheet(self):
         with tempfile.TemporaryDirectory() as td:
             d=pathlib.Path(td)
