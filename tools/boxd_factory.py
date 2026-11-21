@@ -105,6 +105,14 @@ def card_position(card_id):
 
 def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
     out.mkdir(parents=True, exist_ok=True)
+    # One artifact per card: never accept a sheet, cover, or bonus artifact as a card.
+    if len(specs) != 8 or any(not isinstance(spec, dict) or spec.get("artifact_type", "individual_card") != "individual_card" for spec in specs):
+        report = {"policy":"BOXD_CI_FIRST_CARD_RULES_V2","target":8,"passed":0,
+                  "total":len(specs),"processed":0,"release_status":"HOLD",
+                  "human_qc_required":False,"reason":"EXACTLY_EIGHT_INDIVIDUAL_CARD_SPECS_REQUIRED",
+                  "cards":[]}
+        (out/"factory_report.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
+        return report
     receipts = []
     approved = []
     seen = set()
@@ -204,17 +212,23 @@ def run(specs, transcript, out, renderer=None, inspector=None, max_attempts=3):
         if result["status"] != "PASS":
             break
     passed = len(approved)
-    complete = passed == len(specs) and len(specs) == 50 and len(seen) == 50
+    complete = passed == len(specs) and len(specs) == 8 and len(seen) == 8
     report = {"policy":"BOXD_CI_FIRST_CARD_RULES_V2",
-              "target":50,"passed":passed,"total":len(specs),
+              "target":8,"passed":passed,"total":len(specs),
               "processed":len(receipts),
-              "current_card_number":len(approved)+1 if len(approved)<50 else None,
+              "current_card_number":len(approved)+1 if len(approved)<8 else None,
               "current_routine":"RENDER_OR_REPAIR" if len(approved)<50 else "AWAIT_FINAL_APPROVAL",
               "next_card":specs[len(receipts)].get("card_id") if len(receipts)<len(specs) and receipts and receipts[-1]["status"]=="PASS" else None,
               "release_status":"READY_FOR_CREATIVE_APPROVAL" if complete else "HOLD",
               "human_qc_required":False,"cards":receipts}
     (out/"factory_report.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
     if complete:
+        # Structural package invariant: exactly eight separately named card PNGs.
+        if len({cid for cid,*_ in approved}) != 8 or len({digest(img) for _,img,*_ in approved}) != 8:
+            report["release_status"] = "HOLD"
+            report["reason"] = "DUPLICATE_OR_MISSING_INDIVIDUAL_CARD_IMAGE"
+            (out/"factory_report.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
+            return report
         with zipfile.ZipFile(out/"candidate_release.zip","w",compression=zipfile.ZIP_DEFLATED) as z:
             for cid,img,manifest,gate in approved:
                 z.write(img,f"cards/{cid}.png")
