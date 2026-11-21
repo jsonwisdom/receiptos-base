@@ -72,6 +72,42 @@
       "check": "PNG_FORMAT",
       "failure": "not a PNG",
       "machine_action": "reject and request valid standalone PNG with actual decode"
+    },
+    {
+      "id": "R012",
+      "check": "EXACTLY_EIGHT_INDEPENDENT_CARD_IMAGES",
+      "failure": "one image depicting eight cards, ten-panel sheet, cover art, extra cards or missing cards",
+      "machine_action": "reject entire batch; generate exactly eight separate full-resolution card PNGs, independently inspect each, never crop a contact sheet to claim a valid render"
+    },
+    {
+      "id": "R013",
+      "check": "NO_COVER_OR_BONUS_ART",
+      "failure": "cover, title sheet, factory drawing, or bonus artwork included as collectible",
+      "machine_action": "remove from candidate batch; repair production prompt, restart rulebook and rerender affected card; no substitution or extra art"
     }
-  ]
+  ],
+  "release_target": 8,
+  "artifact_contract": {
+    "count": 8,
+    "each_artifact": "one independently rendered portrait PNG of one parody card",
+    "forbidden": [
+      "contact sheet",
+      "collage",
+      "eight-cards-in-one-image",
+      "cover art",
+      "bonus card",
+      "promotional poster"
+    ],
+    "allowed_card_numbers": [
+      "001",
+      "002",
+      "003",
+      "004",
+      "005",
+      "006",
+      "007",
+      "008"
+    ],
+    "release_if_mismatch": "HOLD_AND_RETURN_TO_FACTORY"
+  }
 }
